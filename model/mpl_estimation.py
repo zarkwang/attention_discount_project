@@ -31,13 +31,14 @@ def log_likelihood(params, data, dstyle, ustyle):
     return -log_like
 
 
+# estimation with maximum likelihood method
 def mle(data,init_params,dstyle,ustyle,bounds):
     
     result = minimize(log_likelihood, x0=init_params, args=(data,dstyle,ustyle), bounds=bounds,
                         method='L-BFGS-B')
     
     if result.success:
-        se = np.sqrt(np.diag(result.hess_inv.todense()))
+        se = np.sqrt(np.diag(result.hess_inv.todense())) / np.sqrt(len(data))
         log_like = -result.fun
         aic = 2*len(init_params)-2*log_like
         bic = 2*np.log(len(data))*len(init_params)-2*log_like
@@ -48,4 +49,5 @@ def mle(data,init_params,dstyle,ustyle,bounds):
     return {'params':result.x,'se':se,'log-likelihood':log_like,'aic':aic,'bic':bic,'gradient':gradient}
 
 
+# estimation with Bayesian method
 
