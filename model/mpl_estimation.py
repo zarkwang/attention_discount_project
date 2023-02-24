@@ -35,7 +35,7 @@ def log_likelihood(params, data, dstyle, ustyle):
 def mle(data,init_params,dstyle,ustyle,bounds):
     
     result = minimize(log_likelihood, x0=init_params, args=(data,dstyle,ustyle), bounds=bounds,
-                        method='L-BFGS-B')
+                        method='L-BFGS-B',tol=1e-8)
     
     if result.success:
         se = np.sqrt(np.diag(result.hess_inv.todense())) / np.sqrt(len(data))
@@ -45,8 +45,12 @@ def mle(data,init_params,dstyle,ustyle,bounds):
         gradient = result.jac
     else:
         print("Fail to converge.")
-        
-    return {'params':result.x,'se':se,'log-likelihood':log_like,'aic':aic,'bic':bic,'gradient':gradient}
+
+    result_x =  [round(e,2) for e in result.x]
+    se = [round(e,3) for e in se]
+    gradient = [round(e,2) for e in gradient]
+
+    return {'model':dstyle+'-'+ustyle,'params':result_x,'se':se,'log-likelihood':log_like,'aic':aic,'bic':bic,'gradient':gradient}
 
 
 # estimation with Bayesian method

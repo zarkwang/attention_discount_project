@@ -23,12 +23,12 @@ def attention_mpl_d(t, u, dargs):
     
     if dargs['delta'] == 1:
         g = t
-    elif dargs['delta'] < 1 and dargs['delta'] > 0:
+    elif (dargs['delta'] < 1) & (dargs['delta'] > 0):
         g = 1 / (1 - dargs['delta']) * (np.power(dargs['delta'], -t) - 1)
     else:
         print("Invalid value for argument 'delta'. Must be greater than 0 and not greater than 1.")
         return
-    
+
     w_t = 1 / (1 + g * np.exp(-u / dargs['lambd']))
     
     return w_t
@@ -117,7 +117,6 @@ def mpl_v(t, x, params, dstyle, ustyle='crra', sigma=0, **kwargs):
         print("Invalid value for argument 'dstyle'. Must be one of 'hb', 'quasihb', 'lp', 'bbs', 'gb' or 'attention'.")
         return
     
-    d = fun_list[dstyle](t, u, args)
-    du = d * u
+    du = fun_list[dstyle](t, u, args)* u
     
     return du
