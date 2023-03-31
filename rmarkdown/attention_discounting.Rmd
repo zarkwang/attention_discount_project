@@ -1,113 +1,143 @@
 ---
 title: "Attention-adjusted discounting"
-author: "Zark Wang"
-date: "`r Sys.Date()`"
-output: html_document
+author: "Zijian Zark Wang"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+bibliography: reference.bib
+csl: apa-no-ampersand.csl
+link-citations: true
+header-includes: 
+  - \usepackage{setspace}
+  - \usepackage{amsmath}
+  - \setstretch{1.3} 
+fontsize: 12pt
+geometry: margin=1in
 editor_options: 
   markdown: 
     wrap: 72
+output:
+  pdf_document:
+    number_sections: true
+  html_document:
+    toc: true
+    number_sections: true
 ---
 
-# Attention-Adjusted Discounting
+I propose a new model of intermporal choice, drawing on the recent
+literature on rational inattention. I assume the decision makers seek to
+maximize the weighted sum of instantaneous utilities, where the weights
+depend on the attention assigned to each time point. The initial
+attention allocation is in line with time-consistent choice. But after
+knowing the temporal reward structure, they tend to assign more weights
+(pay more attention) to the time points with larger rewards, though the
+attention-adjusting process incurs a cognitive cost. I show that this
+process can explain a lot of behavioral biases, including common
+difference effect, magnitude effect, risk aversion over time lotteries,
+interval additivity anomalies, intertemporal correlation aversion, and
+inconsistent planning. Also, several discounting models can be viewed as
+a special case of this model, such as magnitude-dependent hyperbolic
+discounting and quasi-hyperbolic discounting.
 
-Initially, the decision maker is time-consistent. After learning about
-the intertemporal choice problem, she will pay more attention to the
-periods with more attractive rewards, though deviating from the initial
-attention allocation triggers a cognitive cost. I show that such an
-attention-adjusted discounting process can explain a lot of behavioral
-biases, including common difference effect, magnitude effect, timing
-risk aversion, interval additivity anomalies, planning fallacy, and
-description-experience gap.
+# Introduction
 
-#### 1. Introduction
-
-Consider a decision maker receiving a sequence of rewards
-$\textbf{x}=[x_0,x_1,...,x_T]$. Her instantaneous utility in period $t$
-is $u(x_t)$, which is strictly increasing with $x_t$, the reward in
-period $t$. The total utility she gains from $\textbf{x}$ is computed by
-valuing the reward in each period individually, and multiplying the
-utility of each by a certain weight, then adding up the results: $$
+Suppose a decision maker is informed that she will receive a sequence of
+rewards $\textbf{x}=[x_0,x_1,...,x_T]$. Her instantaneous utility in
+time point $t$ is $u(x_t)$, which is twice differentiable and strictly
+increasing in $x_t$, and $u(0)=0$. I assume that she values the reward
+in each time point separately, then use the weighted sum of each
+instantaneous utility to represent the overall utility of her own $U$.
+Thus,$$
 U(\textbf{w};\textbf{x}) = \sum_{t=0}^T w_t u(x_t)
-$$ where $\textbf{w} = [w_0,w_1,...,w_T]'$ is the decision weights,
-$w_i \geq 0$ for all $i\in \{1,..,T\}$ and $\sum_{t=0}^T w_t = 1$. The
-idea that decision makers value an option using the sum of weighted
-utilities is widely adopted in behavioral economic theories, such as
-prospect theory and salience theory. In intertemporal choice setting,
-$\textbf{w}$ is decided by some discounting function. When the decision
-maker is time-consistent (i.e. the discounting function takes an
-exponential form) and the discounting factor is assumed to be $\delta$,
-the weights in $\textbf{w}$ are
-$\{1/\iota,\delta/\iota,\delta^2/\iota,...,\delta^T/\iota\}$ with
+$$where $\textbf{w} = [w_0,w_1,...,w_T]'$ denotes decision weights,
+$w_i \geq 0$ for all $i\in \{1,..,T\}$ and $\sum_{t=0}^T w_t = 1$.
+
+The idea that decision makers evaluate an option using the sum of
+weighted utilities is widely adopted in behavioral economic literature.
+[^1] In intertemporal choice setting, those weights (aka $\textbf{w}$)
+is decided by some discounting function. According to the classical work
+of @strotz_myopia_1955, when the decision maker is time-consistent,
+$\textbf{w}$ should take an exponential form. We assume
+$\textbf{w} =\{1/\iota,\delta/\iota,\delta^2/\iota,...,\delta^T/\iota\}$
+under this circumstance, where $\delta$ is a constant parameter and
 $\iota =\sum_{t=0}^T \delta^t$.
 
-Suppose the decision maker faces an intertemporal choice question
-\`\`receive $x^s$ now or receive $x^l$ in $T$ periods", $0<x^s<x^l$,
-$T>0$, and $u(0)=0$. By choosing to receive $x^s$ now, the decision
-maker can gain utility $u(x^s)$; by choosing to receive $x^l$ later, she
-can gain
-$w_0 \cdot 0 + ... + w_{T-1} \cdot 0 + w_T\cdot u(x^l) = w_T u(x^l)$. I
-assume the decision maker is initially time-consistent, and for
-simplicity, the discounting factor $\delta = 1$.
+[^1]: For example, in risky choice theories, such as prospect theory,
+    the weights are interpreted as the outputs of probability weighting
+    function.
 
-When considering the latter option, the decision maker's initial
-decision weights are $\textbf{w}^0 = [1/T,1/T,...,1/T]$, but she can
-reallocate the weights to maximize the total utility $w_T u(x^l)$. If
-the reallocation of weights is costless, she will assign full weight to
-period $T$ and zero weight to the other periods. However, processing the
-information about rewards and adjusting decision weights will trigger a
-cognitive cost, and when the cost is large, $\textbf{w}$ cannot deviate
-from $\textbf{w}^0$ by too much. Following the rational inattention
-literature, I define the cognitive cost function with KL divergence, a
+I use a simple example to illustrate how the model works. Suppose the
+decision maker is asked to choose one option between "receive $x^s$ now"
+and "receive $x^l$ in $T$", where $0<x^s<x^l$, $T>0$. By choosing to
+receive $x^s$ now, the decision maker can obtain utility $u(x^s)$ at
+time point $0$. By choosing to receive $x^l$ later, she can gain
+$u(x^l)$ at time point $T$ and $0$ at other time points; thus, her
+overall utility is $w_Tu(x^l)$.
+
+I assume the decision maker is initially time-consistent, and for
+simplicity, the discounting parameter $\delta = 1$. So, when considering
+the "receiving later" option, her initial decision weight allocation is
+$\textbf{w}^0 = [1/T,1/T,...,1/T]$. She can reallocate the weights to
+$\textbf{w}$, in order to maximize $w_T u(x^l)$; but the reallocation
+process triggers some cognitive cost, which also needs to be considered
+in utility maximization. When the cost is zero, she will assign full
+weight to time point $T$ and zero weight to other time points; when the
+cost is fairly large, $\textbf{w}$ cannot deviate from $\textbf{w}^0$ by
+too much. I define the cognitive cost function with KL divergence, a
 measure of how much a distribution differs from another. Therefore, the
 decision maker's objective is $$
 \max_{\textbf{w}} \; U(\textbf{w};\textbf{x})-\lambda\cdot D_{KL}(\textbf{w}||\textbf{w}^0)
-$$ where $\lambda$ is a parameter, and
-$D_{KL}(\textbf{w}||\textbf{w}^0)$ is defined by $$
+$$ where $\lambda$ is a parameter, and the definition of
+$D_{KL}(\textbf{w}||\textbf{w}^0)$ is$$
 D_{KL}(\textbf{w}||\textbf{w}^0)= \sum_{t=0}^T w_i \log(\frac{w_i}{w_i^0})
 $$
 
-The solution to this optimization problem should meet the condition
-$w_t \propto \delta^t \exp\{u(x_t)/\lambda\}$. Thus, while considering
-\`\`receive $x^l$ in $T$ periods", the decision maker adjusts her weight
-for period $T$ to $$
+The FOC condition of this optimization problem tells us
+$w_t \propto \delta^t \exp\{u(x_t)/\lambda\}$. Therefore, when
+considering "receive $x^l$ in $T$", the decision maker will adjust her
+weight for time point $T$ to $$
 w_T = \frac{1}{1+k\cdot T}
-$$ where $k=e^{-u(x^l)/\lambda}$. This discounting function takes a
-similar form with hyperbolic discounting.
+$$where $k=e^{-u(x^l)/\lambda}$. Clearly, $w_T$ takes a similar form
+with hyperbolic discounting function. The literature on rational
+inattention [@matejka_rational_2015; @jung_discrete_2019;
+@mackowiak_rational_2023] suggests that the determination of $w_T$ can
+be interpreted as some costly top-down attention shifting process.
+Therefore, I term the weights calculated by such decision process as
+"*attention-adjusted discounting factors*".
 
-Let me show that the attention-adjusted discounting factors satisfy both
-the magnitude effect and common difference effect in a numerical
-example. First, set $T = 9$, $x^s = 12$, $x^l = 16$,
-$u(x) = \lambda \cdot x^{0.5}$. If the decision maker chooses to receive
-$x^s$ now, she gains $u(x^s) = 3.46\lambda$; if she chooses to receive
-$x^l$ later, she gains $w_Tu(x_l) = 4\lambda/(1+9e^{-4})=3.43\lambda$.
-Hence, in this setting she tends to receive $x_s$ now. To show magnitude
-effect, we can increase $x^s$ and $x^l$ by a same amount, say 9. Then
-the utility of receiving reward early will be $4.58\lambda$, and that of
-receiving late will be $4.71\lambda$. Thus, she is more likely to wait
-with the magnitude of rewards increasing. To show common difference
-effect, we can delay the reward of each option by a same interval, say 3
-periods. Then the utility of receiving reward early shrinks to
-$3.17\lambda$ and that of receiving late shrinks to $3.28\lambda$, i.e.
-adding a common delay to each option makes her more likely to wait.
+Let us set $T = 9$, $x^s = 12$, $x^l = 16$, $u(x) = \lambda x^{0.5}$. I
+show that how the attention-adjusted discounting factor $w_T$ satisfies
+both the magnitude effect and the common difference effect. First, if
+the decision maker chooses to receive $x^s$ now, she gains
+$u(x^s) = 3.46\lambda$; if she chooses to receive $x^l$ in $T$, she
+gains $w_Tu(x_l) = 4\lambda/(1+9e^{-4})=3.43\lambda$. Hence, in this
+setting she tends to receive $x_s$ now. Second, for magnitude effect, we
+can increase $x^s$ and $x^l$ by a same amount, say $9$. Then the utility
+of receiving reward earlier will be $4.58\lambda$, and that of receiving
+later will be $4.71\lambda$, i.e. increasing the reward magnitude by a
+same amount makes her more likely to wait. Finally, for common
+difference effect, we can delay the reward of each option by a same
+interval, say $3$. Then the utility of receiving reward earlier shrinks
+to $u(x^s)/(1+3e^{-u(x^s)/\lambda})=3.17\lambda$ and that of receiving
+later shrinks to $3.28\lambda$, i.e. adding a common delay to each
+option makes her more likely to wait.
 
-#### 2. Model Framework
+# The Model
 
-##### 2.1 Rational Inattention
+## Attention Reallocation Process
 
-Consider a decision maker who wants to evaluate a reward sequence, which
+Consider a decision maker evaluating a sequence of rewards, which
 depends on the state of world $s$. The time length of this sequence is
-$T$. Let $t$ denote a time points, $t\in [0,T]$. The decision maker
-samples from those points and aggregate the utilities she can gain in
-each time point in her sample, to construct a value representation of
-$s$. Her objective is to find a sampling strategy $f(t,s)$, which
-denotes the choice probability for each time point under each certain
-state. I set the probability of $s$ occurring and the unconditional
-probability of choosing $t$ to be $p(s)$, $p(t)$ . By the insight of
-motivated beliefs, I assume she wants to maximize her total utility
-through $f$; thus, time points with greater rewards should be sampled
-more frequently. However, processing reward information is costly.
-Following the rational inattention literature, the optimization problem
-for the decision maker is $$
+$T$. Let $t$ denote each time point, $t\in [0,T]$. The decision maker
+samples from those time points and aggregate the utilities she can
+obtain in each time point in her sample, to construct a value
+representation of $s$. Her objective is to find a sampling strategy
+$f(t,s)$, which denotes the choice probability for each time point under
+each certain state. I set the probability of $s$ occurring and the
+unconditional probability of choosing $t$ to be $p(s)$, $p(t)$ . By the
+insight of motivated beliefs, I assume she wants to maximize her total
+utility through $f$; thus, time points with greater rewards should be
+sampled more frequently. However, processing reward information is
+costly. Following the rational inattention literature, the optimization
+problem for the decision maker is $$
 \begin{split}
 & \max_f\; \int u(t,s)f(t,s)dtds - \lambda I(t;s) \\
 & s.t. \; \int u(t,s)dt = p(s),\, \forall s
@@ -137,7 +167,20 @@ sampling strategy. Then, she compare the options and make the choice. A
 lot of literature has documented that human make decisions by sampling
 approach.
 
-##### 2.2 Description vs Experience
+For why I use Shannon mutual information here, one can refer to
+@caplin_rationally_2022.
+
+Posterior Separable
+
+Changes in prior do not affect the selection of learning policy - in
+descriptive intertemporal choice problem, the decision maker clearly
+know she will receive what reward in what time, so the probability of
+learning such specific payoff information is 1.
+
+Only the payoff of each action (but not the labeling of action) will
+affect action policy - that is, for the early time periods with payoff
+0, we can either treat them as $T$ inidividual periods or an integrated
+period with length $T$.
 
 There are two experimental paradigms: SS vs LL, time budget. In the
 former, the participants are informed when and how many rewards will
@@ -147,9 +190,9 @@ I set that for $t>0$, $u_t = v(x_t) + \epsilon_t$,
 $\epsilon_t \sim N(0,\lambda\sigma_t)$.
 
 Throughout the paper, I assume $w_t^0 = \delta^t$, where $\delta$ is the
-exponential discounting factor, $\delta \in (0,1]$
+exponential discounting parameter, $\delta \in (0,1]$
 
-##### 2.3 SS vs LL
+## SS or LL
 
 Given that the reward is pre-determined, the state $s$ is certain (or
 $\sigma_t =0$).
@@ -165,9 +208,29 @@ G(T) = \left\{\begin{split}
 \end{split}\right.
 $$
 
-#### 3. Theoretical Implications
+# Related Literature
 
-##### 3.1 Common Difference Effect
+One of the closest papers to this model may be @steiner_rational_2017.
+@steiner_rational_2017 mainly consider a decision maker allocating
+attention across discrete options and updating the attention allocation
+over time. In each time point, given that the decision maker's ability
+to process new information is limited, her attention allocation cannot
+deviate from the original one in the last time point by too much. This
+causes her action strategy to lag behind the state of world and to
+perform a inertial style. However, the attention-adjusted discounting
+model assumes the decision maker directly allocates attention across
+discrete time points and evaluates each action separately. This makes it
+convenient to analyze not only how decision makers will update action
+strategy in a dynamic process, but also how their will choose between a
+early small reward or a late large reward when these options are
+presented in a descriptive form.
+
+Another relevant model is proposed by @noor_optimal_2022 and
+@noor_constrained_2020, which they term as "optimal discounting".
+
+# Behavioral Implications
+
+## Common Difference Effect
 
 The decision-maker prefers a small reward arriving at $t_1$, than a
 large reward arriving at $t_2$ ($t_2>t_1$)
@@ -191,48 +254,25 @@ that $w_{t_1+\Delta t}/w_{t_2+\Delta t}<\alpha$
 ***Proposition 1: decision makers with attention-adjusted discounting
 perform common difference effect***
 
-> Proof:
->
-> From the definition of $\alpha$, $$
-> \alpha \cdot(1+G(t_1)\cdot e^{-u}) = 1+G(t_2)\cdot e^{-\alpha u} \tag{1}
-> $$ Set up a function $$
-> f(\Delta t) = \alpha\cdot(1+G(t_1+\Delta t)\cdot e^{-u}) - (1+G(t_2+\Delta t)\cdot e^{-\alpha u})
-> $$ We know that $f(0)=0$
->
-> common difference effect implies $f(\Delta t)>0$ when $\Delta t>0$
->
-> if $f'(\Delta t) >0$ then $$
-> \frac{G'(t_2+\Delta t)}{G'(t_1+\Delta t)} < \alpha e^{(\alpha-1)u}
-> $$ when $\delta=1$, the right hand is 1, the common difference effect
-> always holds
->
-> when $0<\delta<1$, rewrite $f(\Delta t)>0$: $$
-> \delta^{-\Delta t}(\delta^{-t_1}\alpha e^{-u}-\delta^{-t_2}e^{-\alpha u}) >
-> \alpha e^{-u}- e^{-\alpha u} -(1-\delta)(\alpha-1)$$ from **eq. (1)**
-> we know the the left hand equals
-> $\delta^{-t_1}\alpha e^{-u}-\delta^{-t_2}e^{-\alpha u}$. Therefore,
-> the inequality always holds when $\Delta t>0$
-
-##### 3.2 Magnitude Effect
+## Magnitude Effect
 
 People are getting more patient when increasing both the small and large
 rewards by the same magnitude.
 
-> Noor & Takeoka (2022) provides another account, also based on finding
-> the optimal discounting factors. Attention-adjusted discounting model
-> admits a *General Costly Empathy (CE)* representation in their paper,
-> but its cognitive cost function is different.
->
-> In their paper, for discounting factor $d_t$, there exists
-> $0<\underline{d}_t<\overline{d}_t<1$ such that ***CE*** cognitive cost
-> is 0 when $d_t \in (0,\underline{d}_t]$, is strictly increasing when
-> $d_t\in (\underline{d}_t,\overline{d}_t]$, and is $\infty$ when
-> $d_t \in (\overline{d}_t,1]$
+Noor & Takeoka (2022) provides another account, also based on finding
+the optimal discounting factors. Attention-adjusted discounting model
+admits a *General Costly Empathy (CE)* representation in their paper,
+but its cognitive cost function is different. In their paper, for
+discounting factor $d_t$, there exists
+$0<\underline{d}_t<\overline{d}_t<1$ such that ***CE*** cognitive cost
+is 0 when $d_t \in (0,\underline{d}_t]$, is strictly increasing when
+$d_t\in (\underline{d}_t,\overline{d}_t]$, and is $\infty$ when
+$d_t \in (\overline{d}_t,1]$
 
 Define $V(t,x_t)=w_t(x_t)\cdot v(x_t)$. Again, assume $$
 V(t_1,x_1)=V(t_2,x_2)\equiv 1+b 
 \tag{2}
-$$ Given $t_1$, $t_2$, we can set $x_1$ that satisfies **eq. (2)** as a
+$$Given $t_1$, $t_2$, we can set $x_1$ that satisfies **eq. (2)** as a
 function of $x_2$.
 
 By definition, magnitude effect is $$
@@ -250,26 +290,10 @@ $$ ***where RRA is relative risk aversion coefficient of function***
 $v(x)$, and $E_{vx} = v'(x)\frac{x}{v(x)}$ is the elasticity of $v$ to
 $x$.
 
-> Proof:
->
-> Given that $G(t_1)e^{-v(x_1)/\lambda}=v(x_1)/(1+b)-1$, $$
-> \frac{\partial V}{\partial x_1}x_1
-> =(1+b)(v(x_1)+b) \frac{v'(x_1)}{v(x_1)}x_1
-> $$ Observing that $x_2\cdot \partial V/\partial x_2$ admits a similar
-> representation, we can define a function $\psi(x)$: $$
-> \psi(x) = (v(x)+b) \frac{v'(x)}{v(x)}x=xv'(x)+bE_{vx}
-> $$
->
-> (Lama 1) for any $x_1<x_2<\infty$, there always exists
-> $t_1<t_2<\infty$ that makes **eq. (2)** holds.
->
-> Thus, if $\psi'(x)>0$, then $\psi(x_2)>\psi(x_1)$ for any ,
-> $x_1<x_2<\infty$. The inequality can be derived from $\psi'(x)>0$.
-
 **Corollary 1: If** $v(x)$ admits a CRRA representation, then the
 decision maker perform magnitude effect when CRRA\<1.
 
-**3.3 Risk Aversion over Time Lotteries**
+## **Risk Aversion over Time Lotteries**
 
 Generally, people prefer a reward arriving at a sure time $t_M$, rather
 than the same reward arriving at $t_S$ with probability $p$ and at $t_L$
@@ -293,7 +317,7 @@ seeking when delay is long.**
 **When** $z$ gets smaller (or $x$ gets larger), the bound for $t$ gets
 relaxed.
 
-##### 3.4 Interval Additivity Anomalies
+## Interval Additivity Anomalies
 
 Super-additivity:
 
@@ -325,7 +349,11 @@ perform super-additivity.
 Similarly, people perform sub-additivity when $t$ is large. When $x$ is
 smaller, people are more likely to perform super-additivity.
 
-##### 3.5 Planning Fallacy
+## Intertemporal Correlation Aversion
+
+@andersen_multiattribute_2018
+
+## Inconsistent Planning
 
 Suppose the decision maker has a total reward $m$ and needs to allocate
 it over $T$ periods. $$
@@ -338,34 +366,7 @@ discounting factors is always time consistent.
 
 At time period $i$, the optimal decision weights are $$
 \textbf{w} = \arg \max_{\textbf{w}}\,\left\{\sum_{t=i}^TE_s[w_tu_t]-\lambda I(t;s)\right\}
-$$ Given that $w_t(s) \propto \delta^t e^{u_t(s)/\lambda}$, we have
-$E_s[w_tu_t] \propto \delta^t \xi(x_t,\sigma_t)$, where $$
-\xi(x_t,\sigma_t) \equiv (\frac{v(x_t)}{\lambda}+\sigma_t^2)\exp\left\{\frac{v(x_t)}{\lambda}+\frac{\sigma_t^2}{2}\right\}
 $$
-
-> Note that if $z \sim N(\mu,\sigma)$, then
-> $E[ze^z] = (\mu+\sigma^2)\exp\{\mu+\sigma^2/2\}$
-
-> $\xi(.)$ should be a concave function to $x_t$; therefore, $$
-> v'(x_t)\left[1+\sigma_t^2+\frac{v(x_t)}{\lambda}\right]
-> \exp\left\{\frac{v(x_t)}{\lambda}+\frac{\sigma_t^2}{2}\right\}
-> $$ is decreasing with $x_t$.
-
-At period 0, the decision maker allocate her total rewards to solve the
-optimization problem $$
-\max_\textbf{x} \sum_{t=0}^T \delta^t\cdot\xi(x_t,\sigma_t)\quad s.t. \sum_{t=0}^T x_t = m
-$$ by FOC, we have $$
-\frac{\partial \xi}{\partial x_t} = \delta\frac{\partial \xi}{\partial x_{t+1}}
-$$ i.e. $$
-\frac{v'(x_t)}{v'(x_{t+1})} = \rho\delta
-$$ where $$
-\rho = \frac{1+\sigma_{t+1}+v(x_{t+1})/\lambda}{1+\sigma_t+v(x_t)/\lambda}
-\exp\left\{ \frac{v(x_{t+1})-v(x_t)}{\lambda} + \frac{\sigma_{t+1} - \sigma_t}{2}\right\}
-$$ When $\rho$ is constant with $t$, the decision maker performs no
-planning fallacy. When $\beta$ is (weakly) increasing with $t$ and there
-exists an interval $[0,\bar{t}]$ such that $\beta$ is strictly
-increasing with $t$, the decision maker performs planning fallacy and is
-present-biased.
 
 For example, the classical $(\beta,\delta)$-preference admits such a
 representation:\
@@ -387,4 +388,8 @@ The decision maker performs future bias.
 
 (proof by contradiction)
 
-#### 4. Empirical Results
+# Empirical Test
+
+compare models
+
+# Discussion
