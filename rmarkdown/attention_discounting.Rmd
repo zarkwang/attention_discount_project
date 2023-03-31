@@ -226,7 +226,38 @@ early small reward or a late large reward when these options are
 presented in a descriptive form.
 
 Another relevant model is proposed by @noor_optimal_2022 and
-@noor_constrained_2020, which they term as "optimal discounting".
+@noor_constrained_2020, which they term as "*costly empathy*". They
+admits a similar intertemporal choice process, in which discounting
+factors are determined by maximizing the sum of the utilities for each
+time point, where the utility for each time point is the discounted
+instantaneous utility of reward minus the cognitive cost of assigning a
+non-zero discounting factor to a future time point. They prove that when
+the margnial cognitive cost is increasing with both the discounting
+factor and time, the final discounting factors will be increasing in
+reward magnitude. My work differ from them by imposing a normalization
+condition on the weights and presume a initial weight allocation.
+
+@gershman_rationally_2020 propose another approach of applying rational
+inattention into time discounting models. They assume that the decision
+maker is uncertain about a future reward and runs a Bayesian estimation
+on it. The discounting factor is decided by minimizing the distance
+between the estimate and the true value of reward. They show under a
+certain specification of rate-distortion function[^2], the discounting
+factor for $T$ in SS vs LL task is $d_T = 1/(1+kT)$ given
+$k=(\beta v_T)^{-1}$, where $\beta$ is a parameter and $v_T$ denote the
+utility of reward obtained in $T$. Hereafter I call their model
+"*magnitude-dependent hyperbolic discounting*". The attention-adjusted
+discounting model with a logarithmic utility function and $\delta=1$ is
+identical to the magnitude-dependent discounting with a power utility
+function.
+
+[^2]: $R = \frac{1}{2}\ln(\beta u_T/T+1)$
+
+    where $u_T$ is the utility obtained by receiving reward in time
+    point $T$.
+
+My work may be helpful in understanding why the *Transformer* is so
+powerful in building artificial intelligence.
 
 # Behavioral Implications
 
@@ -390,6 +421,144 @@ The decision maker performs future bias.
 
 # Empirical Test
 
-compare models
+I compare the following models in the dataset of
+@marzilli_ericson_money_2015.
 
-# Discussion
+Using a similar method with @wulff_modeling_2018.
+
+![](images/image-750933904.png)
+
+# Appendix
+
+## Proof of common difference effect
+
+From the definition of $\alpha$, $$
+\alpha \cdot(1+G(t_1)\cdot e^{-u}) = 1+G(t_2)\cdot e^{-\alpha u} \tag{1}
+$$ Set up a function $$
+f(\Delta t) = \alpha\cdot(1+G(t_1+\Delta t)\cdot e^{-u}) - (1+G(t_2+\Delta t)\cdot e^{-\alpha u})
+$$ We know that $f(0)=0$
+
+common difference effect implies $f(\Delta t)>0$ when $\Delta t>0$
+
+if $f'(\Delta t) >0$ then $$
+\frac{G'(t_2+\Delta t)}{G'(t_1+\Delta t)} < \alpha e^{(\alpha-1)u}
+$$ when $\delta=1$, the right hand is 1, the common difference effect
+always holds
+
+when $0<\delta<1$, rewrite $f(\Delta t)>0$: $$
+\delta^{-\Delta t}(\delta^{-t_1}\alpha e^{-u}-\delta^{-t_2}e^{-\alpha u}) >
+\alpha e^{-u}- e^{-\alpha u} -(1-\delta)(\alpha-1)$$ from eq. (1) we
+know the the left hand equals
+$\delta^{-t_1}\alpha e^{-u}-\delta^{-t_2}e^{-\alpha u}$. Therefore, the
+inequality always holds when $\Delta t>0$
+
+## Proof of magnitude effect
+
+Given that $G(t_1)e^{-v(x_1)/\lambda}=v(x_1)/(1+b)-1$, $$
+\frac{\partial V}{\partial x_1}x_1
+=(1+b)(v(x_1)+b) \frac{v'(x_1)}{v(x_1)}x_1
+$$ Observing that $x_2\cdot \partial V/\partial x_2$ admits a similar
+representation, we can define a function $\psi(x)$: $$
+\psi(x) = (v(x)+b) \frac{v'(x)}{v(x)}x=xv'(x)+bE_{vx}
+$$
+
+(Lama 1) for any $x_1<x_2<\infty$, there always exists $t_1<t_2<\infty$
+that makes **eq. (2)** holds.
+
+Thus, if $\psi'(x)>0$, then $\psi(x_2)>\psi(x_1)$ for any ,
+$x_1<x_2<\infty$. The inequality can be derived from $\psi'(x)>0$.
+
+## Proof of inconsistent planning
+
+Given that $w_t(s) \propto \delta^t e^{u_t(s)/\lambda}$, we have
+$E_s[w_tu_t] \propto \delta^t \xi(x_t,\sigma_t)$, where $$
+\xi(x_t,\sigma_t) \equiv (\frac{v(x_t)}{\lambda}+\sigma_t^2)\exp\left\{\frac{v(x_t)}{\lambda}+\frac{\sigma_t^2}{2}\right\}
+$$
+
+Note that if $z \sim N(\mu,\sigma)$, then
+$E[ze^z] = (\mu+\sigma^2)\exp\{\mu+\sigma^2/2\}$
+
+$\xi(.)$ should be a concave function to $x_t$; therefore, $$
+v'(x_t)\left[1+\sigma_t^2+\frac{v(x_t)}{\lambda}\right]
+\exp\left\{\frac{v(x_t)}{\lambda}+\frac{\sigma_t^2}{2}\right\}
+$$ is decreasing with $x_t$.
+
+At period 0, the decision maker allocate her total rewards to solve the
+optimization problem $$
+\max_\textbf{x} \sum_{t=0}^T \delta^t\cdot\xi(x_t,\sigma_t)\quad s.t. \sum_{t=0}^T x_t = m
+$$ by FOC, we have $$
+\frac{\partial \xi}{\partial x_t} = \delta\frac{\partial \xi}{\partial x_{t+1}}
+$$ i.e. $$
+\frac{v'(x_t)}{v'(x_{t+1})} = \rho\delta
+$$ where $$
+\rho = \frac{1+\sigma_{t+1}+v(x_{t+1})/\lambda}{1+\sigma_t+v(x_t)/\lambda}
+\exp\left\{ \frac{v(x_{t+1})-v(x_t)}{\lambda} + \frac{\sigma_{t+1} - \sigma_t}{2}\right\}
+$$ When $\rho$ is constant with $t$, the decision maker performs no
+planning fallacy. When $\beta$ is (weakly) increasing with $t$ and there
+exists an interval $[0,\bar{t}]$ such that $\beta$ is strictly
+increasing with $t$, the decision maker performs planning fallacy and is
+present-biased.
+
+## Proof of intertemporal correlation aversion
+
+## Model Comparison
+
+8 discounted utility models, in comparison
+
+1.  exponential (EXPO)
+
+    $$
+    d_t =\delta^t
+    $$
+
+2.  double exponential (EXPO2)
+
+    $$
+    d_t = \omega\delta_1^t+(1-\omega)\delta_2^t
+    $$
+
+3.  hyperbolic (HB)
+
+    $$
+    d_t = \frac{1}{1+kt}
+    $$
+
+4.  dual-parameter hyperbolic (HB2)
+
+    $$
+    d_t = \frac{1}{(1+kt)^\alpha}
+    $$
+
+5.  magnitude-dependent hyperbolic (HB-MD)
+
+    $$
+    d_t = \frac{1}{1+(\beta u(x_t))^{-1}\cdot t}
+    $$
+
+6.  quasi-hyperbolic (QuasiHB)
+
+    $$
+    d_t =\left\{\begin{aligned}& 1 ,& t=0\\& \beta \delta^t, & t>0\end{aligned}\right.
+    $$
+
+7.  quasi-hyperbolic plus fixed delay cost (QuasiHB-FC)
+
+    $$
+    d_t =\left\{\begin{aligned}& 1 ,& t=0\\& \beta \delta^t - \frac{\alpha}{u_t}, & t>0\end{aligned}\right.
+    $$
+
+8.  homogeneous costly empathy (HCE)
+
+    $$
+    d_t = a_t u(x_t)^{\frac{1}{m-1}}
+    $$
+
+    where $a_t=\delta^t$.
+
+The choice probability function is given by
+
+$$
+P(LL)=\frac{1}{1+e^{-(V_l-V_s)\rho}}
+$$
+
+where $V_t = d_tu(x_t)$, $t\in\{s,l\}$
