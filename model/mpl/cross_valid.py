@@ -1,7 +1,7 @@
 
 import numpy as np
-import choice_prob
-import mpl_estimation
+from mpl import choice_rule
+from mpl import estimation
 from tqdm import tqdm
 
 

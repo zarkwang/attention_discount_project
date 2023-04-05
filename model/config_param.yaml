@@ -45,5 +45,5 @@ utility_func:
     bound: [[.001,100],[.001,100]]
 choice_prob:
   temper:
-    x0: [1]
+    x0: [5]
     bound: [[.001,100]]
