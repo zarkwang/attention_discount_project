@@ -5,12 +5,12 @@ from mpl import estimation
 from tqdm import tqdm
 
 
-def split_sample(data,train_ratio):
+def split_sample(data,train_size):
     
     subject_id_set = set(data["person_id"])
 
-    train_ratio = round(len(subject_id_set)* train_ratio)
-    train_subject_id = np.random.choice(np.array(list(subject_id_set)),size=train_ratio,replace=False)
+    train_size = round(len(subject_id_set)* train_size)
+    train_subject_id = np.random.choice(np.array(list(subject_id_set)),size=train_size,replace=False)
     
     train_sample = data[data["person_id"].isin(train_subject_id)]
     test_sample = data[data["person_id"].isin(train_subject_id) == False]
@@ -51,13 +51,13 @@ def test_model(style,test_sample,params):
 
 
 
-def validation(style,data,sample_times,train_ratio=0.75,disp_output=False):
+def validation(style,data,sample_times,train_size=0.75,disp_output=False):
 
     test_result = []
 
     for i in tqdm(range(sample_times)):
 
-        sample = split_sample(data,train_ratio)
+        sample = split_sample(data,train_size)
 
         train_result = mpl_estimation.mle(style,data = sample["train"])
 
