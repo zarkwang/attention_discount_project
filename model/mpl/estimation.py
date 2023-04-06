@@ -5,7 +5,7 @@ import scipy.stats as st
 from scipy.optimize import minimize,basinhopping
 from mpl import choice_rule
 
-with open('config_param.yaml', 'r') as f:
+with open('mpl/config_param.yaml', 'r') as f:
         config_param = yaml.safe_load(f)
 
 
@@ -20,24 +20,30 @@ def constraint(params,bound):
 
 
 
-def log_likelihood(params, data, dstyle, ustyle, bounds, method="logit", regenerate_sample=True,
+def log_likelihood(params, data, dstyle, ustyle, bounds, method="logit",
+                   intercept=False, regenerate_sample=True,
                    kwargs={}):
 
     if not constraint(params,bounds):
         return 1e10 
     else:
         temper = params[-1]
-        ss_t = data['ss_delay'].values
-        ss_x = data['ss_amount'].values
-        ll_t = data['ll_delay'].values
-        ll_x = data['ll_amount'].values
+        ss_t = data['ss_t'].values
+        ss_x = data['ss_x'].values
+        ll_t = data['ll_t'].values
+        ll_x = data['ll_x'].values
         choice = data['choice'].values
         
         if not regenerate_sample:
-            p_choice_ll = choice_rule.choice_prob_du(ss_t, ss_x, ll_t, ll_x, params, dstyle, ustyle, temper, method,
-                                                     regenerate_sample=False, simu_sample = kwargs['simu_sample'])
+            p_choice_ll = choice_rule.choice_prob(ss_x, ss_t, ll_x, ll_t, 
+                                                  params, dstyle, ustyle, temper, 
+                                                  intercept, method, 
+                                                  regenerate_sample=False, 
+                                                  simu_sample = kwargs['simu_sample'])
         else:
-            p_choice_ll = choice_rule.choice_prob_du(ss_t, ss_x, ll_t, ll_x, params, dstyle, ustyle, temper, method)
+            p_choice_ll = choice_rule.choice_prob(ss_x, ss_t, ll_x, ll_t, 
+                                                  params, dstyle, ustyle, temper, 
+                                                  intercept,method)
         
         p_choice_ll[np.where(p_choice_ll == 1)] = p_choice_ll[np.where(p_choice_ll == 1)] - 1e-8
         p_choice_ll[np.where(p_choice_ll == 0)] = p_choice_ll[np.where(p_choice_ll == 0)] + 1e-8
@@ -53,7 +59,7 @@ def log_likelihood(params, data, dstyle, ustyle, bounds, method="logit", regener
 
 
 
-def mle(style,data,disp_output=False,disp_step=False,simu_size=1000):
+def mle(style,data,disp_output=False,disp_step=False,intercept=False,simu_size=1000):
 
     dstyle = style['dstyle']
     ustyle = style['ustyle']
@@ -72,17 +78,21 @@ def mle(style,data,disp_output=False,disp_step=False,simu_size=1000):
         regenerate_sample = False
         kwargs = {'simu_sample': np.random.normal(size=len(data)*simu_size).reshape(len(data),simu_size)}
 
-        minimizer_kwargs = {"method": "L-BFGS-B", "args": (data, dstyle, ustyle, bounds, method,
-                                                           regenerate_sample,kwargs)}
+        minimizer_kwargs = {"method": "L-BFGS-B", 
+                            "args": (data, dstyle, ustyle, bounds, method, intercept,
+                                     regenerate_sample, kwargs)}
     else:
-        minimizer_kwargs = {"method": "L-BFGS-B", "args": (data, dstyle, ustyle, bounds, method)}
+        minimizer_kwargs = {"method": "L-BFGS-B", 
+                            "args": (data, dstyle, ustyle, bounds, method, intercept)}
 
     solver = basinhopping(log_likelihood, x0, minimizer_kwargs=minimizer_kwargs, 
-                niter=100, 
+                niter=500, 
                 stepsize=0.05, 
                 T=1.0,
-                niter_success = 10,
+                niter_success = 100,
                 disp=disp_step)
+    
+    print(solver)
     
     if solver.success:
         result = solver.lowest_optimization_result

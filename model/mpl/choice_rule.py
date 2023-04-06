@@ -25,10 +25,8 @@ class utility:
         self._intercept = intercept
 
 
-        required_param = {'cara': ['exponent'],
-                    'power':['power'],
-                    'power2':['power','coef'],
-                    'log':['coef']}
+        required_param = {'cara': ['coef'],
+                    'power':['coef']}
         
         self.d_keys = self.get_dargs_keys(dstyle)
         self.u_keys = self.get_uargs_keys(ustyle,random,intercept,required_param)
@@ -95,10 +93,6 @@ class utility:
             u = 1 - np.exp(- x * uargs[self.u_keys[0]])
         elif self._ustyle == 'power':
             u = x**uargs[self.u_keys[0]]
-        elif self._ustyle == 'power2':
-            u = x**uargs[self.u_keys[0]] + uargs[self.u_keys[1]]*x
-        elif self._ustyle == 'log':
-            u = uargs[self.u_keys[0]]*np.log(x)
         else:
             print("Invalid value for argument 'ustyle'. Must be one of",self.valid_ustyle)
 
@@ -236,7 +230,7 @@ def choice_prob(ss_x, ss_t, ll_x, ll_t, params, dstyle, ustyle, temper,
     diff_u = utility(ss_x,ss_t,ll_x,ll_t,params,ustyle,dstyle,intercept).diff
 
     if method == "logit":
-        p_choice_ll = 1/(1+np.exp(diff_u/temper))
+        p_choice_ll = 1/(1+np.exp(-diff_u/temper))
 
     elif method == "probit":
 
@@ -275,27 +269,4 @@ def choice_prob(ss_x, ss_t, ll_x, ll_t, params, dstyle, ustyle, temper,
     return p_choice_ll
 
 
-
-
-
-
-
-
-
-
-
-
-def choice_prob_itch(ss_t, ss_x, ll_t, ll_x, params):
-
-    abs_diff_x = ll_x - ss_x
-    abs_diff_t = ll_t - ss_t
-    rel_diff_x = 2*abs_diff_x / (ll_x + ss_x)
-    rel_diff_t = 2*abs_diff_t / (ll_t + ss_t)
-    growth_rate = (np.log(ll_x) - np.log(ss_x)) / abs_diff_t
-
-    itch_list = [1,abs_diff_x,abs_diff_t,rel_diff_x,rel_diff_t,growth_rate] 
-
-    p_choice_ll = sum([params[i] * itch_list[i] for i in range(len(itch_list))])
-
-    return p_choice_ll
 

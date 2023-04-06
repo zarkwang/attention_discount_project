@@ -37,12 +37,6 @@ utility_func:
   cara:
     x0: [1]
     bound: [[.001,100]]
-  power2:
-    x0: [1,.5]
-    bound: [[.001,100],[.001,1]]
-  log:
-    x0: [1,.5]
-    bound: [[.001,100],[.001,100]]
 choice_prob:
   temper:
     x0: [5]

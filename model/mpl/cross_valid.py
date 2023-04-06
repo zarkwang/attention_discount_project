@@ -5,12 +5,12 @@ from mpl import estimation
 from tqdm import tqdm
 
 
-def sampling_subject(data,train_size):
+def split_sample(data,train_ratio):
     
     subject_id_set = set(data["person_id"])
 
-    train_size = round(len(subject_id_set)* train_size)
-    train_subject_id = np.random.choice(np.array(list(subject_id_set)),size=train_size,replace=False)
+    train_ratio = round(len(subject_id_set)* train_ratio)
+    train_subject_id = np.random.choice(np.array(list(subject_id_set)),size=train_ratio,replace=False)
     
     train_sample = data[data["person_id"].isin(train_subject_id)]
     test_sample = data[data["person_id"].isin(train_subject_id) == False]
@@ -21,19 +21,19 @@ def sampling_subject(data,train_size):
 
 def test_model(style,test_sample,params):
 
-    ss_t = test_sample['ss_delay'].values
-    ss_x = test_sample['ss_amount'].values
-    ll_t = test_sample['ll_delay'].values
-    ll_x = test_sample['ll_amount'].values
+    ss_t = test_sample['ss_t'].values
+    ss_x = test_sample['ss_x'].values
+    ll_t = test_sample['ll_t'].values
+    ll_x = test_sample['ll_x'].values
     choice = test_sample['choice'].values
 
 
-    predict_choice = choice_prob.choice_prob_du(ss_t, ss_x, ll_t, ll_x, 
+    predict_choice = choice_rule.choice_prob(ss_x, ss_t, ll_x, ll_t, 
                             dstyle = style["dstyle"], 
                             ustyle = style["ustyle"], 
+                            method = style['method'],
                             params = params[:-1], 
                             temper = params[-1])
-
 
     choice_not_nan = (~np.isnan((choice - predict_choice)))
 
@@ -51,13 +51,13 @@ def test_model(style,test_sample,params):
 
 
 
-def validation(style,data,sample_times,train_size=0.75,disp_output=False):
+def validation(style,data,sample_times,train_ratio=0.75,disp_output=False):
 
     test_result = []
 
     for i in tqdm(range(sample_times)):
 
-        sample = sampling_subject(data,train_size)
+        sample = split_sample(data,train_ratio)
 
         train_result = mpl_estimation.mle(style,data = sample["train"])
 
