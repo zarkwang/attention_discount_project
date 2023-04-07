@@ -3,7 +3,9 @@ import numpy as np
 import pandas as pd
 import scipy.stats as st
 from scipy.optimize import minimize,basinhopping
+from sklearn import metrics
 from mpl import choice_rule
+
 
 with open('mpl/config_param.yaml', 'r') as f:
         config_param = yaml.safe_load(f)
@@ -47,13 +49,10 @@ def log_likelihood(params, data, dstyle, ustyle, bounds, method="logit",
         
         p_choice_ll[np.where(p_choice_ll == 1)] = p_choice_ll[np.where(p_choice_ll == 1)] - 1e-8
         p_choice_ll[np.where(p_choice_ll == 0)] = p_choice_ll[np.where(p_choice_ll == 0)] + 1e-8
-        
-        p_choice_ss = 1 - p_choice_ll
-        p_choice = np.where(choice == 1, p_choice_ll, p_choice_ss)
 
-        log_like = np.sum(np.log(p_choice))
+        loss = metrics.log_loss(choice,p_choice_ll)
 
-        return -log_like
+        return loss
 
 
 
@@ -87,9 +86,9 @@ def mle(style,data,disp_output=False,disp_step=False,intercept=False,simu_size=1
 
     solver = basinhopping(log_likelihood, x0, minimizer_kwargs=minimizer_kwargs, 
                 niter=500, 
-                stepsize=0.05, 
+                stepsize=0.1, 
                 T=1.0,
-                niter_success = 100,
+                niter_success = 50,
                 disp=disp_step)
     
     print(solver)
@@ -97,9 +96,9 @@ def mle(style,data,disp_output=False,disp_step=False,intercept=False,simu_size=1
     if solver.success:
         result = solver.lowest_optimization_result
         se = np.sqrt(np.diag(result.hess_inv.todense())) / np.sqrt(len(data))
-        log_like = -result.fun
-        aic = 2*len(x0)-2*log_like
-        bic = 2*np.log(len(data))*len(x0)-2*log_like
+        log_loss = result.fun
+        aic = 2*len(x0)+2*log_loss*len(data)
+        bic = 2*np.log(len(data))*len(x0)+2*log_loss*len(data)
         gradient = result.jac
 
 
@@ -107,7 +106,7 @@ def mle(style,data,disp_output=False,disp_step=False,intercept=False,simu_size=1
                 'params':[round(e,3) for e in result.x],
                 'se':[round(e,3) for e in se],
                 'gradient':[round(e,3) for e in gradient],
-                'log-likelihood':round(log_like,3),
+                'log_loss':round(log_loss,3),
                 'aic':round(aic,3),
                 'bic':round(bic,3),
                 }

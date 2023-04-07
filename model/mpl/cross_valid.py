@@ -3,6 +3,7 @@ import numpy as np
 from mpl import choice_rule
 from mpl import estimation
 from tqdm import tqdm
+from sklearn import metrics
 
 
 def split_sample(data,train_size):
@@ -39,15 +40,14 @@ def test_model(style,test_sample,params):
 
     choice_valid = choice[choice_not_nan]
     predict_valid = predict_choice[choice_not_nan]
-    resid = choice_valid - predict_valid
+    binary_pred = (predict_valid > .5)
 
-    mse = np.var(resid)
-    mae = abs(resid).mean()
-    accuracy = (abs(resid)<.5).sum()/len(resid)
-    p_choice = np.where(choice_valid == 1, predict_valid, 1 - predict_valid)
-    log_like = np.sum(np.log(p_choice))
+    mse = metrics.mean_squared_error(choice_valid,predict_valid)
+    mae = metrics.mean_absolute_error(choice_valid,predict_valid)
+    accuracy = metrics.accuracy_score(choice_valid,binary_pred)
+    log_loss =metrics.log_loss(choice_valid,predict_valid)
 
-    return {"mse":mse,"mae":mae,"accuracy":accuracy,"log_like":log_like}
+    return {"mse":mse,"mae":mae,"accuracy":accuracy,"log_loss":log_loss}
 
 
 
