@@ -1,0 +1,149 @@
+---
+title: "Empirical Test"
+author: "Zark Wang"
+date: "`r Sys.Date()`"
+bibliography: reference.bib
+csl: apa-no-ampersand.csl
+link-citations: False
+editor_options: 
+  markdown: 
+    wrap: 72
+output: html_document
+---
+
+# Data
+
+# Empirical Strategy
+
+I test three types of intertemporal choice models: discounted utility
+model, trade-off model, and heuristic model.
+
+The discounted utility model assumes that the decision maker tends to
+choose the option with greater discounted utility. Let the discounted
+utility for option $j$ ($j\in\{l,s\}$) be $v_j=d_ju(x_j)$, where $d_j$
+is the discounting factor and $u(.)$ is the instantanoues utility
+function. Suppose the decision maker's perceived discounted utility for
+each option, denoted by is $\tilde{v_l}$ and $\tilde{v_s}$, is noisy. I
+set $\tilde{v_l}=v_l+\eta_l$, $\tilde{v_s}=v_s+\eta_s$. When $\eta_l$
+and $\eta_s$ are independent and both follow $Gumble(0,\rho)$, then the
+probability that the decision maker chooses LL is
+
+$$
+P\{\tilde{v_s}\leq\tilde{v_l}\}=\frac{1}{1+\exp\{-\frac{1}{\rho}(v_l-v_s)\}}
+$$
+
+The trade-off model [@scholten_psychology_2010; @scholten_weighing_2014]
+assumes that when thinking of whether to choose LL, the decision maker
+makes a comparison between attributes (reward and time), rather than
+between options (LL and SS). If the benefit of receiving a larger reward
+exceeds the cost of waiting a longer time, then she will choose LL;
+otherwise, she will choose SS. I denote the benefit of receiving a
+larger reward by $B$, the cost of waiting longer by $Q$. The value of
+$B$ can be simply represented by $u(x_l)-u(x_s)$. Following
+@scholten_weighing_2014, I represent $Q$ by
+
+$$
+Q =\frac{\kappa}{\zeta_1}\ln\left(1+\zeta_1\left(\frac{w(t_l)-w(t_s)}{\zeta_2}\right)^{\zeta_2}\right)
+$$
+
+where $\eta_q$ is a noise term, and $w(t)=\ln(1+\omega t)/\omega$. The
+parameter $\omega$ measures how much time is distorted in the decision
+maker's mind; $\kappa$ measures the relative importance of reducing
+waiting time compared with increasing reward magnitude; $\zeta_1$,
+$\zeta_2$ jointly determine the curvature of changes in $Q$ relative to
+$t_l-t_s$. @scholten_weighing_2014 use $\zeta_1$, $\zeta_2$ to ensure
+that $Q$ follow a S-shape curve in relation to $t_l-t_s$ and that the
+behavioral pattern can shift between sub-additivity and
+super-additivity.
+
+I assume the decision maker's perception of $B$ and $Q$, denoted by
+$\tilde{B}$ and $\tilde{Q}$, is noisy. Therefore, $\tilde{B}=B+\eta_B$,
+$\tilde{Q}=Q+\eta_Q$, where $\eta_B$ and $\eta_Q$ are independent
+zero-mean noise terms. Again, assume both $\eta_B$ and $\eta_Q$ follow
+$Gumble(0,\rho)$, then the probability that the decision maker chooses
+LL is
+
+$$
+P\{\tilde{Q}\leq\tilde{B}\}=\frac{1}{1+\exp\{-\frac{1}{\rho}(B-Q)\}}
+$$
+
+For the heuristic model, previous literature calculates the features of
+the intertemporal choice context (such as the relative difference
+between $x_l$ and $x_s$), then use a linear combination of these
+features to predict the choice probability for option LL
+[@read_drift_2013;@marzilli_ericson_money_2015]. I implement the same
+approach to calculate features, but use them to construct several
+decision trees for prediction. To be specific, I use the XGBoost model,
+which is a machine learning algorithm widely applied to solving
+classification problem. The intuition underlying XGBoost is that, the
+decision maker relies on a chain of if-then rules to make a choice
+(similar with elimiation-by-aspects), and she repeats this process for
+several times, summing up the results of each time to do a final choice.
+
+8 discounted utility models, in comparison
+
+exponential (EXPO)
+
+$$
+d_t =\delta^t
+$$
+
+double exponential (EXPO2)
+
+$$
+d_t = \omega\delta_1^t+(1-\omega)\delta_2^t
+$$
+
+hyperbolic (HB)
+
+$$
+d_t = \frac{1}{1+kt}
+$$
+
+dual-parameter hyperbolic (HB2)
+
+$$
+d_t = \frac{1}{(1+kt)^\alpha}
+$$
+
+magnitude-dependent hyperbolic (HB-MD)
+
+$$
+d_t = \frac{1}{1+(\beta u(x_t))^{-1}\cdot t}
+$$
+
+quasi-hyperbolic (QuasiHB)
+
+$$
+d_t =\left\{\begin{aligned}& 1 ,& t=0\\& \beta \delta^t, & t>0\end{aligned}\right.
+$$
+
+quasi-hyperbolic plus fixed delay cost (QuasiHB-FC)
+
+$$
+d_t =\left\{\begin{aligned}& 1 ,& t=0\\& \beta \delta^t - \frac{\alpha}{u_t}, & t>0\end{aligned}\right.
+$$
+
+homogeneous costly empathy (HCE)
+
+$$
+d_t = a_t u(x_t)^{\frac{1}{m-1}}
+$$
+
+where $a_t=\delta^t$.
+
+The choice probability function is given by
+
+$$
+P(LL)=\frac{1}{1+e^{-(V_l-V_s)\rho}}
+$$
+
+where $V_t = d_tu(x_t)$, $t\in\{s,l\}$
+
+# Results
+
+## Parameter Fitting
+
+## Out-of-Sample Performance
+
+## Model Comparison

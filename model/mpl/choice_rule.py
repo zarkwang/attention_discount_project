@@ -11,7 +11,7 @@ class utility:
 
     def __init__(self,ss_x,ss_t,ll_x,ll_t,
                  params: Union[dict,list],
-                 ustyle='power',dstyle='expo',
+                 dstyle='expo',ustyle='power',
                  random=None,intercept=False):
         
         self.ss_x = ss_x #array or float, small reward
@@ -19,17 +19,13 @@ class utility:
         self.ll_x = ll_x #array or float, large reward
         self.ll_t = ll_t #array or float, large delay
         self._params = params
+        self._dstyle= dstyle  
         self._ustyle = ustyle  
-        self._dstyle= dstyle   
         self._random = random  
         self._intercept = intercept
-
-
-        required_param = {'cara': ['coef'],
-                    'power':['coef']}
         
         self.d_keys = self.get_dargs_keys(dstyle)
-        self.u_keys = self.get_uargs_keys(ustyle,random,intercept,required_param)
+        self.u_keys = self.get_uargs_keys(required_param=['coef'],random=random,intercept=intercept)
 
         """
         params: dict or list, parameters in utility and discounting (timing cost) functions
@@ -55,9 +51,8 @@ class utility:
         """
 
 
-
         self.valid_dstyle = discount.d_func_list
-        self.valid_ustyle = list(required_param.keys())
+        self.valid_ustyle = ['cara','power']
         self.d_args,self.u_args = self.get_all_args()
 
         self.diff = self.agg_utility()
@@ -150,24 +145,12 @@ class utility:
         return list(d_keys)
     
     @staticmethod
-    def get_uargs_keys(ustyle,random,intercept,required_param):
+    def get_uargs_keys(required_param,random,intercept):
         """
         Get the keys for the "uargs" in an instantaneous utility function
         """
-
-        if not random:
-            random = []
-        else:
-            random = ['u_sigma']
         
-        if not intercept:
-            intercept = []
-        else:
-            intercept = ['u_intercept']
-
-        param_key = required_param[ustyle] + intercept + random
-        
-        return param_key
+        return required_param + intercept*['u_intercept'] + (random is not None)*['u_scale']
     
 
     def get_all_args(self):
@@ -176,8 +159,9 @@ class utility:
         """
 
         if isinstance(self._params,np.ndarray) or isinstance(self._params,list):
-            d_args = {self.d_keys[i]: self._params[i] for i in range(len(self.d_keys))}
-            u_args = {self.u_keys[i]: self._params[i+len(self.d_keys)] for i in range(len(self.u_keys))}
+            
+            d_args = dict(zip(self.d_keys,self._params[:len(self.d_keys)]))
+            u_args = dict(zip(self.u_keys,self._params[len(self.d_keys):]))
 
         elif isinstance(self._params,dict):
             d_args = self._params[self.d_keys]
@@ -222,49 +206,55 @@ class utility:
     
 
 
-    
+# The choice probability for option LL
 def choice_prob(ss_x, ss_t, ll_x, ll_t, params, dstyle, ustyle, temper,
-                   intercept=False,method="logit", 
-                   simu_size=1000, regenerate_sample=True,**kwargs):
+                   intercept=False,
+                   method="logit", 
+                   regenerate_sample=True, simu_size=1000, random_state=2023,
+                   **kwargs):
 
-    diff_u = utility(ss_x,ss_t,ll_x,ll_t,params,ustyle,dstyle,intercept).diff
+    diff_u = utility(ss_x,ss_t,ll_x,ll_t,params,dstyle,ustyle,intercept=intercept).diff
+
+    method_list = ['logit','probit','binary']
 
     if method == "logit":
         p_choice_ll = 1/(1+np.exp(-diff_u/temper))
+    
+    elif method == "binary":
+        p_choice_ll = (diff_u>=0)
 
     elif method == "probit":
+
+        np.random.seed(random_state)
 
         if hasattr(ll_x, "__len__"):
 
             obs = len(ll_x)
 
             if regenerate_sample:
-                np.random.seed(2023)
                 simu_normal = np.random.normal(size=obs*simu_size).reshape(obs,simu_size)
             else:
                 simu_normal = kwargs['simu_sample']
             
             diff_v = np.repeat(diff_u,simu_size).reshape(obs,simu_size) 
 
-            _limit = (diff_v + simu_normal * temper) / temper
+            cum_limit = (diff_v + simu_normal * temper) / temper
 
-            p_choice_ll = np.mean(st.norm.cdf(_limit),axis=1)
+            p_choice_ll = np.mean(st.norm.cdf(cum_limit),axis=1)
 
         else:
+
             if regenerate_sample:
-                np.random.seed(2023)
                 simu_normal = np.random.normal(size=simu_size)
             else:
                 simu_normal = kwargs['simu_sample']
 
-            _limit = (diff_u + simu_normal* temper) / temper
+            cum_limit = (diff_u + simu_normal * temper) / temper
             
-            p_choice_ll = (st.norm.cdf(_limit)).mean() 
+            p_choice_ll = (st.norm.cdf(cum_limit)).mean() 
 
-    elif method == "deterministic":
-        p_choice_ll = (diff_u>=0)
     else:
-        print("Invalid method. Should be one of 'probit','logit','determinstic'")
+        print("Invalid method. Should be one of",method_list)
     
     return p_choice_ll
 

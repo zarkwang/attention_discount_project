@@ -1,6 +1,5 @@
 
 import numpy as np
-import inspect
 from typing import Dict, Union, Literal
 
 
@@ -49,10 +48,10 @@ def hb_d(dargs: Dict[Literal["k"], float],
 
 
 # dual-parameter hyperbolic discounting (Loewenstein-Prelec 1992)
-def hb2_d(self,dargs: Dict[Literal["k","a"], float],
+def hb2_d(dargs: Dict[Literal["k","a"], float],
                 t=None,u=None):
     
-    return 1/(1 + dargs['k'] * self._t)**dargs['a']
+    return 1/(1 + dargs['k'] * t)**dargs['a']
 
 # magnitude-dependent discounting (Gershman-Bhui 2020)
 def hbmd_d(dargs: Dict[Literal["b"], float],
@@ -86,7 +85,7 @@ def hce_d(dargs: Dict[Literal["delta","m"], float],
 
     a_t = dargs['delta']**t
 
-    w_t = a_t * u**(1/(dargs['m']-1)) 
+    w_t = a_t * u**(1/dargs['m']) 
 
     return w_t
 
@@ -126,9 +125,9 @@ def trade_d(dargs: Dict[Literal["beta","zeta","alpha","k"],float],
 
     w = lambda t: 1/dargs['beta'] * np.log(1+dargs['beta']*t)
 
-    represent_t = ((w(ll_t) - w(ss_t)) / dargs['zeta'])**dargs['zeta']
+    represent_diff_t = ((w(ll_t) - w(ss_t)) / dargs['zeta'])**dargs['zeta']
 
-    cost = dargs['k']/dargs['alpha'] * np.log(1+represent_t)
+    cost = dargs['k']/dargs['alpha'] * np.log(1+ dargs['alpha']*represent_diff_t)
 
     return cost   
 

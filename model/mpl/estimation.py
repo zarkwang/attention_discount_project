@@ -12,19 +12,20 @@ with open('mpl/config_param.yaml', 'r') as f:
 
 
 def constraint(params,bound):
-
     cons = True
 
-    for i in range(len(params)):
-     cons = (params[i] <= bound[i][1]) & (params[i] >= bound[i][0]) & cons
+    if bound:
+        cons = ((np.array(bound)[:,0] <= params) & (np.array(bound)[:,1] >= params)).prod()
 
     return cons
 
 
 
-def log_likelihood(params, data, dstyle, ustyle, bounds, method="logit",
-                   intercept=False, regenerate_sample=True,
-                   kwargs={}):
+def objective(params, data, dstyle, ustyle, method="logit", 
+                intercept=False,
+                bounds=None,
+                regenerate_sample=True,
+                kwargs={}):
 
     if not constraint(params,bounds):
         return 1e10 
@@ -39,13 +40,15 @@ def log_likelihood(params, data, dstyle, ustyle, bounds, method="logit",
         if not regenerate_sample:
             p_choice_ll = choice_rule.choice_prob(ss_x, ss_t, ll_x, ll_t, 
                                                   params, dstyle, ustyle, temper, 
-                                                  intercept, method, 
+                                                  intercept=intercept, 
+                                                  method=method, 
                                                   regenerate_sample=False, 
-                                                  simu_sample = kwargs['simu_sample'])
+                                                  simu_sample=kwargs['simu_sample'])
         else:
             p_choice_ll = choice_rule.choice_prob(ss_x, ss_t, ll_x, ll_t, 
                                                   params, dstyle, ustyle, temper, 
-                                                  intercept,method)
+                                                  intercept=intercept,
+                                                  method=method)
         
         p_choice_ll[np.where(p_choice_ll == 1)] = p_choice_ll[np.where(p_choice_ll == 1)] - 1e-8
         p_choice_ll[np.where(p_choice_ll == 0)] = p_choice_ll[np.where(p_choice_ll == 0)] + 1e-8
@@ -58,18 +61,24 @@ def log_likelihood(params, data, dstyle, ustyle, bounds, method="logit",
 
 
 
-def mle(style,data,disp_output=False,disp_step=False,intercept=False,simu_size=1000):
+def mle(style,data,disp_output=False,disp_step=False,simu_size=1000):
 
     dstyle = style['dstyle']
     ustyle = style['ustyle']
     method = style['method']
+    intercept = style['intercept']
+
+    init_intercept = [0]
+    bound_intercept = [[-100,100]]
 
     x0 = config_param['discount_func'][dstyle]["x0"] + \
          config_param['utility_func'][ustyle]["x0"] + \
+         init_intercept*intercept + \
          config_param['choice_prob']['temper']["x0"]
     
     bounds = config_param['discount_func'][dstyle]["bound"] + \
              config_param['utility_func'][ustyle]["bound"] + \
+             bound_intercept*intercept + \
              config_param['choice_prob']['temper']["bound"]
 
     if method == 'probit':
@@ -78,20 +87,23 @@ def mle(style,data,disp_output=False,disp_step=False,intercept=False,simu_size=1
         kwargs = {'simu_sample': np.random.normal(size=len(data)*simu_size).reshape(len(data),simu_size)}
 
         minimizer_kwargs = {"method": "L-BFGS-B", 
-                            "args": (data, dstyle, ustyle, bounds, method, intercept,
+                            "args": (data, dstyle, ustyle, method, intercept, bounds, 
                                      regenerate_sample, kwargs)}
     else:
         minimizer_kwargs = {"method": "L-BFGS-B", 
-                            "args": (data, dstyle, ustyle, bounds, method, intercept)}
+                            "args": (data, dstyle, ustyle, method, intercept, bounds)}
+        
+    
+    stepsize = np.array(bounds)[:,1]*0.1
 
-    solver = basinhopping(log_likelihood, x0, minimizer_kwargs=minimizer_kwargs, 
-                niter=500, 
-                stepsize=0.1, 
+    solver = basinhopping(objective, x0, minimizer_kwargs=minimizer_kwargs, 
+                niter=1000, 
+                stepsize=stepsize, 
                 T=1.0,
-                niter_success = 50,
+                niter_success = 100,
                 disp=disp_step)
     
-    print(solver)
+    #print(solver)
     
     if solver.success:
         result = solver.lowest_optimization_result
@@ -116,7 +128,7 @@ def mle(style,data,disp_output=False,disp_step=False,intercept=False,simu_size=1
 
         return output
     else:
-        output = "Fail to converge"
+        output = config_param['msg']['fail_converge']
         print(output)
         return output
 
@@ -124,10 +136,4 @@ def mle(style,data,disp_output=False,disp_step=False,intercept=False,simu_size=1
 #if __name__ == "__main__":
 
     
-
-
-    
-
-
-# estimation with Bayesian method
 
