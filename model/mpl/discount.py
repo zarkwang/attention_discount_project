@@ -114,7 +114,7 @@ def attention_uni_d(dargs: Dict[Literal["lambd"], float],
     return w_t
 
 
-
+# trade-off model
 def trade_d(dargs: Dict[Literal["beta","zeta","alpha","k"],float],
             ss_t,ll_t):
     

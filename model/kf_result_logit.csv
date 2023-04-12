@@ -1,5 +1,0 @@
-style,params,mse,mae,log_loss,accuracy,pred_ll
-"{'dstyle': 'quasihb', 'ustyle': 'cara', 'method': 'logit', 'intercept': False}",[ 0.995   0.5026 20.8262  2.33  ],0.2358,0.4758,0.6638,0.6314,0.0032
-"{'dstyle': 'quasihb', 'ustyle': 'power', 'method': 'logit', 'intercept': False}",[0.998  0.8746 0.1836 2.9758],0.2234,0.454,0.6386000000000001,0.6728,0.175
-"{'dstyle': 'quasihb_fc', 'ustyle': 'cara', 'method': 'logit', 'intercept': False}",[ 0.996   0.4514  7.9952 11.762   1.9704],0.2354,0.476,0.6638,0.6312,0.0054
-"{'dstyle': 'quasihb_fc', 'ustyle': 'power', 'method': 'logit', 'intercept': False}",[0.9966 0.9578 5.4604 0.0718 0.9984],0.22480000000000003,0.42279999999999995,0.6557999999999999,0.6784,0.187
