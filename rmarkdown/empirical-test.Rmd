@@ -7,6 +7,10 @@ csl: apa-no-ampersand.csl
 header-includes: 
   - \usepackage{setspace}
   - \usepackage{amsmath}
+  - \usepackage{array}
+  - \usepackage{caption}
+  - \renewcommand{\arraystretch}{1.5}
+  - \captionsetup[table]{skip=5pt}
   - \setstretch{1.3} 
 fontsize: 12pt
 geometry: margin=1in
@@ -24,7 +28,7 @@ output:
 # Data
 
 I select two datasets from previous studies: the first is from
-@marzilli_ericson_money_2015, containing 23,131 observations from 939
+@ericson_money_2015, containing 23,131 observations from 939
 participants; the second is from @chavez_hierarchical_2017, containing
 34,515 choices from 1,284 participants. I term the first dataset as
 *Ericson* data, and the second dataset as *Chávez* data. Each dataset is
@@ -95,7 +99,7 @@ super-additivity.
 I assume the decision maker's perception of $B$ and $Q$, denoted by
 $\tilde{B}$ and $\tilde{Q}$, is noisy. Therefore, $\tilde{B}=B+\eta_B$,
 $\tilde{Q}=Q+\eta_Q$, where $\eta_B$ and $\eta_Q$ are independent
-zero-mean noise terms. Again, assume both $\eta_B$ and $\eta_Q$ follow
+noises. Again, assume both $\eta_B$ and $\eta_Q$ follow
 $Gumble(0,\rho)$, then the probability that the decision maker chooses
 LL is
 
@@ -110,20 +114,20 @@ XGBoost is that, the decision-maker uses a chain of if-then rules to
 make a choice, and repeats this process for several times, adding up the
 results of each iteration to make the final decision. To better fit the
 data, I extract features from each intertemporal choice question,
-following the methods in @read_drift_2013 and
-@marzilli_ericson_money_2015, and tune the hyper-parameters of the
-algorithm via grid search. The features that I use to fit *Ericson* data
-are $x_s$, $x_l$, $t_s$, $t_l$, the absolute and relative differences
-between $x_s$ and $x_l$, the absolute and relative differences between
-$t_l$ and $t_s$, the interest rate of LL when SS is invested as
-principal. For *Chávez* data, given that $t_s=0$, I omit $t_s$ and the
-differences between $t_s$ and $t_l$.
+following the methods in @read_drift_2013 and @ericson_money_2015.
+Meanwhile, I tune the hyper-parameters of the algorithm via grid search.
+The features that I use to fit *Ericson* data are $x_s$, $x_l$, $t_s$,
+$t_l$, the absolute and relative differences between $x_s$ and $x_l$,
+the absolute and relative differences between $t_l$ and $t_s$, the
+interest rate of LL when SS is invested as principal. For *Chávez* data,
+given that $t_s=0$, I omit $t_s$ and the differences between $t_s$ and
+$t_l$.
 
 Along with the attention-adjusted discounting (under exponential and
-uniform initial weight allocations), I employ 8 other methods to draw
+uniform initial attention allocations), I employ 8 other methods to draw
 the discounting factor in the discounted utility model, which are
 
-**1. exponential** (EXPO)
+**1. exponential**
 
 $$
 d(t) =\delta^t
@@ -131,7 +135,7 @@ $$
 
 where the parameter is $\delta$ and $\delta\in(0,1]$.
 
-**2. double exponential** (EXPO2)
+**2. double exponential** [@van_den_bos_towards_2013]
 
 $$
 d(t) = \omega\delta_1^t+(1-\omega)\delta_2^t
@@ -140,7 +144,7 @@ $$
 where the parameters are $\delta_1$, $\delta_2$, $\omega$, and
 $\delta_1,\delta_2\in(0,1]$.
 
-**3. hyperbolic** (HB)
+**3. hyperbolic**
 
 $$
 d(t) = \frac{1}{1+kt}
@@ -148,7 +152,7 @@ $$
 
 where the parameter is $k$.
 
-**4. dual-parameter hyperbolic** (HB2)
+**4. dual-parameter hyperbolic** [@loewenstein_anomalies_1992]
 
 $$
 d(t) = \frac{1}{(1+kt)^a}
@@ -156,7 +160,7 @@ $$
 
 where the parameters are $k$, $a$.
 
-**5. magnitude-dependent hyperbolic** (HBMD)
+**5. magnitude-dependent hyperbolic** [@gershman_rationally_2020]
 
 $$
 d(t) = \frac{1}{1+kt}, \quad k=\frac{1}{b u(x_t)}
@@ -164,7 +168,7 @@ $$
 
 where the parameter is $b$.
 
-**6. quasi-hyperbolic** (QuasiHB)
+**6. quasi-hyperbolic** [@laibson_golden_1997]
 
 $$
 d(t)= \textbf{1}\{t=0\}+ \beta\delta^t\cdot\textbf{1}\{t>0\}
@@ -172,14 +176,15 @@ $$
 
 where the parameters are $\beta$, $\delta$, and $\beta,\delta\in(0,1]$.
 
-**7. quasi-hyperbolic plus fixed delay cost** (QuasiHB_FC)
+**7. quasi-hyperbolic plus fixed delay cost**
+[@benhabib_present-bias_2010]
 
 $$
 d(t)= \textbf{1}\{t=0\}+ (\beta\delta^t-\frac{c}{u(x_t)})\cdot\textbf{1}\{t>0\}
 $$ where the parameters are $\beta$, $\delta$, $c$, and
 $\beta,\delta\in(0,1]$.
 
-**8. homogeneous costly empathy** (HCE)
+**8. homogeneous costly empathy** [@noor_optimal_2022]
 
 $$
 d_t = \kappa_t u(x_t)^{\frac{1}{m}}
@@ -217,8 +222,60 @@ optimization. [^2]
 
 # Result
 
-## Parameter Fitting
+## Results for *Ericson* data
 
-## Out-of-Sample Performance
+Table \ref{tab:itch_result_kf} shows the fitness of each model in cross-validation.
 
-## Model Comparison
+```{=tex}
+\begin{table}[]
+\caption{Cross-validation result for Ericson data}
+\label{tab:itch_result_kf}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllllll}
+\hline
+\textbf{dstyle} & \textbf{ustyle} & \textbf{params} & \textbf{mse} & \textbf{mae} & \textbf{log\_loss} & \textbf{accuracy} \\ \hline
+gbdt           & gbdt  & --                                             & 0.2988 & 0.2988 & 0.5812 & 0.7012 \\ 
+trade          & power & {[}4.783  1.275 39.186  2.194  0.159  0.926{]} & 0.2036 & 0.4088 & 0.5947 & 0.6937 \\
+hbmd           & power & {[}6.751 0.149 0.182{]}                        & 0.2042 & 0.4094 & 0.5978 & 0.6942 \\
+attention\_uni & power & {[}1.298 0.176 0.326{]}                        & 0.2088 & 0.4185 & 0.6071 & 0.6840 \\
+expo2          & power & {[}0.939 0.786 0.599 0.016 0.014{]}            & 0.2094 & 0.4165 & 0.6087 & 0.6845 \\
+expo           & power & {[}0.992 0.018 0.015{]}                        & 0.2099 & 0.4205 & 0.6093 & 0.6827 \\
+hb             & power & {[}0.012 0.027 0.024{]}                        & 0.2099 & 0.4204 & 0.6097 & 0.6820  \\
+hce            & power & {[}0.993 4.22  0.01  0.013{]}                  & 0.2102 & 0.4211 & 0.6098 & 0.6805 \\
+hb2            & power & {[}0.003 3.939 0.02 0.019{]}                   & 0.2105 & 0.4194 & 0.6113 & 0.6824 \\
+quasihb\_fc    & power & {[}0.922 0.861 9.834 0.086 1.253{]}            & 0.2160 & 0.4362 & 0.6222 & 0.6725 \\
+attention      & power & {[}0.996 7.781 0.341 1.582{]}                  & 0.2157 & 0.4358 & 0.6232 & 0.6787 \\
+trade          & cara  & {[}3.615  1.63  36.216  5.63   0.4    1.205{]} & 0.2248 & 0.4499 & 0.6415 & 0.6485 \\
+quasihb        & power & {[}0.997 0.834 0.121 1.875{]}                  & 0.2251 & 0.4438 & 0.6440 & 0.6571 \\
+attention\_uni & cara  & {[}0.793 2.886 0.395{]}                        & 0.2277 & 0.4554 & 0.6476 & 0.6339 \\
+expo           & cara  & {[}0.725 2.516 0.544{]}                        & 0.2279 & 0.4558 & 0.6480 & 0.6326 \\
+hb2            & cara  & {[}0.079 4.857 2.677 0.502{]}                  & 0.2281 & 0.4558 & 0.6481 & 0.6324 \\
+expo2          & cara  & {[}0.445 0.604 0.419 2.853 0.508{]}            & 0.2280 & 0.4556 & 0.6481 & 0.6325 \\
+hce            & cara  & {[}0.725 98.968  2.537  0.545{]}               & 0.2279 & 0.4558 & 0.6481 & 0.6326 \\
+hb             & cara  & {[}0.317 3.258 0.419{]}                        & 0.2282 & 0.4560 & 0.6484 & 0.6324 \\
+attention      & cara  & {[}0.885 1.159 3.091 0.481{]}                  & 0.2281 & 0.4560 & 0.6487 & 0.6318 \\
+hbmd           & cara  & {[}3.75  2.583 0.383{]}                        & 0.2281 & 0.4559 & 0.6489 & 0.6363 \\
+quasihb\_fc    & cara  & {[}0.995  0.491 19.741 18.769  2.305{]}        & 0.2366 & 0.4780 & 0.6658 & 0.6325 \\
+quasihb        & cara  & {[}0.971  0.488 13.833  2.652{]}               & 0.2372 & 0.4790 & 0.6670 & 0.6330 \\
+\hline
+\end{tabular}%
+}
+\end{table}
+```
+
+
+Table
+
+```{=tex}
+
+
+
+```
+
+
+
+## Results for *Chávez* data
+
+## Discussion
+
+# Reference

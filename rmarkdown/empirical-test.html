@@ -378,26 +378,43 @@ display: none;
 
 </div>
 
-
-<div id="data" class="section level1">
-<h1>Data</h1>
-<p>I use two datasets: the first is from <span class="citation">Marzilli
-Ericson et al. (2015)</span>, which contains XXX observations from XX
-participants; the second is from <span class="citation">Chávez et al.
-(2017)</span>.</p>
-<p>Each experiment asks participants to answer a series of intertemporal
-choice questions. In each question, the participants are required to
-select one option between an early small reward (denoted by SS) and late
-large reward (denoted by LL). I denote the magnitude and delay of reward
-by <span class="math inline">\(x_s\)</span> and <span class="math inline">\(t_s\)</span> for option SS, and by <span class="math inline">\(x_l\)</span> and <span class="math inline">\(t_l\)</span> for option LL, where <span class="math inline">\(x_l&gt;x_s\)</span>, <span class="math inline">\(t_l&gt;t_s\)</span>.</p>
-<p>I mainly focus on out-of-sample model performance. For each dataset,
-I draw the responses from 20% of the participants as the test sample,
-and set the rest as the train sample. To mitigate the overfitting issue,
-I implement a 10-fold cross-validation procedure on the train
-sample.</p>
+<div id="TOC">
+<ul>
+<li><a href="#data" id="toc-data"><span class="toc-section-number">1</span> Data</a></li>
+<li><a href="#empirical-strategy" id="toc-empirical-strategy"><span class="toc-section-number">2</span> Empirical Strategy</a></li>
+<li><a href="#result" id="toc-result"><span class="toc-section-number">3</span> Result</a>
+<ul>
+<li><a href="#results-for-ericson-data" id="toc-results-for-ericson-data"><span class="toc-section-number">3.1</span> Results for <em>Ericson</em>
+data</a></li>
+<li><a href="#results-for-chávez-data" id="toc-results-for-chávez-data"><span class="toc-section-number">3.2</span> Results for <em>Chávez</em>
+data</a></li>
+<li><a href="#discussion" id="toc-discussion"><span class="toc-section-number">3.3</span> Discussion</a></li>
+</ul></li>
+<li><a href="#reference" id="toc-reference">Reference</a></li>
+</ul>
 </div>
-<div id="empirical-strategy" class="section level1">
-<h1>Empirical Strategy</h1>
+
+<div id="data" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Data</h1>
+<p>I select two datasets from previous studies: the first is from <span class="citation">Ericson et al. (2015)</span>, containing 23,131
+observations from 939 participants; the second is from <span class="citation">Chávez et al. (2017)</span>, containing 34,515 choices
+from 1,284 participants. I term the first dataset as <em>Ericson</em>
+data, and the second dataset as <em>Chávez</em> data. Each dataset is
+used in more than one academic study.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Thus, readers interested in the method and
+the results of this paper can easily compare them with those of other
+papers.</p>
+<p>The experiments corresponding to each dataset ask the participants to
+answer a series of intertemporal choice questions. In each question, the
+participants are required to select one option between an early small
+reward (denoted by SS) and late large reward (denoted by LL). I denote
+the magnitude and delay of reward by <span class="math inline">\(x_s\)</span> and <span class="math inline">\(t_s\)</span> for option SS, and by <span class="math inline">\(x_l\)</span> and <span class="math inline">\(t_l\)</span> for option LL, where <span class="math inline">\(x_l&gt;x_s\)</span>, <span class="math inline">\(t_l&gt;t_s\)</span>. I mainly focus on
+out-of-sample model performance. For each dataset, I draw the responses
+from 20% of the participants as the test sample, and set the rest as the
+train sample. To mitigate the overfitting issue, I implement a 10-fold
+cross-validation procedure on the train sample.</p>
+</div>
+<div id="empirical-strategy" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Empirical Strategy</h1>
 <p>I test three types of intertemporal choice model: discounted utility
 model, trade-off model, and heuristic model.</p>
 <p>The discounted utility model assumes that the decision maker tends to
@@ -406,8 +423,9 @@ utility for option <span class="math inline">\(j\)</span> (<span class="math inl
 <span class="math inline">\(u(.)\)</span> is the instantanoues utility
 function. Suppose the decision maker’s perceived discounted utility for
 each option, denoted by is <span class="math inline">\(\tilde{v_l}\)</span> and <span class="math inline">\(\tilde{v_s}\)</span>, is noisy. I set <span class="math inline">\(\tilde{v_l}=v_l+\eta_l\)</span>, <span class="math inline">\(\tilde{v_s}=v_s+\eta_s\)</span>. When <span class="math inline">\(\eta_l\)</span> and <span class="math inline">\(\eta_s\)</span> are independent and both follow
-<span class="math inline">\(Gumble(0,\rho)\)</span>, then the
-probability that the decision maker chooses LL is</p>
+<span class="math inline">\(Gumble(0,\rho)\)</span>, where the scale
+parameter <span class="math inline">\(\rho\in(0,\infty)\)</span>, then
+the probability that the decision maker chooses LL is</p>
 <p><span class="math display">\[
 P\{\tilde{v_s}\leq\tilde{v_l}\}=\frac{1}{1+\exp\{-\frac{1}{\rho}(v_l-v_s)\}}
 \]</span></p>
@@ -433,9 +451,8 @@ et al. (2014)</span> use <span class="math inline">\(\zeta_1\)</span>,
 <span class="math inline">\(\zeta_2\)</span> to ensure that <span class="math inline">\(Q\)</span> follow a S-shape curve in relation to
 <span class="math inline">\(t_l-t_s\)</span> and that the behavioral
 pattern can shift between sub-additivity and super-additivity.</p>
-<p>I assume the decision maker’s perception of <span class="math inline">\(B\)</span> and <span class="math inline">\(Q\)</span>, denoted by <span class="math inline">\(\tilde{B}\)</span> and <span class="math inline">\(\tilde{Q}\)</span>, is noisy. Therefore, <span class="math inline">\(\tilde{B}=B+\eta_B\)</span>, <span class="math inline">\(\tilde{Q}=Q+\eta_Q\)</span>, where <span class="math inline">\(\eta_B\)</span> and <span class="math inline">\(\eta_Q\)</span> are independent zero-mean noise
-terms. Again, assume both <span class="math inline">\(\eta_B\)</span>
-and <span class="math inline">\(\eta_Q\)</span> follow <span class="math inline">\(Gumble(0,\rho)\)</span>, then the probability that
+<p>I assume the decision maker’s perception of <span class="math inline">\(B\)</span> and <span class="math inline">\(Q\)</span>, denoted by <span class="math inline">\(\tilde{B}\)</span> and <span class="math inline">\(\tilde{Q}\)</span>, is noisy. Therefore, <span class="math inline">\(\tilde{B}=B+\eta_B\)</span>, <span class="math inline">\(\tilde{Q}=Q+\eta_Q\)</span>, where <span class="math inline">\(\eta_B\)</span> and <span class="math inline">\(\eta_Q\)</span> are independent noises. Again,
+assume both <span class="math inline">\(\eta_B\)</span> and <span class="math inline">\(\eta_Q\)</span> follow <span class="math inline">\(Gumble(0,\rho)\)</span>, then the probability that
 the decision maker chooses LL is</p>
 <p><span class="math display">\[
 P\{\tilde{Q}\leq\tilde{B}\}=\frac{1}{1+\exp\{-\frac{1}{\rho}(B-Q)\}}
@@ -448,121 +465,212 @@ make a choice, and repeats this process for several times, adding up the
 results of each iteration to make the final decision. To better fit the
 data, I extract features from each intertemporal choice question,
 following the methods in <span class="citation">Read et al.
-(2013)</span> and <span class="citation">Marzilli Ericson et al.
-(2015)</span>, and tune the hyper-parameters of the algorithm via grid
-search. The features that I use to fit <em>Ericson</em> data are <span class="math inline">\(x_s\)</span>, <span class="math inline">\(x_l\)</span>, <span class="math inline">\(t_s\)</span>, <span class="math inline">\(t_l\)</span>, the absolute and relative
+(2013)</span> and <span class="citation">Ericson et al. (2015)</span>.
+Meanwhile, I tune the hyper-parameters of the algorithm via grid search.
+The features that I use to fit <em>Ericson</em> data are <span class="math inline">\(x_s\)</span>, <span class="math inline">\(x_l\)</span>, <span class="math inline">\(t_s\)</span>, <span class="math inline">\(t_l\)</span>, the absolute and relative
 differences between <span class="math inline">\(x_s\)</span> and <span class="math inline">\(x_l\)</span>, the absolute and relative
 differences between <span class="math inline">\(t_l\)</span> and <span class="math inline">\(t_s\)</span>, the interest rate of LL when SS is
 invested as principal. For <em>Chávez</em> data, given that <span class="math inline">\(t_s=0\)</span>, I omit <span class="math inline">\(t_s\)</span> and the differences between <span class="math inline">\(t_s\)</span> and <span class="math inline">\(t_l\)</span>.</p>
 <p>Along with the attention-adjusted discounting (under exponential and
-uniform initial weight allocations), I employ 8 other methods to draw
+uniform initial attention allocations), I employ 8 other methods to draw
 the discounting factor in the discounted utility model, which are</p>
-<ol style="list-style-type: decimal">
-<li>exponential (EXPO)</li>
-</ol>
+<p><strong>1. exponential</strong></p>
 <p><span class="math display">\[
 d(t) =\delta^t
 \]</span></p>
-<p>where the parameter is <span class="math inline">\(\delta\)</span>.</p>
-<ol start="2" style="list-style-type: decimal">
-<li>double exponential (EXPO2)</li>
-</ol>
+<p>where the parameter is <span class="math inline">\(\delta\)</span>
+and <span class="math inline">\(\delta\in(0,1]\)</span>.</p>
+<p><strong>2. double exponential</strong> <span class="citation">(Bos
+and McClure, 2013)</span></p>
 <p><span class="math display">\[
 d(t) = \omega\delta_1^t+(1-\omega)\delta_2^t
 \]</span></p>
-<p>where the parameters are <span class="math inline">\(\delta_1\)</span>, <span class="math inline">\(\delta_2\)</span>, <span class="math inline">\(\omega\)</span>.</p>
-<ol start="3" style="list-style-type: decimal">
-<li>hyperbolic (HB)</li>
-</ol>
+<p>where the parameters are <span class="math inline">\(\delta_1\)</span>, <span class="math inline">\(\delta_2\)</span>, <span class="math inline">\(\omega\)</span>, and <span class="math inline">\(\delta_1,\delta_2\in(0,1]\)</span>.</p>
+<p><strong>3. hyperbolic</strong></p>
 <p><span class="math display">\[
 d(t) = \frac{1}{1+kt}
 \]</span></p>
 <p>where the parameter is <span class="math inline">\(k\)</span>.</p>
-<ol start="4" style="list-style-type: decimal">
-<li>dual-parameter hyperbolic (HB2)</li>
-</ol>
+<p><strong>4. dual-parameter hyperbolic</strong> <span class="citation">(Loewenstein and Prelec, 1992)</span></p>
 <p><span class="math display">\[
 d(t) = \frac{1}{(1+kt)^a}
 \]</span></p>
 <p>where the parameters are <span class="math inline">\(k\)</span>,
 <span class="math inline">\(a\)</span>.</p>
-<ol start="5" style="list-style-type: decimal">
-<li>magnitude-dependent hyperbolic (HB-MD)</li>
-</ol>
+<p><strong>5. magnitude-dependent hyperbolic</strong> <span class="citation">(Gershman and Bhui, 2020)</span></p>
 <p><span class="math display">\[
 d(t) = \frac{1}{1+kt}, \quad k=\frac{1}{b u(x_t)}
 \]</span></p>
 <p>where the parameter is <span class="math inline">\(b\)</span>.</p>
-<ol start="6" style="list-style-type: decimal">
-<li>quasi-hyperbolic (QuasiHB)</li>
-</ol>
+<p><strong>6. quasi-hyperbolic</strong> <span class="citation">(Laibson,
+1997)</span></p>
 <p><span class="math display">\[
 d(t)= \textbf{1}\{t=0\}+ \beta\delta^t\cdot\textbf{1}\{t&gt;0\}
 \]</span></p>
-<p>where the parameters are <span class="math inline">\(\beta\)</span>,<span class="math inline">\(\delta\)</span>.</p>
-<ol start="7" style="list-style-type: decimal">
-<li>quasi-hyperbolic plus fixed delay cost (QuasiHB-FC)</li>
-</ol>
+<p>where the parameters are <span class="math inline">\(\beta\)</span>,
+<span class="math inline">\(\delta\)</span>, and <span class="math inline">\(\beta,\delta\in(0,1]\)</span>.</p>
+<p><strong>7. quasi-hyperbolic plus fixed delay cost</strong> <span class="citation">(Benhabib et al., 2010)</span></p>
 <p><span class="math display">\[
 d(t)= \textbf{1}\{t=0\}+
 (\beta\delta^t-\frac{c}{u(x_t)})\cdot\textbf{1}\{t&gt;0\}
-\]</span> where the parameters are <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\delta\)</span>, <span class="math inline">\(c\)</span>.</p>
-<ol start="8" style="list-style-type: decimal">
-<li>homogeneous costly empathy (HCE)</li>
-</ol>
+\]</span> where the parameters are <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\delta\)</span>, <span class="math inline">\(c\)</span>, and <span class="math inline">\(\beta,\delta\in(0,1]\)</span>.</p>
+<p><strong>8. homogeneous costly empathy</strong> <span class="citation">(Noor and Takeoka, 2022)</span></p>
 <p><span class="math display">\[
 d_t = \kappa_t u(x_t)^{\frac{1}{m}}
 \]</span></p>
 <p>where <span class="math inline">\(\kappa_t\)</span> is decreasing in
 <span class="math inline">\(t\)</span>. I set <span class="math inline">\(\kappa_t=\delta^t\)</span>, where the parameters
-are <span class="math inline">\(m\)</span> and <span class="math inline">\(\delta\)</span>.</p>
-<p>Besides, I employed 2 types of utility functions: (1) exponential
+are <span class="math inline">\(m\)</span>, <span class="math inline">\(\delta\)</span> and <span class="math inline">\(\delta\in(0,1]\)</span>.</p>
+<p>For the parameters in discounting functions, except for those
+explicitly marked as having a domain between 0 and 1, the domain of all
+other parameters is <span class="math inline">\((0,\infty)\)</span>.
+Besides, I employed 2 types of utility functions: (1) exponential
 utility (CARA), <span class="math inline">\(u(x)=1-e^{-\gamma
 x}\)</span>; (2) power utility (CRRA), <span class="math inline">\(u(x)
-= x^{\gamma}\)</span>. Therefore, for the discounted utility model,
-there are 20 specific model settings to fit; for the trade-off model,
-there are 2 specific model settings to fit.</p>
+= x^{\gamma}\)</span>. In both functions, the parameter is <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\gamma\in(0,\infty)\)</span>. Therefore, for the
+discounted utility model, there are 20 specific model settings to fit;
+for the trade-off model, there are 2 specific model settings to fit. In
+model fitting, if a parameter has a lower bound of 0, I set its lower
+bound to 0.001; if a parameter has a upper bound of infinity, I set its
+upper bound to 100. I use the maximum likelihood method to estimate the
+parameters, and apply L-BFGS-B method for optimization. As the solutions
+of L-BFGS-B are sensitive to initial points and often converge to local
+optima, I use the basin-hopping algorithm to achieve global
+optimization. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 </div>
-<div id="result" class="section level1">
-<h1>Result</h1>
-<div id="parameter-fitting" class="section level2">
-<h2>Parameter Fitting</h2>
+<div id="result" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Result</h1>
+<div id="results-for-ericson-data" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Results for
+<em>Ericson</em> data</h2>
+<p>Table 1 cross-validation</p>
+<pre class="latex tex"><code>\begin{table}[]
+\begin{tabular}{llllllll}
+\hline
+\textbf{dstyle} &amp; \textbf{ustyle} &amp; \textbf{params}                                 &amp; \textbf{mse} &amp; \textbf{mae} &amp; \textbf{log\_loss} &amp; \textbf{accuracy} &amp; \textbf{pred\_ll} \\ \hline
+trade           &amp; power           &amp; {[} 4.783  1.275 39.186  2.194  0.159  0.926{]} &amp; 0.2036       &amp; 0.4088       &amp; 0.5947             &amp; 0.6937            &amp; 0.2074            \\
+hbmd            &amp; power           &amp; {[}6.751 0.149 0.182{]}                         &amp; 0.2042       &amp; 0.4094       &amp; 0.5978             &amp; 0.6942            &amp; 0.2282            \\
+attention\_uni  &amp; power           &amp; {[}1.298 0.176 0.326{]}                         &amp; 0.2088       &amp; 0.4185       &amp; 0.6071             &amp; 0.6840            &amp; 0.1526            \\
+expo2           &amp; power           &amp; {[}0.939 0.786 0.599 0.016 0.014{]}             &amp; 0.2094       &amp; 0.4165       &amp; 0.6087             &amp; 0.6845            &amp; 0.2437            \\
+expo            &amp; power           &amp; {[}0.992 0.018 0.015{]}                         &amp; 0.2099       &amp; 0.4205       &amp; 0.6093             &amp; 0.6827            &amp; 0.2405            \\
+hb              &amp; power           &amp; {[}0.012 0.027 0.024{]}                         &amp; 0.2099       &amp; 0.4204       &amp; 0.6097             &amp; 0.682             &amp; 0.2472            \\
+hce             &amp; power           &amp; {[}0.993 4.22  0.01  0.013{]}                   &amp; 0.2102       &amp; 0.4211       &amp; 0.6098             &amp; 0.6805            &amp; 0.2351            \\
+hb2             &amp; power           &amp; {[}3.000e-03 3.939e+00 2.100e-02 1.900e-02{]}   &amp; 0.2105       &amp; 0.4194       &amp; 0.6113             &amp; 0.6824            &amp; 0.2453            \\
+quasihb\_fc     &amp; power           &amp; {[}0.922 0.861 9.834 0.086 1.253{]}             &amp; 0.2160       &amp; 0.4362       &amp; 0.6222             &amp; 0.6725            &amp; 0.1628            \\
+attention       &amp; power           &amp; {[}0.996 7.781 0.341 1.582{]}                   &amp; 0.2157       &amp; 0.4358       &amp; 0.6232             &amp; 0.6787            &amp; 0.1715            \\
+trade           &amp; cara            &amp; {[} 3.615  1.63  36.216  5.63   0.4    1.205{]} &amp; 0.2248       &amp; 0.4499       &amp; 0.6415             &amp; 0.6485            &amp; 0.0687            \\
+quasihb         &amp; power           &amp; {[}0.997 0.834 0.121 1.875{]}                   &amp; 0.2251       &amp; 0.4438       &amp; 0.644              &amp; 0.6571            &amp; 0.1035            \\
+attention\_uni  &amp; cara            &amp; {[}0.793 2.886 0.395{]}                         &amp; 0.2277       &amp; 0.4554       &amp; 0.6476             &amp; 0.6339            &amp; 0.0817            \\
+expo            &amp; cara            &amp; {[}0.725 2.516 0.544{]}                         &amp; 0.2279       &amp; 0.4558       &amp; 0.648              &amp; 0.6326            &amp; 0.05              \\
+hb2             &amp; cara            &amp; {[}0.079 4.857 2.677 0.502{]}                   &amp; 0.2281       &amp; 0.4558       &amp; 0.6481             &amp; 0.6324            &amp; 0.0632            \\
+expo2           &amp; cara            &amp; {[}0.445 0.604 0.419 2.853 0.508{]}             &amp; 0.2280       &amp; 0.4556       &amp; 0.6481             &amp; 0.6325            &amp; 0.0576            \\
+hce             &amp; cara            &amp; {[} 0.725 98.968  2.537  0.545{]}               &amp; 0.2279       &amp; 0.4558       &amp; 0.6481             &amp; 0.6326            &amp; 0.05              \\
+hb              &amp; cara            &amp; {[}0.317 3.258 0.419{]}                         &amp; 0.2282       &amp; 0.4560       &amp; 0.6484             &amp; 0.6324            &amp; 0.0736            \\
+attention       &amp; cara            &amp; {[}0.885 1.159 3.091 0.481{]}                   &amp; 0.2281       &amp; 0.4560       &amp; 0.6487             &amp; 0.6318            &amp; 0.0665            \\
+hbmd            &amp; cara            &amp; {[}3.75  2.583 0.383{]}                         &amp; 0.2281       &amp; 0.4559       &amp; 0.6489             &amp; 0.6363            &amp; 0.1021            \\
+quasihb\_fc     &amp; cara            &amp; {[} 0.995  0.491 19.741 18.769  2.305{]}        &amp; 0.2366       &amp; 0.4780       &amp; 0.6658             &amp; 0.6325            &amp; 0.0084            \\
+quasihb         &amp; cara            &amp; {[} 0.971  0.488 13.833  2.652{]}               &amp; 0.2372       &amp; 0.479        &amp; 0.667              &amp; 0.633             &amp; 0.0082            \\ \hline
+\end{tabular}
+\end{table}</code></pre>
 </div>
-<div id="out-of-sample-performance" class="section level2">
-<h2>Out-of-Sample Performance</h2>
+<div id="results-for-chávez-data" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Results for
+<em>Chávez</em> data</h2>
 </div>
-<div id="model-comparison" class="section level2 unnumbered">
-<h2 class="unnumbered">Model Comparison</h2>
+<div id="discussion" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Discussion</h2>
+</div>
+</div>
+<div id="reference" class="section level1 unnumbered">
+<h1 class="unnumbered">Reference</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-benhabib_present-bias_2010" class="csl-entry">
+Benhabib, J., Bisin, A., and Schotter, A. (2010). Present-bias,
+quasi-hyperbolic discounting, and fixed costs. <em>Games and Economic
+Behavior</em>, <em>69</em>(2), 205–223. <a href="https://doi.org/10.1016/j.geb.2009.11.003">https://doi.org/10.1016/j.geb.2009.11.003</a>
+</div>
+<div id="ref-van_den_bos_towards_2013" class="csl-entry">
+Bos, W. van den, and McClure, S. M. (2013). Towards a
+<span>General</span> <span>Model</span> of <span>Temporal</span>
+<span>Discounting</span>: <span>General</span> <span>Model</span> of
+<span>Time</span> <span>Discounting</span>. <em>Journal of the
+Experimental Analysis of Behavior</em>, <em>99</em>(1), 58–73. <a href="https://doi.org/10.1002/jeab.6">https://doi.org/10.1002/jeab.6</a>
+</div>
 <div id="ref-chavez_hierarchical_2017" class="csl-entry">
 Chávez, M. E., Villalobos, E., Baroja, J. L., and Bouzas, A. (2017).
-Hierarchical bayesian modeling of intertemporal choice. <em>Judgment and
-Decision Making</em>, <em>12</em>(1), 19–28. <a href="https://doi.org/10.1017/S1930297500005210">https://doi.org/10.1017/S1930297500005210</a>
+Hierarchical <span>Bayesian</span> modeling of intertemporal choice.
+<em>Judgment and Decision Making</em>, <em>12</em>(1), 19–28. <a href="https://doi.org/10.1017/S1930297500005210">https://doi.org/10.1017/S1930297500005210</a>
 </div>
-<div id="ref-marzilli_ericson_money_2015" class="csl-entry">
-Marzilli Ericson, K. M., White, J. M., Laibson, D., and Cohen, J. D.
-(2015). Money earlier or later? Simple heuristics explain intertemporal
-choices better than delay discounting does. <em>Psychological
-Science</em>, <em>26</em>(6), 826–833. <a href="https://doi.org/10.1177/0956797615572232">https://doi.org/10.1177/0956797615572232</a>
+<div id="ref-ericson_money_2015" class="csl-entry">
+Ericson, K. M., White, J. M., Laibson, D., and Cohen, J. D. (2015).
+Money <span>Earlier</span> or <span>Later</span>? <span>Simple</span>
+<span>Heuristics</span> <span>Explain</span> <span>Intertemporal</span>
+<span>Choices</span> <span>Better</span> <span>Than</span>
+<span>Delay</span> <span>Discounting</span> <span>Does</span>.
+<em>Psychological Science</em>, <em>26</em>(6), 826–833. <a href="https://doi.org/10.1177/0956797615572232">https://doi.org/10.1177/0956797615572232</a>
+</div>
+<div id="ref-gershman_rationally_2020" class="csl-entry">
+Gershman, S. J., and Bhui, R. (2020). Rationally inattentive
+intertemporal choice. <em>Nature Communications</em>, <em>11</em>(1),
+3365. <a href="https://doi.org/10.1038/s41467-020-16852-y">https://doi.org/10.1038/s41467-020-16852-y</a>
+</div>
+<div id="ref-laibson_golden_1997" class="csl-entry">
+Laibson, D. (1997). Golden <span>Eggs</span> and <span>Hyperbolic</span>
+<span>Discounting</span>. <em>The Quarterly Journal of Economics</em>,
+<em>112</em>(2), 443–478. <a href="https://doi.org/10.1162/003355397555253">https://doi.org/10.1162/003355397555253</a>
+</div>
+<div id="ref-loewenstein_anomalies_1992" class="csl-entry">
+Loewenstein, G., and Prelec, D. (1992). Anomalies in
+<span>Intertemporal</span> <span>Choice</span>: <span>Evidence</span>
+and an <span>Interpretation</span>. <em>The Quarterly Journal of
+Economics</em>, <em>107</em>(2), 573–597. <a href="https://doi.org/10.2307/2118482">https://doi.org/10.2307/2118482</a>
+</div>
+<div id="ref-noor_optimal_2022" class="csl-entry">
+Noor, J., and Takeoka, N. (2022). Optimal <span>Discounting</span>.
+<em>Econometrica</em>, <em>90</em>(2), 585–623. <a href="https://doi.org/10.3982/ECTA16050">https://doi.org/10.3982/ECTA16050</a>
 </div>
 <div id="ref-read_drift_2013" class="csl-entry">
-Read, D., Frederick, S., and Scholten, M. (2013). <span>DRIFT</span>: An
-analysis of outcome framing in intertemporal choice. <em>Journal of
-Experimental Psychology: Learning, Memory, and Cognition</em>,
-<em>39</em>(2), 573–588. <a href="https://doi.org/10.1037/a0029177">https://doi.org/10.1037/a0029177</a>
+Read, D., Frederick, S., and Scholten, M. (2013). <span>DRIFT</span>:
+<span>An</span> analysis of outcome framing in intertemporal choice.
+<em>Journal of Experimental Psychology: Learning, Memory, and
+Cognition</em>, <em>39</em>(2), 573–588. <a href="https://doi.org/10.1037/a0029177">https://doi.org/10.1037/a0029177</a>
 </div>
 <div id="ref-scholten_psychology_2010" class="csl-entry">
-Scholten, M., and Read, D. (2010). The psychology of intertemporal
-tradeoffs. <em>Psychological Review</em>, <em>117</em>(3), 925–944. <a href="https://doi.org/10.1037/a0019619">https://doi.org/10.1037/a0019619</a>
+Scholten, M., and Read, D. (2010). The <span>Psychology</span> of
+<span>Intertemporal</span> <span>Tradeoffs</span>. <em>Psychological
+Review</em>, <em>117</em>(3), 925–944. <a href="https://doi.org/10.1037/a0019619">https://doi.org/10.1037/a0019619</a>
 </div>
 <div id="ref-scholten_weighing_2014" class="csl-entry">
-Scholten, M., Read, D., and Sanborn, A. (2014). Weighing outcomes
-<em>by</em> time or <em>against</em> time? Evaluation rules in
-intertemporal choice. <em>Cognitive Science</em>, <em>38</em>(3),
-399–438. <a href="https://doi.org/10.1111/cogs.12104">https://doi.org/10.1111/cogs.12104</a>
+Scholten, M., Read, D., and Sanborn, A. (2014). Weighing
+<span>Outcomes</span> <em>by</em> <span>Time</span> or <em>against</em>
+<span>Time</span>? <span>Evaluation</span> <span>Rules</span> in
+<span>Intertemporal</span> <span>Choice</span>. <em>Cognitive
+Science</em>, <em>38</em>(3), 399–438. <a href="https://doi.org/10.1111/cogs.12104">https://doi.org/10.1111/cogs.12104</a>
+</div>
+<div id="ref-wulff_modeling_2018" class="csl-entry">
+Wulff, D. U., and Bos, W. van den. (2018). Modeling <span>Choices</span>
+in <span>Delay</span> <span>Discounting</span>. <em>Psychological
+Science</em>, <em>29</em>(11), 1890–1894. <a href="https://doi.org/10.1177/0956797616664342">https://doi.org/10.1177/0956797616664342</a>
 </div>
 </div>
 </div>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>For example, <em>Ericson</em> data is also used by <span class="citation">Wulff and Bos (2018)</span> for comparing different
+intermporal choice models. <em>Chávez</em> data is also used by <span class="citation">Gershman and Bhui (2020)</span> for testing their
+proposed attention-based theory.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>The basin-hopping algorithm runs the L-BFGS-B method for
+several times, and after each iteration, the solution will randomly
+drift to a new point. We set this new point as the initial point for the
+next iteration, and compare the new solution with the solution of the
+last iteration. The algorithm tends to accept the better solution of
+them, but there is still some probability of accepting an inferior
+solution. The magnitude of drifting is dependent on a stepwise
+parameter, which I set as 0.5; the probability of accepting the inferior
+solution is dependent on a temper parameter, which I set as 1.0. I also
+set the maximum number of iterations as 500.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 
 
