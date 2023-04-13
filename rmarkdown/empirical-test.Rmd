@@ -1,0 +1,224 @@
+---
+title: "Empirical Test"
+author: "Zark Wang"
+date: "`r Sys.Date()`"
+bibliography: reference.bib
+csl: apa-no-ampersand.csl
+header-includes: 
+  - \usepackage{setspace}
+  - \usepackage{amsmath}
+  - \setstretch{1.3} 
+fontsize: 12pt
+geometry: margin=1in
+editor_options: 
+  markdown: 
+    wrap: 72
+output:
+  pdf_document:
+    number_sections: true
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+# Data
+
+I select two datasets from previous studies: the first is from
+@marzilli_ericson_money_2015, containing 23,131 observations from 939
+participants; the second is from @chavez_hierarchical_2017, containing
+34,515 choices from 1,284 participants. I term the first dataset as
+*Ericson* data, and the second dataset as *Chávez* data. Each dataset is
+used in more than one academic study.[^1] Thus, readers interested in
+the method and the results of this paper can easily compare them with
+those of other papers.
+
+[^1]: For example, *Ericson* data is also used by @wulff_modeling_2018
+    for comparing different intermporal choice models. *Chávez* data is
+    also used by @gershman_rationally_2020 for testing their proposed
+    attention-based theory.
+
+The experiments corresponding to each dataset ask the participants to
+answer a series of intertemporal choice questions. In each question, the
+participants are required to select one option between an early small
+reward (denoted by SS) and late large reward (denoted by LL). I denote
+the magnitude and delay of reward by $x_s$ and $t_s$ for option SS, and
+by $x_l$ and $t_l$ for option LL, where $x_l>x_s$, $t_l>t_s$. I mainly
+focus on out-of-sample model performance. For each dataset, I draw the
+responses from 20% of the participants as the test sample, and set the
+rest as the train sample. To mitigate the overfitting issue, I implement
+a 10-fold cross-validation procedure on the train sample.
+
+# Empirical Strategy
+
+I test three types of intertemporal choice model: discounted utility
+model, trade-off model, and heuristic model.
+
+The discounted utility model assumes that the decision maker tends to
+choose the option with greater discounted utility. Let the discounted
+utility for option $j$ ($j\in\{l,s\}$) be $v_j=d(t_j)u(x_j)$, where
+$d(.)$ is the discounting function and $u(.)$ is the instantanoues
+utility function. Suppose the decision maker's perceived discounted
+utility for each option, denoted by is $\tilde{v_l}$ and $\tilde{v_s}$,
+is noisy. I set $\tilde{v_l}=v_l+\eta_l$, $\tilde{v_s}=v_s+\eta_s$. When
+$\eta_l$ and $\eta_s$ are independent and both follow $Gumble(0,\rho)$,
+where the scale parameter $\rho\in(0,\infty)$, then the probability that
+the decision maker chooses LL is
+
+$$
+P\{\tilde{v_s}\leq\tilde{v_l}\}=\frac{1}{1+\exp\{-\frac{1}{\rho}(v_l-v_s)\}}
+$$
+
+The trade-off model [@scholten_psychology_2010; @scholten_weighing_2014]
+assumes that when thinking of whether to choose LL, the decision maker
+makes a comparison between attributes (reward and time), rather than
+between options (LL and SS). If the benefit of receiving a larger reward
+exceeds the cost of waiting a longer time, then she will choose LL;
+otherwise, she will choose SS. I denote the benefit of receiving a
+larger reward by $B$, the cost of waiting longer by $Q$. The value of
+$B$ can be simply represented by $u(x_l)-u(x_s)$. Following
+@scholten_weighing_2014, I represent $Q$ by
+
+$$
+Q =\frac{\kappa}{\zeta_1}\ln\left(1+\zeta_1\left(\frac{w(t_l)-w(t_s)}{\zeta_2}\right)^{\zeta_2}\right)
+$$
+
+where $\eta_q$ is a noise term, and $w(t)=\ln(1+\omega t)/\omega$. The
+parameter $\omega$ measures how much time is distorted in the decision
+maker's mind; $\kappa$ measures the relative importance of reducing
+waiting time compared with increasing reward magnitude; $\zeta_1$,
+$\zeta_2$ jointly determine the curvature of changes in $Q$ relative to
+$t_l-t_s$. @scholten_weighing_2014 use $\zeta_1$, $\zeta_2$ to ensure
+that $Q$ follow a S-shape curve in relation to $t_l-t_s$ and that the
+behavioral pattern can shift between sub-additivity and
+super-additivity.
+
+I assume the decision maker's perception of $B$ and $Q$, denoted by
+$\tilde{B}$ and $\tilde{Q}$, is noisy. Therefore, $\tilde{B}=B+\eta_B$,
+$\tilde{Q}=Q+\eta_Q$, where $\eta_B$ and $\eta_Q$ are independent
+zero-mean noise terms. Again, assume both $\eta_B$ and $\eta_Q$ follow
+$Gumble(0,\rho)$, then the probability that the decision maker chooses
+LL is
+
+$$
+P\{\tilde{Q}\leq\tilde{B}\}=\frac{1}{1+\exp\{-\frac{1}{\rho}(B-Q)\}}
+$$
+
+For the heuristic model, I employ a decision tree algorithm called
+XGBoost, which has been widely used in solving classfication problems
+(including predicting human risky choices). The intuition underlying
+XGBoost is that, the decision-maker uses a chain of if-then rules to
+make a choice, and repeats this process for several times, adding up the
+results of each iteration to make the final decision. To better fit the
+data, I extract features from each intertemporal choice question,
+following the methods in @read_drift_2013 and
+@marzilli_ericson_money_2015, and tune the hyper-parameters of the
+algorithm via grid search. The features that I use to fit *Ericson* data
+are $x_s$, $x_l$, $t_s$, $t_l$, the absolute and relative differences
+between $x_s$ and $x_l$, the absolute and relative differences between
+$t_l$ and $t_s$, the interest rate of LL when SS is invested as
+principal. For *Chávez* data, given that $t_s=0$, I omit $t_s$ and the
+differences between $t_s$ and $t_l$.
+
+Along with the attention-adjusted discounting (under exponential and
+uniform initial weight allocations), I employ 8 other methods to draw
+the discounting factor in the discounted utility model, which are
+
+**1. exponential** (EXPO)
+
+$$
+d(t) =\delta^t
+$$
+
+where the parameter is $\delta$ and $\delta\in(0,1]$.
+
+**2. double exponential** (EXPO2)
+
+$$
+d(t) = \omega\delta_1^t+(1-\omega)\delta_2^t
+$$
+
+where the parameters are $\delta_1$, $\delta_2$, $\omega$, and
+$\delta_1,\delta_2\in(0,1]$.
+
+**3. hyperbolic** (HB)
+
+$$
+d(t) = \frac{1}{1+kt}
+$$
+
+where the parameter is $k$.
+
+**4. dual-parameter hyperbolic** (HB2)
+
+$$
+d(t) = \frac{1}{(1+kt)^a}
+$$
+
+where the parameters are $k$, $a$.
+
+**5. magnitude-dependent hyperbolic** (HBMD)
+
+$$
+d(t) = \frac{1}{1+kt}, \quad k=\frac{1}{b u(x_t)}
+$$
+
+where the parameter is $b$.
+
+**6. quasi-hyperbolic** (QuasiHB)
+
+$$
+d(t)= \textbf{1}\{t=0\}+ \beta\delta^t\cdot\textbf{1}\{t>0\}
+$$
+
+where the parameters are $\beta$, $\delta$, and $\beta,\delta\in(0,1]$.
+
+**7. quasi-hyperbolic plus fixed delay cost** (QuasiHB_FC)
+
+$$
+d(t)= \textbf{1}\{t=0\}+ (\beta\delta^t-\frac{c}{u(x_t)})\cdot\textbf{1}\{t>0\}
+$$ where the parameters are $\beta$, $\delta$, $c$, and
+$\beta,\delta\in(0,1]$.
+
+**8. homogeneous costly empathy** (HCE)
+
+$$
+d_t = \kappa_t u(x_t)^{\frac{1}{m}}
+$$
+
+where $\kappa_t$ is decreasing in $t$. I set $\kappa_t=\delta^t$, where
+the parameters are $m$, $\delta$ and $\delta\in(0,1]$.
+
+For the parameters in discounting functions, except for those explicitly
+marked as having a domain between 0 and 1, the domain of all other
+parameters is $(0,\infty)$. Besides, I employed 2 types of utility
+functions: (1) exponential utility (CARA), $u(x)=1-e^{-\gamma x}$; (2)
+power utility (CRRA), $u(x) = x^{\gamma}$. In both functions, the
+parameter is $\gamma$ and $\gamma\in(0,\infty)$. Therefore, for the
+discounted utility model, there are 20 specific model settings to fit;
+for the trade-off model, there are 2 specific model settings to fit. In
+model fitting, if a parameter has a lower bound of 0, I set its lower
+bound to 0.001; if a parameter has a upper bound of infinity, I set its
+upper bound to 100. I use the maximum likelihood method to estimate the
+parameters, and apply L-BFGS-B method for optimization. As the solutions
+of L-BFGS-B are sensitive to initial points and often converge to local
+optima, I use the basin-hopping algorithm to achieve global
+optimization. [^2]
+
+[^2]: The basin-hopping algorithm runs the L-BFGS-B method for several
+    times, and after each iteration, the solution will randomly drift to
+    a new point. We set this new point as the initial point for the next
+    iteration, and compare the new solution with the solution of the
+    last iteration. The algorithm tends to accept the better solution of
+    them, but there is still some probability of accepting an inferior
+    solution. The magnitude of drifting is dependent on a stepwise
+    parameter, which I set as 0.5; the probability of accepting the
+    inferior solution is dependent on a temper parameter, which I set as
+    1.0. I also set the maximum number of iterations as 500.
+
+# Result
+
+## Parameter Fitting
+
+## Out-of-Sample Performance
+
+## Model Comparison

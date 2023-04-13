@@ -11,7 +11,7 @@
 
 <meta name="author" content="Zark Wang" />
 
-<meta name="date" content="2023-04-10" />
+<meta name="date" content="2023-04-13" />
 
 <title>Empirical Test</title>
 
@@ -374,21 +374,36 @@ display: none;
 
 <h1 class="title toc-ignore">Empirical Test</h1>
 <h4 class="author">Zark Wang</h4>
-<h4 class="date">2023-04-10</h4>
+<h4 class="date">2023-04-13</h4>
 
 </div>
 
 
 <div id="data" class="section level1">
 <h1>Data</h1>
+<p>I use two datasets: the first is from <span class="citation">Marzilli
+Ericson et al. (2015)</span>, which contains XXX observations from XX
+participants; the second is from <span class="citation">Chávez et al.
+(2017)</span>.</p>
+<p>Each experiment asks participants to answer a series of intertemporal
+choice questions. In each question, the participants are required to
+select one option between an early small reward (denoted by SS) and late
+large reward (denoted by LL). I denote the magnitude and delay of reward
+by <span class="math inline">\(x_s\)</span> and <span class="math inline">\(t_s\)</span> for option SS, and by <span class="math inline">\(x_l\)</span> and <span class="math inline">\(t_l\)</span> for option LL, where <span class="math inline">\(x_l&gt;x_s\)</span>, <span class="math inline">\(t_l&gt;t_s\)</span>.</p>
+<p>I mainly focus on out-of-sample model performance. For each dataset,
+I draw the responses from 20% of the participants as the test sample,
+and set the rest as the train sample. To mitigate the overfitting issue,
+I implement a 10-fold cross-validation procedure on the train
+sample.</p>
 </div>
 <div id="empirical-strategy" class="section level1">
 <h1>Empirical Strategy</h1>
-<p>I test three types of intertemporal choice models: discounted utility
+<p>I test three types of intertemporal choice model: discounted utility
 model, trade-off model, and heuristic model.</p>
 <p>The discounted utility model assumes that the decision maker tends to
 choose the option with greater discounted utility. Let the discounted
-utility for option <span class="math inline">\(j\)</span> (<span class="math inline">\(j\in\{l,s\}\)</span>) be <span class="math inline">\(v_j=d_ju(x_j)\)</span>, where <span class="math inline">\(d_j\)</span> is the discounting factor and <span class="math inline">\(u(.)\)</span> is the instantanoues utility
+utility for option <span class="math inline">\(j\)</span> (<span class="math inline">\(j\in\{l,s\}\)</span>) be <span class="math inline">\(v_j=d(t_j)u(x_j)\)</span>, where <span class="math inline">\(d(.)\)</span> is the discounting function and
+<span class="math inline">\(u(.)\)</span> is the instantanoues utility
 function. Suppose the decision maker’s perceived discounted utility for
 each option, denoted by is <span class="math inline">\(\tilde{v_l}\)</span> and <span class="math inline">\(\tilde{v_s}\)</span>, is noisy. I set <span class="math inline">\(\tilde{v_l}=v_l+\eta_l\)</span>, <span class="math inline">\(\tilde{v_s}=v_s+\eta_s\)</span>. When <span class="math inline">\(\eta_l\)</span> and <span class="math inline">\(\eta_s\)</span> are independent and both follow
 <span class="math inline">\(Gumble(0,\rho)\)</span>, then the
@@ -425,62 +440,91 @@ the decision maker chooses LL is</p>
 <p><span class="math display">\[
 P\{\tilde{Q}\leq\tilde{B}\}=\frac{1}{1+\exp\{-\frac{1}{\rho}(B-Q)\}}
 \]</span></p>
-<p>For the heuristic model, previous literature calculates the features
-of the intertemporal choice context (such as the relative difference
-between <span class="math inline">\(x_l\)</span> and <span class="math inline">\(x_s\)</span>), then use a linear combination of
-these features to predict the choice probability for option LL <span class="citation">(Marzilli Ericson et al., 2015; Read et al.,
-2013)</span>. I implement the same approach to calculate features, but
-use them to construct several decision trees for prediction. To be
-specific, I use the XGBoost model, which is a machine learning algorithm
-widely applied to solving classification problem. The intuition
-underlying XGBoost is that, the decision maker relies on a chain of
-if-then rules to make a choice (similar with elimiation-by-aspects), and
-she repeat this process for several times, summing up the results of
-each time to do a final choice.</p>
-<p>8 discounted utility models, in comparison</p>
-<p>exponential (EXPO)</p>
+<p>For the heuristic model, I employ a decision tree algorithm called
+XGBoost, which has been widely used in solving classfication problems
+(including predicting human risky choices). The intuition underlying
+XGBoost is that, the decision-maker uses a chain of if-then rules to
+make a choice, and repeats this process for several times, adding up the
+results of each iteration to make the final decision. To better fit the
+data, I extract features from each intertemporal choice question,
+following the methods in <span class="citation">Read et al.
+(2013)</span> and <span class="citation">Marzilli Ericson et al.
+(2015)</span>, and tune the hyper-parameters of the algorithm via grid
+search. The features that I use to fit <em>Ericson</em> data are <span class="math inline">\(x_s\)</span>, <span class="math inline">\(x_l\)</span>, <span class="math inline">\(t_s\)</span>, <span class="math inline">\(t_l\)</span>, the absolute and relative
+differences between <span class="math inline">\(x_s\)</span> and <span class="math inline">\(x_l\)</span>, the absolute and relative
+differences between <span class="math inline">\(t_l\)</span> and <span class="math inline">\(t_s\)</span>, the interest rate of LL when SS is
+invested as principal. For <em>Chávez</em> data, given that <span class="math inline">\(t_s=0\)</span>, I omit <span class="math inline">\(t_s\)</span> and the differences between <span class="math inline">\(t_s\)</span> and <span class="math inline">\(t_l\)</span>.</p>
+<p>Along with the attention-adjusted discounting (under exponential and
+uniform initial weight allocations), I employ 8 other methods to draw
+the discounting factor in the discounted utility model, which are</p>
+<ol style="list-style-type: decimal">
+<li>exponential (EXPO)</li>
+</ol>
 <p><span class="math display">\[
-d_t =\delta^t
+d(t) =\delta^t
 \]</span></p>
-<p>double exponential (EXPO2)</p>
+<p>where the parameter is <span class="math inline">\(\delta\)</span>.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>double exponential (EXPO2)</li>
+</ol>
 <p><span class="math display">\[
-d_t = \omega\delta_1^t+(1-\omega)\delta_2^t
+d(t) = \omega\delta_1^t+(1-\omega)\delta_2^t
 \]</span></p>
-<p>hyperbolic (HB)</p>
+<p>where the parameters are <span class="math inline">\(\delta_1\)</span>, <span class="math inline">\(\delta_2\)</span>, <span class="math inline">\(\omega\)</span>.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>hyperbolic (HB)</li>
+</ol>
 <p><span class="math display">\[
-d_t = \frac{1}{1+kt}
+d(t) = \frac{1}{1+kt}
 \]</span></p>
-<p>dual-parameter hyperbolic (HB2)</p>
+<p>where the parameter is <span class="math inline">\(k\)</span>.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>dual-parameter hyperbolic (HB2)</li>
+</ol>
 <p><span class="math display">\[
-d_t = \frac{1}{(1+kt)^\alpha}
+d(t) = \frac{1}{(1+kt)^a}
 \]</span></p>
-<p>magnitude-dependent hyperbolic (HB-MD)</p>
+<p>where the parameters are <span class="math inline">\(k\)</span>,
+<span class="math inline">\(a\)</span>.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>magnitude-dependent hyperbolic (HB-MD)</li>
+</ol>
 <p><span class="math display">\[
-d_t = \frac{1}{1+(\beta u(x_t))^{-1}\cdot t}
+d(t) = \frac{1}{1+kt}, \quad k=\frac{1}{b u(x_t)}
 \]</span></p>
-<p>quasi-hyperbolic (QuasiHB)</p>
+<p>where the parameter is <span class="math inline">\(b\)</span>.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>quasi-hyperbolic (QuasiHB)</li>
+</ol>
 <p><span class="math display">\[
-d_t =\left\{\begin{aligned}&amp; 1 ,&amp; t=0\\&amp; \beta \delta^t,
-&amp; t&gt;0\end{aligned}\right.
+d(t)= \textbf{1}\{t=0\}+ \beta\delta^t\cdot\textbf{1}\{t&gt;0\}
 \]</span></p>
-<p>quasi-hyperbolic plus fixed delay cost (QuasiHB-FC)</p>
+<p>where the parameters are <span class="math inline">\(\beta\)</span>,<span class="math inline">\(\delta\)</span>.</p>
+<ol start="7" style="list-style-type: decimal">
+<li>quasi-hyperbolic plus fixed delay cost (QuasiHB-FC)</li>
+</ol>
 <p><span class="math display">\[
-d_t =\left\{\begin{aligned}&amp; 1 ,&amp; t=0\\&amp; \beta \delta^t -
-\frac{\alpha}{u_t}, &amp; t&gt;0\end{aligned}\right.
-\]</span></p>
-<p>homogeneous costly empathy (HCE)</p>
+d(t)= \textbf{1}\{t=0\}+
+(\beta\delta^t-\frac{c}{u(x_t)})\cdot\textbf{1}\{t&gt;0\}
+\]</span> where the parameters are <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\delta\)</span>, <span class="math inline">\(c\)</span>.</p>
+<ol start="8" style="list-style-type: decimal">
+<li>homogeneous costly empathy (HCE)</li>
+</ol>
 <p><span class="math display">\[
-d_t = a_t u(x_t)^{\frac{1}{m-1}}
+d_t = \kappa_t u(x_t)^{\frac{1}{m}}
 \]</span></p>
-<p>where <span class="math inline">\(a_t=\delta^t\)</span>.</p>
-<p>The choice probability function is given by</p>
-<p><span class="math display">\[
-P(LL)=\frac{1}{1+e^{-(V_l-V_s)\rho}}
-\]</span></p>
-<p>where <span class="math inline">\(V_t = d_tu(x_t)\)</span>, <span class="math inline">\(t\in\{s,l\}\)</span></p>
+<p>where <span class="math inline">\(\kappa_t\)</span> is decreasing in
+<span class="math inline">\(t\)</span>. I set <span class="math inline">\(\kappa_t=\delta^t\)</span>, where the parameters
+are <span class="math inline">\(m\)</span> and <span class="math inline">\(\delta\)</span>.</p>
+<p>Besides, I employed 2 types of utility functions: (1) exponential
+utility (CARA), <span class="math inline">\(u(x)=1-e^{-\gamma
+x}\)</span>; (2) power utility (CRRA), <span class="math inline">\(u(x)
+= x^{\gamma}\)</span>. Therefore, for the discounted utility model,
+there are 20 specific model settings to fit; for the trade-off model,
+there are 2 specific model settings to fit.</p>
 </div>
-<div id="results" class="section level1">
-<h1>Results</h1>
+<div id="result" class="section level1">
+<h1>Result</h1>
 <div id="parameter-fitting" class="section level2">
 <h2>Parameter Fitting</h2>
 </div>
@@ -490,6 +534,11 @@ P(LL)=\frac{1}{1+e^{-(V_l-V_s)\rho}}
 <div id="model-comparison" class="section level2 unnumbered">
 <h2 class="unnumbered">Model Comparison</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-chavez_hierarchical_2017" class="csl-entry">
+Chávez, M. E., Villalobos, E., Baroja, J. L., and Bouzas, A. (2017).
+Hierarchical bayesian modeling of intertemporal choice. <em>Judgment and
+Decision Making</em>, <em>12</em>(1), 19–28. <a href="https://doi.org/10.1017/S1930297500005210">https://doi.org/10.1017/S1930297500005210</a>
+</div>
 <div id="ref-marzilli_ericson_money_2015" class="csl-entry">
 Marzilli Ericson, K. M., White, J. M., Laibson, D., and Cohen, J. D.
 (2015). Money earlier or later? Simple heuristics explain intertemporal
