@@ -9,6 +9,8 @@ header-includes:
   - \usepackage{amsmath}
   - \usepackage{array}
   - \usepackage{caption}
+  - \usepackage{longtable}
+  - \usepackage{booktabs}
   - \renewcommand{\arraystretch}{1.5}
   - \captionsetup[table]{skip=5pt}
   - \setstretch{1.3} 
@@ -224,57 +226,175 @@ optimization. [^2]
 
 ## Results for *Ericson* data
 
-Table \ref{tab:itch_result_kf} shows the fitness of each model in cross-validation.
+Table \ref{tab:ericson_kf_result} shows the fitness of each model in cross-validation.
 
 ```{=tex}
-\begin{table}[]
-\caption{Cross-validation result for Ericson data}
-\label{tab:itch_result_kf}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lllllll}
-\hline
-\textbf{dstyle} & \textbf{ustyle} & \textbf{params} & \textbf{mse} & \textbf{mae} & \textbf{log\_loss} & \textbf{accuracy} \\ \hline
-gbdt           & gbdt  & --                                             & 0.2988 & 0.2988 & 0.5812 & 0.7012 \\ 
-trade          & power & {[}4.783  1.275 39.186  2.194  0.159  0.926{]} & 0.2036 & 0.4088 & 0.5947 & 0.6937 \\
-hbmd           & power & {[}6.751 0.149 0.182{]}                        & 0.2042 & 0.4094 & 0.5978 & 0.6942 \\
-attention\_uni & power & {[}1.298 0.176 0.326{]}                        & 0.2088 & 0.4185 & 0.6071 & 0.6840 \\
-expo2          & power & {[}0.939 0.786 0.599 0.016 0.014{]}            & 0.2094 & 0.4165 & 0.6087 & 0.6845 \\
-expo           & power & {[}0.992 0.018 0.015{]}                        & 0.2099 & 0.4205 & 0.6093 & 0.6827 \\
-hb             & power & {[}0.012 0.027 0.024{]}                        & 0.2099 & 0.4204 & 0.6097 & 0.6820  \\
-hce            & power & {[}0.993 4.22  0.01  0.013{]}                  & 0.2102 & 0.4211 & 0.6098 & 0.6805 \\
-hb2            & power & {[}0.003 3.939 0.02 0.019{]}                   & 0.2105 & 0.4194 & 0.6113 & 0.6824 \\
-quasihb\_fc    & power & {[}0.922 0.861 9.834 0.086 1.253{]}            & 0.2160 & 0.4362 & 0.6222 & 0.6725 \\
-attention      & power & {[}0.996 7.781 0.341 1.582{]}                  & 0.2157 & 0.4358 & 0.6232 & 0.6787 \\
-trade          & cara  & {[}3.615  1.63  36.216  5.63   0.4    1.205{]} & 0.2248 & 0.4499 & 0.6415 & 0.6485 \\
-quasihb        & power & {[}0.997 0.834 0.121 1.875{]}                  & 0.2251 & 0.4438 & 0.6440 & 0.6571 \\
-attention\_uni & cara  & {[}0.793 2.886 0.395{]}                        & 0.2277 & 0.4554 & 0.6476 & 0.6339 \\
-expo           & cara  & {[}0.725 2.516 0.544{]}                        & 0.2279 & 0.4558 & 0.6480 & 0.6326 \\
-hb2            & cara  & {[}0.079 4.857 2.677 0.502{]}                  & 0.2281 & 0.4558 & 0.6481 & 0.6324 \\
-expo2          & cara  & {[}0.445 0.604 0.419 2.853 0.508{]}            & 0.2280 & 0.4556 & 0.6481 & 0.6325 \\
-hce            & cara  & {[}0.725 98.968  2.537  0.545{]}               & 0.2279 & 0.4558 & 0.6481 & 0.6326 \\
-hb             & cara  & {[}0.317 3.258 0.419{]}                        & 0.2282 & 0.4560 & 0.6484 & 0.6324 \\
-attention      & cara  & {[}0.885 1.159 3.091 0.481{]}                  & 0.2281 & 0.4560 & 0.6487 & 0.6318 \\
-hbmd           & cara  & {[}3.75  2.583 0.383{]}                        & 0.2281 & 0.4559 & 0.6489 & 0.6363 \\
-quasihb\_fc    & cara  & {[}0.995  0.491 19.741 18.769  2.305{]}        & 0.2366 & 0.4780 & 0.6658 & 0.6325 \\
-quasihb        & cara  & {[}0.971  0.488 13.833  2.652{]}               & 0.2372 & 0.4790 & 0.6670 & 0.6330 \\
-\hline
-\end{tabular}%
-}
-\end{table}
+\begin{longtable}{@{}llllll@{}}
+\caption{Cross-Validation Results on \textit{Ericson} Data}
+\label{tab:ericson_kf_result}\\
+\toprule
+\textbf{model} & \textbf{utility} & \textbf{mse} & \textbf{mae} & \textbf{log\_loss} & \textbf{accuracy} \\* \midrule
+\endhead
+%
+\bottomrule
+\endfoot
+%
+\endlastfoot
+%
+heuristic      & --    & 0.2988 & 0.2988 & 0.5812 & 0.7012 \\
+tradeoff       & power & 0.2019 & 0.4035 & 0.5914 & 0.6949 \\
+hbmd           & power & 0.2042 & 0.4093 & 0.5976 & 0.6943 \\
+quasihb\_fc    & power & 0.2074 & 0.4151 & 0.6036 & 0.6889 \\
+quasihb        & power & 0.2074 & 0.4148 & 0.6037 & 0.6889 \\
+expo2          & power & 0.2074 & 0.4157 & 0.6038 & 0.6858 \\
+attention\_uni & power & 0.2088 & 0.4184 & 0.6072 & 0.6835 \\
+hb2            & power & 0.2094 & 0.4186 & 0.6086 & 0.6846 \\
+hb             & power & 0.2097 & 0.4199 & 0.6092 & 0.6833 \\
+hce            & power & 0.2100 & 0.4203 & 0.6097 & 0.6833 \\
+expo           & power & 0.2100 & 0.4203 & 0.6097 & 0.6833 \\
+attention      & power & 0.2132 & 0.4278 & 0.6179 & 0.6782 \\
+tradeoff       & cara  & 0.2160 & 0.4321 & 0.6232 & 0.6729 \\
+attention      & cara  & 0.2276 & 0.4549 & 0.6473 & 0.6348 \\
+attention\_uni & cara  & 0.2278 & 0.4553 & 0.6477 & 0.6338 \\
+hbmd           & cara  & 0.2278 & 0.4554 & 0.6478 & 0.6341 \\
+expo2          & cara  & 0.2280 & 0.4557 & 0.6480 & 0.6323 \\
+quasihb        & cara  & 0.2280 & 0.4557 & 0.6480 & 0.6320 \\
+quasihb\_fc    & cara  & 0.2280 & 0.4557 & 0.6480 & 0.6320 \\
+expo           & cara  & 0.2280 & 0.4558 & 0.6481 & 0.6326 \\
+hce            & cara  & 0.2280 & 0.4558 & 0.6481 & 0.6326 \\
+hb2            & cara  & 0.2281 & 0.4558 & 0.6482 & 0.6325 \\
+hb             & cara  & 0.2282 & 0.4561 & 0.6485 & 0.6323 \\* \bottomrule
+\end{longtable}
 ```
 
-
-Table
+Table \ref{tab:ericson_test_result} shows the out-of-sample performance of each model.
 
 ```{=tex}
-
-
+\begin{longtable}{@{}lllllll@{}}
+\caption{Out-of-Sample Test Results on \textit{Ericson} Data}
+\label{tab:ericson_test_result}\\
+\toprule
+\textbf{model} & \textbf{utility} & \textbf{mse} & \textbf{mae} & \textbf{log\_loss} & \textbf{accuracy} & \textbf{pred\_ll} \\* \midrule
+\endhead
+%
+\bottomrule
+\endfoot
+%
+\endlastfoot
+%
+hbmd           & power & 0.2044 & 0.4074 & 0.5983  & 0.7008 & 0.2132 \\
+heuristic      & --    & 0.2997 & 0.2997 & 10.8005 & 0.7003 & 0.2647 \\
+tradeoff       & power & 0.2020 & 0.4022 & 0.5919  & 0.6977 & 0.2106 \\
+hb             & power & 0.2084 & 0.4185 & 0.6067  & 0.6903 & 0.2451 \\
+quasihb\_fc    & power & 0.2067 & 0.4167 & 0.6029  & 0.6899 & 0.2839 \\
+quasihb        & power & 0.2090 & 0.4001 & 0.6109  & 0.6897 & 0.2056 \\
+expo           & power & 0.2090 & 0.4158 & 0.6082  & 0.6814 & 0.2056 \\
+hce            & power & 0.2092 & 0.4161 & 0.6087  & 0.6814 & 0.2056 \\
+attention\_uni & power & 0.2108 & 0.4190 & 0.6114  & 0.6798 & 0.1491 \\
+attention      & power & 0.2159 & 0.4288 & 0.6242  & 0.6685 & 0.1246 \\
+tradeoff       & cara  & 0.2192 & 0.4326 & 0.6298  & 0.6630 & 0.1078 \\
+attention      & cara  & 0.2302 & 0.4570 & 0.6528  & 0.6318 & 0.0709 \\
+attention\_uni & cara  & 0.2303 & 0.4574 & 0.6531  & 0.6307 & 0.0764 \\
+hbmd           & cara  & 0.2304 & 0.4575 & 0.6533  & 0.6301 & 0.0762 \\
+quasihb\_fc    & cara  & 0.2309 & 0.4582 & 0.6544  & 0.6281 & 0.0546 \\
+quasihb        & cara  & 0.2309 & 0.4582 & 0.6544  & 0.6281 & 0.0546 \\
+hb             & cara  & 0.2310 & 0.4585 & 0.6546  & 0.6275 & 0.0657 \\
+hb2            & cara  & 0.2317 & 0.4554 & 0.6562  & 0.6248 & 0.0399 \\
+hce            & cara  & 0.2310 & 0.4583 & 0.6545  & 0.6242 & 0.0410 \\
+expo           & cara  & 0.2310 & 0.4582 & 0.6545  & 0.6242 & 0.0410 \\
+expo2          & cara  & 0.2406 & 0.4484 & 0.6819  & 0.6203 & 0.0083 \\
+hb2            & power & 0.3832 & 0.3832 & 8.8541  & 0.6168 & 0.0000 \\
+expo2          & power & 0.3832 & 0.3832 & 9.3569  & 0.6168 & 0.0000 \\* \bottomrule
+\end{longtable}
 
 ```
-
 
 
 ## Results for *Chávez* data
+
+Table \ref{tab:chavez_kf_result}shows the fitness of each model in cross-validation.
+
+```{=tex}
+\begin{longtable}{@{}llllll@{}}
+\caption{Cross-Validation Results on \textit{Chávez} Data}
+\label{tab:chavez_kf_result}\\
+\toprule
+\textbf{model} & \textbf{utility} & \textbf{mse} & \textbf{mae} & \textbf{log\_loss} & \textbf{accuracy} \\* \midrule
+\endhead
+%
+\bottomrule
+\endfoot
+%
+\endlastfoot
+%
+heuristic      & --      & 0.2211 & 0.2211 & 0.4818    & 0.7789   \\
+tradeoff       & power   & 0.1571 & 0.3140 & 0.4840    & 0.7826   \\
+expo2          & power   & 0.1574 & 0.3146 & 0.4844    & 0.7826   \\
+quasihb        & power   & 0.1574 & 0.3144 & 0.4845    & 0.7826   \\
+quasihb\_fc    & power   & 0.1576 & 0.3146 & 0.4850    & 0.7816   \\
+hb2            & power   & 0.1577 & 0.3149 & 0.4854    & 0.7804   \\
+attention      & power   & 0.1579 & 0.3170 & 0.4860    & 0.7826   \\
+hbmd           & power   & 0.1583 & 0.3174 & 0.4868    & 0.7731   \\
+attention\_uni & power   & 0.1584 & 0.3178 & 0.4881    & 0.7826   \\
+hbmd           & cara    & 0.1592 & 0.3191 & 0.4900    & 0.7731   \\
+hb             & power   & 0.1597 & 0.3209 & 0.4903    & 0.7731   \\
+attention\_uni & cara    & 0.1601 & 0.3203 & 0.4905    & 0.7641   \\
+expo           & power   & 0.1604 & 0.3229 & 0.4922    & 0.7731   \\
+hce            & power   & 0.1604 & 0.3229 & 0.4922    & 0.7731   \\
+attention      & cara    & 0.1625 & 0.3263 & 0.4956    & 0.7465   \\
+tradeoff       & cara    & 0.1633 & 0.3268 & 0.4971    & 0.7430   \\
+hb2            & cara    & 0.1659 & 0.3326 & 0.5042    & 0.7439   \\
+hb             & cara    & 0.1685 & 0.3372 & 0.5093    & 0.7287   \\
+quasihb        & cara    & 0.1679 & 0.3411 & 0.5099    & 0.7450   \\
+expo           & cara    & 0.1692 & 0.3421 & 0.5107    & 0.7253   \\
+hce            & cara    & 0.1700 & 0.3412 & 0.5124    & 0.7168   \\
+quasihb\_fc    & cara    & 0.1701 & 0.3407 & 0.5128    & 0.7203   \\
+expo2          & cara    & 0.1747 & 0.3487 & 0.5213    & 0.6825   \\* \bottomrule
+\end{longtable}
+
+```
+
+Table \ref{tab:chavez_test_result} shows the out-of-sample performance of each model.
+
+```{=tex}
+\begin{longtable}{@{}lllllll@{}}
+\caption{Out-of-Sample Test Results on \textit{Chávez} Data}
+\label{tab:chavez_test_result}\\
+\toprule
+\textbf{model} & \textbf{utility} & \textbf{mse} & \textbf{mae} & \textbf{log\_loss} & \textbf{accuracy} & \textbf{pred\_ll} \\* \midrule
+\endhead
+%
+\bottomrule
+\endfoot
+%
+\endlastfoot
+%
+attention      & power & 0.1628 & 0.3230 & 0.4982  & 0.7702 & 0.3299 \\
+attention\_uni & power & 0.1635 & 0.3233 & 0.5008  & 0.7702 & 0.3299 \\
+tradeoff       & power & 0.1633 & 0.3206 & 0.4986  & 0.7674 & 0.2926 \\
+heuristic      & --    & 0.2326 & 0.2326 & 8.3825  & 0.7674 & 0.2926 \\
+hb             & power & 0.1641 & 0.3315 & 0.5014  & 0.7603 & 0.3296 \\
+quasihb\_fc    & power & 0.1876 & 0.4173 & 0.5640  & 0.7603 & 0.3296 \\
+expo           & power & 0.1646 & 0.3302 & 0.5032  & 0.7603 & 0.3296 \\
+hbmd           & cara  & 0.1645 & 0.3283 & 0.5033  & 0.7603 & 0.3296 \\
+hce            & power & 0.1651 & 0.3359 & 0.5039  & 0.7603 & 0.3296 \\
+quasihb        & power & 0.1779 & 0.3969 & 0.5413  & 0.7603 & 0.3296 \\
+hbmd           & power & 0.1630 & 0.3252 & 0.4987  & 0.7603 & 0.3296 \\
+hb2            & power & 0.1650 & 0.3217 & 0.5024  & 0.7570 & 0.2184 \\
+attention\_uni & cara  & 0.1821 & 0.3844 & 0.5425  & 0.6710 & 0.1118 \\
+tradeoff       & cara  & 0.2500 & 0.5000 & 0.6931  & 0.6678 & 0.4780 \\
+attention      & cara  & 0.1802 & 0.3552 & 0.5360  & 0.6483 & 0.0000 \\
+quasihb        & cara  & 0.2060 & 0.3433 & 0.5958  & 0.6483 & 0.0000 \\
+expo           & cara  & 0.1996 & 0.3290 & 0.5981  & 0.6483 & 0.0000 \\
+hce            & cara  & 0.2085 & 0.3226 & 0.6464  & 0.6483 & 0.0000 \\
+hb             & cara  & 0.2198 & 0.3268 & 0.6642  & 0.6483 & 0.0000 \\
+expo2          & cara  & 0.2245 & 0.3201 & 0.7294  & 0.6483 & 0.0000 \\
+hb2            & cara  & 0.2504 & 0.3283 & 0.7914  & 0.6483 & 0.0000 \\
+expo2          & power & 0.3517 & 0.3517 & 12.6783 & 0.6483 & 0.0000 \\
+quasihb\_fc    & cara  & 0.2019 & 0.3423 & 0.5866  & 0.6483 & 0.0000 \\* \bottomrule
+\end{longtable}
+
+```
 
 ## Discussion
 
