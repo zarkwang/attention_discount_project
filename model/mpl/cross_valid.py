@@ -8,63 +8,119 @@ from mpl import estimation
 from tqdm import tqdm
 from sklearn import metrics
 from sklearn import model_selection
-from functools import partial
 
 
-def generate_sample(data):
+class data_prepare:
 
-    dt = data.dropna()
+    def __init__(self,data,
+                 feature=None,label=None,group=None):
 
-    pd.set_option('mode.chained_assignment', None)
+        self._data = data
+        self._feature = feature
+        self._label = label
+        self._group = group
 
-    dt['ratio_x'] = dt['ll_x'] / dt['ss_x']
-    dt['abs_diff_x'] = dt['ll_x'] - dt['ss_x']
-    dt['abs_diff_t'] = dt['ll_t'] - dt['ss_t']
-    dt['rel_diff_x'] = 2*(dt['ll_x'] - dt['ss_x'])/(dt['ll_x'] + dt['ss_x']) 
-    dt['rel_diff_t'] = 2*(dt['ll_t'] - dt['ss_t'])/(dt['ll_t'] + dt['ss_t']) 
-    dt['growth_x'] = np.log(dt['ratio_x']) / dt['abs_diff_t']
+    def generate_features(self):
 
-    return dt
+        dt = self._data.dropna()
+
+        pd.set_option('mode.chained_assignment', None)
+
+        dt['ratio_x'] = dt['ll_x'] / dt['ss_x']
+        dt['abs_diff_x'] = dt['ll_x'] - dt['ss_x']
+        dt['abs_diff_t'] = dt['ll_t'] - dt['ss_t']
+        dt['rel_diff_x'] = 2*(dt['ll_x'] - dt['ss_x'])/(dt['ll_x'] + dt['ss_x']) 
+        dt['rel_diff_t'] = 2*(dt['ll_t'] - dt['ss_t'])/(dt['ll_t'] + dt['ss_t']) 
+        dt['growth_x'] = np.log(dt['ratio_x']) / dt['abs_diff_t']
+
+        self._data = dt
+
+    def split_sample(self,test_size=0.2,split_X_y=True):
+        
+        groups = self._data[self._group]
+        
+        test_index = np.random.choice(list(set(groups)),size=int(len(set(groups)) * test_size),replace=False)
+        train_index = np.array(list(set(groups)-set(test_index)))
+        
+        self.train_sample = self._data[self._data[self._group].isin(train_index)]
+        self.test_sample = self._data[self._data[self._group].isin(test_index)]
+
+        if split_X_y:
+            X_train = self.train_sample[self._feature]
+            X_test = self.test_sample[self._feature]
+            y_train = self.train_sample[self._label]
+            y_test = self.test_sample[self._label]
+        
+        return X_train,X_test,y_train,y_test
 
 
 
-def test_model(style,test_sample,params):
 
-    ss_t = test_sample['ss_t'].values
-    ss_x = test_sample['ss_x'].values
-    ll_t = test_sample['ll_t'].values
-    ll_x = test_sample['ll_x'].values
-    choice = test_sample['choice'].values
-
-
-    predict_choice = choice_rule.choice_prob(ss_x, ss_t, ll_x, ll_t, 
-                            dstyle = style['dstyle'], 
-                            ustyle = style['ustyle'], 
-                            method = style['method'],
-                            intercept=style['intercept'],
-                            params = params[:-1], 
-                            temper = params[-1])
-
-    choice_not_nan = (~np.isnan((choice - predict_choice)))
-
-    choice_valid = choice[choice_not_nan]
-    predict_valid = predict_choice[choice_not_nan]
-    binary_pred = (predict_valid > .5)
-
-    mse = metrics.mean_squared_error(choice_valid,predict_valid)
-    mae = metrics.mean_absolute_error(choice_valid,predict_valid)
-    log_loss =metrics.log_loss(choice_valid,predict_valid)
-    accuracy = metrics.accuracy_score(choice_valid,binary_pred)
-
-    test_scores= {"mse":mse,
-                "mae":mae,
-                "log_loss":log_loss,
-                "accuracy":accuracy,
-                "pred_ll":sum(binary_pred)/len(predict_valid)}
+def test_model(test_sample=None,label='choice',
+               y_test=None,X_test=None,
+               style=None,params=None,model=None,output='scores'):
     
-    return test_scores
+    if X_test is None:
+        y_test = test_sample[label]
+        X_test = test_sample.drop(label,axis=1)
 
+    if style == 'heuristic':
+        
+        preds = np.array([x[1] for x in model.predict_proba(X_test)])
+        pred_binary = (preds > .5)
 
+        if output == 'predict_proba':
+            return preds
+        elif output == 'scores':
+            
+            scores = {'dstyle': 'heurstic',
+                    'ustyle': '--',
+                    'mse': metrics.mean_squared_error(y_test, preds),
+                    'mae': metrics.mean_absolute_error(y_test, preds),
+                    'log_loss': metrics.log_loss(y_test, preds),
+                    'accuracy': metrics.accuracy_score(y_test,pred_binary),
+                    'pred_ll':sum(pred_binary)/len(pred_binary)
+                }
+            
+            return scores
+        else:
+            print("output can only be 'predict_proba' or 'scores'")
+
+    else:
+        ss_t = X_test['ss_t'].values
+        ss_x = X_test['ss_x'].values
+        ll_t = X_test['ll_t'].values
+        ll_x = X_test['ll_x'].values
+
+        preds = choice_rule.choice_prob(ss_x, ss_t, ll_x, ll_t, 
+                                dstyle = style['dstyle'], 
+                                ustyle = style['ustyle'], 
+                                method = style['method'],
+                                intercept=style['intercept'],
+                                params = params[:-1], 
+                                temper = params[-1])
+        
+        if output == 'predict_proba':
+            return preds
+        elif output == 'scores':
+            choice = y_test.values
+            choice_not_nan = (~np.isnan((choice - preds)))
+
+            choice_valid = choice[choice_not_nan]
+            predict_valid = preds[choice_not_nan]
+            pred_binary = (predict_valid > .5)
+
+            scores= {"mse": metrics.mean_squared_error(choice_valid,predict_valid),
+                        "mae": metrics.mean_absolute_error(choice_valid,predict_valid),
+                        "log_loss": metrics.log_loss(choice_valid,predict_valid),
+                        "accuracy": metrics.accuracy_score(choice_valid,pred_binary),
+                        "pred_ll": sum(pred_binary)/len(predict_valid)}
+            return scores
+        else:
+            print("output can only be 'predict_proba' or 'scores'")
+
+        
+    
 
 
 class KFvalidation:
@@ -88,7 +144,6 @@ class KFvalidation:
                                                         random_state=random_state)
             
             self._cv = list(sgkf.split(X=data[kwargs['features']],
-                                y=data[kwargs['label']],
                                 groups=data[kwargs['groups']]))
         else:
             self._cv = cv
@@ -217,59 +272,34 @@ class KFvalidation:
 
         sum_tab = sum_tab.reset_index()
         sum_tab['style'] = sum_tab['style'].apply(lambda x:eval(x))
+        sum_tab['dstyle'] = sum_tab['style'].apply(lambda x:x['dstyle'])
+        sum_tab['ustyle'] = sum_tab['style'].apply(lambda x:x['ustyle'])
+
+        df_cols = sum_tab.columns.tolist()
+        df_cols = df_cols[-2:] + df_cols[:-2]
+        sum_tab = sum_tab.reindex(columns=df_cols)
 
         return sum_tab
 
 
    
 
-def fit_and_test(data: pd.DataFrame,
-                 style_list: list,
-                 label=None,group=None,
-                 train_size=.8,random_state=2023,n_jobs=4):
+
+def get_result_tab(kf_result_df,test_sample):
+
+    test_result = []
+
+    for i in range(len(kf_result_df)):
+
+        test_style = kf_result_df['style'][i]
+        test_params = kf_result_df['params'][i]
+
+        test_scores = test_model(test_sample=test_sample,style=test_style,params=test_params)
+        test_scores['dstyle'] = test_style['dstyle'] 
+        test_scores['ustyle'] = test_style['ustyle']
+        test_result.append(test_scores)
+
+    test_result = pd.DataFrame(test_result)
+    test_result = test_result.reindex(columns=kf_result_df.columns).sort_values('accuracy',ascending=False)
     
-    X = data.drop(label,axis=1)
-    y = data[label]
-    groups = data[group]
-    score_list = ['mse', 'mae', 'log_loss','accuracy','pred_ll']
-
-
-    # Split the data into train sample and test sample 
-    # Train sample containts 80% of the participants, test sample contains the rest 
-    split = model_selection.GroupShuffleSplit(n_splits=1,train_size=train_size,random_state=random_state).split(X,y,groups)
-    train_index,test_index = list(split)[0]
-
-    train_sample = data[data.index.isin(train_index)]
-    test_sample = data[data.index.isin(test_index)]
-
-
-    # Fit the data with discounted utility and trade-off model
-    with mp.Pool(processes=n_jobs) as pool:
-                
-        func = partial(KFvalidation.train_val_func,train_set=train_sample,val_set=test_sample)
-                
-        fit_styles = []
-        fit_params = []
-        fit_scores = []
-                
-        for s,p,v in tqdm(pool.imap(func,style_list),total=len(style_list)):
-
-            fit_styles.append(s)
-            fit_params.append(p)
-            fit_scores.append(v)
-
-    pool.join()
-    pool.close() 
-
-    # Get the results
-    fit_result = pd.DataFrame({'dstyle': [x['dstyle'] for x in fit_styles],
-                                'ustyle': [x['ustyle'] for x in fit_styles],
-                                'params': fit_params,
-                                'scores': fit_scores})
-
-    fit_result[score_list] = fit_result.scores.apply(lambda x:pd.Series(x))
-    fit_result.drop('scores',axis=1).sort_values('log_loss')
-    
-    return fit_result
-
-    
+    return test_result.drop(['style','params'],axis=1)
