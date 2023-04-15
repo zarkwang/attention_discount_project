@@ -7,17 +7,40 @@ from sklearn import metrics
 from mpl import choice_rule
 
 
+# Load the configuration file
+# The configuration file contains the initial points (x0）and constraints (bound) for the parameters in each model
+# It also contains the error message
 with open('mpl/config_param.yaml', 'r') as f:
         config_param = yaml.safe_load(f)
 
 
+def gen_style_list(method='logit',intercept=False):
+
+    """
+    Find the discounting functions and utility functions specified in the configuration file, then
+    generate a list of model styles (in dictionary form)
+    """
+
+    dstyle_list = list(config_param['discount_func'].keys())
+    ustyle_list = list(config_param['utility_func'].keys())
+
+    style_list = [ {"dstyle":dstyle_list[i], 
+                    "ustyle":ustyle_list[j], 
+                    "method":method, 
+                    "intercept":intercept} 
+                for i in range(len(dstyle_list)) for j in range(len(ustyle_list))
+                ]
+    
+    return style_list
+
 
 class mle:
 
-    def __init__(self,style,data,x0=None,bounds=None):
+    def __init__(self,style:dict,data,x0=None,bounds=None):
         
         self._data = data
         self._style = style
+
         self.dstyle = style['dstyle']
         self.ustyle = style['ustyle']
         self.method = style['method']
@@ -26,6 +49,7 @@ class mle:
         init_intercept = [0]
         bound_intercept = [[-100,100]]
 
+        # Specify initial points (x0)
         if x0 is None:
             self._x0 = config_param['discount_func'][self.dstyle]["x0"] + \
                 config_param['utility_func'][self.ustyle]["x0"] + \
@@ -33,7 +57,9 @@ class mle:
                 config_param['choice_prob']['temper']["x0"]
         else:
             self._x0 = x0
-        
+
+
+        # Specify parameter constraints (bound)
         if bounds is None: 
             self.bounds = config_param['discount_func'][self.dstyle]["bound"] + \
                     config_param['utility_func'][self.ustyle]["bound"] + \
@@ -48,6 +74,7 @@ class mle:
     def constraint(params,bound):
         cons = True
 
+        # Judge if the value of every parameter is within the bounds
         if bound:
             cons = ((np.array(bound)[:,0] <= params) & (np.array(bound)[:,1] >= params)).prod()
 
@@ -58,6 +85,7 @@ class mle:
 
         if not self.constraint(params,self.bounds):
             return 1e10 
+        # If any parameter value is out of the bounds, then loss function will jump to a very high value
         else:
             temper = params[-1]
             ss_t = self._data['ss_t'].values
@@ -66,6 +94,7 @@ class mle:
             ll_x = self._data['ll_x'].values
             choice = self._data['choice'].values
             
+            # Compute the probability of choosing option LL
             if not regenerate_sample:
                 p_choice_ll = choice_rule.choice_prob(ss_x, ss_t, ll_x, ll_t, params, 
                                                     dstyle=self.dstyle, 
@@ -96,8 +125,10 @@ class mle:
               disp_output=False,disp_step=False,):
         
         if self.method == 'probit':
-            np.random.seed(2023)
+            np.random.seed(2023) 
             regenerate_sample = False
+
+            # Use Monte Carlo method to solve the multinominal probir model
             simu_sample = np.random.normal(size=len(self._data)*simu_size).reshape(len(self._data),simu_size)
             kwargs = {'simu_sample':simu_sample}
 
