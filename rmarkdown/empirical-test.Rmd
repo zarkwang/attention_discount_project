@@ -1,6 +1,6 @@
 ---
 title: "Empirical Test"
-author: "Zark Wang"
+author: "Zijian Zark Wang"
 date: "`r Sys.Date()`"
 bibliography: reference.bib
 csl: apa-no-ampersand.csl
@@ -34,9 +34,9 @@ I select two datasets from previous studies: the first is from
 participants; the second is from @chavez_hierarchical_2017, containing
 34,515 choices from 1,284 participants. I term the first dataset as
 *Ericson* data, and the second dataset as *Chávez* data. Each dataset is
-used in more than one academic study.[^1] Thus, readers interested in
-the method and the results of this paper can easily compare them with
-those of other papers.
+used in more than one academic study.[^1] Readers interested in the
+empirical method and the results of this paper can easily compare them
+with those of other papers.
 
 [^1]: For example, *Ericson* data is also used by @wulff_modeling_2018
     for comparing different intermporal choice models. *Chávez* data is
@@ -49,10 +49,10 @@ participants are required to select one option between an early small
 reward (denoted by SS) and late large reward (denoted by LL). I denote
 the magnitude and delay of reward by $x_s$ and $t_s$ for option SS, and
 by $x_l$ and $t_l$ for option LL, where $x_l>x_s$, $t_l>t_s$. I mainly
-focus on out-of-sample model performance. For each dataset, I draw the
-responses from 20% of the participants as the test sample, and set the
-rest as the train sample. To mitigate the overfitting issue, I implement
-a 10-fold cross-validation procedure on the train sample.
+focus on out-of-sample model performance. For each dataset, I randomly
+draw the responses from 20% of the participants as the test sample, and
+set the rest as the train sample. To mitigate the overfitting issue, I
+implement a 10-fold cross-validation procedure on the train sample.
 
 # Empirical Strategy
 
@@ -125,11 +125,14 @@ interest rate of LL when SS is invested as principal. For *Chávez* data,
 given that $t_s=0$, I omit $t_s$ and the differences between $t_s$ and
 $t_l$.
 
-Along with the attention-adjusted discounting (under exponential and
-uniform initial attention allocations), I employ 8 other methods to draw
-the discounting factor in the discounted utility model, which are
+The attention-adjusted discounting factor is dependent on the decision
+maker's initial attention allocation. I test the model under the
+assumptions that initial attention allocation is exponential and uniform
+(I term the former as "*attention*", the latter as "*attention_uni*").
+Along with the attention-adjusted discounting, I also employ 8 other
+methods to draw the discounting factor, which are:
 
-**1. exponential**
+**1. exponential**, denoted by "*expo*"
 
 $$
 d(t) =\delta^t
@@ -137,7 +140,8 @@ $$
 
 where the parameter is $\delta$ and $\delta\in(0,1]$.
 
-**2. double exponential** [@van_den_bos_towards_2013]
+**2. double exponential**, denoted by "*expo2*"
+[@van_den_bos_towards_2013]
 
 $$
 d(t) = \omega\delta_1^t+(1-\omega)\delta_2^t
@@ -146,7 +150,7 @@ $$
 where the parameters are $\delta_1$, $\delta_2$, $\omega$, and
 $\delta_1,\delta_2\in(0,1]$.
 
-**3. hyperbolic**
+**3. hyperbolic**, denoted by "*hb*"
 
 $$
 d(t) = \frac{1}{1+kt}
@@ -154,7 +158,8 @@ $$
 
 where the parameter is $k$.
 
-**4. dual-parameter hyperbolic** [@loewenstein_anomalies_1992]
+**4. dual-parameter hyperbolic**, denoted by "*hb2*"
+[@loewenstein_anomalies_1992]
 
 $$
 d(t) = \frac{1}{(1+kt)^a}
@@ -162,7 +167,8 @@ $$
 
 where the parameters are $k$, $a$.
 
-**5. magnitude-dependent hyperbolic** [@gershman_rationally_2020]
+**5. magnitude-dependent hyperbolic**, denoted by "*hbmd*"
+[@gershman_rationally_2020]
 
 $$
 d(t) = \frac{1}{1+kt}, \quad k=\frac{1}{b u(x_t)}
@@ -170,7 +176,7 @@ $$
 
 where the parameter is $b$.
 
-**6. quasi-hyperbolic** [@laibson_golden_1997]
+**6. quasi-hyperbolic**, denoted by "*quasihb*"[@laibson_golden_1997]
 
 $$
 d(t)= \textbf{1}\{t=0\}+ \beta\delta^t\cdot\textbf{1}\{t>0\}
@@ -178,7 +184,7 @@ $$
 
 where the parameters are $\beta$, $\delta$, and $\beta,\delta\in(0,1]$.
 
-**7. quasi-hyperbolic plus fixed delay cost**
+**7. quasi-hyperbolic plus fixed delay cost**, denoted by "*quasihb_fc*"
 [@benhabib_present-bias_2010]
 
 $$
@@ -186,7 +192,8 @@ d(t)= \textbf{1}\{t=0\}+ (\beta\delta^t-\frac{c}{u(x_t)})\cdot\textbf{1}\{t>0\}
 $$ where the parameters are $\beta$, $\delta$, $c$, and
 $\beta,\delta\in(0,1]$.
 
-**8. homogeneous costly empathy** [@noor_optimal_2022]
+**8. homogeneous costly empathy**, denoted by "*hce*"
+[@noor_optimal_2022]
 
 $$
 d_t = \kappa_t u(x_t)^{\frac{1}{m}}
@@ -226,14 +233,42 @@ optimization. [^2]
 
 ## Results for *Ericson* data
 
-Table \ref{tab:ericson_kf_result} shows the fitness of each model in cross-validation.
+Table \ref{tab:ericson_kf_result} shows the fitness of each model in
+cross-validation. The heuristic model has the highest accuracy rate, the
+lowest log loss, and the lowest MAE (mean absolute error). The trade-off
+model with power utility performs the lowest MSE (mean squared error).
+The magnitude-dependent hyperbolic (*hbmd*) model with power utility
+ranks third in all evaluation metrics. On the test sample, these three
+models also perform the best in MSE, MAE and accuracy rate (see Table
+\ref{tab:ericson_test_result}). However, the heuristic model has the
+highest MSE in out-of-sample test, which is 10.8005, nearly 18 times as
+the *hbmd* and trade-off models with power utility. This may imply that
+the heuristic model can perform well in predicting whether the
+probability of choosing LL is greater than 0.5, but is not good at
+predicting the exact value of it.
+
+Notably, the heuristic model has the most parameters that need to be
+fitted. Apart from the heuristic model, the trade-off model has the
+highest number of parameters, which is 6. The *hbmd* model has only 3
+parameters to be fitted, and on the test sample, it performs very
+similarly with the trade-off model. It may be reasonable to conclude
+that magnitude-dependent hyperbolic discounting plus power utility can
+best describe the data, for it performs the best out-of-sample
+prediction accuracy (70.1%) with the lowest number of parameters. In
+addition, to test the correlation between the predictions of *hbmd* and
+trade-off models, I randomly draw 1,000 choice questions from *Ericson*
+data, and use choices predicted by trade-off model with power utility as
+the labels, letting the other models to predict them. The accuracy rate
+for *hbmd* with power utility is the highest, which is 94.5%, even
+higher than the heuristic model (91.6%) and the trade-off model with
+exponential utility (85.4%).
 
 ```{=tex}
 \begin{longtable}{@{}llllll@{}}
 \caption{Cross-Validation Results on \textit{Ericson} Data}
 \label{tab:ericson_kf_result}\\
 \toprule
-\textbf{model} & \textbf{utility} & \textbf{mse} & \textbf{mae} & \textbf{log\_loss} & \textbf{accuracy} \\* \midrule
+\textbf{model} & \textbf{utility} & \textbf{MSE} & \textbf{MAE} & \textbf{log\_loss} & \textbf{accuracy} \\* \midrule
 \endhead
 %
 \bottomrule
@@ -266,9 +301,6 @@ hb2            & cara  & 0.2281 & 0.4558 & 0.6482 & 0.6325 \\
 hb             & cara  & 0.2282 & 0.4561 & 0.6485 & 0.6323 \\* \bottomrule
 \end{longtable}
 ```
-
-Table \ref{tab:ericson_test_result} shows the out-of-sample performance of each model.
-
 ```{=tex}
 \begin{longtable}{@{}lllllll@{}}
 \caption{Out-of-Sample Test Results on \textit{Ericson} Data}
@@ -306,13 +338,36 @@ expo2          & cara  & 0.2406 & 0.4484 & 0.6819  & 0.6203 & 0.0083 \\
 hb2            & power & 0.3832 & 0.3832 & 8.8541  & 0.6168 & 0.0000 \\
 expo2          & power & 0.3832 & 0.3832 & 9.3569  & 0.6168 & 0.0000 \\* \bottomrule
 \end{longtable}
-
 ```
+I now focus on attention-adjusted models. First, it is notable that
+*hbmd* can be viewed as a special case of the attention-adjusted models.
+[^3] Magnitude-dependent hyperbolic discounting plus power utility is
+identical to attention-adjusted discounting under uniform initial
+attention allocation, plus logarithmic utility. Second, to explain why
+attention-adjusted models with exponential or power utility underperform
+some other models, see the last column in Table
+\ref{tab:ericson_test_result}, which reports the ratio of LL choices in
+the predictions. The two attention-adjusted models underestimate the
+decision makers' tendency to choose option LL in *Ericson* data. Third,
+for why using logarithmic utility in attention-adjusted models
+outperforms power utility in the given data, the experimental design may
+explains.
 
+[^3]: Note that under the assumption that the initial attention is
+    uniformly allocated, the discounting factor in attention-adjusted
+    model is $1/(1+kt)$, where $k=e^{-u(x_t)/\lambda}$. Suppose
+    $u(x)/\lambda=\ln\beta+\gamma\ln x$, then we can get the
+    magnitude-dependent hyperbolic model with power utility.
+
+25.3% of the small early rewards is less than \$3, 19.3% of the large
+late rewards is less than \$3.
+
+In Chavez data, the smallest $x_s$ is 11, the smallest $x_l$ is 25.
 
 ## Results for *Chávez* data
 
-Table \ref{tab:chavez_kf_result}shows the fitness of each model in cross-validation.
+Table \ref{tab:chavez_kf_result}shows the fitness of each model in
+cross-validation.
 
 ```{=tex}
 \begin{longtable}{@{}llllll@{}}
@@ -351,10 +406,9 @@ hce            & cara    & 0.1700 & 0.3412 & 0.5124    & 0.7168   \\
 quasihb\_fc    & cara    & 0.1701 & 0.3407 & 0.5128    & 0.7203   \\
 expo2          & cara    & 0.1747 & 0.3487 & 0.5213    & 0.6825   \\* \bottomrule
 \end{longtable}
-
 ```
-
-Table \ref{tab:chavez_test_result} shows the out-of-sample performance of each model.
+Table \ref{tab:chavez_test_result} shows the out-of-sample performance
+of each model.
 
 ```{=tex}
 \begin{longtable}{@{}lllllll@{}}
@@ -393,9 +447,7 @@ hb2            & cara  & 0.2504 & 0.3283 & 0.7914  & 0.6483 & 0.0000 \\
 expo2          & power & 0.3517 & 0.3517 & 12.6783 & 0.6483 & 0.0000 \\
 quasihb\_fc    & cara  & 0.2019 & 0.3423 & 0.5866  & 0.6483 & 0.0000 \\* \bottomrule
 \end{longtable}
-
 ```
-
-## Discussion
+## Parametrication
 
 # Reference
