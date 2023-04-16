@@ -1,38 +1,64 @@
 import yaml
+import os
 import numpy as np
 import pandas as pd
 import scipy.stats as st
 from scipy.optimize import minimize,basinhopping
 from sklearn import metrics
-from mpl import choice_rule
+from mel import choice_rule
 
 
-# Load the configuration file
-# The configuration file contains the initial points (x0）and constraints (bound) for the parameters in each model
-# It also contains the error message
-with open('mpl/config_param.yaml', 'r') as f:
+"""
+    Load the configuration file. The following information are specified in configuration file:
+    
+    1. initial points (x0) and constraints (bound) for parameters in discounting function, utility
+    function, and choice probability function
+        - both the initial points and contraints are framed in list
+        - e.g. for x0 = [.5,1,2], 0.5 is the initial point for the first parameter, 1 is the initial
+        point for the second parameter, and so on 
+        - for bound = [[.001,1],[.001,100]], the first parameter has a lower bound of 0.001 and a upper
+        bound of 1, the second parameter has a lower bound of 0.001 and a upper bound of 100
+    
+    2. error message
+"""
+
+current_dir = os.path.dirname(os.path.relpath(__file__))
+path_config = current_dir + '/config_param.yaml'
+
+with open(path_config, 'r') as f:
         config_param = yaml.safe_load(f)
 
 
-def gen_style_list(method='logit',intercept=False):
 
-    """
-    Find the discounting functions and utility functions specified in the configuration file, then
-    generate a list of model styles (in dictionary form)
-    """
+"""
+    mle (maximum likelihood estimation)
 
-    dstyle_list = list(config_param['discount_func'].keys())
-    ustyle_list = list(config_param['utility_func'].keys())
+    input:
+        data: must be a dataframe and contain these five columns [ss_x,ss_t,ll_x,ll_t,choice] 
+        style: model style, need to write in dict, such as 
 
-    style_list = [ {"dstyle":dstyle_list[i], 
-                    "ustyle":ustyle_list[j], 
-                    "method":method, 
-                    "intercept":intercept} 
-                for i in range(len(dstyle_list)) for j in range(len(ustyle_list))
-                ]
-    
-    return style_list
+            {'dstyle':<discount_function_name>,
+            'ustyle': <utility_function_name>,
+            'method':'logit' or 'probit',
+            'intercept': True or False} 
 
+        x0: initial points for optimization. if None, then use the initial points in the configuration file
+        bounds: constraints. if None, the use the bounds in the figuration file 
+
+    output:
+        solver: solver in scipy.basinhopping function
+        params: fitted parameters, listed in the following order 
+            
+            [<discount_parameters>,<utility_parameter>,<choice_probability_parameter>]
+        
+        se: standard error for each parameter
+        gradient: gradient for each parameter
+        log_loss: log loss, the objective for optimization
+        aic: Arkaike Information Criterion
+        bic: Bayesian Information Criterion
+        output: summarizing the parameters and scores in a dict 
+
+"""
 
 class mle:
 
@@ -176,6 +202,31 @@ class mle:
                 print(self.output)
 
         return self.output
+
+
+
+
+
+
+def gen_style_list(method='logit',intercept=False):
+
+    """
+    Find the discounting functions and utility functions specified in the configuration file, then
+    generate a list of model styles (in dictionary form)
+    """
+
+    dstyle_list = list(config_param['discount_func'].keys())
+    ustyle_list = list(config_param['utility_func'].keys())
+
+    style_list = [ {"dstyle":dstyle_list[i], 
+                    "ustyle":ustyle_list[j], 
+                    "method":method, 
+                    "intercept":intercept} 
+                for i in range(len(dstyle_list)) for j in range(len(ustyle_list))
+                ]
+    
+    return style_list
+
 
     
 #if __name__ == "__main__":

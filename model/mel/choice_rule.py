@@ -3,7 +3,7 @@ import numpy as np
 import inspect
 import scipy.stats as st
 from typing import Union
-from mpl import discount
+from mel import discount
 
 
 
