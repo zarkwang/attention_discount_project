@@ -3,17 +3,17 @@ title: "Empirical Test"
 author: "Zijian Zark Wang"
 date: "`r Sys.Date()`"
 bibliography: reference.bib
-csl: apa-no-ampersand.csl
+biblio-style: apalike
 header-includes: 
-  - \usepackage{setspace}
-  - \usepackage{amsmath}
-  - \usepackage{array}
-  - \usepackage{caption}
-  - \usepackage{longtable}
-  - \usepackage{booktabs}
-  - \renewcommand{\arraystretch}{1.5}
-  - \captionsetup[table]{skip=5pt}
-  - \setstretch{1.3} 
+  \usepackage{setspace}
+  \usepackage{amsmath}
+  \usepackage{array}
+  \usepackage{caption}
+  \usepackage{longtable}
+  \usepackage{booktabs}
+  \renewcommand{\arraystretch}{1}
+  \captionsetup[table]{skip=5pt}
+  \setstretch{1.5} 
 fontsize: 12pt
 geometry: margin=1in
 editor_options: 
@@ -22,6 +22,7 @@ editor_options:
 output:
   pdf_document:
     number_sections: true
+    citation_package: natbib
   html_document:
     toc: true
     number_sections: true
@@ -29,30 +30,47 @@ output:
 
 # Data
 
-I select two datasets from previous studies: the first is from
-@ericson_money_2015, containing 23,131 observations from 939
-participants; the second is from @chavez_hierarchical_2017, containing
-34,515 choices from 1,284 participants. I term the first dataset as
-*Ericson* data, and the second dataset as *Chávez* data. Each dataset is
-used in more than one academic study.[^1] Readers interested in the
-empirical method and the results of this paper can easily compare them
-with those of other papers.
+To test the capacity of the proposed model in explaining experimental
+findings under the "Money Earlier or Later" (MEL) paradigm, I select two
+open datasets. The first dataset is from @ericson_money_2015, containing
+23,131 observations from 939 participants; the second is from
+@chavez_hierarchical_2017, containing 34,515 choices from 1,284
+participants. Hereafter, I term the first dataset as *Ericson* data, and
+the second dataset as *Chávez* data. Each dataset has been used in more
+than one previous study.[^1] Readers interested in the empirical method
+and the results of this paper can easily compare them with those of
+other papers. For both datasets, the corresponding experiments require
+the participants to answer a series of choice questions. For each
+question, participants need to make a choice between an small sooner
+reward (denoted by SS) and a large later reward (denoted by LL). I
+denote the reward magnitude and delay by $x_s$ and $t_s$ for option SS,
+and by $x_l$ and $t_l$ for option LL, where $x_l>x_s>0$, $t_l>t_s$.
 
-[^1]: For example, *Ericson* data is also used by @wulff_modeling_2018
-    for comparing different intermporal choice models. *Chávez* data is
-    also used by @gershman_rationally_2020 for testing their proposed
-    attention-based theory.
+[^1]: For example, *Ericson* data is used by @wulff_modeling_2018 for
+    discussing the proper ways to compare different choice models.
+    *Chávez* data is used by @gershman_rationally_2020 for testing their
+    proposed attention-based choice model.
 
-The experiments corresponding to each dataset ask the participants to
-answer a series of intertemporal choice questions. In each question, the
-participants are required to select one option between an early small
-reward (denoted by SS) and late large reward (denoted by LL). I denote
-the magnitude and delay of reward by $x_s$ and $t_s$ for option SS, and
-by $x_l$ and $t_l$ for option LL, where $x_l>x_s$, $t_l>t_s$. I mainly
-focus on out-of-sample model performance. For each dataset, I randomly
-draw the responses from 20% of the participants as the test sample, and
-set the rest as the train sample. To mitigate the overfitting issue, I
-implement a 10-fold cross-validation procedure on the train sample.
+Notably, there are significant differences in experimental procedure
+underlying the datasets. In *Ericson* data, the participants are
+recruited via Mechanical Turk. Rewards are framed in US dollars, ranging
+from USD 0.03 to USD 10100. For 25.4% of the observations, option SS has
+a reward less than USD 3. Delays are framed in weeks. Delays for SS
+range from 0 to 2 weeks, and the maximum delay for LL is 5 weeks. In
+*Chávez* data, the participants are Mexican high school and first-year
+university students, and attending the experiment is a class
+requirement. Rewards are framed in Mexican pesos, ranging from MXD 11
+(approx. USD 0.6) to MXD 85 (approx. USD 4.7). Delays are framed in
+days. All sooner rewards are delivered "today" ($t_s=0$), and the
+maximum delay for LL is 186 days. Given that the two datasets employ
+different frames and ranges for rewards and delays, a same model fitted
+on these datasets may have different parameters and goodness of fit.
+
+I mainly focus on out-of-sample model performance. For each dataset, I
+randomly draw the responses from 20% of the participants as the test
+sample, and set the rest as the train sample. To mitigate the
+overfitting issue, I implement a 10-fold cross-validation procedure on
+the train sample.
 
 # Empirical Strategy
 
@@ -66,9 +84,9 @@ $d(.)$ is the discounting function and $u(.)$ is the instantanoues
 utility function. Suppose the decision maker's perceived discounted
 utility for each option, denoted by is $\tilde{v_l}$ and $\tilde{v_s}$,
 is noisy. I set $\tilde{v_l}=v_l+\eta_l$, $\tilde{v_s}=v_s+\eta_s$. When
-$\eta_l$ and $\eta_s$ are independent and both follow $Gumble(0,\rho)$,
-where the scale parameter $\rho\in(0,\infty)$, then the probability that
-the decision maker chooses LL is
+$\eta_l$ and $\eta_s$ are independent noises and both follow
+$Gumble(0,\rho)$, where the scale parameter $\rho\in(0,\infty)$, the
+probability that the decision maker chooses LL is
 
 $$
 P\{\tilde{v_s}\leq\tilde{v_l}\}=\frac{1}{1+\exp\{-\frac{1}{\rho}(v_l-v_s)\}}
@@ -76,63 +94,65 @@ $$
 
 The trade-off model [@scholten_psychology_2010; @scholten_weighing_2014]
 assumes that when thinking of whether to choose LL, the decision maker
-makes a comparison between attributes (reward and time), rather than
-between options (LL and SS). If the benefit of receiving a larger reward
-exceeds the cost of waiting a longer time, then she will choose LL;
-otherwise, she will choose SS. I denote the benefit of receiving a
-larger reward by $B$, the cost of waiting longer by $Q$. The value of
-$B$ can be simply represented by $u(x_l)-u(x_s)$. Following
+tends to make a comparison between attributes (reward and time), rather
+than between options (LL and SS). If the benefit of receiving a larger
+reward exceeds the cost of waiting longer, she will choose LL;
+otherwise, she will choose SS. Let $B$ denote the benefit of receiving a
+larger reward, $Q$ denote the cost of waiting longer. The value of $B$
+can be simply represented by $u(x_l)-u(x_s)$. Following
 @scholten_weighing_2014, I represent $Q$ by
 
 $$
 Q =\frac{\kappa}{\zeta_1}\ln\left(1+\zeta_1\left(\frac{w(t_l)-w(t_s)}{\zeta_2}\right)^{\zeta_2}\right)
 $$
 
-where $\eta_q$ is a noise term, and $w(t)=\ln(1+\omega t)/\omega$. The
-parameter $\omega$ measures how much time is distorted in the decision
-maker's mind; $\kappa$ measures the relative importance of reducing
-waiting time compared with increasing reward magnitude; $\zeta_1$,
-$\zeta_2$ jointly determine the curvature of changes in $Q$ relative to
-$t_l-t_s$. @scholten_weighing_2014 use $\zeta_1$, $\zeta_2$ to ensure
-that $Q$ follow a S-shape curve in relation to $t_l-t_s$ and that the
-behavioral pattern can shift between sub-additivity and
-super-additivity.
-
-I assume the decision maker's perception of $B$ and $Q$, denoted by
-$\tilde{B}$ and $\tilde{Q}$, is noisy. Therefore, $\tilde{B}=B+\eta_B$,
-$\tilde{Q}=Q+\eta_Q$, where $\eta_B$ and $\eta_Q$ are independent
-noises. Again, assume both $\eta_B$ and $\eta_Q$ follow
+where $w(t)=\ln(1+\omega t)/\omega$. The parameter $\omega$ measures the
+magnitude in which time is distorted in the decision maker's mind;
+$\kappa$ measures the relative importance of reducing waiting time
+compared with increasing reward magnitude; $\zeta_1$, $\zeta_2$ jointly
+determine the curvature of changes in $Q$ relative to $t_l-t_s$.[^2] I
+assume the decision maker's perception of $B$ and $Q$, denoted by
+$\tilde{B}$ and $\tilde{Q}$, is noisy. $\tilde{B}=B+\eta_B$,
+$\tilde{Q}=Q+\eta_Q$, where $\eta_B$ and $\eta_Q$ are noise terms.
+Again, assume $\eta_B$ and $\eta_Q$ are independent and follow
 $Gumble(0,\rho)$, then the probability that the decision maker chooses
 LL is
+
+[^2]: @scholten_weighing_2014 use these two parameters
+    $\{\zeta_1,\zeta_2\}$ to ensure that $Q$ follow a S-shape curve in
+    relation to $t_l-t_s$, and that the decision-maker's behavioral
+    pattern can shift between sub-additivity and super-additivity.
 
 $$
 P\{\tilde{Q}\leq\tilde{B}\}=\frac{1}{1+\exp\{-\frac{1}{\rho}(B-Q)\}}
 $$
 
 For the heuristic model, I employ a decision tree algorithm called
-XGBoost, which has been widely used in solving classfication problems
-(including predicting human risky choices). The intuition underlying
-XGBoost is that, the decision-maker uses a chain of if-then rules to
-make a choice, and repeats this process for several times, adding up the
-results of each iteration to make the final decision. To better fit the
-data, I extract features from each intertemporal choice question,
-following the methods in @read_drift_2013 and @ericson_money_2015.
-Meanwhile, I tune the hyper-parameters of the algorithm via grid search.
-The features that I use to fit *Ericson* data are $x_s$, $x_l$, $t_s$,
-$t_l$, the absolute and relative differences between $x_s$ and $x_l$,
-the absolute and relative differences between $t_l$ and $t_s$, the
-interest rate of LL when SS is invested as principal. For *Chávez* data,
-given that $t_s=0$, I omit $t_s$ and the differences between $t_s$ and
-$t_l$.
+XGBoost [@chen_xgboost_2016]. The intuition underlying XGBoost is that,
+the decision-maker uses a chain of if-then rules to make a choice, and
+repeats this process for several times, adding up the results of each
+iteration to make the final decision. This algorithm has been widely
+used in solving classfication problems (including predicting human risky
+choices, see \citealt{plonsky_predicting_2019}). To better fit the data,
+I tune the hyper-parameters of this algorithm via grid search. For
+*Ericson* data, the features I use are $x_s$, $x_l$, $t_s$, $t_l$, the
+absolute and relative differences between $x_s$ and $x_l$, the absolute
+and relative differences between $t_l$ and $t_s$, the interest rate of
+LL when SS is invested as principal. For *Chávez* data, given that
+$t_s=0$, I omit $t_s$ and the differences between $t_s$ and $t_l$ from
+the features.[^3]
+
+[^3]: The features are extracted following the methods in
+    @read_drift_2013 and @ericson_money_2015.
 
 The attention-adjusted discounting factor is dependent on the decision
 maker's initial attention allocation. I test the model under the
 assumptions that initial attention allocation is exponential and uniform
 (I term the former as "*attention*", the latter as "*attention_uni*").
-Along with the attention-adjusted discounting, I also employ 8 other
-methods to draw the discounting factor, which are:
+Along with the attention-adjusted discounting, I employ 8 other methods
+to draw discounting factors, which are:
 
-**1. exponential**, denoted by "*expo*"
+1.  **exponential**, denoted by "*expo*"
 
 $$
 d(t) =\delta^t
@@ -140,17 +160,17 @@ $$
 
 where the parameter is $\delta$ and $\delta\in(0,1]$.
 
-**2. double exponential**, denoted by "*expo2*"
-[@van_den_bos_towards_2013]
+2.  **double exponential**, denoted by "*expo2*"
+    [@van_den_bos_towards_2013]
 
 $$
 d(t) = \omega\delta_1^t+(1-\omega)\delta_2^t
 $$
 
-where the parameters are $\delta_1$, $\delta_2$, $\omega$, and
+where the parameters are $\{\delta_1, \delta_2, \omega\}$, and
 $\delta_1,\delta_2\in(0,1]$.
 
-**3. hyperbolic**, denoted by "*hb*"
+3.  **hyperbolic**, denoted by "*hb*"
 
 $$
 d(t) = \frac{1}{1+kt}
@@ -158,17 +178,17 @@ $$
 
 where the parameter is $k$.
 
-**4. dual-parameter hyperbolic**, denoted by "*hb2*"
-[@loewenstein_anomalies_1992]
+4.  **dual-parameter hyperbolic**, denoted by "*hb2*"
+    [@loewenstein_anomalies_1992]
 
 $$
 d(t) = \frac{1}{(1+kt)^a}
 $$
 
-where the parameters are $k$, $a$.
+where the parameters are $\{k,a\}$.
 
-**5. magnitude-dependent hyperbolic**, denoted by "*hbmd*"
-[@gershman_rationally_2020]
+5.  **magnitude-dependent hyperbolic**, denoted by "*hbmd*"
+    [@gershman_rationally_2020]
 
 $$
 d(t) = \frac{1}{1+kt}, \quad k=\frac{1}{b u(x_t)}
@@ -176,99 +196,92 @@ $$
 
 where the parameter is $b$.
 
-**6. quasi-hyperbolic**, denoted by "*quasihb*"[@laibson_golden_1997]
+6.  **quasi-hyperbolic**, denoted by "*quasihb*"[@laibson_golden_1997]
 
 $$
 d(t)= \textbf{1}\{t=0\}+ \beta\delta^t\cdot\textbf{1}\{t>0\}
 $$
 
-where the parameters are $\beta$, $\delta$, and $\beta,\delta\in(0,1]$.
+where the parameters are $\{\beta, \delta\}$, and
+$\beta,\delta\in(0,1]$.
 
-**7. quasi-hyperbolic plus fixed delay cost**, denoted by "*quasihb_fc*"
-[@benhabib_present-bias_2010]
+7.  **quasi-hyperbolic plus fixed delay cost**, denoted by
+    "*quasihb_fc*" [@benhabib_present-bias_2010]
 
 $$
 d(t)= \textbf{1}\{t=0\}+ (\beta\delta^t-\frac{c}{u(x_t)})\cdot\textbf{1}\{t>0\}
-$$ where the parameters are $\beta$, $\delta$, $c$, and
+$$ where the parameters are $\{\beta, \delta, c\}$, and
 $\beta,\delta\in(0,1]$.
 
-**8. homogeneous costly empathy**, denoted by "*hce*"
-[@noor_optimal_2022]
+8.  **homogeneous costly empathy**, denoted by "*hce*"
+    [@noor_optimal_2022]
 
 $$
 d_t = \kappa_t u(x_t)^{\frac{1}{m}}
 $$
 
 where $\kappa_t$ is decreasing in $t$. I set $\kappa_t=\delta^t$, where
-the parameters are $m$, $\delta$ and $\delta\in(0,1]$.
+the parameters are $\{m, \delta\}$ and $\delta\in(0,1]$.
 
-For the parameters in discounting functions, except for those explicitly
-marked as having a domain between 0 and 1, the domain of all other
-parameters is $(0,\infty)$. Besides, I employed 2 types of utility
-functions: (1) exponential utility (CARA), $u(x)=1-e^{-\gamma x}$; (2)
-power utility (CRRA), $u(x) = x^{\gamma}$. In both functions, the
-parameter is $\gamma$ and $\gamma\in(0,\infty)$. Therefore, for the
-discounted utility model, there are 20 specific model settings to fit;
-for the trade-off model, there are 2 specific model settings to fit. In
-model fitting, if a parameter has a lower bound of 0, I set its lower
-bound to 0.001; if a parameter has a upper bound of infinity, I set its
-upper bound to 100. I use the maximum likelihood method to estimate the
-parameters, and apply L-BFGS-B method for optimization. As the solutions
-of L-BFGS-B are sensitive to initial points and often converge to local
-optima, I use the basin-hopping algorithm to achieve global
-optimization. [^2]
+Besides, I employ 2 types of utility functions to obtain $u(.)$:
+exponential or CARA utility, where $u(x)=1-e^{-\gamma x}$; power
+utility, where $u(x) = x^{\gamma}$. In each utility function, $\gamma$
+is the parameter, $\gamma\in (0,\infty)$. For parameters in discounting
+function, except for those explicitly marked as having a domain between
+0 and 1, the domain of all other parameters is $(0,\infty)$. In model
+fitting, if a parameter has a lower bound of 0, I set its lower bound to
+0.001; if a parameter has a upper bound of infinity, I set its upper
+bound to 100.
 
-[^2]: The basin-hopping algorithm runs the L-BFGS-B method for several
-    times, and after each iteration, the solution will randomly drift to
-    a new point. We set this new point as the initial point for the next
-    iteration, and compare the new solution with the solution of the
-    last iteration. The algorithm tends to accept the better solution of
-    them, but there is still some probability of accepting an inferior
-    solution. The magnitude of drifting is dependent on a stepwise
-    parameter, which I set as 0.5; the probability of accepting the
-    inferior solution is dependent on a temper parameter, which I set as
-    1.0. I also set the maximum number of iterations as 500.
+I use the maximum likelihood method to estimate the parameters, and
+apply L-BFGS-B method for optimization. As the solutions of L-BFGS-B are
+sensitive to initial points and often converge to local optima, I use
+the basin-hopping algorithm to achieve global optimization. [^4]
+Finally, I compare the goodness of fit and out-of-sample performance of
+20 discounted utility models, 2 trade-off models, and 1 heuristic model
+on the two datasets.
+
+[^4]: The basin-hopping algorithm runs a local optimizer for several
+    times. After each iteration, the solution randomly drifts to a new
+    point. This new point is taken as the initial point for the next
+    iteration. The algorithm compares the solution of the next iteration
+    with the original solution, and is more likely to accept the better
+    solution between them (note there is still some probability of
+    accepting an inferior solution). The magnitude of drifting is
+    dependent on a stepwise parameter, which I set as 0.5; the
+    probability of accepting the inferior solution is dependent on a
+    temper parameter, which I set as 1.0. I also set the maximum number
+    of iterations as 500.
 
 # Result
 
 ## Results for *Ericson* data
 
-Table \ref{tab:ericson_kf_result} shows the fitness of each model in
-cross-validation. The heuristic model has the highest accuracy rate, the
-lowest log loss, and the lowest MAE (mean absolute error). The trade-off
-model with power utility performs the lowest MSE (mean squared error).
-The magnitude-dependent hyperbolic (*hbmd*) model with power utility
-ranks third in all evaluation metrics. On the test sample, these three
-models also perform the best in MSE, MAE and accuracy rate (see Table
-\ref{tab:ericson_test_result}). However, the heuristic model has the
-highest MSE in out-of-sample test, which is 10.8005, nearly 18 times as
-the *hbmd* and trade-off models with power utility. This may imply that
-the heuristic model can perform well in predicting whether the
-probability of choosing LL is greater than 0.5, but is not good at
-predicting the exact value of it.
+Table \ref{tab:ericson_kf_result} shows the goodness of fit for each
+model in cross-validation. The heuristic model has the highest accuracy
+rate, the lowest log loss, and the lowest MAE. The trade-off (*trade*)
+model with power utility performs the lowest MSE. The
+magnitude-dependent hyperbolic (*hbmd*) model with power utility ranks
+the second or third in all evaluation metrics. On the test sample, these
+three models also perform the best in MSE, MAE, log loss and accuracy
+rate (see Table \ref{tab:ericson_test_result}). To test the correlation
+between these models, I randomly draw 1,000 choice questions from
+*Ericson* data, and set the choices predicted by the heuristic model as
+labels, letting the other models to predict them. The accuracy rate for
+*trade* with power utility is the highest, which is 95.7%, and the
+second is *hbmd* with power utility (95.0%).
 
-Notably, the heuristic model has the most parameters that need to be
-fitted. Apart from the heuristic model, the trade-off model has the
-highest number of parameters, which is 6. The *hbmd* model has only 3
-parameters to be fitted, and on the test sample, it performs very
-similarly with the trade-off model. It may be reasonable to conclude
-that magnitude-dependent hyperbolic discounting plus power utility can
-best describe the data, for it performs the best out-of-sample
-prediction accuracy (70.1%) with the lowest number of parameters. In
-addition, to test the correlation between the predictions of *hbmd* and
-trade-off models, I randomly draw 1,000 choice questions from *Ericson*
-data, and use choices predicted by trade-off model with power utility as
-the labels, letting the other models to predict them. The accuracy rate
-for *hbmd* with power utility is the highest, which is 94.5%, even
-higher than the heuristic model (91.6%) and the trade-off model with
-exponential utility (85.4%).
+Remarkably, the heuristic model has the most parameters that need to be
+fitted. Apart from the heuristic model, the model that has the largest
+number of parameters is *trade*, which has 6 parameters to be fitted.
+The *hbmd* model has only 3 parameters to be fitted.
 
 ```{=tex}
 \begin{longtable}{@{}llllll@{}}
-\caption{Cross-Validation Results on \textit{Ericson} Data}
+\caption{Cross-Validation Results on Ericson Data}
 \label{tab:ericson_kf_result}\\
 \toprule
-\textbf{model} & \textbf{utility} & \textbf{MSE} & \textbf{MAE} & \textbf{log\_loss} & \textbf{accuracy} \\* \midrule
+\textbf{model}       & \textbf{utility}       & \textbf{mse}      & \textbf{mae}      & \textbf{log\_loss}      & \textbf{accuracy}      \\* \midrule
 \endhead
 %
 \bottomrule
@@ -276,29 +289,34 @@ exponential utility (85.4%).
 %
 \endlastfoot
 %
-heuristic      & --    & 0.2988 & 0.2988 & 0.5812 & 0.7012 \\
-tradeoff       & power & 0.2019 & 0.4035 & 0.5914 & 0.6949 \\
-hbmd           & power & 0.2042 & 0.4093 & 0.5976 & 0.6943 \\
-quasihb\_fc    & power & 0.2074 & 0.4151 & 0.6036 & 0.6889 \\
-quasihb        & power & 0.2074 & 0.4148 & 0.6037 & 0.6889 \\
-expo2          & power & 0.2074 & 0.4157 & 0.6038 & 0.6858 \\
-attention\_uni & power & 0.2088 & 0.4184 & 0.6072 & 0.6835 \\
-hb2            & power & 0.2094 & 0.4186 & 0.6086 & 0.6846 \\
-hb             & power & 0.2097 & 0.4199 & 0.6092 & 0.6833 \\
-hce            & power & 0.2100 & 0.4203 & 0.6097 & 0.6833 \\
-expo           & power & 0.2100 & 0.4203 & 0.6097 & 0.6833 \\
-attention      & power & 0.2132 & 0.4278 & 0.6179 & 0.6782 \\
-tradeoff       & cara  & 0.2160 & 0.4321 & 0.6232 & 0.6729 \\
-attention      & cara  & 0.2276 & 0.4549 & 0.6473 & 0.6348 \\
-attention\_uni & cara  & 0.2278 & 0.4553 & 0.6477 & 0.6338 \\
-hbmd           & cara  & 0.2278 & 0.4554 & 0.6478 & 0.6341 \\
-expo2          & cara  & 0.2280 & 0.4557 & 0.6480 & 0.6323 \\
-quasihb        & cara  & 0.2280 & 0.4557 & 0.6480 & 0.6320 \\
-quasihb\_fc    & cara  & 0.2280 & 0.4557 & 0.6480 & 0.6320 \\
-expo           & cara  & 0.2280 & 0.4558 & 0.6481 & 0.6326 \\
-hce            & cara  & 0.2280 & 0.4558 & 0.6481 & 0.6326 \\
-hb2            & cara  & 0.2281 & 0.4558 & 0.6482 & 0.6325 \\
-hb             & cara  & 0.2282 & 0.4561 & 0.6485 & 0.6323 \\* \bottomrule
+heuristic      & --      & 0.298 & 0.298 & 0.581     & 0.702    \\
+trade          & power   & 0.204 & 0.407 & 0.595     & 0.693    \\
+hbmd           & power   & 0.206 & 0.413 & 0.602     & 0.692    \\
+quasihb\_fc    & power   & 0.208 & 0.418 & 0.606     & 0.685    \\
+quasihb        & power   & 0.209 & 0.417 & 0.607     & 0.687    \\
+expo2          & power   & 0.210 & 0.420 & 0.609     & 0.685    \\
+attention\_uni & power   & 0.211 & 0.422 & 0.611     & 0.679    \\
+hb2            & power   & 0.211 & 0.422 & 0.611     & 0.682    \\
+hb             & power   & 0.211 & 0.422 & 0.612     & 0.681    \\
+expo           & power   & 0.211 & 0.422 & 0.612     & 0.681    \\
+hce            & power   & 0.211 & 0.422 & 0.612     & 0.681    \\
+attention      & power   & 0.215 & 0.431 & 0.621     & 0.673    \\
+trade          & cara    & 0.218 & 0.437 & 0.628     & 0.666    \\
+attention      & cara    & 0.228 & 0.456 & 0.648     & 0.638    \\
+attention\_uni & cara    & 0.229 & 0.458 & 0.650     & 0.631    \\
+hbmd           & cara    & 0.229 & 0.458 & 0.650     & 0.631    \\
+quasihb        & cara    & 0.229 & 0.459 & 0.651     & 0.630    \\
+quasihb\_fc    & cara    & 0.229 & 0.459 & 0.651     & 0.630    \\
+expo2          & cara    & 0.229 & 0.458 & 0.651     & 0.630    \\
+expo           & cara    & 0.229 & 0.459 & 0.651     & 0.629    \\
+hce            & cara    & 0.229 & 0.459 & 0.651     & 0.629    \\
+hb2            & cara    & 0.229 & 0.459 & 0.651     & 0.629    \\
+hb             & cara    & 0.229 & 0.459 & 0.651     & 0.629    \\* \midrule
+\multicolumn{6}{p{.7\textwidth}}{
+\setstretch{1}
+\textit{Note}: "mae" denotes mean absolute error, "mse" denotes mean
+squared error.
+}
 \end{longtable}
 ```
 ```{=tex}
@@ -314,55 +332,72 @@ hb             & cara  & 0.2282 & 0.4561 & 0.6485 & 0.6323 \\* \bottomrule
 %
 \endlastfoot
 %
-hbmd           & power & 0.2044 & 0.4074 & 0.5983  & 0.7008 & 0.2132 \\
-heuristic      & --    & 0.2997 & 0.2997 & 10.8005 & 0.7003 & 0.2647 \\
-tradeoff       & power & 0.2020 & 0.4022 & 0.5919  & 0.6977 & 0.2106 \\
-hb             & power & 0.2084 & 0.4185 & 0.6067  & 0.6903 & 0.2451 \\
-quasihb\_fc    & power & 0.2067 & 0.4167 & 0.6029  & 0.6899 & 0.2839 \\
-quasihb        & power & 0.2090 & 0.4001 & 0.6109  & 0.6897 & 0.2056 \\
-expo           & power & 0.2090 & 0.4158 & 0.6082  & 0.6814 & 0.2056 \\
-hce            & power & 0.2092 & 0.4161 & 0.6087  & 0.6814 & 0.2056 \\
-attention\_uni & power & 0.2108 & 0.4190 & 0.6114  & 0.6798 & 0.1491 \\
-attention      & power & 0.2159 & 0.4288 & 0.6242  & 0.6685 & 0.1246 \\
-tradeoff       & cara  & 0.2192 & 0.4326 & 0.6298  & 0.6630 & 0.1078 \\
-attention      & cara  & 0.2302 & 0.4570 & 0.6528  & 0.6318 & 0.0709 \\
-attention\_uni & cara  & 0.2303 & 0.4574 & 0.6531  & 0.6307 & 0.0764 \\
-hbmd           & cara  & 0.2304 & 0.4575 & 0.6533  & 0.6301 & 0.0762 \\
-quasihb\_fc    & cara  & 0.2309 & 0.4582 & 0.6544  & 0.6281 & 0.0546 \\
-quasihb        & cara  & 0.2309 & 0.4582 & 0.6544  & 0.6281 & 0.0546 \\
-hb             & cara  & 0.2310 & 0.4585 & 0.6546  & 0.6275 & 0.0657 \\
-hb2            & cara  & 0.2317 & 0.4554 & 0.6562  & 0.6248 & 0.0399 \\
-hce            & cara  & 0.2310 & 0.4583 & 0.6545  & 0.6242 & 0.0410 \\
-expo           & cara  & 0.2310 & 0.4582 & 0.6545  & 0.6242 & 0.0410 \\
-expo2          & cara  & 0.2406 & 0.4484 & 0.6819  & 0.6203 & 0.0083 \\
-hb2            & power & 0.3832 & 0.3832 & 8.8541  & 0.6168 & 0.0000 \\
-expo2          & power & 0.3832 & 0.3832 & 9.3569  & 0.6168 & 0.0000 \\* \bottomrule
+heurstic       & --     & 0.200 & 0.400 & 0.586     & 0.702    & 0.290    \\
+hbmd           & power  & 0.204 & 0.411 & 0.596     & 0.696    & 0.237    \\
+trade          & power  & 0.202 & 0.405 & 0.591     & 0.695    & 0.249    \\
+quasihb\_fc    & power  & 0.207 & 0.412 & 0.603     & 0.694    & 0.248    \\
+quasihb        & power  & 0.207 & 0.422 & 0.604     & 0.694    & 0.248    \\
+expo           & power  & 0.210 & 0.427 & 0.609     & 0.690    & 0.306    \\
+hce            & power  & 0.210 & 0.428 & 0.609     & 0.686    & 0.260    \\
+hb             & power  & 0.209 & 0.424 & 0.607     & 0.686    & 0.260    \\
+attention\_uni & power  & 0.211 & 0.422 & 0.611     & 0.678    & 0.157    \\
+attention      & power  & 0.215 & 0.431 & 0.623     & 0.673    & 0.142    \\
+trade          & cara   & 0.217 & 0.434 & 0.626     & 0.668    & 0.120    \\
+attention      & cara   & 0.231 & 0.457 & 0.654     & 0.629    & 0.091    \\
+attention\_uni & cara   & 0.231 & 0.459 & 0.654     & 0.624    & 0.087    \\
+hbmd           & cara   & 0.231 & 0.459 & 0.654     & 0.623    & 0.085    \\
+hb2            & cara   & 0.233 & 0.454 & 0.658     & 0.620    & 0.046    \\
+hb             & cara   & 0.231 & 0.460 & 0.655     & 0.618    & 0.082    \\
+hce            & cara   & 0.231 & 0.460 & 0.655     & 0.618    & 0.080    \\
+quasihb        & cara   & 0.231 & 0.460 & 0.655     & 0.618    & 0.078    \\
+quasihb\_fc    & cara   & 0.231 & 0.460 & 0.655     & 0.618    & 0.078    \\
+expo           & cara   & 0.231 & 0.460 & 0.655     & 0.618    & 0.080    \\
+expo2          & cara   & 0.240 & 0.447 & 0.679     & 0.616    & 0.013    \\
+expo2          & power  & 0.385 & 0.386 & 4.767     & 0.614    & 0.000    \\
+hb2            & power  & 0.386 & 0.386 & 6.562     & 0.614    & 0.000    \\* \midrule
+\multicolumn{7}{p{0.8\textwidth}}{
+\setstretch{1}
+\textit{Note}: "mae" denotes mean absolute error, "mse" denotes mean
+squared error, "pred\_ll" denotes the ratio of LL in predicted choices.
+}
 \end{longtable}
 ```
-I now focus on attention-adjusted models. First, it is notable that
+Now we focus on attention-adjusted models. First, it is notable that
 *hbmd* can be viewed as a special case of the attention-adjusted models.
-[^3] Magnitude-dependent hyperbolic discounting plus power utility is
+[^5] Magnitude-dependent hyperbolic discounting plus power utility is
 identical to attention-adjusted discounting under uniform initial
-attention allocation, plus logarithmic utility. Second, to explain why
-attention-adjusted models with exponential or power utility underperform
-some other models, see the last column in Table
-\ref{tab:ericson_test_result}, which reports the ratio of LL choices in
-the predictions. The two attention-adjusted models underestimate the
-decision makers' tendency to choose option LL in *Ericson* data. Third,
-for why using logarithmic utility in attention-adjusted models
-outperforms power utility in the given data, the experimental design may
-explains.
+attention allocation, plus log utility. We can conclude that log utility
+function fits the data better than power and CARA functions under
+attention-adjusted model.
 
-[^3]: Note that under the assumption that the initial attention is
+[^5]: Note that under the assumption that the initial attention is
     uniformly allocated, the discounting factor in attention-adjusted
-    model is $1/(1+kt)$, where $k=e^{-u(x_t)/\lambda}$. Suppose
-    $u(x)/\lambda=\ln\beta+\gamma\ln x$, then we can get the
+    model is $1/(1+kt)$, where $k=e^{-u(x_t)/\lambda}$. Setting
+    $u(x)/\lambda=\ln\beta+\gamma\ln x$, we can get the
     magnitude-dependent hyperbolic model with power utility.
 
-25.3% of the small early rewards is less than \$3, 19.3% of the large
-late rewards is less than \$3.
+Second, the last column in Table \ref{tab:ericson_test_result}, which
+reports the ratio of LL in predicted choices, gives us a hint on why
+attention-adjusted discounting plus CARA or power utility underperforms
+some other models. The attention-adjusted models with CARA (or power)
+utility seem underestimating the participants' tendency to choose LL in
+*Ericson* data. For example, *attention_uni* with power utility predicts
+only 15.7% of the choices are LL, whereas the heuristic model predicts
+29% of the choices are LL.
+
+Third, the underperformance of attention-adjusted models can be partly
+attributed to the fact that *Ericson* data contains a significant number
+of extreme rewards: 8.7% of the rewards for SS are less than USD 1; in
+comparison, 7.6% are larger than USD 10000.
 
 In Chavez data, the smallest $x_s$ is 11, the smallest $x_l$ is 25.
+
+1.  what model performs the best
+2.  redundancy analysis
+3.  attention
+    -   attention with log = hbmd with power
+
+    -   not fit very small reward
 
 ## Results for *Chávez* data
 
