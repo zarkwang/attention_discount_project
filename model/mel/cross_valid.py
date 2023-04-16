@@ -3,8 +3,8 @@ import numpy as np
 import pandas as pd
 import itertools
 import multiprocessing as mp
-from mpl import choice_rule
-from mpl import estimation
+from mel import choice_rule
+from mel import estimation
 from tqdm import tqdm
 from sklearn import metrics
 from sklearn import model_selection
