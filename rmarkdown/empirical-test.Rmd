@@ -1,5 +1,5 @@
 ---
-title: "Empirical Test"
+title: "Empirical Test on MEL Task"
 author: "Zijian Zark Wang"
 date: "`r Sys.Date()`"
 bibliography: reference.bib
@@ -28,12 +28,77 @@ output:
     number_sections: true
 ---
 
+# The Model
+
+## Attention Reallocation Process
+
+Suppose a decision maker is to evaluate a sequence of rewards, which
+depends on the state of world $s$. The time length of this sequence is
+$T$. Let $t$ denote each time point, $t\in [0,T]$. The decision maker
+draws a random sample of the time points within $[0,T]$, and aggregate
+the utilities that could be obtained at each sampled time point, to
+construct a value representation of $s$. Her objective is to find a
+sampling strategy $f(t,s)$, which denotes the probability of selecting a
+time point $t$ into the sample under a certain state $s$. I denote the
+prior probability of $s$ occurring by $p(s)$ and the prior probability
+of selecting $t$ into the sample by $p(t)$ . The decision maker wants to
+maximize her total utility through $f$; thus, time points with larger
+rewards should be sampled more frequently (that is, she wants to
+selectively pay more attention on these time points). However,
+processing reward information and shifting attention trigger a cognitive
+cost. Let $u(.)$ denote the instantaneous utility function. Following
+the rational inattention literature [@matejka_rational_2015;
+@caplin_rationally_2022; @mackowiak_rational_2023], I frame the decision
+maker's optimization problem as $$
+\begin{split}
+& \max_f\; \int u(t,s)f(t,s)dtds - \lambda I(t;s) \\
+& s.t. \; \int f(t,s)dt = p(s),\, \forall s
+\end{split}
+$$
+
+where $\lambda I(t;s)$ is the attention cost function, $\lambda$ is a
+fixed parameter and $I(t;s)$ denotes Shannon mutual information. $$
+I(t;s)=\int f(t,s) \log\left(\frac{f(t,s)}{p(t)p(s)}\right)dtds
+$$ The solution needs to satisfy
+$f(t|s) \propto p(t)e^{u(t,s)/\lambda}$, where $\int f(t|s)dt=1$.
+
+Considering discrete time $t \in\{0,1,...,T\}$, we can replace $p(t)$
+and $f(t|s)$ by the decision weight (or discounting factor) assigned to
+time point $t$. Let $w^0_t$ denote the initial weight assigned to $t$
+and $w_t$ denote the decision weight after optimization, i.e.
+$w_t^0 \equiv p(t)$, $w_t \equiv f(t|s)$, then $\{w^0_t\}_{t=0}^T$ and
+$\{w_t\}_{t=0}^T$ can represent the initial and adjusted attention
+allocations. I assume the decision maker is initially time-consistent,
+that is, $w_t^0 = \delta^t$, where $\delta$ is the exponential
+discounting parameter, $\delta \in (0,1]$.
+
+## SS or LL
+
+In a "Money Earlier or Later" (MEL) task, the decision maker needs to
+make a choice between different options. For each option, she is
+informed the amount of reward she would receive in a specific time point
+$t$, which I denote by $x_t$. The reward is pre-determined, thus the
+state $s$ is fixed. The decision maker simply wants to choose the option
+that has the maximum $\sum_{t} w_t u(x_t)$, where
+$w_t \propto \delta^t e^{u(x_t)/\lambda}$ and $\sum_{t=0}^T w_t =1$.
+Suppose the reward only arrives at time point $T$, that is, $x_t=0$ for
+all $t<T$. The optimal weight for $T$ is $$
+w_T = \frac{1}{1+G(T)\cdot e^{-v(x_T)/\lambda}}
+$$ where $$
+G(T) = \left\{\begin{split}
+& T &, \delta=1\\
+& \frac{1}{1-\delta}(\delta^{-T}-1) &,0<\delta<1
+\end{split}\right.
+$$
+
+When $\delta=1$, I say the initial attention is uniformly allocated.
+
 # Data
 
 To test the capacity of attention-adjusted discounting factor in
-explaining the findings of "Money Earlier or Later" (MEL) experiments, I
-select two open datasets. The first dataset is from @ericson_money_2015,
-containing 23,131 observations from 939 participants; the second is from
+explaining the findings of MEL experiments, I select two open datasets.
+The first dataset is from @ericson_money_2015, containing 23,131
+observations from 939 participants; the second is from
 @chavez_hierarchical_2017, containing 34,515 choices from 1,284
 participants. Hereafter, I term the first dataset as *Ericson* data, and
 the second dataset as *Chávez* data. Each dataset has been used in more
@@ -82,13 +147,13 @@ model, trade-off model, and heuristic model.
 The discounted utility model assumes that the decision maker tends to
 choose the option with greater discounted utility. Let the discounted
 utility for option $j$ ($j\in\{l,s\}$) be $v_j=d(t_j)u(x_j)$, where
-$d(.)$ is the discounting function and $u(.)$ is the instantanoues
-utility function. Suppose the decision maker's perceived discounted
-utility for each option, denoted by is $\tilde{v_l}$ and $\tilde{v_s}$,
-is noisy. I set $\tilde{v_l}=v_l+\eta_l$, $\tilde{v_s}=v_s+\eta_s$. When
-$\eta_l$ and $\eta_s$ are independent noises and both follow
-$Gumble(0,\rho)$, where the scale parameter $\rho\in(0,\infty)$, the
-probability that the decision maker chooses LL is
+$d(.)$ is the discounting function. Suppose the decision maker's
+perceived discounted utility for each option, denoted by is
+$\tilde{v_l}$ and $\tilde{v_s}$, is noisy. I set
+$\tilde{v_l}=v_l+\eta_l$, $\tilde{v_s}=v_s+\eta_s$. When $\eta_l$ and
+$\eta_s$ are independent noises and both follow $Gumble(0,\rho)$, where
+the scale parameter $\rho\in(0,\infty)$, the probability that the
+decision maker chooses LL is
 
 $$
 P\{\tilde{v_s}\leq\tilde{v_l}\}=\frac{1}{1+\exp\{-\frac{1}{\rho}(v_l-v_s)\}}
