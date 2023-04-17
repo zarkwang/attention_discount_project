@@ -30,17 +30,17 @@ output:
 
 # Data
 
-To test the capacity of the proposed model in explaining experimental
-findings under the "Money Earlier or Later" (MEL) paradigm, I select two
-open datasets. The first dataset is from @ericson_money_2015, containing
-23,131 observations from 939 participants; the second is from
+To test the capacity of attention-adjusted discounting factor in
+explaining the findings of "Money Earlier or Later" (MEL) experiments, I
+select two open datasets. The first dataset is from @ericson_money_2015,
+containing 23,131 observations from 939 participants; the second is from
 @chavez_hierarchical_2017, containing 34,515 choices from 1,284
 participants. Hereafter, I term the first dataset as *Ericson* data, and
 the second dataset as *Chávez* data. Each dataset has been used in more
 than one previous study.[^1] Readers interested in the empirical method
 and the results of this paper can easily compare them with those of
 other papers. For both datasets, the corresponding experiments require
-the participants to answer a series of choice questions. For each
+the participants to answer a series of choice questions. In each
 question, participants need to make a choice between an small sooner
 reward (denoted by SS) and a large later reward (denoted by LL). I
 denote the reward magnitude and delay by $x_s$ and $t_s$ for option SS,
@@ -54,17 +54,19 @@ and by $x_l$ and $t_l$ for option LL, where $x_l>x_s>0$, $t_l>t_s$.
 Notably, there are significant differences in experimental procedure
 underlying the datasets. In *Ericson* data, the participants are
 recruited via Mechanical Turk. Rewards are framed in US dollars, ranging
-from USD 0.03 to USD 10100. For 25.4% of the observations, option SS has
-a reward less than USD 3. Delays are framed in weeks. Delays for SS
+from 0.03 USD to 10,100 USD. 33% of the observations have a $x_s$ no
+larger than 5 USD, 30% of the $x_s$ are between 5 USD and 100 USD, 22%
+of the $x_s$ are between 100 USD and 1,000 USD, while 15% are between
+1,000 USD and 10,000 USD. Delays are framed in weeks. Delays for SS
 range from 0 to 2 weeks, and the maximum delay for LL is 5 weeks. In
 *Chávez* data, the participants are Mexican high school and first-year
 university students, and attending the experiment is a class
-requirement. Rewards are framed in Mexican pesos, ranging from MXD 11
-(approx. USD 0.6) to MXD 85 (approx. USD 4.7). Delays are framed in
-days. All sooner rewards are delivered "today" ($t_s=0$), and the
-maximum delay for LL is 186 days. Given that the two datasets employ
-different frames and ranges for rewards and delays, a same model fitted
-on these datasets may have different parameters and goodness of fit.
+requirement. Rewards are framed in Mexican pesos, ranging from 11 MXD
+(approx. 0.6 USD) to 85 (approx. 4.7 MXD). Delays are framed in days.
+All sooner rewards are delivered "today" ($t_s=0$), and the maximum
+delay for LL is 186 days. Given that the two datasets employ different
+frames and ranges for rewards and delays, a same model fitted on these
+datasets may have different parameters and goodness of fit.
 
 I mainly focus on out-of-sample model performance. For each dataset, I
 randomly draw the responses from 20% of the participants as the test
@@ -271,11 +273,6 @@ labels, letting the other models to predict them. The accuracy rate for
 *trade* with power utility is the highest, which is 95.7%, and the
 second is *hbmd* with power utility (95.0%).
 
-Remarkably, the heuristic model has the most parameters that need to be
-fitted. Apart from the heuristic model, the model that has the largest
-number of parameters is *trade*, which has 6 parameters to be fitted.
-The *hbmd* model has only 3 parameters to be fitted.
-
 ```{=tex}
 \begin{longtable}{@{}llllll@{}}
 \caption{Cross-Validation Results on Ericson Data}
@@ -314,8 +311,8 @@ hb2            & cara    & 0.229 & 0.459 & 0.651     & 0.629    \\
 hb             & cara    & 0.229 & 0.459 & 0.651     & 0.629    \\* \midrule
 \multicolumn{6}{p{.7\textwidth}}{
 \setstretch{1}
-\textit{Note}: "mae" denotes mean absolute error, "mse" denotes mean
-squared error.
+\textit{Note}: \textbf{mae} denotes mean absolute error, \textbf{mse} denotes mean
+squared error
 }
 \end{longtable}
 ```
@@ -357,8 +354,8 @@ expo2          & power  & 0.385 & 0.386 & 4.767     & 0.614    & 0.000    \\
 hb2            & power  & 0.386 & 0.386 & 6.562     & 0.614    & 0.000    \\* \midrule
 \multicolumn{7}{p{0.8\textwidth}}{
 \setstretch{1}
-\textit{Note}: "mae" denotes mean absolute error, "mse" denotes mean
-squared error, "pred\_ll" denotes the ratio of LL in predicted choices.
+\textit{Note}: \textbf{mae} denotes mean absolute error, \textbf{mse} denotes mean
+squared error, \textbf{pred\_ll} denotes the ratio of LL in predicted choices.
 }
 \end{longtable}
 ```
@@ -366,9 +363,9 @@ Now we focus on attention-adjusted models. First, it is notable that
 *hbmd* can be viewed as a special case of the attention-adjusted models.
 [^5] Magnitude-dependent hyperbolic discounting plus power utility is
 identical to attention-adjusted discounting under uniform initial
-attention allocation, plus log utility. We can conclude that log utility
+attention allocation plus log utility. We can conclude that log utility
 function fits the data better than power and CARA functions under
-attention-adjusted model.
+attention-adjusted model settings.
 
 [^5]: Note that under the assumption that the initial attention is
     uniformly allocated, the discounting factor in attention-adjusted
@@ -376,37 +373,153 @@ attention-adjusted model.
     $u(x)/\lambda=\ln\beta+\gamma\ln x$, we can get the
     magnitude-dependent hyperbolic model with power utility.
 
-Second, the last column in Table \ref{tab:ericson_test_result}, which
-reports the ratio of LL in predicted choices, gives us a hint on why
-attention-adjusted discounting plus CARA or power utility underperforms
-some other models. The attention-adjusted models with CARA (or power)
-utility seem underestimating the participants' tendency to choose LL in
-*Ericson* data. For example, *attention_uni* with power utility predicts
-only 15.7% of the choices are LL, whereas the heuristic model predicts
-29% of the choices are LL.
+Second, the reason why attention-adjusted models with power or CARA
+utility underpeform than some other models can be (at least partially)
+attributed to the distribution of observations on *Ericson* data. Note
+that the rewards for SS follow a power-law-like distribution in
+*Ericson* data. The data contains a substantial proportion of very small
+rewards, compared with the reward range: 33% of the $x_s$ are no larger
+than 5 USD, whereas only 15% are between 1,000 USD and 10,000 USD. The
+derivatives of exponential and power functions (with a positive power)
+at a small number are much smaller than that of a log function. Thus,
+for a small reward, neither CARA utility nor power utility of it can
+significantly differ from the utility of its near neighbors, and this
+makes it more difficult for a model to learn the decision makers'
+choices on the given data.
 
-Third, the underperformance of attention-adjusted models can be partly
-attributed to the fact that *Ericson* data contains a significant number
-of extreme rewards: 8.7% of the rewards for SS are less than USD 1; in
-comparison, 7.6% are larger than USD 10000.
+Third, the last column in Table \ref{tab:ericson_test_result}, which
+reports the ratio of LL in predicted choices, also gives us a hint on
+why attention-adjusted models underperform. This kind of models seem
+underestimating the participants' tendency to choose LL in *Ericson*
+data. For example, *attention_uni* with power utility predicts only
+15.7% of the choices are LL, whereas the heuristic model and *hbmd* with
+power utility predict 29% and 23.7% of the choices are LL respectively.
+To some extent, this can also be attributed to the fact that there are
+many small rewards in the data. Considering *hbmd* and *attention_uni*
+models, the discounting factor of each can be formatted as $1/(1+kt)$,
+where $k=e^{-u(x)/\lambda}$ for *attention_uni* and
+$k=(\beta u(x) )^{-1}$ for *hbmd*. When $x$ approaches to 0, under both
+CARA and power utility settings, the $k$ in *attention_uni* approaches
+to 1, while the $k$ in *hbmd* approaches to infinity. Thus, the utility
+of a small reward under *hbmd* may be discounted more heavily than that
+under *attention_uni*. In such a case, suppose a decision maker still
+prefers a delayed reward to an immediate reward, the *hbmd* model should
+conclude the decision maker is more patient in comparison to
+*attention_uni*.
 
-In Chavez data, the smallest $x_s$ is 11, the smallest $x_l$ is 25.
+To check if sample distribution affects the performance of models, I
+conduct two follow-up analyses on *Ericson* data. Table
+\ref{tab:follow_test_result} shows the performance of the seven models
+with the highest out-of-sample prediction accuracy for each follow-up
+analysis. In the first analysis, I set 0.01 USD as reward unit, and
+replace $x_s$ and $x_l$ by their logarithms (keeping other features
+equal)[^6], then re-train and test the models. The results for the first
+analysis are presented in Panel A of Table \ref{tab:follow_test_result}.
+The highest accuracy is for the heuristic model, and its accuracy rate
+rises from 70.2% in \ref{tab:ericson_test_result} to 71.1%. The accuracy
+of *attention_uni* model with power utility rises from 61.1% in
+\ref{tab:ericson_test_result} to 70.8%. In the second analysis, I omit
+the observations with $x_s\leq$ 5 USD, retaining 66% of the observations
+for model fitting. The results for the second analysis are presented in
+Panel B of Table \ref{tab:follow_test_result}. The highest accuracy is
+for the heuristic model, and its accuracy rate rises from to 74.9%. The
+accuracy of *attention_uni* model with power utility rises to 74.8%.
 
-1.  what model performs the best
-2.  redundancy analysis
-3.  attention
-    -   attention with log = hbmd with power
+[^6]: The distributions for log magnitude of rewards are similar to
+    normal distributions.
 
-    -   not fit very small reward
+In each analysis, there is an increase in the performance of
+attention-adjusted models relative to other models. Meanwhile, the
+attention-adjusted models with power utility outperform other models
+except the heuristic model. I also set the predicted choices from
+heuristic models as the labels and apply other fitted models to
+predicting it. In the first analysis, *attention* and *attention_uni*
+with power utility perform the best in prediction, which have an
+accuracy of 93.2% and 92.4%. In the second analysis, the models that
+predict the best are *quasihb_fc* and *quasihb* with power utility, with
+an accuracy of 94.2% and 93.3%. The *attention_uni* model with power
+utility has an accuracy of 91.1%. Therefore, when reward magnitude is
+much greater than 0 and only few extreme values are contained in the
+data, the attention-adjusted models seem a good substitute to the
+heuristic model for researchers who want to save parameters.
 
+```{=tex}
+\begin{longtable}{@{}lllllll@{}}
+\caption{Out-of-Sample Test Results for Follow-Up Analyses}
+\label{tab:follow_test_result}\\
+\toprule
+\textbf{model} & \textbf{utility} & \textbf{mse} & \textbf{mae} & \textbf{log\_loss} & \textbf{accuracy} & \textbf{pred\_ll} \\* \midrule
+\endhead
+%
+\bottomrule
+\endfoot
+%
+\endlastfoot
+%
+\textit{Panel A} &       &       &       &       &       &       \\
+heurstic         & --    & 0.194 & 0.394 & 0.574 & 0.711 & 0.265 \\
+attention        & power & 0.201 & 0.407 & 0.590 & 0.709 & 0.234 \\
+attention\_uni   & power & 0.201 & 0.408 & 0.590 & 0.708 & 0.231 \\
+trade            & power & 0.198 & 0.402 & 0.583 & 0.701 & 0.231 \\
+hbmd             & power & 0.203 & 0.413 & 0.595 & 0.701 & 0.295 \\
+trade            & cara  & 0.202 & 0.407 & 0.592 & 0.698 & 0.269 \\
+attention\_uni   & cara  & 0.205 & 0.412 & 0.597 & 0.691 & 0.161 \\* \midrule
+\textit{Panel B} &       &       &       &       &       &       \\
+heurstic         & --    & 0.177 & 0.368 & 0.535 & 0.749 & 0.250 \\
+attention\_uni   & power & 0.185 & 0.384 & 0.556 & 0.748 & 0.213 \\
+quasihb          & power & 0.191 & 0.400 & 0.568 & 0.748 & 0.234 \\
+expo             & power & 0.187 & 0.380 & 0.560 & 0.747 & 0.256 \\
+hb               & power & 0.189 & 0.398 & 0.565 & 0.747 & 0.256 \\
+hbmd             & power & 0.185 & 0.384 & 0.555 & 0.746 & 0.217 \\
+trade            & power & 0.182 & 0.382 & 0.549 & 0.746 & 0.216 \\* \bottomrule
+\multicolumn{7}{p{0.8\textwidth}}{
+\setstretch{1}
+\textit{Note}: \textit{Panel A} shows the results for using 0.01 USD as reward unit and taking log magnitude of rewards. \textit{Panel B} shows the results for omitting the observations in which the rewards for SS are no larger than 5 USD. Each panel present the seven models with the highest accuracy rate. \textbf{mae} denotes mean absolute error, \textbf{mse} denotes mean squared error, \textbf{pred\_ll} denotes the ratio of LL in predicted choices.
+}
+\end{longtable}
+```
 ## Results for *Chávez* data
 
-Table \ref{tab:chavez_kf_result}shows the fitness of each model in
-cross-validation.
+For *Chávez* data, I use MXD as reward unit and days of delay as $t_l$.
+Note the rewards range from 11 MXD to 85 MXD, and for either SS or LL,
+the distribution of rewards approximates a uniform distribution.
+Therefore, Table \ref{tab:chavez_kf_result} shows the goodness of fit
+for each model in cross-validation. Similar with Table
+\ref{tab:ericson_kf_result}, the *trade* model with power utility
+performs the lowest MSE, and the heuristic model performs the best in
+MAE, log loss, and accuracy. Though, the goodness of fit of
+attention-adjusted models with power utility are close to the *trade*
+model in all evaluation metrics. For example, the log loss for
+*attention* with power utility (0.486) is only 0.003 higher than that
+for *trade* with power utility (0.483). Table
+\ref{tab:chavez_test_result} shows the out-of-sample performance of each
+model. The heuristic model performs the best in all evaluation metrics,
+following *trade*, *attention*, and *attention_uni* with power utility.
+The performance between these models are also close. For example, the
+accuracy rate of heuristic model is 76.7%, while those of *trade*,
+*attention*, and *attention_uni* with power utility are 76.6%, 76.3%,
+76.3%. Setting the predicted choices by heuristic model as the labels
+and letting the other models to predicting them, we obtain an accuracy
+of 96.2% for *trade* with power utililty (the highest), and an accuracy
+of 95.9% for attention-adjusted models with power utility (the second
+highest).
+
+In summary, I find the heuristic model outperforms than the other models
+in predicting human choices on Ericson and *Chávez* data. Both
+Intertemporal trade-off and attention adjustment (given that *hbmd* is a
+special case of attention-adjusted model) can be viewed as good
+candidates of mechansim for explaining the choices predicted by the
+heuristic model. Remarkably, apart from the heuristic model, the *trade*
+model has the largest number of parameters, which has 6. The
+*attention_uni* and *attention* model have only 3 and 4 parameters to be
+fitted, and the minimum number of parameters among the fitted models is
+3. Thus, for people who want to save parameters or draw the predictions
+on a normative theory of intertemporal choice, the attention adjustment
+mechanism can be a choice.
 
 ```{=tex}
 \begin{longtable}{@{}llllll@{}}
-\caption{Cross-Validation Results on \textit{Chávez} Data}
+\caption{Cross-Validation Results on Chávez Data}
 \label{tab:chavez_kf_result}\\
 \toprule
 \textbf{model} & \textbf{utility} & \textbf{mse} & \textbf{mae} & \textbf{log\_loss} & \textbf{accuracy} \\* \midrule
@@ -417,37 +530,39 @@ cross-validation.
 %
 \endlastfoot
 %
-heuristic      & --      & 0.2211 & 0.2211 & 0.4818    & 0.7789   \\
-tradeoff       & power   & 0.1571 & 0.3140 & 0.4840    & 0.7826   \\
-expo2          & power   & 0.1574 & 0.3146 & 0.4844    & 0.7826   \\
-quasihb        & power   & 0.1574 & 0.3144 & 0.4845    & 0.7826   \\
-quasihb\_fc    & power   & 0.1576 & 0.3146 & 0.4850    & 0.7816   \\
-hb2            & power   & 0.1577 & 0.3149 & 0.4854    & 0.7804   \\
-attention      & power   & 0.1579 & 0.3170 & 0.4860    & 0.7826   \\
-hbmd           & power   & 0.1583 & 0.3174 & 0.4868    & 0.7731   \\
-attention\_uni & power   & 0.1584 & 0.3178 & 0.4881    & 0.7826   \\
-hbmd           & cara    & 0.1592 & 0.3191 & 0.4900    & 0.7731   \\
-hb             & power   & 0.1597 & 0.3209 & 0.4903    & 0.7731   \\
-attention\_uni & cara    & 0.1601 & 0.3203 & 0.4905    & 0.7641   \\
-expo           & power   & 0.1604 & 0.3229 & 0.4922    & 0.7731   \\
-hce            & power   & 0.1604 & 0.3229 & 0.4922    & 0.7731   \\
-attention      & cara    & 0.1625 & 0.3263 & 0.4956    & 0.7465   \\
-tradeoff       & cara    & 0.1633 & 0.3268 & 0.4971    & 0.7430   \\
-hb2            & cara    & 0.1659 & 0.3326 & 0.5042    & 0.7439   \\
-hb             & cara    & 0.1685 & 0.3372 & 0.5093    & 0.7287   \\
-quasihb        & cara    & 0.1679 & 0.3411 & 0.5099    & 0.7450   \\
-expo           & cara    & 0.1692 & 0.3421 & 0.5107    & 0.7253   \\
-hce            & cara    & 0.1700 & 0.3412 & 0.5124    & 0.7168   \\
-quasihb\_fc    & cara    & 0.1701 & 0.3407 & 0.5128    & 0.7203   \\
-expo2          & cara    & 0.1747 & 0.3487 & 0.5213    & 0.6825   \\* \bottomrule
+heuristic      & --    & 0.221 & 0.221 & 0.480 & 0.779 \\
+trade          & power & 0.157 & 0.314 & 0.483 & 0.782 \\
+hb2            & power & 0.158 & 0.315 & 0.485 & 0.775 \\
+expo2          & power & 0.158 & 0.315 & 0.485 & 0.780 \\
+attention      & power & 0.158 & 0.317 & 0.486 & 0.782 \\
+hbmd           & power & 0.158 & 0.317 & 0.486 & 0.774 \\
+quasihb\_fc    & power & 0.158 & 0.317 & 0.487 & 0.781 \\
+trade          & cara  & 0.159 & 0.317 & 0.487 & 0.772 \\
+attention\_uni & power & 0.158 & 0.318 & 0.488 & 0.782 \\
+hb             & power & 0.159 & 0.320 & 0.489 & 0.774 \\
+hbmd           & cara  & 0.159 & 0.319 & 0.489 & 0.774 \\
+quasihb        & power & 0.159 & 0.321 & 0.491 & 0.777 \\
+expo           & power & 0.160 & 0.322 & 0.491 & 0.774 \\
+hce            & power & 0.160 & 0.322 & 0.491 & 0.774 \\
+attention      & cara  & 0.162 & 0.324 & 0.494 & 0.746 \\
+attention\_uni & cara  & 0.166 & 0.331 & 0.501 & 0.730 \\
+hb             & cara  & 0.165 & 0.331 & 0.503 & 0.747 \\
+quasihb        & cara  & 0.167 & 0.332 & 0.506 & 0.741 \\
+quasihb\_fc    & cara  & 0.168 & 0.337 & 0.509 & 0.732 \\
+hce            & cara  & 0.169 & 0.339 & 0.511 & 0.721 \\
+expo           & cara  & 0.172 & 0.345 & 0.516 & 0.701 \\
+hb2            & cara  & 0.174 & 0.348 & 0.519 & 0.689 \\
+expo2          & cara  & 0.175 & 0.348 & 0.522 & 0.683 \\* \bottomrule
+\multicolumn{6}{p{.7\textwidth}}{
+\setstretch{1}
+\textit{Note}: \textbf{mae} denotes mean absolute error, \textbf{mse} denotes mean
+squared error
+}
 \end{longtable}
 ```
-Table \ref{tab:chavez_test_result} shows the out-of-sample performance
-of each model.
-
 ```{=tex}
 \begin{longtable}{@{}lllllll@{}}
-\caption{Out-of-Sample Test Results on \textit{Chávez} Data}
+\caption{Out-of-Sample Test Results on Chávez Data}
 \label{tab:chavez_test_result}\\
 \toprule
 \textbf{model} & \textbf{utility} & \textbf{mse} & \textbf{mae} & \textbf{log\_loss} & \textbf{accuracy} & \textbf{pred\_ll} \\* \midrule
@@ -458,31 +573,34 @@ of each model.
 %
 \endlastfoot
 %
-attention      & power & 0.1628 & 0.3230 & 0.4982  & 0.7702 & 0.3299 \\
-attention\_uni & power & 0.1635 & 0.3233 & 0.5008  & 0.7702 & 0.3299 \\
-tradeoff       & power & 0.1633 & 0.3206 & 0.4986  & 0.7674 & 0.2926 \\
-heuristic      & --    & 0.2326 & 0.2326 & 8.3825  & 0.7674 & 0.2926 \\
-hb             & power & 0.1641 & 0.3315 & 0.5014  & 0.7603 & 0.3296 \\
-quasihb\_fc    & power & 0.1876 & 0.4173 & 0.5640  & 0.7603 & 0.3296 \\
-expo           & power & 0.1646 & 0.3302 & 0.5032  & 0.7603 & 0.3296 \\
-hbmd           & cara  & 0.1645 & 0.3283 & 0.5033  & 0.7603 & 0.3296 \\
-hce            & power & 0.1651 & 0.3359 & 0.5039  & 0.7603 & 0.3296 \\
-quasihb        & power & 0.1779 & 0.3969 & 0.5413  & 0.7603 & 0.3296 \\
-hbmd           & power & 0.1630 & 0.3252 & 0.4987  & 0.7603 & 0.3296 \\
-hb2            & power & 0.1650 & 0.3217 & 0.5024  & 0.7570 & 0.2184 \\
-attention\_uni & cara  & 0.1821 & 0.3844 & 0.5425  & 0.6710 & 0.1118 \\
-tradeoff       & cara  & 0.2500 & 0.5000 & 0.6931  & 0.6678 & 0.4780 \\
-attention      & cara  & 0.1802 & 0.3552 & 0.5360  & 0.6483 & 0.0000 \\
-quasihb        & cara  & 0.2060 & 0.3433 & 0.5958  & 0.6483 & 0.0000 \\
-expo           & cara  & 0.1996 & 0.3290 & 0.5981  & 0.6483 & 0.0000 \\
-hce            & cara  & 0.2085 & 0.3226 & 0.6464  & 0.6483 & 0.0000 \\
-hb             & cara  & 0.2198 & 0.3268 & 0.6642  & 0.6483 & 0.0000 \\
-expo2          & cara  & 0.2245 & 0.3201 & 0.7294  & 0.6483 & 0.0000 \\
-hb2            & cara  & 0.2504 & 0.3283 & 0.7914  & 0.6483 & 0.0000 \\
-expo2          & power & 0.3517 & 0.3517 & 12.6783 & 0.6483 & 0.0000 \\
-quasihb\_fc    & cara  & 0.2019 & 0.3423 & 0.5866  & 0.6483 & 0.0000 \\* \bottomrule
+heurstic       & --    & 0.163 & 0.322 & 0.500 & 0.767 & 0.295 \\
+trade          & power & 0.165 & 0.316 & 0.504 & 0.766 & 0.258 \\
+attention      & power & 0.165 & 0.326 & 0.505 & 0.763 & 0.332 \\
+attention\_uni & power & 0.165 & 0.325 & 0.506 & 0.763 & 0.332 \\
+hb             & power & 0.167 & 0.327 & 0.508 & 0.757 & 0.332 \\
+quasihb\_fc    & power & 0.206 & 0.448 & 0.604 & 0.757 & 0.332 \\
+quasihb        & power & 0.180 & 0.397 & 0.543 & 0.757 & 0.332 \\
+hce            & power & 0.167 & 0.335 & 0.510 & 0.757 & 0.332 \\
+hbmd           & power & 0.165 & 0.327 & 0.505 & 0.757 & 0.332 \\
+hbmd           & cara  & 0.167 & 0.329 & 0.509 & 0.757 & 0.332 \\
+hb2            & power & 0.167 & 0.341 & 0.509 & 0.757 & 0.332 \\
+expo           & power & 0.167 & 0.334 & 0.510 & 0.757 & 0.332 \\
+trade          & cara  & 0.248 & 0.498 & 0.689 & 0.700 & 0.222 \\
+attention      & cara  & 0.179 & 0.356 & 0.535 & 0.685 & 0.037 \\
+attention\_uni & cara  & 0.191 & 0.414 & 0.567 & 0.685 & 0.037 \\
+hb2            & cara  & 0.184 & 0.344 & 0.545 & 0.667 & 0.000 \\
+hb             & cara  & 0.207 & 0.322 & 0.622 & 0.667 & 0.000 \\
+expo2          & power & 0.333 & 0.333 & 3.764 & 0.667 & 0.000 \\
+expo2          & cara  & 0.326 & 0.333 & 1.605 & 0.667 & 0.000 \\
+hce            & cara  & 0.202 & 0.316 & 0.634 & 0.667 & 0.000 \\
+quasihb        & cara  & 0.222 & 0.333 & 0.650 & 0.667 & 0.000 \\
+expo           & cara  & 0.203 & 0.314 & 0.653 & 0.667 & 0.000 \\
+quasihb\_fc    & cara  & 0.198 & 0.336 & 0.582 & 0.667 & 0.000 \\* \bottomrule
+\multicolumn{7}{p{0.8\textwidth}}{
+\setstretch{1}
+\textit{Note}: \textbf{mae} denotes mean absolute error, \textbf{mse} denotes mean
+squared error, \textbf{pred\_ll} denotes the ratio of LL in predicted choices.
+}
 \end{longtable}
 ```
-## Parametrication
-
 # Reference
