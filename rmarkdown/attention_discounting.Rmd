@@ -122,8 +122,6 @@ option makes her more likely to wait.
 
 # The Model
 
-## Attention Reallocation Process
-
 Consider a decision maker evaluating a sequence of rewards, which
 depends on the state of world $s$. The time length of this sequence is
 $T$. Let $t$ denote each time point, $t\in [0,T]$. The decision maker
@@ -192,22 +190,6 @@ $\epsilon_t \sim N(0,\lambda\sigma_t)$.
 Throughout the paper, I assume $w_t^0 = \delta^t$, where $\delta$ is the
 exponential discounting parameter, $\delta \in (0,1]$
 
-## SS or LL
-
-Given that the reward is pre-determined, the state $s$ is certain (or
-$\sigma_t =0$).
-
-Reward arrives only at period $T$. For all $t<T$, $x_t=0$.
-
-The optimal weight for $T$ is $$
-w_T = \frac{1}{1+G(T)\cdot e^{-v(x_T)/\lambda}}
-$$ where $$
-G(T) = \left\{\begin{split}
-& T &, \delta=1\\
-& \frac{1}{1-\delta}(\delta^{-T}-1) &,0<\delta<1
-\end{split}\right.
-$$
-
 # Related Literature
 
 One of the closest papers to this model may be @steiner_rational_2017.
@@ -259,7 +241,21 @@ function.
 My work may be helpful in understanding why the *Transformer* is so
 powerful in building artificial intelligence.
 
-# Behavioral Implications
+# Intertemporal Choice with One-Shot Attention Adjustment
+
+Given that the reward is pre-determined, the state $s$ is certain (or
+$\sigma_t =0$).
+
+Reward arrives only at period $T$. For all $t<T$, $x_t=0$.
+
+The optimal weight for $T$ is $$
+w_T = \frac{1}{1+G(T)\cdot e^{-v(x_T)/\lambda}}
+$$ where $$
+G(T) = \left\{\begin{split}
+& T &, \delta=1\\
+& \frac{1}{1-\delta}(\delta^{-T}-1) &,0<\delta<1
+\end{split}\right.
+$$
 
 ## Common Difference Effect
 
@@ -348,7 +344,7 @@ seeking when delay is long.**
 **When** $z$ gets smaller (or $x$ gets larger), the bound for $t$ gets
 relaxed.
 
-## Interval Additivity Anomalies
+## Non-Additive Time Intervals
 
 Super-additivity:
 
@@ -384,7 +380,7 @@ smaller, people are more likely to perform super-additivity.
 
 @andersen_multiattribute_2018
 
-## Inconsistent Planning
+# Dynamic Inconsistency
 
 Suppose the decision maker has a total reward $m$ and needs to allocate
 it over $T$ periods. $$
@@ -419,6 +415,8 @@ The decision maker performs future bias.
 
 (proof by contradiction)
 
+# Endogeneous Reference-Dependent Preference
+
 # Empirical Test
 
 I compare the following models in the dataset of
@@ -428,4 +426,4 @@ Using a similar method with @wulff_modeling_2018.
 
 ![](images/image-750933904.png)
 
-## 
+# Discussion
