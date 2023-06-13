@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/captcha.js/dist/captcha.min.js"></script>
+  <style>
+    .ball {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin: 5px;
+    }
+
+    .red {
+      background-color: red;
+    }
+
+    .blue {
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+
+  <script>
+	window.addEventListener('DOMContentLoaded', function() {
+		var container = document.getElementById('container');
+		var redBallsCount = 5; // 红色球形的数量
+		var blueBallsCount = 5; // 蓝色球形的数量
+
+		for (var i = 0; i < redBallsCount; i++) {
+			createBall('red');
+		}
+
+		for (var i = 0; i < blueBallsCount; i++) {
+			createBall('blue');
+		}
+
+		var submitButton = document.createElement('button');
+		submitButton.textContent = '提交';
+		submitButton.addEventListener('click', function() {
+			var balls = document.getElementsByClassName('ball');
+			var randomIndex = Math.floor(Math.random() * balls.length);
+			var selectedBall = balls[randomIndex];
+			var color = selectedBall.classList.contains('red') ? '红色' : '蓝色';
+			alert('抽出的球的颜色为：' + color);
+		});
+
+		container.appendChild(submitButton);
+
+		var captcha = generateCaptcha();
+
+		function createBall(color) {
+			var ballContainer = document.createElement('div');
+			ballContainer.className = 'ball-container';
+
+			var ball = document.createElement('div');
+			ball.className = 'ball ' + color;
+			ball.addEventListener('click', function() {
+			var userInput = prompt('请输入验证码：');
+			if (userInput === captcha) {
+				ball.classList.toggle('red');
+				ball.classList.toggle('blue');
+			} else {
+				alert('验证码错误！');
+			}
+			updateCaptchaImage();
+			});
+
+			ballContainer.appendChild(ball);
+			container.appendChild(ballContainer);
+		}
+
+		var captchaCanvas = document.createElement('canvas');
+		var captchaContext = captchaCanvas.getContext('2d');
+
+		function generateCaptcha() {
+			var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+			var captcha = '';
+			for (var i = 0; i < 6; i++) {
+			captcha += characters.charAt(Math.floor(Math.random() * characters.length));
+			}
+			return captcha;
+		}
+
+		function updateCaptchaImage() {
+			captchaCanvas.width = 150;
+			captchaCanvas.height = 50;
+			
+			captchaContext.font = '24px Arial';
+			captchaContext.fillText(captcha, 10, 30);
+
+			var captchaImage = new Image();
+			captchaImage.src = captchaCanvas.toDataURL();
+
+			var existingCaptchaImage = container.querySelector('.captcha-image');
+			if (existingCaptchaImage) {
+			container.removeChild(existingCaptchaImage);
+			}
+			captchaImage.className = 'captcha-image';
+			container.appendChild(captchaImage);
+		}
+
+		updateCaptchaImage();
+	});
+  </script>
+</body>
+</html>

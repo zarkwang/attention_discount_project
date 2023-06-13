@@ -1,6 +1,7 @@
 ---
 title: "Attention-Adjusted Discounted Utility"
 author: "Zijian Zark Wang"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
 bibliography: reference.bib
 biblio-style: apalike
 header-includes: 
@@ -19,8 +20,8 @@ editor_options:
   markdown: 
     wrap: 72
 output:
-  word_document:
-    number_sections: true
+  #word_document:
+    #number_sections: true
   pdf_document:
     number_sections: true
     citation_package: natbib
@@ -31,6 +32,10 @@ output:
 ---
 
 # Introduction
+
+It has been a long tradition that researchers in economics and
+behavioral sciences use the discounted utility framework for modelling
+intertemporal choices
 
 I develop a novel model of intertemporal choice, which I term
 "*attention-adjusted discounted utility*" (ADU). I postulate that the
@@ -47,11 +52,11 @@ decision maker optimally re-allocates the weights across time periods. I
 term the discounting factors that can be represented by such weights as
 *attention-adjusted* discounting factors.
 
-In this document, I show that a set of intertemporal choice anomalies
-can be attributed to such attention adjustment processes (that is, can
-be explained by ADU to some extent), including common difference effect
-and magnitude effect [@loewenstein_anomalies_1992], risk aversion over
-time lotteries [@onay_intertemporal_2007; @dejarnette_time_2020],
+In this paper, I show that a set of intertemporal choice anomalies can
+be attributed to such attention adjustment processes (that is, can be
+explained by ADU to some extent), including common difference effect and
+magnitude effect [@loewenstein_anomalies_1992], risk aversion over time
+lotteries [@onay_intertemporal_2007; @dejarnette_time_2020],
 non-additive time intervals [@read_is_2001; @scholten_discounting_2006],
 intertemporal correlation aversion [@andersen_multiattribute_2018], and
 dynamic inconsistency. The model can also offer insights on the
@@ -62,49 +67,14 @@ set of time discounting models in predicting human intertemporal
 choices. Therefore, I think there is a need to rethink the foundation of
 many behavioral phenomena.
 
-To understand ADU better, let's consider a simple example. Suppose a
-decision maker wants to estimate the value of receiving £10 on Day 3,
-with no reward on Day 1 and Day 2. Using an exponential discounting
-model with a discounting parameter of 0.8, the value of this reward
-sequence can be calculated as follows: 0 × 1 + 0 × 0.8 + 10 × 0.64.
-
-The underlying evaluation procedure may involve a sampling and
-estimation process. Imagine a black box with three types of balls: "Day
-1's reward," "Day 2's reward," and "Day 3's reward." Initially, the box
-contains 1000 balls labeled as Day 1's reward, 800 balls labeled as Day
-2's reward, and 640 balls labeled as Day 3's reward. The decision maker
-randomly samples from the box to evaluate the sequence. An exponential
-discounting model would assume the number of balls for each type keeps
-constant throughout the process.
-
-By contrast, ADU assumes that, before she draws, an "attention
-mechanism" determines how many balls of each type should be included in
-the black box. Considering that "Day 3's reward" is the greatest, the
-decision maker wants to include more of these balls in the box to
-exchange for more rewards later. However, the total number of balls in
-the box is fixed (indicating "limited attention"), and it requires
-significant cognitive effort to change all the balls in the box to this
-type ("costly attention adjustment"). Therefore, the decision maker can
-only change a portion of the balls.
-
-Suppose the final distribution of balls for Day 1, Day 2, and Day 3 is
-970, 770, and 700, respectively. This means the decision maker
-successfully changed 60 balls to "Day 3's reward." Consequently, the
-discounting factors for each time period shift to 1, 0.79 (770/970), and
-0.72 (700/970), reflecting a "hyperbolic"-style discounting. If the
-magnitude of Day 3's reward is increased to £20, the benefit of putting
-more "Day 3's reward" balls into the box can offset a greater cost of
-attention adjustment. Thus, the decision maker would exhibit more
-patience for a larger delayed reward.
-
 The remaining part of this document is organized as follows. Section
 \ref{model} outlines the model of attention-adjusted discounted utility
 (ADU). Section \ref{behavioral} explains how the model can help explain
-some empirical findings in intertemporal choice. Section \ref{empirical}
-performs an empirical test of ADU and compare it with other models.
-Section \ref{schedule} introduces my plan for the next step.
+some empirical findings in intertemporal choice.
 
 # The Model \label{model}
+
+## Rational Inattention and Time Discounting
 
 Consider a reward sequence $x = [x_0,x_1,...,x_T]$ that yields reward
 $x_t$ in time period $t$. The time length of this sequence, denoted by
@@ -204,6 +174,10 @@ of optimal sequential learning (for example, @zhong_optimal_2022 ).
 properties are jointly satisfied if and only if the solution of
 $w(s_t|s)$ follows Equation (1).
 
+## Axiomatic Characterization
+
+## Related Literature
+
 In addition to ADU, there are other models that attempt to incorporate
 attention mechanism into the formation of time preferences. For example,
 @steiner_rational_2017 consider a decision maker adjusting the belief
@@ -224,40 +198,41 @@ magnitude-increasing patience and hyperbolic-like discounting.
 Discounting factors in this style can be viewed as a special case of
 those in ADU. @noor_optimal_2022, @noor_constrained_2023 construct an
 optimization problem similar to ADU. However, they use a different
-cognitive cost function. In Section \ref{empirical}, I compare the
-performance of ADU with models of @gershman_rationally_2020,
-@noor_optimal_2022 and some other papers in predicting human choices in
-MEL tasks.
+cognitive cost function. I compare the performance of ADU with models of
+@gershman_rationally_2020, @noor_optimal_2022 and some other papers in
+predicting human choices in MEL tasks.
 
-# Explaining Behavioral Biases \label{behavioral}
+# Explaining Non-Stationary Time Preferences \label{behavioral}
 
-## Evaluating Delayed Rewards
+## Evaluating A Delayed Reward
 
-Suppose a decision maker receives a positive detereminstic reward in
-time period $T$ (and no reward in other periods). I assume she evaluates
-the reward by implementing the ADU evaluation procedure on a reward
-sequence $x=[x_0,x_1,…,x_T]$, where $x_0=…=x_{T-1}=0$ and $x_T>0$. For
-simplicity, I set $u(0)=0$, and the decision maker initially holds
-stationary time preferences, i.e. $w^0_t=\delta^t$. $\delta\in(0,1]$,
-where $\delta=1$ implies the initial attention is uniformly distributed
+Suppose there is a reward sequence with a time length of $T$. A decision
+maker receives a positive detereminstic reward in time period $j$ (and
+no reward in other periods), that is, for any $t\in[0,1,…,T]$ and
+$t \neq j$, $x_t = 0$. The decision maker evaluates the reward sequence
+by implementing the ADU evaluation procedure. For simplicity, I set
+$v(0)=0$. I also set the decision maker initially holds stationary time
+preferences, i.e. $w^0_t=\delta^t$, where $\delta\in(0,1]$. When
+$\delta=1$, we say that the initial attention is uniformly distributed
 across time periods. Given the reward is detereminsic, one can omit $s$
 in $w(s_t|s)$ and directly represent the weight on each time period $t$
-by $w_t$. Therefore, the value of this delayed reward is $w_Tu(x_T)$. By
-Equation (1),$$ \tag{2}
-w_T  = \frac{\delta^Te^{u(x_T)/\lambda}}{\sum_{t=0}^T \delta^te^{u(x_t)/\lambda}}  =\frac{1}{1+G(T)\cdot e^{-u(x_T)/\lambda}}
-$$ where$$
-G(T) = \left\{\begin{split}
-& T \;, & \delta=1\\
-& \frac{1}{1-\delta}(\delta^{-T}-1) \;,&0<\delta<1
-\end{split}\right.
+by $w_t$.
+
+$$
+w_j = \left\{ \begin{aligned}
+& \delta^j \cdot\frac{1}{1+\frac{\delta}{1-\delta}(1-\delta^T)e^{-v(x_j)}}\;, & 0<\delta<1 \\
+& \frac{1}{1+T\cdot e^{-v(x_j)}}\; , & \delta=1
+\end{aligned}
+\right.
 $$
 
-Equation (2) implies $w_T$ is increasing in $x_T$ and decreasing in $T$.
-Hereafter, I use $w_T(x_T)$ to represent $w_T$. I will show that
-Equation (2) can explain a series of experimental findings. Due to the
-limitation on word number, I omit mathematical proof.
+When $\delta=1$ and $j=T$, the attention weight $w_j$ takes a form
+similar to hyperbolic discounting.
+$w_T = (1+(1-\delta)^{-1}(\delta^{-T}-1)e^{u(x_T)})^{-1}$
 
-### Common Difference Effect
+the hidden zero effect
+
+## Common Difference Effect
 
 Suppose there are a large later reward $x_l$ arriving at period $t_l$
 (denoted by LL) and a small sooner reward $x_s$ arriving at period $t_s$
@@ -267,6 +242,14 @@ implies $w_{t_l+\Delta t}(x_l)u(x_l)>w_{t_s+\Delta t}(x_s)u(x_s)$ for
 any positive integer $\Delta t$, magnitude effect implies
 $w_{t_l}(x_l)u(x_l+\Delta x)>w_{t_s}(x_s)u(x_s+\Delta x)$ for any
 positive real number $\Delta x$ [@loewenstein_anomalies_1992].
+
+Proposition 1: The common difference effect
+
+(1) holds when
+$v(x_l)-v(x_s)+\ln\frac{u(x_l)}{u(x_s)}>-(t_l-t_s)\ln\delta$, if
+$T_l = t_l$ and $T_s=t_s$
+
+(2) always holds, if $T_s = T_l$.
 
 When $\delta = 1$, ADU predicts that the decision maker always performs
 common difference effect. This is obvious because the discounting factor
@@ -291,7 +274,19 @@ extending the time length, the average attention that can be allocated
 to each period should shrink. The decision makers performs common
 difference effect only when the former effect exceeds the latter effect.
 
-### Magnitude Effect and Reference-Dependent Preferences
+## Magnitude Effect
+
+Proposition 2: The magnitude effect holds when
+
+$$
+RRA_u(x)-\alpha\frac{\partial \epsilon_u (x)}{\partial u} <1
+$$
+
+Corollary 1: Suppose $u(x)=x^\gamma/\lambda$, where $\gamma>0$ and
+$\lambda>0$. Then magnitude effect always holds if and only if
+$0<\gamma<1$.
+
+## Reference-Dependent Preferences
 
 ADU predicts that the larger the unit cost of information $\lambda$ or
 the smaller the magnitude of $x_l$ and $x_s$ is, the more likely it is
@@ -314,7 +309,7 @@ certain threshold, and be concave when it is above the threshold. This
 is also consistent to the theories about reference-dependent preferences
 [@koszegi_model_2006].
 
-### Risk Attitude over Time Lotteries and Non-additive Time Intervals
+## Non-Additive Time Intervals
 
 Both exponential and hyperbolic discounting models predict the decision
 maker is risk seeking over time lotteries. That is, suppose a
@@ -351,7 +346,7 @@ sub-additive when the total time length $T$ is large, and are
 super-additive when $T$ is small, which is consistent with
 @scholten_discounting_2006.
 
-## Intertemporal Correlation Aversion
+## Non-Separable Sequences
 
 Let $x$ and $y$ denote two 2-period risky reward sequences. For $x$, the
 realized sequence is [£100,£100] with probability 1/2, and is [£3,£3]
@@ -374,7 +369,7 @@ $\frac{1}{2} u(100) + \frac{1}{2} u(3)$ and the value of $y$ is
 $w\cdot u(100) +(1-w) \cdot u(3)$. Given that $x>\frac{1}{2}$, the
 decision makers should strictly prefer $y$ to $x$.
 
-## Dynamic Inconsistency
+# Explaining Dynamic Inconsistent Behavior
 
 Suppose a decision maker has budget $m$ ($m>0$) and is considering how
 to spend it over different time periods. We can use a reward sequence
@@ -435,199 +430,8 @@ Both the attention-grabbing effect and initial attention updating are
 affected by the curvature of utility function. They jointly decide which
 behavior pattern that people should perform in dynamics.
 
-# Comparing Models of Intertemporal Choice \label{empirical}
+# Consumption Over-Smoothness and Over-Sensitivity
 
-## Data
+# Discussion
 
-I test the ability of ADU in predicting human intertemporal choices on
-two open datasets. The sources of data are @ericson_money_2015 and
-@chavez_hierarchical_2017. In each study, participants are recruited to
-do the classical MEL tasks (choosing between a SS reward and a LL
-reward). The data from @ericson_money_2015 contains 23,131 observations
-from 939 participants, the data from @chavez_hierarchical_2017 contains
-34,515 choices from 1,284 participants.
-
-## Empirical Strategy
-
-I mainly focus on out-of-sample model performance. For each dataset, I
-randomly draw 20% of the participants as the test sample, and set the
-rest as the train sample. To mitigate the overfitting issue, I implement
-a 10-fold cross-validation procedure on the train sample.
-
-I fit the train sample with ADU and 8 other time discounting models, the
-intertemporal trade-off model [@scholten_weighing_2014], and a
-decision-tree heuristic model, namely XGboost [@chen_xgboost_2016].
-Table \ref{tab:models} describes the models used for comparison. For
-each time discounting model and the intertemporal trade-off model, I use
-Logit model to predict the probability of participants choosing LL. A
-temperature parameter is added to control the entropy of the probability
-distribution. Besides, I test each model with two types of utility
-functions: CARA utility, $u(x)=1-e^{-\gamma x}$; power utility,
-$u(x) = x^{\gamma}$ ($\gamma$ is a parameter). For the heuristic model,
-I use the same features as @read_drift_2013 and @ericson_money_2015.
-
-```{=tex}
-\begin{longtable}{p{0.14\textwidth} p{0.38\textwidth} p{0.13\textwidth} p{0.25\textwidth}}
-\caption{Models for Comparison}
-\label{tab:models}\\
-\toprule
-\textbf{model} & \textbf{description} & \textbf{\#parameter} & \textbf{  source} \\* \midrule
-\endhead
-%
-\bottomrule
-\endfoot
-%
-\endlastfoot
-%
-attention & ADU & 2 & - \\
-attention\_uni & ADU with uniformly allocated initial attention & 1 &  - \\
-expo & exponential discounting & 1 & - \\
-hb & hyperbolic discounting & 1 & - \\
-expo2 & double-exponential discounting & 3 & \citet{van_den_bos_towards_2013} \\
-hb2 & dual-parameter hyperbolic discounting & 2 & \citet{loewenstein_anomalies_1992} \\
-hbmd & magnitude-dependent hyperbolic discounting & 1 & \citet{gershman_rationally_2020} \\
-quasihb & quasi-hyperbolic discounting & 2 &  \citet{laibson_golden_1997} \\
-quasihb\_fc & quasi-hyperbolic discounting plus a fixed delay cost & 
-3 & \citet{benhabib_present-bias_2010} \\
-hce & homogeneous costly empathy model of discounting & 2 & \citet{noor_optimal_2022}\\
-trade & intertemporal trade-off & 4 & \citet{scholten_weighing_2014}\\
-heuristic & a decision-tree learning algorithm & by tunning & \citet{chen_xgboost_2016}\\* 
-\bottomrule
-\end{longtable}
-```
-I use the maximum likelihood method to estimate the parameters, and
-apply L-BFGS-B method for optimization. As the solution of L-BFGS-B is
-sensitive to initial points, I use the basin-hopping algorithm for
-global optimization. For details about empirical analysis, see
-[https://github.com/zarkwang/attention_discount_project](https://github.com/zarkwang/attention_discount_project.)
-
-## Results
-
-In summary, I find the heuristic model outperforms the other models in
-predictive accuracy. ADU and the intertemporal trade-off model rank
-either the second or the third (dependent on the dataset and empirical
-strategy), and their performance is very close. Each of the two models
-can accurately predict about 95% of the simulated responses generated by
-XGBoost. Note that ADU has only one additional parameter compared with
-the exponential or hyperbolic discounting, whereas the intertemporal
-trade-off model has three additional parameters, researchers who want to
-save the number of parameters can consider ADU as a candidate in model
-fitting. Table \ref{tab:chavez_test_result} present the out-of-sample
-test results on the data from @chavez_hierarchical_2017.
-
-```{=tex}
-\begin{longtable}{@{}lllllll@{}}
-\caption{Out-of-Sample Test Results}
-\label{tab:chavez_test_result}\\
-\toprule
-\textbf{model} & \textbf{utility} & \textbf{mse} & \textbf{mae} & \textbf{logLoss} & \textbf{accuracy} & \textbf{predLL} \\* \midrule
-\endhead
-%
-\bottomrule
-\endfoot
-%
-\endlastfoot
-%
-heurstic       & --    & 0.163 & 0.322 & 0.500 & 0.767 & 0.295 \\
-trade          & power & 0.165 & 0.316 & 0.504 & 0.766 & 0.258 \\
-attention      & power & 0.165 & 0.326 & 0.505 & 0.763 & 0.332 \\
-attention\_uni & power & 0.165 & 0.325 & 0.506 & 0.763 & 0.332 \\
-hb             & power & 0.167 & 0.327 & 0.508 & 0.757 & 0.332 \\
-quasihb\_fc    & power & 0.206 & 0.448 & 0.604 & 0.757 & 0.332 \\
-quasihb        & power & 0.180 & 0.397 & 0.543 & 0.757 & 0.332 \\
-hce            & power & 0.167 & 0.335 & 0.510 & 0.757 & 0.332 \\
-hbmd           & power & 0.165 & 0.327 & 0.505 & 0.757 & 0.332 \\
-hbmd           & cara  & 0.167 & 0.329 & 0.509 & 0.757 & 0.332 \\
-hb2            & power & 0.167 & 0.341 & 0.509 & 0.757 & 0.332 \\
-expo           & power & 0.167 & 0.334 & 0.510 & 0.757 & 0.332 \\
-trade          & cara  & 0.248 & 0.498 & 0.689 & 0.700 & 0.222 \\
-attention      & cara  & 0.179 & 0.356 & 0.535 & 0.685 & 0.037 \\
-attention\_uni & cara  & 0.191 & 0.414 & 0.567 & 0.685 & 0.037 \\
-hb2            & cara  & 0.184 & 0.344 & 0.545 & 0.667 & 0.000 \\
-hb             & cara  & 0.207 & 0.322 & 0.622 & 0.667 & 0.000 \\
-expo2          & power & 0.333 & 0.333 & 3.764 & 0.667 & 0.000 \\
-expo2          & cara  & 0.326 & 0.333 & 1.605 & 0.667 & 0.000 \\
-hce            & cara  & 0.202 & 0.316 & 0.634 & 0.667 & 0.000 \\
-quasihb        & cara  & 0.222 & 0.333 & 0.650 & 0.667 & 0.000 \\
-expo           & cara  & 0.203 & 0.314 & 0.653 & 0.667 & 0.000 \\
-quasihb\_fc    & cara  & 0.198 & 0.336 & 0.582 & 0.667 & 0.000 \\* \bottomrule
-\multicolumn{7}{p{0.8\textwidth}}{
-\setstretch{1}
-\textit{Note}: \textbf{mae} denotes mean absolute error, \textbf{mse} denotes mean squared error, \textbf{predLL} denotes the ratio of LL in predicted choices. The data source is \citet{chavez_hierarchical_2017}.
-}
-\end{longtable}
-```
-# Next Step \label{schedule}
-
-The ADU model draws inspiration from theories of rational inattention.
-In line with most literature in rational inattention (e.g.
-@matejka_rational_2015, @jung_discrete_2019, @mackowiak_rational_2023),
-I set the cognitive cost function linear to Shannon mutual information.
-The rationale, according to @matejka_rational_2015 and
-@caplin_rationally_2022, is twofold. First, Shannon mutual information
-can be written as $\sum_{s\in X} p(s) D(s)$, where $D(s)$ is a function
-of $w(s_t|s)$ and $w^0_t$. This indicates that how the decision maker
-allocates attention across periods under a given outcome, denoted by
-$w(s_t|s)$, is independent of the belief regarding how likely it is that
-a potential outcome $s$ is realized, denoted by $p(s)$. Second, when the
-cognitive cost function is in this style, the relative discounting
-factor between two periods depends merely on their own rewards, and is
-irrelevant from the reward in any other period, regardless of the
-rewards in any other period.
-
-I am designing an experiment to test the first property. The
-experimental design does not draw on intertemporal choice setting.
-Instead, it asks participants to explicitly implement the sampling and
-attention adjustment processes.
-
-The design is as follows. Suppose there are 10 red balls and 10 blue
-balls in a black box. The decision maker randomly draws one ball. If a
-red ball is drawn, she can get $v_r$; if a blue ball is drawn, she can
-get $v_b$. Prior to the draw, the decision maker can change the color of
-balls as her will. However, every time she changes the color of a ball,
-she has to complete a real-effort task (such as entering a CAPTCHA
-code). Suppose $v_b>v_r$, and she changes $a$ balls from red to blue,
-then the corresponding decision problem can be written as: $$
-\max_a \frac{10+a}{20} v_b + \frac{10-a}{20} v_r - C(a)
-$$where $C(a)$ is the cognitive cost of completing $a$ tasks.
-$\frac{10+a}{20}$ is the probability of a blue ball being drawn,
-$\frac{10-a}{20}$ is the probability of a red ball being drawn. Clearly,
-this decision problem has the same representation as rational
-inattention or ADU. Suppose when $v_b = b_1$, $v_r = r_1$, we have
-$a=a_1$; when $v_b = b_2$, $v_r = r_2$, we have $a=a_2$. Then, set that
-the first case occurs with probability 0.5, and the second case occurs
-with probability 0.5, if the desired property holds, we should have
-$C(a)=0.5C(a_1)+0.5C(a_2)$. That is the target to test.
-
-I am also trying to develop an axiomatic characterization of ADU.
-Moreover, more empirical analyses are needed for validating the model.
-Table \ref{tab:next} shows my plan for the next step.
-
-```{=tex}
-    \begin{longtable}{@{}l@{}}
-    \caption{Plan for the Next Step}
-    \label{tab:next}\\
-    \toprule
-    \textbf{Timeline} \\* \midrule
-    \endhead
-    %
-    \bottomrule
-    \endfoot
-    %
-    \endlastfoot
-    %
-    \textbf{June 2023} \\
-      \quad - Refine the theory of ADU \\
-      \quad - Find proper ways to further validate the ADU model \\
-      \quad - Finalize the experimental design for testing rational inattention \\
-    \textbf{July-Aug 2023} \\
-      \quad - Obtain necessary approvals and run a pilot test \\
-      \quad - Conduct the experiment and collect data \\
-      \quad - Start analyzing the data \\
-    \textbf{Sep-Dec 2023} \\
-      \quad - Complete the paper about ADU \\
-      \quad - Begin drafting a paper on the experiment tests of rational inattention \\
-      \quad - Plan for the final chapter of thesis \\* \bottomrule
-    \end{longtable}
-```
 # Reference

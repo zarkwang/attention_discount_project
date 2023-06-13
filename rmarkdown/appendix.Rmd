@@ -5,23 +5,33 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-## Proof of common difference effect
+# Math Proofs
 
-From the definition of $\alpha$, $$
-\alpha \cdot(1+G(t_1)\cdot e^{-u}) = 1+G(t_2)\cdot e^{-\alpha u} \tag{1}
-$$ Set up a function $$
-f(\Delta t) = \alpha\cdot(1+G(t_1+\Delta t)\cdot e^{-u}) - (1+G(t_2+\Delta t)\cdot e^{-\alpha u})
-$$ We know that $f(0)=0$
+herefore, the value of this delayed reward is $w_Tu(x_T)$. By Equation (1),$$ \tag{2} w_T  =\frac{1}{1+G(T)\cdot e^{-u(x_T)/\lambda}} $$ where$$ G(T) = \left\{\begin{aligned} & T \;, & \delta=1\\ & \frac{1}{1-\delta}(\delta^{-T}-1) \;,&0<\delta<1 \end{aligned}\right. $$
 
-common difference effect implies $f(\Delta t)>0$ when $\Delta t>0$
+Equation (2) implies $w_T$ is increasing in $x_T$ and decreasing in $T$. Hereafter, I use $w_T(x_T)$ to represent $w_T$. I will show that Equation (2) can explain a series of experimental findings.
 
-if $f'(\Delta t) >0$ then $$
-\frac{G'(t_2+\Delta t)}{G'(t_1+\Delta t)} < \alpha e^{(\alpha-1)u}
-$$ when $\delta=1$, the right hand is 1, the common difference effect always holds
+SS: "getting $x_s$ in period $t_s$"
 
-when $0<\delta<1$, rewrite $f(\Delta t)>0$: $$
-\delta^{-\Delta t}(\delta^{-t_1}\alpha e^{-u}-\delta^{-t_2}e^{-\alpha u}) >
-\alpha e^{-u}- e^{-\alpha u} -(1-\delta)(\alpha-1)$$ from eq. (1) we know the the left hand equals $\delta^{-t_1}\alpha e^{-u}-\delta^{-t_2}e^{-\alpha u}$. Therefore, the inequality always holds when $\Delta t>0$
+LL: "getting $x_l$ in period $t_l$"
+
+The discounted utility of a delayed reward is $w_t u(x_t)$, where
+
+$$
+w_t = \delta^t \frac{1}{1+G(T) e^{-u(x_t)/\lambda}} 
+$$
+
+and
+
+$$
+G(T) = \frac{\delta}{1-\delta}(1-\delta^T)
+$$
+
+given $T\geq t$
+
+## common difference effect
+
+Time length is $t_s$ for SS and $t_l$ for LL.
 
 ## Proof of magnitude effect
 
