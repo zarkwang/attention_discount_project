@@ -33,24 +33,87 @@ output:
 
 # Introduction
 
-It has been a long tradition that researchers in economics and
-behavioral sciences use the discounted utility framework for modelling
-intertemporal choices
+The discounted utility framework has been widely employed to model
+intertemporal choices. According to this framework, decision makers
+evaluate a sequence of rewards by assigning a weight to each time period
+and summing up the weighted utilities of the rewards across these
+periods. Typically, the weights are referred to as the discounting
+factors and are assumed to decline over time, indicating a preference
+for receiving a sooner reward over a later reward. However, recent
+research suggests that, due to limited information processing capacity,
+prior to making a decision, people tend to allocate more attention to
+the information most relevant to the decision. We propose that the
+determination of weights in discounted utility framework is also
+influenced by such an attentional mechanism. For instance, when an
+investor consider whether to invest \$100 now and get \$110 in 100 days,
+she may focus more on the amount of money she can obtain on the 100th
+day (i.e. £110). Consequently, when calculating the utility of
+"receiving £110 in 100 days", the investor may want to assign a higher
+weight to the 100th day. And doing that will reduce weight assigned to
+the days prior to the 100th day. Based on this perspective, we develop a
+novel model of intertemporal choice, which we term "*attention-adjusted
+discounted utility*". We demonstrate how this model can better
+accommodate certain empirical findings. To distinguish it from the
+discounting factor, we refer to the weights in our model as "attention
+weights."
 
-I develop a novel model of intertemporal choice, which I term
-"*attention-adjusted discounted utility*" (ADU). I postulate that the
-overall utility a decision maker can obtain from a reward sequence is
-decided by the weighted sum of utilities that can be obtained in each
-time period. The initial weight allocation is exponential, i.e. the
-decision maker is initially time-stationary. However, when evaluating
-the given reward sequence, she tends to assign more weights (pay more
-attention) to the time periods with larger rewards, in order to
-subjectively maximize her overall utility. This attention adjustment
-process incurs a cognitive cost; and the more the weight allocation
-deviates from the initial allocation, the greater the cost is. The
-decision maker optimally re-allocates the weights across time periods. I
-term the discounting factors that can be represented by such weights as
-*attention-adjusted* discounting factors.
+Let $\textbf{x} = [x_0, x_1, …, x_T]$ denote a sequence of rewards and
+$u(.)$ denote the utility function. The overall utility of this sequence
+is calculated by $\sum_{t=0}^T w_t u(x_t)$, where $w_t$ is the attention
+weight assigned to period $t$. In our model, the attention weight is
+calculated by
+
+$$
+w_t = \frac{d_t e^{u(x_t)}}{\sum_{\tau=0}^T d_\tau e^{u(x_t)}}
+$$
+
+where $d_t$ is the initial weight (discounting factor) allocated to
+period $t$. The weight for each period, i.e. $w_t$, is increasing with
+$u(x_t)$, indicating that the decision maker is motivated to shift
+attention to the periods with larger rewards. $w_t$ is "anchored" in the
+initial weight $d_t$, because the attention adjustment process is
+costly. The sum of weights is fixed at 1, indicating the decision
+maker's capacity of focusing is limited.
+
+We draw inspirations on three fields of research. The first is motivated
+beliefs. The theory of motivated beliefs states that people will adjust
+beliefs to subjectively maximize their utility. When the choice made by
+a decision maker does not deliver the maximum utility, she may tend to
+adjust the belief to safeguard the choice, rather than shift to another
+option. This is usually applied to cognitive dissonance and
+overconfidence. The similar mechanism may exist in the allocation of
+weights to each time period.
+
+The second is rational inattention. The model of rational inattention
+states that, prior to making choices between options, the decision maker
+has to learn the information about each option. Under the assumption
+that she wants to maximum the expected utility minus the cost of
+learning, which is linear to the information gains, we can derive that
+the probability of each option being chosen follows a logistic-like
+distribution. In our model, we assume that when allocating weights
+across time periods, the decision maker has a similar objective
+function, thus the attention weights also follows a logistic-like
+distribution.
+
+The third is the attention mechanisms which have been widely applied in
+deep learning.
+
+The process is efficient sampling.
+
+I postulate that the overall utility a decision maker can obtain from a
+reward sequence is decided by the weighted sum of utilities that can be
+obtained in each time period. The initial weight allocation is
+exponential, i.e. the decision maker is initially time-stationary.
+However, when evaluating the given reward sequence, she tends to assign
+more weights (pay more attention) to the time periods with larger
+rewards, in order to subjectively maximize her overall utility. This
+attention adjustment process incurs a cognitive cost; and the more the
+weight allocation deviates from the initial allocation, the greater the
+cost is. The decision maker optimally re-allocates the weights across
+time periods.
+
+Our contribution is three-fold. First, the model can accommodate a lot
+of empirical evidence with just one to two parameters.
 
 In this paper, I show that a set of intertemporal choice anomalies can
 be attributed to such attention adjustment processes (that is, can be
@@ -66,6 +129,10 @@ and the formation of reference-dependent preferences
 set of time discounting models in predicting human intertemporal
 choices. Therefore, I think there is a need to rethink the foundation of
 many behavioral phenomena.
+
+Second, we link the literature of attention to time preferences.
+
+Third, we make some novel predictions based on the model.
 
 The remaining part of this document is organized as follows. Section
 \ref{model} outlines the model of attention-adjusted discounted utility
@@ -174,9 +241,7 @@ of optimal sequential learning (for example, @zhong_optimal_2022 ).
 properties are jointly satisfied if and only if the solution of
 $w(s_t|s)$ follows Equation (1).
 
-## Axiomatic Characterization
-
-## Related Literature
+## Comparison With Existing Models
 
 In addition to ADU, there are other models that attempt to incorporate
 attention mechanism into the formation of time preferences. For example,
@@ -202,23 +267,22 @@ cognitive cost function. I compare the performance of ADU with models of
 @gershman_rationally_2020, @noor_optimal_2022 and some other papers in
 predicting human choices in MEL tasks.
 
-# Explaining Non-Stationary Time Preferences \label{behavioral}
+# Implications in Time Preferences \label{behavioral}
 
 ## Evaluating A Delayed Reward
 
-Suppose there is a reward sequence with a time length of $T$. A decision
-maker receives a positive detereminstic reward in time period $j$ (and
-no reward in other periods), that is, for any $t\in[0,1,…,T]$ and
-$t \neq j$, $x_t = 0$. The decision maker evaluates the reward sequence
-by implementing the ADU evaluation procedure. For simplicity, I set
-$v(0)=0$. I also set the decision maker initially holds stationary time
-preferences, i.e. $w^0_t=\delta^t$, where $\delta\in(0,1]$. When
-$\delta=1$, we say that the initial attention is uniformly distributed
-across time periods. Given the reward is detereminsic, one can omit $s$
-in $w(s_t|s)$ and directly represent the weight on each time period $t$
-by $w_t$.
+Suppose a decision maker receives a positive detereminstic reward in
+time period $j$ (and no reward in other periods), that is, for any
+$t\in[0,1,…,T]$ and $t \neq j$, $x_t = 0$. The decision maker evaluates
+the reward sequence by implementing the ADU evaluation procedure. For
+simplicity, I set $v(0)=0$. I also set the decision maker initially
+holds stationary time preferences, i.e. $w^0_t=\delta^t$, where
+$\delta\in(0,1]$. When $\delta=1$, we say that the initial attention is
+uniformly distributed across time periods. Given the reward is
+detereminsic, one can omit $s$ in $w(s_t|s)$ and directly represent the
+weight on each time period $t$ by $w_t$.
 
-$$
+$$ 
 w_j = \left\{ \begin{aligned}
 & \delta^j \cdot\frac{1}{1+\frac{\delta}{1-\delta}(1-\delta^T)e^{-v(x_j)}}\;, & 0<\delta<1 \\
 & \frac{1}{1+T\cdot e^{-v(x_j)}}\; , & \delta=1
@@ -226,11 +290,45 @@ w_j = \left\{ \begin{aligned}
 \right.
 $$
 
+## Hidden Zero Effect
+
+One way to validate the model is that, when we frame of the length of
+sequence in different ways, the decision maker's overall utility may
+change.
+
+One evidence is @magen_hidden-zero_2008, which find that people perform
+greater patience when both SS and LL are framed as sequences, rather
+than being framed single-period rewards. They term this finding as
+"hidden zero effect". For instance, suppose SS is "receive £100 today"
+and LL is "receive £120 in 6 months", and we have
+
+SS~0~: "receive £100 today and £0 in 6 months"
+
+LL~0~: "receive £0 today and £120 in 6 months"
+
+Then people will be more likely to prefer LL~0~ over SS~0~ than
+preferring LL over SS. The subsequent studies (e.g. @read_value_2017)
+show that the hidden zero effect is asymmetric. That is, shifting SS to
+SS~0~ and keeping LL unchanged leads to an increase in patience, whereas
+shifting LL to LL~0~ and keeping SS unchanged cannot increase patience.
+
+A key issue in the model is the selection of time length $T$. As is
+shown in Equation \ref{eq:w_delay_reward}, when
+
+The range of $T$ is $[j,+\infty)$.
+
+The decision maker will
+
+The first reason is to optimize the overall utility.
+
+The second reason is based on
+
 When $\delta=1$ and $j=T$, the attention weight $w_j$ takes a form
 similar to hyperbolic discounting.
-$w_T = (1+(1-\delta)^{-1}(\delta^{-T}-1)e^{u(x_T)})^{-1}$
 
-the hidden zero effect
+$$
+w_T = \frac{1}{1+G(T)e^{-u(x_T)}}
+$$
 
 ## Common Difference Effect
 
@@ -246,8 +344,8 @@ positive real number $\Delta x$ [@loewenstein_anomalies_1992].
 Proposition 1: The common difference effect
 
 (1) holds when
-$v(x_l)-v(x_s)+\ln\frac{u(x_l)}{u(x_s)}>-(t_l-t_s)\ln\delta$, if
-$T_l = t_l$ and $T_s=t_s$
+    $v(x_l)-v(x_s)+\ln\frac{u(x_l)}{u(x_s)}>-(t_l-t_s)\ln\delta$, if
+    $T_l = t_l$ and $T_s=t_s$
 
 (2) always holds, if $T_s = T_l$.
 
@@ -285,29 +383,6 @@ $$
 Corollary 1: Suppose $u(x)=x^\gamma/\lambda$, where $\gamma>0$ and
 $\lambda>0$. Then magnitude effect always holds if and only if
 $0<\gamma<1$.
-
-## Reference-Dependent Preferences
-
-ADU predicts that the larger the unit cost of information $\lambda$ or
-the smaller the magnitude of $x_l$ and $x_s$ is, the more likely it is
-that the decision maker performs magnitude effect.
-
-First, note that the magnitude effect requires the decision maker's
-overall utility $w_T(x_T)u(x_T)$ to be a convex function of $x_T$. Given
-that $u(.)$ is concave, whether the magnitude effect holds should depend
-on $w_T$. Then, set $z = u(x_T)-\lambda\log G(T)$. We can rewrite
-Equation (2) as a logistic function of $z$, i.e.
-$w_T = 1/(1+e^{-z/\lambda})$. By the shape of logistic function, $w_T$
-is convex in $u(x_T)$ if and only if $u(x_T)<\lambda \log G(T)$ (that
-is, when $x_T$ is small relative to $T$ or when $\lambda$ is large).
-Finally, it is notable that the given condition is necessary but not
-sufficient to yield magnitude effect.
-
-In summary, holding the others equal, the decision makers' overall
-utility can be convex in a future reward when the level of it is under a
-certain threshold, and be concave when it is above the threshold. This
-is also consistent to the theories about reference-dependent preferences
-[@koszegi_model_2006].
 
 ## Non-Additive Time Intervals
 
@@ -369,7 +444,30 @@ $\frac{1}{2} u(100) + \frac{1}{2} u(3)$ and the value of $y$ is
 $w\cdot u(100) +(1-w) \cdot u(3)$. Given that $x>\frac{1}{2}$, the
 decision makers should strictly prefer $y$ to $x$.
 
-# Explaining Dynamic Inconsistent Behavior
+## Reference-Dependent Preferences
+
+ADU predicts that the larger the unit cost of information $\lambda$ or
+the smaller the magnitude of $x_l$ and $x_s$ is, the more likely it is
+that the decision maker performs magnitude effect.
+
+First, note that the magnitude effect requires the decision maker's
+overall utility $w_T(x_T)u(x_T)$ to be a convex function of $x_T$. Given
+that $u(.)$ is concave, whether the magnitude effect holds should depend
+on $w_T$. Then, set $z = u(x_T)-\lambda\log G(T)$. We can rewrite
+Equation (2) as a logistic function of $z$, i.e.
+$w_T = 1/(1+e^{-z/\lambda})$. By the shape of logistic function, $w_T$
+is convex in $u(x_T)$ if and only if $u(x_T)<\lambda \log G(T)$ (that
+is, when $x_T$ is small relative to $T$ or when $\lambda$ is large).
+Finally, it is notable that the given condition is necessary but not
+sufficient to yield magnitude effect.
+
+In summary, holding the others equal, the decision makers' overall
+utility can be convex in a future reward when the level of it is under a
+certain threshold, and be concave when it is above the threshold. This
+is also consistent to the theories about reference-dependent preferences
+[@koszegi_model_2006].
+
+# Attentional Account of Dynamic Inconsisteny
 
 Suppose a decision maker has budget $m$ ($m>0$) and is considering how
 to spend it over different time periods. We can use a reward sequence
@@ -430,7 +528,7 @@ Both the attention-grabbing effect and initial attention updating are
 affected by the curvature of utility function. They jointly decide which
 behavior pattern that people should perform in dynamics.
 
-# Consumption Over-Smoothness and Over-Sensitivity
+# Consumption Oversmoothness and Oversensitivity
 
 # Discussion
 

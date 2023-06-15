@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.6.12)  13 JUN 2023 07:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.6.12)  15 JUN 2023 03:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -478,54 +478,59 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 79.
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
-
-{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}]
+)
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 130.
+(Font)              <12> on input line 107.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 130.
+(Font)              <8> on input line 107.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 130.
-[2{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+(Font)              <6> on input line 107.
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 167.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 107.
 
-[3{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}] [4]
+[1
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 275.
+{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}] [2{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}] [3{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
 
-[5] [6] [7] [8] [9]
-Overfull \hbox (1.9288pt too wide) in paragraph at lines 519--519
-[]\T1/lmr/bx/n/17.28 Consumption Over-Smoothness and Over-Sensitivity 
- []
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 228.
 
-(./AADU.bbl [10] [11])
+[4] [5]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 335.
+
+[6]
+
+LaTeX Warning: Reference `eq:w_delay_reward' on page 7 undefined on input line 378.
+
+[7] [8] [9] [10] [11] (./AADU.bbl [12] [13] [14])
 
 Package caption Warning: Unused \captionsetup[table] on input line 58.
 See the caption package documentation for explanation.
 
-[12] (./AADU.aux)
+[15] (./AADU.aux)
  ***********
 LaTeX2e <2023-06-01>
 L3 programming layer <2023-06-05>
  ***********
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `AADU.out' has not changed.
-(rerunfilecheck)             Checksum: 9C0845980C17403452CBC4F5C150E700;2841.
+(rerunfilecheck)             Checksum: 974D21D66CB0E9D03668A65011317754;3027.
  ) 
 Here is how much of TeX's memory you used:
- 12747 strings out of 477694
- 201741 string characters out of 5829708
- 1863753 words of memory out of 5000000
- 32981 multiletter control sequences out of 15000+600000
+ 12762 strings out of 477694
+ 202058 string characters out of 5829708
+ 1861753 words of memory out of 5000000
+ 32990 multiletter control sequences out of 15000+600000
  576008 words of font info for 79 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,9n,79p,424b,560s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,424b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
-Output written on AADU.pdf (12 pages, 227407 bytes).
+Output written on AADU.pdf (15 pages, 237446 bytes).
 PDF statistics:
- 317 PDF objects out of 1000 (max. 8388607)
- 275 compressed objects within 3 object streams
- 69 named destinations out of 1000 (max. 500000)
- 121 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 345 PDF objects out of 1000 (max. 8388607)
+ 299 compressed objects within 3 object streams
+ 75 named destinations out of 1000 (max. 500000)
+ 129 words of extra memory for PDF output out of 10000 (max. 10000000)
 
