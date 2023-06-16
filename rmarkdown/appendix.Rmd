@@ -29,9 +29,58 @@ $$
 
 given $T\geq t$
 
-## common difference effect
+## Proof of common difference effect
 
-Time length is $t_s$ for SS and $t_l$ for LL.
+Suppose the instantaneous utilities of LL and SS are $v_l$ and $v_s$, and the delays for LL and SS are $t_l$ and $t_s$. Under ADU, the common difference effect implies that, if
+
+$$ \tag{A.1}
+\frac{1+G(t_s)e^{-v_s}}{v_s} = \frac{1+G(t_l)e^{-v_l}}{v_l}
+$$
+
+then for any $\Delta t \geq 0$,
+
+$$ \tag{A.2}
+\frac{1+G(t_s+\Delta t)e^{-v_s}}{v_s} > \frac{1+G(t_l+\Delta t)e^{-v_l}}{v_l}
+$$
+
+If $G(T)=T$, we have $G(t+\Delta t) = G(t) + \Delta t$. Thus, after combining with Equation (A.1), Equation (A.2) is valid if and only if
+
+$$ \tag{A.3}
+\frac{\Delta t e^{-v_s}}{v_s} > \frac{\Delta t e^{-v_l}}{v_l}
+$$
+
+Given that function $\psi(v) = e^{-v}/v$ is decreasing in $v$ so long as $v>0$, then Equation (A.3) must be valid.
+
+If $G(T) = \frac{1}{1-\delta}(\delta^{-T}-1)$, we have
+
+$$
+1+G(t+\Delta t)e^{-v} = \delta^{-\Delta t}[1+G(t)e^{-v}]+(\delta^{-\Delta t}-1)(\frac{e^{-v}}{1-\delta}-1)
+$$
+
+Thus, after combining Equation (A.1), Equation (A.2) is valid if and only if
+
+$$\tag{A.4}
+(\delta^{-\Delta t}-1)\frac{\frac{e^{-v_s}}{1-\delta}-1}{v_s} >
+(\delta^{-\Delta t}-1)\frac{\frac{e^{-v_l}}{1-\delta}-1}{v_l}
+$$
+
+Given that $0<\delta<1$, we have $\delta^{-\Delta t}>1$, thus Equation (A.4) is valid if and only if
+
+$$\tag{A.5}
+\frac{1}{v_s}-\frac{1}{v_l}<\frac{1}{1-\delta}(\frac{e^{-v_s}}{v_s}-\frac{e^{-v_l}}{v_l})
+$$
+
+From Equation (A.1) we know that
+
+$$\tag{A.6}
+\frac{1}{v_s}-\frac{1}{v_l}=\frac{1}{1-\delta}\left[\frac{(\delta^{-t_l}-1)e^{-v_l}}{v_l} -\frac{(\delta^{-t_s}-1)e^{-v_s}}{v_s}\right]
+$$
+
+Combine Equation (A.5) and (A.6), we have
+
+$$
+\delta^{-t_l}\frac{e^{-v_l}}{v_l}<\delta^{-t_s}\frac{e^{-v_s}}{v_s} \Longrightarrow v_l - v_s + \ln \left(\frac{v_l}{v_s}\right)>-(t_l-t_s)\ln\delta
+$$
 
 ## Proof of magnitude effect
 

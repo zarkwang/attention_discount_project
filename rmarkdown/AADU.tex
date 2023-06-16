@@ -72,7 +72,7 @@
 
 \title{Attention-Adjusted Discounted Utility}
 \author{Zijian Zark Wang}
-\date{June 15, 2023}
+\date{June 16, 2023}
 
 \begin{document}
 \maketitle
@@ -122,7 +122,7 @@ shift attention to the periods with larger rewards. \(w_t\) is
 adjustment process is costly. The sum of weights is fixed at 1,
 indicating the decision maker's capacity of focusing is limited.
 
-We draw inspirations on four fields of research. The first is motivated
+We draw inspirations on three fields of research. The first is motivated
 beliefs. The theory of motivated beliefs states that people will adjust
 beliefs to subjectively maximize their utility. When the choice made by
 a decision maker does not deliver the maximum utility, she may tend to
@@ -143,22 +143,30 @@ function, thus the attention weights also follows a logistic-like
 distribution.
 
 The third is the attention mechanisms which have been widely applied in
-deep learning.
+deep learning. In such models, there is often an input sequence and a
+query vector. Attention weights are assigned to each period of the
+sequence to determine their relevance to the current context. The most
+common approach to obtain attention weights involves computing
+similarity scores between the query vector and each period in the input
+sequence, normalizing these scores using a softmax (i.e.~multinominal
+logistic) function.
 
-The fourth is efficient sampling.
+In the attention-adjusted discounted utility model (hereafter referred
+to as ``ADU''), the underlying cognitive process is efficient sampling.
+We assume that the decision maker initially has no information about
+which period in a reward sequence has a larger reward. She implements a
+costly sampling strategy to draw some rewards from the sequence to learn
+the information, then choose the attention weight to each period
+accordingly. Therefore, when evaluating the given reward sequence, she
+tends to assign more weights (pay more attention) to the time periods
+with larger rewards, in order to subjectively maximize her overall
+utility. This attention adjustment process incurs a cognitive cost; and
+the more the weight allocation deviates from the initial allocation, the
+greater the cost is. The decision maker optimally re-allocates the
+weights across time periods.
 
-I postulate that the overall utility a decision maker can obtain from a
-reward sequence is decided by the weighted sum of utilities that can be
-obtained in each time period. The initial weight allocation is
-exponential, i.e.~the decision maker is initially time-stationary.
-However, when evaluating the given reward sequence, she tends to assign
-more weights (pay more attention) to the time periods with larger
-rewards, in order to subjectively maximize her overall utility. This
-attention adjustment process incurs a cognitive cost; and the more the
-weight allocation deviates from the initial allocation, the greater the
-cost is. The decision maker optimally re-allocates the weights across
-time periods. I term the discounting factors that can be represented by
-such weights as \emph{attention-adjusted} discounting factors.
+Our contribution is three-fold. First, the model can accommodate a lot
+of empirical evidence with just one to two parameters.
 
 In this paper, I show that a set of intertemporal choice anomalies can
 be attributed to such attention adjustment processes (that is, can be
@@ -174,6 +182,10 @@ formation of reference-dependent preferences \citep{koszegi_model_2006}.
 In an empirical test, I find ADU outperforms a set of time discounting
 models in predicting human intertemporal choices. Therefore, I think
 there is a need to rethink the foundation of many behavioral phenomena.
+
+Second, we link the literature of attention to time preferences.
+
+Third, we make some novel predictions based on the model.
 
 The remaining part of this document is organized as follows. Section
 \ref{model} outlines the model of attention-adjusted discounted utility
@@ -290,12 +302,9 @@ consistent with many forms of optimal sequential learning (for example,
 satisfied if and only if the solution of \(w(s_t|s)\) follows Equation
 (1).
 
-\hypertarget{the-rationale-behind-mutual-information}{%
-\subsection{The Rationale Behind Mutual
-Information}\label{the-rationale-behind-mutual-information}}
-
-\hypertarget{related-literature}{%
-\subsection{Related Literature}\label{related-literature}}
+\hypertarget{comparison-with-existing-models}{%
+\subsection{Comparison With Existing
+Models}\label{comparison-with-existing-models}}
 
 In addition to ADU, there are other models that attempt to incorporate
 attention mechanism into the formation of time preferences. For example,
@@ -373,24 +382,39 @@ SS\textsubscript{0} than preferring LL over SS. The subsequent studies
 asymmetric. That is, shifting SS to SS\textsubscript{0} and keeping LL
 unchanged leads to an increase in patience, whereas shifting LL to
 LL\textsubscript{0} and keeping SS unchanged cannot increase patience.
+The attention-based explanation is that, in SS, the decision maker may
+conceive the length of sequence as "today''; in SS\textsubscript{0}, she
+may conceive the length as ``6 months''. In the latter case, she
+allocates some attention weights to some future periods with zero
+reward, which decreases her overall utility.
 
-A key issue in the model is the selection of time length \(T\). As is
-shown in Equation \ref{eq:w_delay_reward}, when
-
-The range of \(T\) is \([j,+\infty)\).
-
-The decision maker will
-
-The first reason is to optimize the overall utility.
-
-The second reason is based on
-
-When \(\delta=1\) and \(j=T\), the attention weight \(w_j\) takes a form
-similar to hyperbolic discounting.
+The existence of hidden zero effect also provides some hints on the
+selection of time length \(T\). As is shown in Equation
+\ref{eq:w_delay}, when evaluating a delayed reward delivered in period
+\(j\), the range of \(T\) is \([j,+\infty)\). An increase in \(T\) will
+reduce the overall utility. Thus, when comparing SS and LL, the decision
+maker may tend to set \(T=j\) (the minimum length she can set), in order
+to optimize the overall utility. That is, without mentioning the periods
+after \(j\), she does not necessarily sample from the periods later than
+\(j\) to evaluate the given delayed reward. In this case, i.e.~\(T=j\)
+we have
 
 \[
 w_T = \frac{1}{1+G(T)e^{-u(x_T)}}
 \]
+
+where
+
+\[
+G(T) = \left\{ \begin{aligned}
+& \frac{1}{1-\delta}(\delta^{-T}-1) \; ,& 0<\delta<1\\
+& T\; ,& \delta=1\
+\end{aligned}
+\right.
+\]
+
+Clearly, when \(\delta=1\), the attention weight \(w_j\) takes a form
+similar with hyperbolic discounting.
 
 \hypertarget{common-difference-effect}{%
 \subsection{Common Difference Effect}\label{common-difference-effect}}

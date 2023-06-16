@@ -96,21 +96,27 @@ function, thus the attention weights also follows a logistic-like
 distribution.
 
 The third is the attention mechanisms which have been widely applied in
-deep learning.
+deep learning. In such models, there is often an input sequence and a
+query vector. Attention weights are assigned to each period of the
+sequence to determine their relevance to the current context. The most
+common approach to obtain attention weights involves computing
+similarity scores between the query vector and each period in the input
+sequence, normalizing these scores using a softmax (i.e. multinominal
+logistic) function.
 
-The process is efficient sampling.
-
-I postulate that the overall utility a decision maker can obtain from a
-reward sequence is decided by the weighted sum of utilities that can be
-obtained in each time period. The initial weight allocation is
-exponential, i.e. the decision maker is initially time-stationary.
-However, when evaluating the given reward sequence, she tends to assign
-more weights (pay more attention) to the time periods with larger
-rewards, in order to subjectively maximize her overall utility. This
-attention adjustment process incurs a cognitive cost; and the more the
-weight allocation deviates from the initial allocation, the greater the
-cost is. The decision maker optimally re-allocates the weights across
-time periods.
+In the attention-adjusted discounted utility model (hereafter referred
+to as "ADU"), the underlying cognitive process is efficient sampling. We
+assume that the decision maker initially has no information about which
+period in a reward sequence has a larger reward. She implements a costly
+sampling strategy to draw some rewards from the sequence to learn the
+information, then choose the attention weight to each period
+accordingly. Therefore, when evaluating the given reward sequence, she
+tends to assign more weights (pay more attention) to the time periods
+with larger rewards, in order to subjectively maximize her overall
+utility. This attention adjustment process incurs a cognitive cost; and
+the more the weight allocation deviates from the initial allocation, the
+greater the cost is. The decision maker optimally re-allocates the
+weights across time periods.
 
 Our contribution is three-fold. First, the model can accommodate a lot
 of empirical evidence with just one to two parameters.
@@ -311,43 +317,52 @@ preferring LL over SS. The subsequent studies (e.g. @read_value_2017)
 show that the hidden zero effect is asymmetric. That is, shifting SS to
 SS~0~ and keeping LL unchanged leads to an increase in patience, whereas
 shifting LL to LL~0~ and keeping SS unchanged cannot increase patience.
+The attention-based explanation is that, in SS, the decision maker may
+conceive the length of sequence as \"today"; in SS~0~, she may conceive
+the length as "6 months". In the latter case, she allocates some
+attention weights to some future periods with zero reward, which
+decreases her overall utility.
 
-A key issue in the model is the selection of time length $T$. As is
-shown in Equation \ref{eq:w_delay_reward}, when
-
-The range of $T$ is $[j,+\infty)$.
-
-The decision maker will
-
-The first reason is to optimize the overall utility.
-
-The second reason is based on
-
-When $\delta=1$ and $j=T$, the attention weight $w_j$ takes a form
-similar to hyperbolic discounting.
+The existence of hidden zero effect also provides some hints on the
+selection of time length $T$. As is shown in Equation \ref{eq:w_delay},
+when evaluating a delayed reward delivered in period $j$, the range of
+$T$ is $[j,+\infty)$. An increase in $T$ will reduce the overall
+utility. Thus, when comparing SS and LL, the decision maker may tend to
+set $T=j$ (the minimum length she can set), in order to optimize the
+overall utility. That is, without mentioning the periods after $j$, she
+does not necessarily sample from the periods later than $j$ to evaluate
+the given delayed reward. In this case, i.e. $T=j$ we have
 
 $$
-w_T = \frac{1}{1+G(T)e^{-u(x_T)}}
+w_T = \frac{1}{1+G(T)e^{-v(x_T)}}
 $$
+
+where
+
+$$
+G(T) = \left\{ \begin{aligned}
+& \frac{1}{1-\delta}(\delta^{-T}-1) \; ,& 0<\delta<1\\
+& T\; ,& \delta=1\
+\end{aligned}
+\right.
+$$
+
+Clearly, when $\delta=1$, the attention weight $w_j$ takes a form
+similar with hyperbolic discounting.
 
 ## Common Difference Effect
 
 Suppose there are a large later reward $x_l$ arriving at period $t_l$
 (denoted by LL) and a small sooner reward $x_s$ arriving at period $t_s$
 (denoted by SS), where $x_l>x_s>0$, $t_l>t_s>0$. Assuming
-$w_{t_l}(x_l)u(x_l)=w_{t_s}(x_s)u(x_s)$, common difference effect
-implies $w_{t_l+\Delta t}(x_l)u(x_l)>w_{t_s+\Delta t}(x_s)u(x_s)$ for
-any positive integer $\Delta t$, magnitude effect implies
-$w_{t_l}(x_l)u(x_l+\Delta x)>w_{t_s}(x_s)u(x_s+\Delta x)$ for any
-positive real number $\Delta x$ [@loewenstein_anomalies_1992].
+$w_{t_l}(x_l)v(x_l)=w_{t_s}(x_s)v(x_s)$, common difference effect
+implies $w_{t_l+\Delta t}(x_l)v(x_l)>w_{t_s+\Delta t}(x_s)v(x_s)$ for
+any positive integer $\Delta t$[@loewenstein_anomalies_1992].
 
-Proposition 1: The common difference effect
-
-(1) holds when
-    $v(x_l)-v(x_s)+\ln\frac{u(x_l)}{u(x_s)}>-(t_l-t_s)\ln\delta$, if
-    $T_l = t_l$ and $T_s=t_s$
-
-(2) always holds, if $T_s = T_l$.
+**Proposition 1**: If the initial weights are uniformly distributed,
+then the common difference effect always holds; if the initial weights
+exponentially declines over time, the common difference effect holds
+when $v(x_l)-v(x_s)+\ln\frac{v(x_l)}{v(x_s)}>-(t_l-t_s)\ln\delta$.
 
 When $\delta = 1$, ADU predicts that the decision maker always performs
 common difference effect. This is obvious because the discounting factor
@@ -374,13 +389,21 @@ difference effect only when the former effect exceeds the latter effect.
 
 ## Magnitude Effect
 
-Proposition 2: The magnitude effect holds when
+Assuming we have $t_l$, $t_s$, $x_l$ fixed, and want to find a $x_s$
+such that $w_{t_l}(x_l)v(x_l) = w_{t_s}(x_s)v(x_s)$, the magnitude
+effect says that, if we increase $x_l$, then the $x_s/x_l$ that makes
+the equality valid will also increase.
+
+**Proposition 2**: The magnitude effect always holds when the utility
+function satisfies
 
 $$
-RRA_u(x)-\alpha\frac{\partial \epsilon_u (x)}{\partial u} <1
+RRA_v(x)\leq 1
 $$
 
-Corollary 1: Suppose $u(x)=x^\gamma/\lambda$, where $\gamma>0$ and
+where $RRA_v(x)$ is the relative risk aversion coefficient of $v(x)$.
+
+**Corollary 1**: Suppose $v(x)=x^\gamma/\lambda$, where $\gamma>0$ and
 $\lambda>0$. Then magnitude effect always holds if and only if
 $0<\gamma<1$.
 
