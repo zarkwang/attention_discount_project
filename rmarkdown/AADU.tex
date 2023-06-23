@@ -65,14 +65,14 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Attention-Adjusted Discounted Utility},
+  pdftitle={Attentional Discounted Utility},
   pdfauthor={Zijian Zark Wang},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
-\title{Attention-Adjusted Discounted Utility}
+\title{Attentional Discounted Utility}
 \author{Zijian Zark Wang}
-\date{June 16, 2023}
+\date{June 21, 2023}
 
 \begin{document}
 \maketitle
@@ -98,11 +98,11 @@ day (i.e.~£110). Consequently, when calculating the utility of
 ``receiving £110 in 100 days'', the investor may want to assign a higher
 weight to the 100th day. And doing that will reduce weight assigned to
 the days prior to the 100th day. Based on this perspective, we develop a
-novel model of intertemporal choice, which we term
-``\emph{attention-adjusted discounted utility}''. We demonstrate how
-this model can better accommodate certain empirical findings. To
-distinguish it from the discounting factor, we refer to the weights in
-our model as ``attention weights.''
+novel model of intertemporal choice, which we term ``\emph{attentional
+discounted utility}''. We demonstrate how this model can better
+accommodate certain empirical findings. To distinguish it from the
+discounting factor, we refer to the weights in our model as ``attention
+weights.''
 
 Let \(\textbf{x} = [x_0, x_1, …, x_T]\) denote a sequence of rewards and
 \(u(.)\) denote the utility function. The overall utility of this
@@ -129,7 +129,7 @@ a decision maker does not deliver the maximum utility, she may tend to
 adjust the belief to safeguard the choice, rather than shift to another
 option. This is usually applied to cognitive dissonance and
 overconfidence. The similar mechanism may exist in the allocation of
-weights to each time period.
+weights to each time period. \textbf{ostrich effect}
 
 The second is rational inattention. The model of rational inattention
 states that, prior to making choices between options, the decision maker
@@ -142,14 +142,9 @@ across time periods, the decision maker has a similar objective
 function, thus the attention weights also follows a logistic-like
 distribution.
 
-The third is the attention mechanisms which have been widely applied in
-deep learning. In such models, there is often an input sequence and a
-query vector. Attention weights are assigned to each period of the
-sequence to determine their relevance to the current context. The most
-common approach to obtain attention weights involves computing
-similarity scores between the query vector and each period in the input
-sequence, normalizing these scores using a softmax (i.e.~multinominal
-logistic) function.
+The third is the related evidence in intertemporal choices. (1) hidden
+zero effect (2) concentration bias (3) models of magnitude-increasing
+patience.
 
 In the attention-adjusted discounted utility model (hereafter referred
 to as ``ADU''), the underlying cognitive process is efficient sampling.
@@ -302,42 +297,28 @@ consistent with many forms of optimal sequential learning (for example,
 satisfied if and only if the solution of \(w(s_t|s)\) follows Equation
 (1).
 
-\hypertarget{comparison-with-existing-models}{%
-\subsection{Comparison With Existing
-Models}\label{comparison-with-existing-models}}
+\hypertarget{the-rationale-behind-mutual-information}{%
+\subsection{The Rationale Behind Mutual
+Information}\label{the-rationale-behind-mutual-information}}
 
-In addition to ADU, there are other models that attempt to incorporate
-attention mechanism into the formation of time preferences. For example,
-\citet{steiner_rational_2017} consider a decision maker adjusting the
-belief \(p(s)\) over time but holding the discounting factor
-\(w(s_t|s)\) constant. In each time period, given that her ability to
-learn new information is limited, the updated belief cannot deviate from
-that in a previous period by too much, which causes behavioral inertia.
-Instead, ADU assumes the decision maker re-allocates \(w(s_t|s)\) each
-time period. Thus, the process of attention adjustment not only affects
-dynamic decision-making but also affects the choices in ``Money Earlier
-or Later'' (MEL) tasks. Besides, \citet{gabaix_myopia_2017} assume the
-perception of future rewards is noisy and the decision maker infers the
-value of them by sampling from normal distributions;
-\citet{gershman_rationally_2020} allow the decision maker optimally
-chooses sample variance to minimize the mean sample squared error. Such
-theories, together with a certain specification on rate-distortion
-function, can lead to magnitude-increasing patience and hyperbolic-like
-discounting. Discounting factors in this style can be viewed as a
-special case of those in ADU. \citet{noor_optimal_2022},
-\citet{noor_constrained_2023} construct an optimization problem similar
-to ADU. However, they use a different cognitive cost function. I compare
-the performance of ADU with models of \citet{gershman_rationally_2020},
-\citet{noor_optimal_2022} and some other papers in predicting human
-choices in MEL tasks.
+Axiom 1: (state independence) the probability weighting process and time
+discounting process can be separated each other.
+
+Axiom 2: (spread-consistency correlation) when allocating a consumption
+budget across time periods, consumers keep their choices dynamically
+consistent if and only if they perform a strong preference for spread.
+
+Proposition 1: If attention weights are generated by the process, the
+weights take the logistic form if and only if the cognitive cost
+function is linear to Shannon mutual information.
 
 \hypertarget{implications-in-time-preferences}{%
 \section{\texorpdfstring{Implications in Time Preferences
 \label{behavioral}}{Implications in Time Preferences }}\label{implications-in-time-preferences}}
 
-\hypertarget{evaluating-a-delayed-reward}{%
-\subsection{Evaluating A Delayed
-Reward}\label{evaluating-a-delayed-reward}}
+\hypertarget{valuation-of-a-delayed-reward}{%
+\subsection{Valuation of A Delayed
+Reward}\label{valuation-of-a-delayed-reward}}
 
 Suppose a decision maker receives a positive detereminstic reward in
 time period \(j\) (and no reward in other periods), that is, for any
@@ -383,8 +364,8 @@ asymmetric. That is, shifting SS to SS\textsubscript{0} and keeping LL
 unchanged leads to an increase in patience, whereas shifting LL to
 LL\textsubscript{0} and keeping SS unchanged cannot increase patience.
 The attention-based explanation is that, in SS, the decision maker may
-conceive the length of sequence as "today''; in SS\textsubscript{0}, she
-may conceive the length as ``6 months''. In the latter case, she
+conceive the length of sequence as ``today''; in SS\textsubscript{0},
+she may conceive the length as ``6 months''. In the latter case, she
 allocates some attention weights to some future periods with zero
 reward, which decreases her overall utility.
 
@@ -400,7 +381,7 @@ after \(j\), she does not necessarily sample from the periods later than
 we have
 
 \[
-w_T = \frac{1}{1+G(T)e^{-u(x_T)}}
+w_T = \frac{1}{1+G(T)e^{-v(x_T)}}
 \]
 
 where
@@ -422,24 +403,16 @@ similar with hyperbolic discounting.
 Suppose there are a large later reward \(x_l\) arriving at period
 \(t_l\) (denoted by LL) and a small sooner reward \(x_s\) arriving at
 period \(t_s\) (denoted by SS), where \(x_l>x_s>0\), \(t_l>t_s>0\).
-Assuming \(w_{t_l}(x_l)u(x_l)=w_{t_s}(x_s)u(x_s)\), common difference
+Assuming \(w_{t_l}(x_l)v(x_l)=w_{t_s}(x_s)v(x_s)\), common difference
 effect implies
-\(w_{t_l+\Delta t}(x_l)u(x_l)>w_{t_s+\Delta t}(x_s)u(x_s)\) for any
-positive integer \(\Delta t\), magnitude effect implies
-\(w_{t_l}(x_l)u(x_l+\Delta x)>w_{t_s}(x_s)u(x_s+\Delta x)\) for any
-positive real number \(\Delta x\) \citep{loewenstein_anomalies_1992}.
+\(w_{t_l+\Delta t}(x_l)v(x_l)>w_{t_s+\Delta t}(x_s)v(x_s)\) for any
+positive integer \(\Delta t\)\citep{loewenstein_anomalies_1992}.
 
-Proposition 1: The common difference effect
-
-\begin{enumerate}
-\def\labelenumi{(\arabic{enumi})}
-\item
-  holds when
-  \(v(x_l)-v(x_s)+\ln\frac{u(x_l)}{u(x_s)}>-(t_l-t_s)\ln\delta\), if
-  \(T_l = t_l\) and \(T_s=t_s\)
-\item
-  always holds, if \(T_s = T_l\).
-\end{enumerate}
+\textbf{Proposition 2}: If the initial weights are uniformly
+distributed, then the common difference effect always holds; if the
+initial weights exponentially declines over time, the common difference
+effect holds when
+\(v(x_l)-v(x_s)+\ln\frac{v(x_l)}{v(x_s)}>-(t_l-t_s)\ln\delta\).
 
 When \(\delta = 1\), ADU predicts that the decision maker always
 performs common difference effect. This is obvious because the
@@ -468,19 +441,42 @@ difference effect only when the former effect exceeds the latter effect.
 \hypertarget{magnitude-effect}{%
 \subsection{Magnitude Effect}\label{magnitude-effect}}
 
-Proposition 2: The magnitude effect holds when
+Assuming we have \(t_l\), \(t_s\), \(x_s\) fixed, and want to find a
+\(x_l\) such that \(w_{t_l}(x_l)v(x_l) = w_{t_s}(x_s)v(x_s)\), the
+magnitude effect implies that, if we increase \(x_s\), then the
+\(x_l/x_s\) that makes the equality valid will decrease.
 
-\[
-RRA_u(x)-\alpha\frac{\partial \epsilon_u (x)}{\partial u} <1
-\]
+\textbf{Proposition 3}: The magnitude effect always holds when the
+utility function \(v(x)\) satisfies\[
+RRA_v(x)\leq 1-\frac{e_v(x)}{v(x)+1}
+\]where \(RRA_v(x)\) is the relative risk aversion coefficient of
+\(v(x)\), \(e_v(x)\) is the elasticity of \(v(x)\) to \(x\).
 
-Corollary 1: Suppose \(u(x)=x^\gamma/\lambda\), where \(\gamma>0\) and
-\(\lambda>0\). Then magnitude effect always holds if and only if
-\(0<\gamma<1\).
+\textbf{Corollary 1}: Suppose \(v(x)=x^\gamma/\lambda\), where
+\(\gamma>0\) and \(\lambda>0\). Then magnitude effect always holds.
 
-\hypertarget{non-additive-time-intervals}{%
-\subsection{Non-Additive Time
-Intervals}\label{non-additive-time-intervals}}
+\hypertarget{concavity-of-time-discounting}{%
+\subsection{Concavity of Time
+Discounting}\label{concavity-of-time-discounting}}
+
+\textbf{Proposition 4}: If \(\delta =1\), then the discount function is
+convex in \(t\). If \(0<\delta<1\), then there are a reward threshold
+\(\underline{x}\) and a time threshold \(\underline{t}\) such that
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  when \(x\leq \underline{x}\), the discount function is convex in
+  \(t\);
+\item
+  when \(x > \underline{x}\), the discount function is convex in \(t\)
+  given \(t\geq \underline{t}\), and it is concave in \(t\) given
+  \(t<\underline{t}\).
+\end{enumerate}
+
+It can be derived that \(v(\underline{x})=\ln(\frac{2}{1-\delta})\), and
+\(\underline{t}=\frac{\ln[(1-\delta)e^{v(x)}-1]}{-\ln\delta}\).
 
 Both exponential and hyperbolic discounting models predict the decision
 maker is risk seeking over time lotteries. That is, suppose a
@@ -518,8 +514,45 @@ intervals are sub-additive when the total time length \(T\) is large,
 and are super-additive when \(T\) is small, which is consistent with
 \citet{scholten_discounting_2006}.
 
-\hypertarget{non-separable-sequences}{%
-\subsection{Non-Separable Sequences}\label{non-separable-sequences}}
+\hypertarget{violation-of-diminishing-sensitivity}{%
+\subsection{Violation of Diminishing
+Sensitivity}\label{violation-of-diminishing-sensitivity}}
+
+We discuss two behavioral implications of this property. The first is
+reference-dependent preferences. The second is sub-additivity and
+super-additivity of time intervals.
+
+\textbf{Proposition 5}: Suppose \(-\frac{v''(x)}{v'(x)^2}<2\) at
+\(x=0\), then there exists a threshold \(x^*\) in \((0,+\infty)\) such
+that \(V(x,t)\) is convex in \(x\) when \(x\leq x^*\) and concave in
+\(x\) when \(x>x^*\).
+
+Supporting evidence: sub- and super-additive intervals
+
+ADU predicts that the larger the unit cost of information \(\lambda\) or
+the smaller the magnitude of \(x_l\) and \(x_s\) is, the more likely it
+is that the decision maker performs magnitude effect.
+
+First, note that the magnitude effect requires the decision maker's
+overall utility \(w_T(x_T)u(x_T)\) to be a convex function of \(x_T\).
+Given that \(u(.)\) is concave, whether the magnitude effect holds
+should depend on \(w_T\). Then, set \(z = u(x_T)-\lambda\log G(T)\). We
+can rewrite Equation (2) as a logistic function of \(z\), i.e.
+\(w_T = 1/(1+e^{-z/\lambda})\). By the shape of logistic function,
+\(w_T\) is convex in \(u(x_T)\) if and only if
+\(u(x_T)<\lambda \log G(T)\) (that is, when \(x_T\) is small relative to
+\(T\) or when \(\lambda\) is large). Finally, it is notable that the
+given condition is necessary but not sufficient to yield magnitude
+effect.
+
+In summary, holding the others equal, the decision makers' overall
+utility can be convex in a future reward when the level of it is under a
+certain threshold, and be concave when it is above the threshold. This
+is also consistent to the theories about reference-dependent preferences
+\citep{koszegi_model_2006}.
+
+\hypertarget{inseparable-sequences}{%
+\subsection{Inseparable Sequences}\label{inseparable-sequences}}
 
 Let \(x\) and \(y\) denote two 2-period risky reward sequences. For
 \(x\), the realized sequence is {[}£100,£100{]} with probability 1/2,
@@ -544,35 +577,13 @@ of £100 (suppose that weight is \(w\)). Then the value of \(x\) is
 \(w\cdot u(100) +(1-w) \cdot u(3)\). Given that \(x>\frac{1}{2}\), the
 decision makers should strictly prefer \(y\) to \(x\).
 
-\hypertarget{reference-dependent-preferences}{%
-\subsection{Reference-Dependent
-Preferences}\label{reference-dependent-preferences}}
+\hypertarget{implications-in-dynamically-inconsistent-planning}{%
+\section{Implications in Dynamically Inconsistent
+Planning}\label{implications-in-dynamically-inconsistent-planning}}
 
-ADU predicts that the larger the unit cost of information \(\lambda\) or
-the smaller the magnitude of \(x_l\) and \(x_s\) is, the more likely it
-is that the decision maker performs magnitude effect.
-
-First, note that the magnitude effect requires the decision maker's
-overall utility \(w_T(x_T)u(x_T)\) to be a convex function of \(x_T\).
-Given that \(u(.)\) is concave, whether the magnitude effect holds
-should depend on \(w_T\). Then, set \(z = u(x_T)-\lambda\log G(T)\). We
-can rewrite Equation (2) as a logistic function of \(z\), i.e.
-\(w_T = 1/(1+e^{-z/\lambda})\). By the shape of logistic function,
-\(w_T\) is convex in \(u(x_T)\) if and only if
-\(u(x_T)<\lambda \log G(T)\) (that is, when \(x_T\) is small relative to
-\(T\) or when \(\lambda\) is large). Finally, it is notable that the
-given condition is necessary but not sufficient to yield magnitude
-effect.
-
-In summary, holding the others equal, the decision makers' overall
-utility can be convex in a future reward when the level of it is under a
-certain threshold, and be concave when it is above the threshold. This
-is also consistent to the theories about reference-dependent preferences
-\citep{koszegi_model_2006}.
-
-\hypertarget{attentional-account-of-dynamic-inconsisteny}{%
-\section{Attentional Account of Dynamic
-Inconsisteny}\label{attentional-account-of-dynamic-inconsisteny}}
+\hypertarget{weight-updating-and-attention-grabbing-effect}{%
+\subsection{Weight Updating and Attention-Grabbing
+Effect}\label{weight-updating-and-attention-grabbing-effect}}
 
 Suppose a decision maker has budget \(m\) (\(m>0\)) and is considering
 how to spend it over different time periods. We can use a reward
@@ -633,12 +644,71 @@ Both the attention-grabbing effect and initial attention updating are
 affected by the curvature of utility function. They jointly decide which
 behavior pattern that people should perform in dynamics.
 
-\hypertarget{consumption-oversmoothness-and-oversensitivity}{%
-\section{Consumption Oversmoothness and
-Oversensitivity}\label{consumption-oversmoothness-and-oversensitivity}}
+\hypertarget{excess-smoothness-and-sensitivity-of-consumption}{%
+\subsection{Excess Smoothness and Sensitivity of
+Consumption}\label{excess-smoothness-and-sensitivity-of-consumption}}
+
+\hypertarget{empirical-analysis}{%
+\section{Empirical Analysis}\label{empirical-analysis}}
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
+
+\hypertarget{comparison-with-other-related-models}{%
+\subsection{Comparison With Other Related
+Models}\label{comparison-with-other-related-models}}
+
+The third is the attention mechanisms which have been widely applied in
+deep learning. In such models, there is often an input sequence and a
+query vector. Attention weights are assigned to each period of the
+sequence to determine their relevance to the current context. The most
+common approach to obtain attention weights involves computing
+similarity scores between the query vector and each period in the input
+sequence, normalizing these scores using a softmax (i.e.~multinominal
+logistic) function.
+
+In addition to ADU, there are other models that attempt to incorporate
+attention mechanism into the formation of time preferences. For example,
+\citet{steiner_rational_2017} consider a decision maker adjusting the
+belief \(p(s)\) over time but holding the discounting factor
+\(w(s_t|s)\) constant. In each time period, given that her ability to
+learn new information is limited, the updated belief cannot deviate from
+that in a previous period by too much, which causes behavioral inertia.
+Instead, ADU assumes the decision maker re-allocates \(w(s_t|s)\) each
+time period. Thus, the process of attention adjustment not only affects
+dynamic decision-making but also affects the choices in ``Money Earlier
+or Later'' (MEL) tasks. Besides, \citet{gabaix_myopia_2017} assume the
+perception of future rewards is noisy and the decision maker infers the
+value of them by sampling from normal distributions;
+\citet{gershman_rationally_2020} allow the decision maker optimally
+chooses sample variance to minimize the mean sample squared error. Such
+theories, together with a certain specification on rate-distortion
+function, can lead to magnitude-increasing patience and hyperbolic-like
+discounting. Discounting factors in this style can be viewed as a
+special case of those in ADU. \citet{noor_optimal_2022},
+\citet{noor_constrained_2023} construct an optimization problem similar
+to ADU. However, they use a different cognitive cost function. I compare
+the performance of ADU with models of \citet{gershman_rationally_2020},
+\citet{noor_optimal_2022} and some other papers in predicting human
+choices in MEL tasks.
+
+\hypertarget{the-sampling-process-underlying-adu}{%
+\subsection{The Sampling Process Underlying
+ADU}\label{the-sampling-process-underlying-adu}}
+
+\hypertarget{potential-research-directions}{%
+\subsection{Potential Research
+Directions}\label{potential-research-directions}}
+
+\begin{itemize}
+\item
+  direct measure of discounting
+\item
+  intransitive time preference
+\item
+  range-dependent weighting (focusing) / consider salience and
+  similarity
+\end{itemize}
 
 \renewcommand\refname{Reference}
   \bibliography{reference.bib}
