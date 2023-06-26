@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.6.19)  21 JUN 2023 04:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.6.19)  26 JUN 2023 05:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -503,7 +503,7 @@ LaTeX Warning: Command \textellipsis invalid in math mode on input line 325.
 LaTeX Warning: Reference `eq:w_delay' on page 8 undefined on input line 374.
 
 [8] [9] [10] [11] [12] [13] [14]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 705.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 723.
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (./AADU.bbl [15{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [16])
@@ -520,21 +520,21 @@ L3 programming layer <2023-06-16>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `AADU.out' has not changed.
-(rerunfilecheck)             Checksum: 29EC7602105228EF5D2DE80DBA7B9CC3;4119.
+(rerunfilecheck)             Checksum: AB35472BCA01787A7553B73B5DE9BF84;4152.
  ) 
 Here is how much of TeX's memory you used:
- 12817 strings out of 477683
- 203501 string characters out of 5829331
+ 12820 strings out of 477683
+ 203531 string characters out of 5829331
  1862749 words of memory out of 5000000
  33041 multiletter control sequences out of 15000+600000
  576383 words of font info for 80 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,9n,79p,424b,578s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,424b,574s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
-Output written on AADU.pdf (17 pages, 249378 bytes).
+Output written on AADU.pdf (17 pages, 250871 bytes).
 PDF statistics:
- 385 PDF objects out of 1000 (max. 8388607)
- 333 compressed objects within 4 object streams
- 85 named destinations out of 1000 (max. 500000)
+ 388 PDF objects out of 1000 (max. 8388607)
+ 336 compressed objects within 4 object streams
+ 88 named destinations out of 1000 (max. 500000)
  161 words of extra memory for PDF output out of 10000 (max. 10000000)
 

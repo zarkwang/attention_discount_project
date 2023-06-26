@@ -72,7 +72,7 @@
 
 \title{Attentional Discounted Utility}
 \author{Zijian Zark Wang}
-\date{June 21, 2023}
+\date{June 26, 2023}
 
 \begin{document}
 \maketitle
@@ -522,10 +522,27 @@ We discuss two behavioral implications of this property. The first is
 reference-dependent preferences. The second is sub-additivity and
 super-additivity of time intervals.
 
-\textbf{Proposition 5}: Suppose \(-\frac{v''(x)}{v'(x)^2}<2\) at
-\(x=0\), then there exists a threshold \(x^*\) in \((0,+\infty)\) such
-that \(V(x,t)\) is convex in \(x\) when \(x\leq x^*\) and concave in
-\(x\) when \(x>x^*\).
+\textbf{Proposition 5}: Suppose \(t\geq1\),
+\(\frac{d}{dx}\left(\frac{1}{v'(x)}\right)\) is continuous in
+\((0,+\infty)\), then
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\item
+  there exists a threshold \(\bar{x}\) in \((0,+\infty)\) such that
+  \(V(x,t)\) is strictly concave in \(x\) when
+  \(x\in [\bar{x},+\infty)\)
+\item
+  if \(\frac{d}{dx}\left(\frac{1}{v'(x)}\right)\) is continuous at
+  \(x=0\), and \(\frac{d}{dx}\left(\frac{1}{v'(0)}\right)<1\), then
+  there exists a threshold \(x^*\) in \((0, \bar{x})\) such that, for
+  any \(x\in (0,x^*)\), \(V(x,t)\) is strictly convex in \(x\) .
+\item
+  there exist a hyper-parameter \(\lambda^*\) and an interval
+  \((x_1,x_2)\) such that, if \(\lambda<\lambda^*\), for any
+  \(x\in(x_1,x_2)\), \(V(x,t)\) is strictly convex in \(x\), where
+  \(\lambda^*>0\) and \((x_1,x_2)\subset(0,\bar{x})\).
+\end{enumerate}
 
 Supporting evidence: sub- and super-additive intervals
 
@@ -551,8 +568,9 @@ certain threshold, and be concave when it is above the threshold. This
 is also consistent to the theories about reference-dependent preferences
 \citep{koszegi_model_2006}.
 
-\hypertarget{inseparable-sequences}{%
-\subsection{Inseparable Sequences}\label{inseparable-sequences}}
+\hypertarget{inseparability-of-sequences}{%
+\subsection{Inseparability of
+Sequences}\label{inseparability-of-sequences}}
 
 Let \(x\) and \(y\) denote two 2-period risky reward sequences. For
 \(x\), the realized sequence is {[}£100,£100{]} with probability 1/2,

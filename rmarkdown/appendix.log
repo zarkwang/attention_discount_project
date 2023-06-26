@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.6.19)  21 JUN 2023 06:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.6.19)  26 JUN 2023 06:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -433,31 +433,31 @@ Underfull \hbox (badness 1762) in paragraph at lines 215--221
 \T1/lmr/m/n/12 where $\OML/lmm/m/it/12 RRA[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x\OT1/lmr/m/n/12 )$ \T1/lmr/m/n/12 is the rel-a-tive risk aver-sion co-ef-fi-cient of $\OML/lmm/m/it/12 v\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x\OT1/lmr/m/n/12 )$\T1/lmr/m/n/12 , i.e. $\OML/lmm/m/it/12 RRA[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x\OT1/lmr/m/n/12 ) =
  []
 
-[3] [4]
+[3] [4] [5]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 307.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 368.
 
-[5] [6] (./appendix.aux)
+[6] [7] (./appendix.aux)
  ***********
 LaTeX2e <2023-06-01>
 L3 programming layer <2023-06-16>
  ***********
 Package rerunfilecheck Info: File `appendix.out' has not changed.
-(rerunfilecheck)             Checksum: 5B9BB2038F15ADFAC688DFF91313DEA1;1686.
+(rerunfilecheck)             Checksum: 190A5296781D0006F8E9EDB10C61508D;1686.
  ) 
 Here is how much of TeX's memory you used:
- 10815 strings out of 477683
- 166253 string characters out of 5829331
- 1867749 words of memory out of 5000000
+ 10821 strings out of 477683
+ 166289 string characters out of 5829331
+ 1869749 words of memory out of 5000000
  31111 multiletter control sequences out of 15000+600000
  558029 words of font info for 73 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,6n,79p,368b,443s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
-Output written on appendix.pdf (6 pages, 212322 bytes).
+Output written on appendix.pdf (7 pages, 217044 bytes).
 PDF statistics:
- 186 PDF objects out of 1000 (max. 8388607)
- 149 compressed objects within 2 object streams
- 44 named destinations out of 1000 (max. 500000)
+ 198 PDF objects out of 1000 (max. 8388607)
+ 160 compressed objects within 2 object streams
+ 50 named destinations out of 1000 (max. 500000)
  65 words of extra memory for PDF output out of 10000 (max. 10000000)
 
