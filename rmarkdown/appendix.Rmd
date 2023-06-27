@@ -11,6 +11,16 @@ output: pdf_document
 
 ## A. Proofs about mutual information
 
+$$
+V=\sum_{t=0}^{T}w_tv_t
+$$
+
+Calculate the first-order derivative of $V$ with respect to $x_t$
+
+$$
+\frac{\partial V}{\partial x_t}=v_t'w_t(1+v_t-V)
+$$
+
 ## B. Proofs about common difference effect
 
 Suppose the instantaneous utilities of LL and SS are $v_l$ and $v_s$, and the delays for LL and SS are $t_l$ and $t_s$. Under ADU, the common difference effect implies that, if$$ \tag{B.1}

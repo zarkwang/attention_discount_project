@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.13)  27 JUN 2023 02:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.13)  27 JUN 2023 17:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -488,171 +488,47 @@ LaTeX Warning: Command \textellipsis invalid in math mode on input line 107.
 
 [1
 
-{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}] [2{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
-
-Package natbib Warning: Citation `loewenstein_anomalies_1992' on page 3 undefined on input line 169.
-
-
-Package natbib Warning: Citation `onay_intertemporal_2007' on page 3 undefined on input line 170.
-
-
-Package natbib Warning: Citation `dejarnette_time_2020' on page 3 undefined on input line 170.
-
-
-Package natbib Warning: Citation `read_is_2001' on page 3 undefined on input line 172.
-
-
-Package natbib Warning: Citation `scholten_discounting_2006' on page 3 undefined on input line 172.
-
-
-Package natbib Warning: Citation `andersen_multiattribute_2018' on page 3 undefined on input line 173.
-
-
-Package natbib Warning: Citation `loewenstein_preferences_1993' on page 3 undefined on input line 175.
-
-
-Package natbib Warning: Citation `koszegi_model_2006' on page 3 undefined on input line 176.
-
-[3{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}] [2{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}] [3]
 
 LaTeX Warning: Command \textellipsis invalid in math mode on input line 241.
 
-[4]
+[4{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [5] [6]
 
-Package natbib Warning: Citation `matejka_rational_2015' on page 5 undefined on input line 259.
-
-
-Package natbib Warning: Citation `matejka_rational_2015' on page 5 undefined on input line 266.
-
-
-Package natbib Warning: Citation `matejka_rational_2015' on page 5 undefined on input line 277.
-
-
-Package natbib Warning: Citation `jung_discrete_2019' on page 5 undefined on input line 277.
-
-
-Package natbib Warning: Citation `mackowiak_rational_2023' on page 5 undefined on input line 277.
-
-
-Package natbib Warning: Citation `matejka_rational_2015' on page 5 undefined on input line 278.
-
-[5]
-
-Package natbib Warning: Citation `zhong_optimal_2022' on page 6 undefined on input line 307.
-
-
-Package natbib Warning: Citation `matejka_rational_2015' on page 6 undefined on input line 307.
-
-
-Package natbib Warning: Citation `caplin_rationally_2022' on page 6 undefined on input line 308.
-
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 343.
-
-[6]
-
-Package natbib Warning: Citation `magen_hidden-zero_2008' on page 7 undefined on input line 368.
-
-
-Package natbib Warning: Citation `read_value_2017' on page 7 undefined on input line 380.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 360.
 
 [7]
 
-LaTeX Warning: Reference `eq:w_delay' on page 8 undefined on input line 392.
+LaTeX Warning: Reference `eq:w_delay' on page 8 undefined on input line 410.
 
-
-Package natbib Warning: Citation `loewenstein_anomalies_1992' on page 8 undefined on input line 427.
-
-[8] [9]
-
-Package natbib Warning: Citation `onay_intertemporal_2007' on page 10 undefined on input line 508.
-
-
-Package natbib Warning: Citation `takeuchi_non-parametric_2011' on page 10 undefined on input line 521.
-
-
-Package natbib Warning: Citation `read_is_2001' on page 10 undefined on input line 532.
-
-
-Package natbib Warning: Citation `scholten_discounting_2006' on page 10 undefined on input line 535.
-
-[10]
-
-Package natbib Warning: Citation `koszegi_model_2006' on page 11 undefined on input line 592.
-
-[11]
-
-Package natbib Warning: Citation `fishburn_time_1982' on page 12 undefined on input line 603.
-
-
-Package natbib Warning: Citation `andersen_multiattribute_2018' on page 12 undefined on input line 606.
-
-
-Package natbib Warning: Citation `noor_constrained_2023' on page 12 undefined on input line 609.
-
-[12]
-
-Package natbib Warning: Citation `loewenstein_preferences_1993' on page 13 undefined on input line 650.
-
-[13]
-
-Package natbib Warning: Citation `steiner_rational_2017' on page 14 undefined on input line 713.
-
-
-Package natbib Warning: Citation `gabaix_myopia_2017' on page 14 undefined on input line 721.
-
-
-Package natbib Warning: Citation `gershman_rationally_2020' on page 14 undefined on input line 724.
-
-
-Package natbib Warning: Citation `noor_optimal_2022' on page 14 undefined on input line 729.
-
-
-Package natbib Warning: Citation `noor_constrained_2023' on page 14 undefined on input line 730.
-
-
-Package natbib Warning: Citation `gershman_rationally_2020' on page 14 undefined on input line 732.
-
-
-Package natbib Warning: Citation `noor_optimal_2022' on page 14 undefined on input line 733.
-
-[14]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 746.
+[8] [9] [10] [11] [12] [13] [14] [15]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 764.
 (c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) (./AADU.bbl [15{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [16])
+) (./AADU.bbl [16{c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [17])
 
 Package caption Warning: Unused \captionsetup[table] on input line 58.
 See the caption package documentation for explanation.
 
-
-Package natbib Warning: There were undefined citations.
-
-[17] (./AADU.aux
-
-Package natbib Warning: Citation(s) may have changed.
-(natbib)                Rerun to get citations correct.
-
-)
+[18] (./AADU.aux)
 
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `AADU.out' has not changed.
-(rerunfilecheck)             Checksum: AB35472BCA01787A7553B73B5DE9BF84;4152.
+(rerunfilecheck)             Checksum: E9E2A82185F2645ED48A343EB0AF6141;4092.
  ) 
 Here is how much of TeX's memory you used:
- 12665 strings out of 477977
- 206469 string characters out of 5836999
+ 12662 strings out of 477977
+ 206442 string characters out of 5836999
  1860660 words of memory out of 5000000
- 32581 multiletter control sequences out of 15000+600000
+ 32579 multiletter control sequences out of 15000+600000
  575283 words of font info for 78 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,9n,76p,424b,576s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,76p,424b,578s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/Users/phd19zw1/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on AADU.pdf (17 pages, 260282 bytes).
+Output written on AADU.pdf (18 pages, 264772 bytes).
 PDF statistics:
- 318 PDF objects out of 1000 (max. 8388607)
- 265 compressed objects within 3 object streams
- 88 named destinations out of 1000 (max. 500000)
- 161 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 392 PDF objects out of 1000 (max. 8388607)
+ 337 compressed objects within 4 object streams
+ 87 named destinations out of 1000 (max. 500000)
+ 153 words of extra memory for PDF output out of 10000 (max. 10000000)
 
