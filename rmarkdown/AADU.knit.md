@@ -1,7 +1,7 @@
 ---
 title: "Attentional Discounted Utility"
 author: "Zijian Zark Wang"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
+date: "June 27, 2023"
 bibliography: reference.bib
 biblio-style: apalike
 header-includes: 
