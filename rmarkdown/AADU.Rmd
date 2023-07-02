@@ -445,17 +445,17 @@ $\frac{d}{dx}\left(\frac{1}{v'(x)}\right)$ is continuous in
 $(0,+\infty)$, then
 
 (1) there exists a threshold $\bar{x}$ in $(0,+\infty)$ such that
-$V(x,t)$ is strictly concave in $x$ when $x\in [\bar{x},+\infty)$
+    $V(x,t)$ is strictly concave in $x$ when $x\in [\bar{x},+\infty)$
 
 (2) if $\frac{d}{dx}\left(\frac{1}{v'(x)}\right)$ is continuous at
-$x=0$, and $\frac{d}{dx}\left(\frac{1}{v'(0)}\right)<1$, then there
-exists a threshold $x^*$ in $(0, \bar{x})$ such that, for any
-$x\in (0,x^*)$, $V(x,t)$ is strictly convex in $x$ .
+    $x=0$, and $\frac{d}{dx}\left(\frac{1}{v'(0)}\right)<1$, then there
+    exists a threshold $x^*$ in $(0, \bar{x})$ such that, for any
+    $x\in (0,x^*)$, $V(x,t)$ is strictly convex in $x$ .
 
 (3) there exist a hyper-parameter $\lambda^*$ and an interval
-$(x_1,x_2)$ such that, if $\lambda<\lambda^*$, for any $x\in(x_1,x_2)$,
-$V(x,t)$ is strictly convex in $x$, where $\lambda^*>0$ and
-$(x_1,x_2)\subset(0,\bar{x})$.
+    $(x_1,x_2)$ such that, if $\lambda<\lambda^*$, for any
+    $x\in(x_1,x_2)$, $V(x,t)$ is strictly convex in $x$, where
+    $\lambda^*>0$ and $(x_1,x_2)\subset(0,\bar{x})$.
 
 Supporting evidence: sub- and super-additive intervals
 
