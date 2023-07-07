@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.6.19)  26 JUN 2023 06:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.4)  7 JUL 2023 13:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **appendix.tex
 (./appendix.tex
-LaTeX2e <2023-06-01>
-L3 programming layer <2023-06-16>
+LaTeX2e <2023-06-01> patch level 1
+L3 programming layer <2023-06-30>
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size12.clo
@@ -208,7 +208,7 @@ LaTeX Info: Redefining \addtolength on input line 81.
 ) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2022/12/04 v6.7b set line spacing
 ) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2023-05-16 v7.00y Hypertext links for LaTeX
+Package: hyperref 2023-06-25 v7.01a Hypertext links for LaTeX
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 ) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
@@ -232,7 +232,7 @@ Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 ) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 ) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2023-05-16 v2.51 Cross-referencing by name of section
+Package: nameref 2023-06-18 v2.52 Cross-referencing by name of section
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
@@ -249,7 +249,7 @@ Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 \Hy@linkcounter=\count279
 \Hy@pagecounter=\count280
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2023-05-16 v7.00y Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2023-06-25 v7.01a Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 ) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
@@ -257,7 +257,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
 \Hy@SavedSpaceFactor=\count281
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2023-05-16 v7.00y Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2023-06-25 v7.01a Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
@@ -301,7 +301,7 @@ package with kernel methods
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2023-05-16 v7.00y Hyperref driver for pdfTeX
+File: hpdftex.def 2023-06-25 v7.01a Hyperref driver for pdfTeX
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
@@ -421,43 +421,43 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 100.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 109.
+(Font)              <12> on input line 107.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 109.
+(Font)              <8> on input line 107.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 109.
+(Font)              <6> on input line 107.
 [1
 
-{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [2{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
-Underfull \hbox (badness 1762) in paragraph at lines 215--221
+{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [2] [3]
+Underfull \hbox (badness 1762) in paragraph at lines 227--233
 \T1/lmr/m/n/12 where $\OML/lmm/m/it/12 RRA[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x\OT1/lmr/m/n/12 )$ \T1/lmr/m/n/12 is the rel-a-tive risk aver-sion co-ef-fi-cient of $\OML/lmm/m/it/12 v\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x\OT1/lmr/m/n/12 )$\T1/lmr/m/n/12 , i.e. $\OML/lmm/m/it/12 RRA[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x\OT1/lmr/m/n/12 ) =
  []
 
-[3] [4] [5]
+[4] [5]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 368.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 382.
 
-[6] [7] (./appendix.aux)
+[6] [7] [8] (./appendix.aux)
  ***********
-LaTeX2e <2023-06-01>
-L3 programming layer <2023-06-16>
+LaTeX2e <2023-06-01> patch level 1
+L3 programming layer <2023-06-30>
  ***********
 Package rerunfilecheck Info: File `appendix.out' has not changed.
-(rerunfilecheck)             Checksum: 190A5296781D0006F8E9EDB10C61508D;1686.
+(rerunfilecheck)             Checksum: 8E13C3C0DB216E73258AEDBA3CD6837A;1442.
  ) 
 Here is how much of TeX's memory you used:
- 10821 strings out of 477683
- 166289 string characters out of 5829331
- 1869749 words of memory out of 5000000
- 31111 multiletter control sequences out of 15000+600000
- 558029 words of font info for 73 fonts, out of 8000000 for 9000
+ 10837 strings out of 477196
+ 166992 string characters out of 5812014
+ 1932238 words of memory out of 5000000
+ 31615 multiletter control sequences out of 15000+600000
+ 602711 words of font info for 75 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,6n,79p,368b,443s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
-Output written on appendix.pdf (7 pages, 217044 bytes).
+Output written on appendix.pdf (8 pages, 218944 bytes).
 PDF statistics:
- 198 PDF objects out of 1000 (max. 8388607)
- 160 compressed objects within 2 object streams
- 50 named destinations out of 1000 (max. 500000)
- 65 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 197 PDF objects out of 1000 (max. 8388607)
+ 158 compressed objects within 2 object streams
+ 49 named destinations out of 1000 (max. 500000)
+ 57 words of extra memory for PDF output out of 10000 (max. 10000000)
 
