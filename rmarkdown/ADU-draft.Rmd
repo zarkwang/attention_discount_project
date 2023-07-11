@@ -21,8 +21,8 @@ editor_options:
   markdown: 
     wrap: 72
 output:
-  word_document:
-    number_sections: true
+  #word_document:
+    #number_sections: true
   pdf_document:
     number_sections: true
     citation_package: natbib
@@ -223,7 +223,11 @@ cost function in the intertemporal choice setting.
 number $\alpha\in(0,1)$, $X_T\succ X'_T$ implies
 $\alpha X_T+ (1-\alpha)X''_T \succ \alpha X'_T + (1-\alpha) X''_T$.
 
-Axiom 1 can be interpreted by Lemma 1.
+Axiom 1 can be interpreted by Lemma 1.[^5]
+
+[^5]: The preference relation $x \succ y$ is defined by the opposite of
+    $y\succsim x$; the preference relation $x\sim y$ is defined by the
+    joint satisfaction of $x\succsim y$ and $y \succsim x$.
 
 **Lemma 1**: (*state independence*) Suppose preference relation
 $\succsim$ has an ADU representation and satisfies Axiom 1. If

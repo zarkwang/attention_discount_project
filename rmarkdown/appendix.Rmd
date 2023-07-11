@@ -4,12 +4,26 @@ author: "Zijian Zark Wang"
 bibliography: reference.bib
 header-includes: 
   \usepackage{setspace}
-  \setstretch{1.2} 
+  \setstretch{1.5} 
 fontsize: 12pt
 output: pdf_document
 ---
 
 ## A. Proofs about mutual information
+
+**Proof of Lemma 1:**
+
+Lemma 1 states that, the value of a risky reward sequence can be represented with expected utility framework. According to vNM representation theorem, if $\succsim$ is state-independent and is continuous, then it has an expected utility representation.
+
+The state independence condition is specified by Axiom 2. What we need to prove is that if $\succsim$ has an ADU representation, then it must be continuous. the following axiom specifies the continuity condition.
+
+Axiom A.1 (continuity): For any $X_T$, $X'_T$, $X''_T$, the set $Z_1=\{\alpha\in[0,1]|\alpha X_T+(1-\alpha)X'_T\succsim X''_T\}$ and the set $Z_2=\{\alpha\in[0,1]|X''_T\succsim \alpha X_T + (1-\alpha)X'_T\}$ are closed.
+
+We can prove that the definition of ADU is sufficient to derive Axiom A.1 by contradiction. First, we can rearrange $Z_1$ to $Z_1=\{\alpha\in[0,1]|\alpha U(X_T)+(1-\alpha)U(X'_T)\geq U(X''_T)\}$ . Second, assume $\alpha=1$ and $U(X_T)\geq U(X''_T)$. If $Z_1$ is open, then the $\epsilon$-neighborhood of $\alpha$ is also a subset of $Z_1$, which means we have $\alpha+\epsilon \in Z_1$ for some positive $\epsilon$. This is contradictory with $\alpha\in[0,1]$. Third, the same principle can be applied to $Z_2$. So, both $Z_1$ and $Z_2$ are closed.
+
+**Proof of Lemma 2:**
+
+Proof of Proposition 1:
 
 (under editing)
 
@@ -56,9 +70,9 @@ $$
 
 Equation (C.1) is obtained by applying the chain rule of differentiation to decompose the expression on the left-hand side. Before proceeding with further derivation, we first prove that for any $x_s$ and $x_l$, we can always find a pair of $t_s$ and $t_l$ such that the decision maker is indifferent between SS and LL (see Lemma 1). This allows us to focus merely on the relation between $x_s$ and $x_l$.
 
-**Lemma 1**: For any $0<<x_s<x_l<+\infty$, there always exist $t_s$ and $t_l$ such that $V(x_s, t_s) = V(x_l, t_l)$, where $0\leq t_s<t_l<+\infty$.
+**Lemma C.1**: For any $0<<x_s<x_l<+\infty$, there always exist $t_s$ and $t_l$ such that $V(x_s, t_s) = V(x_l, t_l)$, where $0\leq t_s<t_l<+\infty$.
 
-To prove Lemma 1, we can first fix $t_s$, then show that, for equation $V(x_s, t_s)-V(x_l,t_l)=0$, there exists a solution $t_l$ that is located in $(t_s, +\infty)$. This is obvious given that $V(x,t)$ is a continuous function, and is decreasing in $t$ and increasing in $x$, and converges to 0 when $t$ approaches $+\infty$. When $t_l = t_s$, we must have $V(x_s, t_s)-V(x_l,t_l)<0$; when $t_l \rightarrow +\infty$, we must have $V(x_s, t_s)-V(x_l,t_l)>0$, since it is easy to find a $t_s$ such that $V(x_s, t_s)>>0$. Thus, the function $V(x_s, t_s)-V(x_l,t_l)$ of $t_l$ must have a zero point in $(t_s, +\infty)$. *QED*
+To prove Lemma C.1, we can first fix $t_s$, then show that, for equation $V(x_s, t_s)-V(x_l,t_l)=0$, there exists a solution $t_l$ that is located in $(t_s, +\infty)$. This is obvious given that $V(x,t)$ is a continuous function, and is decreasing in $t$ and increasing in $x$, and converges to 0 when $t$ approaches $+\infty$. When $t_l = t_s$, we must have $V(x_s, t_s)-V(x_l,t_l)<0$; when $t_l \rightarrow +\infty$, we must have $V(x_s, t_s)-V(x_l,t_l)>0$, since it is easy to find a $t_s$ such that $V(x_s, t_s)>>0$. Thus, the function $V(x_s, t_s)-V(x_l,t_l)$ of $t_l$ must have a zero point in $(t_s, +\infty)$. *QED*
 
 Define a function $\xi(x) = x\cdot \partial V/\partial x$. Then Equation (C.1) is valid if and only if $\xi(x_s)<\xi(x_l)$. Note that$$\tag{C.2}
 \frac{\partial V}{\partial x} = v'(x)\frac{1+G(t)e^{-v(x)}+v(x)\cdot G(t)e^{-v(x)}}{[1+G(t)e^{-v(x)}]^2}
@@ -70,11 +84,11 @@ $$
 
 Let $e_v(x)$ denote the elasticity of $v(x)$ to $x$, i.e. $e_v(x) = v'(x) \cdot x/v(x)$. Then we can write the expression of $\xi(x)$ as $\xi(x)=(1+\alpha)(v(x)-\alpha)e_v(x)$. The condition of magnitude effect, $\xi(x_s)<\xi(x_l)$, thus implies that $(v(x)-\alpha)e_v(x)$ is increasing in $x$. Now, we can show that this condition is weaker than the condition of magnitude effect in standard DU models (see Lemma 2).
 
-**Lemma 2**: The magnitude effect always holds true when $$\tag{C.4}
+**Lemma C.2**: The magnitude effect always holds true when $$\tag{C.4}
 \frac{\partial e_v(x)}{\partial x}(v(x)-\alpha)+e_v(x)v'(x)>0
 $$
 
-To prove Lemma 2, we can calculate the first-order derivative of $(v(x)-\alpha)e_v(x)$ and set it larger than 0.
+To prove Lemma C.2, we can calculate the first-order derivative of $(v(x)-\alpha)e_v(x)$ and set it larger than 0.
 
 As is proposed by @loewenstein_anomalies_1992, in standard DU models, the condition to make magnitude effect appear is $\frac{\partial e_v(x)}{\partial x}>0$. However, in ADU, this can be relaxed by Equation (C.4). First, note that $v(x)$ is the instantaneous utility of reward $x$, and $1+\alpha$ is the discounted utility; thus, we must have $v(x)>1+\alpha$, which implies $v(x)-\alpha>1$. Second, given $v'(x)>0$ and thus $e_v(x)>0$, the inequality in Equation (C.4) can still hold true even when $\frac{\partial e_v(x)}{\partial x}\leq0$.
 
