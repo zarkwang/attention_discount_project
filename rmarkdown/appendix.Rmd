@@ -17,11 +17,34 @@ Lemma 1 states that, the value of a risky reward sequence can be represented wit
 
 The state independence condition is specified by Axiom 2. What we need to prove is that if $\succsim$ has an ADU representation, then it must be continuous. the following axiom specifies the continuity condition.
 
-Axiom A.1 (continuity): For any $X_T$, $X'_T$, $X''_T$, the set $Z_1=\{\alpha\in[0,1]|\alpha X_T+(1-\alpha)X'_T\succsim X''_T\}$ and the set $Z_2=\{\alpha\in[0,1]|X''_T\succsim \alpha X_T + (1-\alpha)X'_T\}$ are closed.
+**Axiom A.1** (continuity): For any $X_T$, $X'_T$, $X''_T$, the set $Z_1=\{\alpha\in[0,1]|\alpha X_T+(1-\alpha)X'_T\succsim X''_T\}$ and the set $Z_2=\{\alpha\in[0,1]|X''_T\succsim \alpha X_T + (1-\alpha)X'_T\}$ are closed.
 
 We can prove that the definition of ADU is sufficient to derive Axiom A.1 by contradiction. First, we can rearrange $Z_1$ to $Z_1=\{\alpha\in[0,1]|\alpha U(X_T)+(1-\alpha)U(X'_T)\geq U(X''_T)\}$ . Second, assume $\alpha=1$ and $U(X_T)\geq U(X''_T)$. If $Z_1$ is open, then the $\epsilon$-neighborhood of $\alpha$ is also a subset of $Z_1$, which means we have $\alpha+\epsilon \in Z_1$ for some positive $\epsilon$. This is contradictory with $\alpha\in[0,1]$. Third, the same principle can be applied to $Z_2$. So, both $Z_1$ and $Z_2$ are closed.
 
 **Proof of Lemma 2:**
+
+Let $S_T=[s_0,s_1,...,s_T]$ be a deterministic reward sequence. We can construct the following constrained optimal discounting problem for $S_T$:$$\tag{A.1}
+\begin{aligned}
+\max_{w\in W}  \quad &\sum_{t=0}^T w_tu_t - C(w) \\
+s.t. \quad &  \sum_{t=0}^T w_t=1 \\
+& w_t \geq 0, \forall t\in\{0,1,…,T\} \\
+\end{aligned}
+$$
+where $u_t=u(s_t)$, $w_t=w(s_t)$ (hereafter the same). Let $\theta$ be the Lagrange multiplier of this optimization problem. According the FOC of its solution, for any $t\in\{0,1,…,T\}$, we should have$$\tag{A.2}
+u_t-\frac{\partial C}{\partial w_t}=\theta
+$$Given that $C$ is strictly convex in $w_t$, and $u_t$ is increasing in $s_t$, we know that $w_t$ is also increasing in $s_t$. For this reason, we can denote the solution of this constrained optimal discounting problem by $w_t\equiv\eta_t(s_t;\theta)$, where $\partial \eta_t/\partial s_t>0$.
+
+When $\succsim$ has an ADU representation, the implication of Axiom 2 can be interpreted by Lemma A.1.
+
+**Lemma A.1**: Suppose $\succsim$ has an ADU representation, $w_t$ is the weight for period delivering reward $s_t$ in $S_T$, $w'_t$ is the weight for period delivering reward $s_t$ in $cS_T$. Then Axiom 2 implies, for any $c$ and $S_T$, we have $w_t=w'_t/\sum_{t=0}^Tw'_t$.
+
+To prove Lemma A.1, from $c\sim S_T$, we know$$\tag{A.3}
+u(c)=\sum_{t=0}^T w_t u_t
+$$From $S_T\sim cS_T$ and Equation (A.3), we know$$\tag{A.4}
+u(c)=w_c'u(c)+\sum_{t=0}^{T} w_t'u_t
+$$where $w'_c$ is the weight for the present period (which delivers reward $c$) in sequence $cS_T$. Given that $w'_c=1-\sum_{t=0}^T w'_t$, we can rearrange Equation (A.4) to$$\tag{A.5}
+u(c)=\sum_{t=0}^T\left(\frac{w'_t}{\sum_{t=0}^T w'_t}\right)u_t
+$$Since for any time period $t$, $u_t$ can take any non-negtive value. Equation (A.4) and (A.5) both hold true if and only if $w_t=w'_t/\sum_{t=0}^Tw'_t$.
 
 Proof of Proposition 1:
 

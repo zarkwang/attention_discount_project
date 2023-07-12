@@ -291,19 +291,19 @@ are both potential realizations of a reward sequence \(X_T\), one can
 solve \(w_t(S_T)\) and \(w_t(S'_T)\) by constructing a constrained
 optimal discounting problem for each then solving it independently.
 
-\textbf{Axiom 2}: For any non-negative real number \(c\) and reward
-sequence \(X_T\), let \(cX_T\) denote \([c,x_0,x_1,...,x_T]\), then
-\(c\sim X_T\) implies \(X_T \sim cX_T\).
+\textbf{Axiom 2}: For any non-negative real number \(c\) and
+deterministic reward sequence \(S_T\), let \(cS_T\) denote
+\([c,s_0,s_1,...,s_T]\), then \(c\sim S_T\) implies \(S_T \sim cS_T\).
 
 Axiom 2 can be interpreted by Lemma 2.
 
 \textbf{Lemma 2}: (\textbf{spread-consistency correlation}) Suppose
 preference relation \(\succsim\) has an ADU representation and satisfies
-Axiom 2. If there exist \(c\) and \(X_T\) such that, for any \(c'\) and
-\(X_T'\), \(cX_T\succsim c'X_T'\), where
-\(c+\sum_{t=0}^Tx_t=c'+\sum_{t=0}^Tx_t'\), then for any \(X'_T\), we
-have \[X_T \succsim X_T' \Longleftrightarrow c\sim X_T\]where
-\(\sum_{t=0}^Tx_t=\sum_{t=0}^Tx_t'\).
+Axiom 2. If there exist \(c\) and \(S_T\) such that, for any \(c'\) and
+\(S_T'\), \(cS_T\succsim c'S_T'\), where
+\(c+\sum_{t=0}^Ts_t=c'+\sum_{t=0}^Ts_t'\), then for any \(S'_T\), we
+have \[S_T \succsim S_T' \Longleftrightarrow c\sim S_T\]where
+\(\sum_{t=0}^Ts_t=\sum_{t=0}^Ts_t'\).
 
 Lemma 2 implies that, when allocating a consumption budget across time
 periods, the decision maker keeps her choice dynamically consistent if
