@@ -72,7 +72,7 @@
 
 \title{Attentional Discounted Utility}
 \author{Zijian Zark Wang}
-\date{July 11, 2023}
+\date{July 13, 2023}
 
 \begin{document}
 \maketitle
@@ -270,7 +270,7 @@ axioms that can characterize Shannon cost function in the intertemporal
 choice setting.
 
 \textbf{Axiom 1}: For any reward sequence \(X_T\), \(X'_T\), \(X''_T\)
-and real number \(\alpha\in(0,1)\), \(X_T\succ X'_T\) implies
+and \(\alpha\in(0,1)\), \(X_T\succ X'_T\) implies
 \(\alpha X_T+ (1-\alpha)X''_T \succ \alpha X'_T + (1-\alpha) X''_T\).
 
 Axiom 1 can be interpreted by Lemma 1.\footnote{The preference relation
@@ -293,11 +293,12 @@ optimal discounting problem for each then solving it independently.
 
 \textbf{Axiom 2}: For any non-negative real number \(c\) and
 deterministic reward sequence \(S_T\), let \(cS_T\) denote
-\([c,s_0,s_1,...,s_T]\), then \(c\sim S_T\) implies \(S_T \sim cS_T\).
+\([c,s_0,s_1,...,s_T]\), there always exists \(\alpha\in(0,1)\) such
+that \(cS_T\sim (1-\alpha)c+\alpha S_T\).
 
 Axiom 2 can be interpreted by Lemma 2.
 
-\textbf{Lemma 2}: (\textbf{spread-consistency correlation}) Suppose
+\textbf{Lemma 2}: (\emph{spread-consistency correlation}) Suppose
 preference relation \(\succsim\) has an ADU representation and satisfies
 Axiom 2. If there exist \(c\) and \(S_T\) such that, for any \(c'\) and
 \(S_T'\), \(cS_T\succsim c'S_T'\), where

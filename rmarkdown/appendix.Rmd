@@ -29,20 +29,15 @@ Let $S_T=[s_0,s_1,...,s_T]$ be a deterministic reward sequence. We can construct
 s.t. \quad &  \sum_{t=0}^T w_t=1 \\
 & w_t \geq 0, \forall t\in\{0,1,…,T\} \\
 \end{aligned}
-$$
-where $u_t=u(s_t)$, $w_t=w(s_t)$ (hereafter the same). Let $\theta$ be the Lagrange multiplier of this optimization problem. According the FOC of its solution, for any $t\in\{0,1,…,T\}$, we should have$$\tag{A.2}
-u_t-\frac{\partial C}{\partial w_t}=\theta
-$$Given that $C$ is strictly convex in $w_t$, and $u_t$ is increasing in $s_t$, we know that $w_t$ is also increasing in $s_t$. For this reason, we can denote the solution of this constrained optimal discounting problem by $w_t\equiv\eta_t(s_t;\theta)$, where $\partial \eta_t/\partial s_t>0$.
+$$ where $u_t=u(s_t)$, $w_t=w(s_t)$ (hereafter the same). Let $\theta$ be the Lagrange multiplier of this optimization problem. According the FOC of its solution, for any $t\in\{0,1,…,T\}$, we should have$$\tag{A.2}
+\frac{\partial C}{\partial w_t}=u_t+\theta
+$$Given that $C$ is strictly convex in $w_t$, we know that $w_t$ is increasing with $u_t+\theta$. For this reason, we can denote the solution of this constrained optimal discounting problem with function $w_t\equiv\eta_t(u_t+\theta)$, where $\partial \eta_t/\partial (u_t+\theta)>0$.
 
 When $\succsim$ has an ADU representation, the implication of Axiom 2 can be interpreted by Lemma A.1.
 
 **Lemma A.1**: Suppose $\succsim$ has an ADU representation, $w_t$ is the weight for period delivering reward $s_t$ in $S_T$, $w'_t$ is the weight for period delivering reward $s_t$ in $cS_T$. Then Axiom 2 implies, for any $c$ and $S_T$, we have $w_t=w'_t/\sum_{t=0}^Tw'_t$.
 
-To prove Lemma A.1, from $c\sim S_T$, we know$$\tag{A.3}
-u(c)=\sum_{t=0}^T w_t u_t
-$$From $S_T\sim cS_T$ and Equation (A.3), we know$$\tag{A.4}
-u(c)=w_c'u(c)+\sum_{t=0}^{T} w_t'u_t
-$$where $w'_c$ is the weight for the present period (which delivers reward $c$) in sequence $cS_T$. Given that $w'_c=1-\sum_{t=0}^T w'_t$, we can rearrange Equation (A.4) to$$\tag{A.5}
+Given that $w'_c=1-\sum_{t=0}^T w'_t$, we can rearrange Equation (A.4) to$$\tag{A.5}
 u(c)=\sum_{t=0}^T\left(\frac{w'_t}{\sum_{t=0}^T w'_t}\right)u_t
 $$Since for any time period $t$, $u_t$ can take any non-negtive value. Equation (A.4) and (A.5) both hold true if and only if $w_t=w'_t/\sum_{t=0}^Tw'_t$.
 
