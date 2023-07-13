@@ -35,7 +35,21 @@ $$Given that $C$ is strictly convex in $w_t$, we know that $w_t$ is increasing w
 
 When $\succsim$ has an ADU representation, the implication of Axiom 2 can be interpreted by Lemma A.1.
 
-**Lemma A.1**: Suppose $\succsim$ has an ADU representation, $w_t$ is the weight for period delivering reward $s_t$ in $S_T$, $w'_t$ is the weight for period delivering reward $s_t$ in $cS_T$. Then Axiom 2 implies, for any $c$ and $S_T$, we have $w_t=w'_t/\sum_{t=0}^Tw'_t$.
+**Lemma A.1**: Suppose $\succsim$ has an ADU representation, $w_t$ is the weight for period delivering reward $s_t$ in $cS_T$, $w'_t$ is the weight for period delivering reward $s_t$ in $S_T$. Then Axiom 2 implies, for any $c$ and $S_T$, we have $w'_t=w_t/\sum_{t=0}^Tw_t$.
+
+$$\tag{A.3}
+w_cu(c)+\sum_{t=0}^Tw_tu_t=(1-\alpha)u(c)+\sum_{t=0}^T(\alpha w'_t)u_t
+$$
+
+Equation (A.3) implies that $\kappa_c u(c)+ \sum_{t=0}^T\kappa_tu_t=0$ where $\kappa_c=w_c-(1-\alpha)$, $\kappa_t=w_t-\alpha w'_t$. Clearly, $\kappa_t\in[0,1)$,and $\sum \kappa=0$
+
+When $\kappa_c=\kappa_t=0$, Equation (A.3) naturally holds true.
+
+Suppose the $i$-th element in $[\kappa_c,\kappa_0,...,\kappa_T]$ is conreponding to the largest utility,
+
+$$
+w_c(u(c)-u_i)+...+w_t(u_t-u_i)=0
+$$
 
 Given that $w'_c=1-\sum_{t=0}^T w'_t$, we can rearrange Equation (A.4) to$$\tag{A.5}
 u(c)=\sum_{t=0}^T\left(\frac{w'_t}{\sum_{t=0}^T w'_t}\right)u_t
