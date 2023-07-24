@@ -35,7 +35,13 @@ $$Given that $C$ is strictly convex in $w_t$, we know that $w_t$ is increasing w
 
 When $\succsim$ has an ADU representation, the implication of Axiom 2 can be interpreted by Lemma A.1.
 
-**Lemma A.1**: Suppose $\succsim$ has an ADU representation, $w_t$ is the weight for period delivering reward $s_t$ in $cS_T$, $w'_t$ is the weight for period delivering reward $s_t$ in $S_T$. Then Axiom 2 implies, for any $c$ and $S_T$, we have $w'_t=w_t/\sum_{t=0}^Tw_t$.
+**Lemma A.1**: Suppose $\succsim$ has an ADU representation and satisfies Axiom 2-3. For any non-negative real number $c$ and $S_T$, let $w_t$ be the weight for period delivering reward $s_t$ in $S_T$. Then, the overall utility of $S_Tc$ can be decomposed to$$
+V(S_Tc)=w_cu(c)+\sum_{t=0}^Tw'_tu_t
+$$ where $w'_t=(1-w_c)w_t$, $w_t\in(0,1)$.
+
+**Lemma A.2**: For any $S_T$, $\{w_t\}$ that satisfies Lemma A.2 is an solution to its constrained optimal discounting problem.
+
+, $w_t$ is the weight for period delivering reward $s_t$ in $cS_T$, $w'_t$ is the weight for period delivering reward $s_t$ in $S_T$. Then Axiom 2 implies, for any $c$ and $S_T$, we have $w'_t=w_t/\sum_{t=0}^Tw_t$.
 
 $$\tag{A.3}
 w_cu(c)+\sum_{t=0}^Tw_tu_t=(1-\alpha)u(c)+\sum_{t=0}^T(\alpha w'_t)u_t

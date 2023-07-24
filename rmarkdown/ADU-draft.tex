@@ -72,7 +72,7 @@
 
 \title{Attentional Discounted Utility}
 \author{Zijian Zark Wang}
-\date{July 13, 2023}
+\date{July 19, 2023}
 
 \begin{document}
 \maketitle
@@ -166,7 +166,7 @@ the following optimization problem is called the \emph{constrained
 optimal discounting} problem for \(X_T\):\[ 
 \begin{aligned}
 \max_{w\in W}  \quad & \sum_{S_T\in \mathcal{S}(X_T)}\sum_{t=0}^T w(s_t)u(s_t) - C(w) \\
-s.t. \quad &  \sum_{S_T\in \mathcal{S}}\sum_{t=0}^T w(s_t)=1 \\
+s.t. \quad &  \sum_{S_T\in \mathcal{S}}\sum_{t=0}^T w(s_t)=m \\
 & w(s_t)\geq 0, \forall t\in\{0,1,…,T\} \\
 \end{aligned}
 \]where \(C:[0,1]^{T+1}\rightarrow \mathbb{R}_{>0}\) is called a
@@ -232,13 +232,14 @@ function, which I term Shannon cost function, proposed by
 used to justify the multinominal logit model in discrete choice
 analysis, and so far has been topical in rational inattention
 literature. To construct this style of information cost function,
-\citet{matejka_rational_2015} introduce two assumptions. The first
-assumption is, before acquiring any information, the decision maker
-estiablishes an initial allocation of weights for different attributes,
-which remains invariant over states. The weights are then updated in a
-manner consistent with Bayes rule. Suppose the initial weight assigned
-to period \(t\) is \(d_t\), then
-\(d_t=\sum_{S_T\in \mathcal{S}(X_T)} w(s_t)\). The second assumption is,
+\citet{matejka_rational_2015} introduce three assumptions. The first is
+that the sum of all weights is fixed at 1. The second assumption is,
+before acquiring any information, the decision maker estiablishes an
+initial allocation of weights for different attributes, which remains
+invariant over states. The weights are then updated in a manner
+consistent with Bayes rule. Suppose the initial weight assigned to
+period \(t\) is \(d_t\), then
+\(d_t=\sum_{S_T\in \mathcal{S}(X_T)} w(s_t)\). The third assumption is,
 the cost of information is linear to the information gains, measured by
 Shannon mutual information. That
 is,\[ C(w)= \lambda \sum_{S_T\in \mathcal{S}(X_T)}\sum_{t=0}^T w(s_t) \log\left(\frac{w_t(S_T)}{d_t}\right) \]where
@@ -260,62 +261,6 @@ decision maker's capacity of information processing is limited. If
 Shannon cost function is used in determining weight function, I call the
 overall utility calculated in the subsequent step as \emph{ADU with
 Shannon cost function} (hereafter referred to as ADUS).
-
-In a static choice setting, the rationale for the usage of Shannon cost
-function can be interpreted with independence of irrelevant alternatives
-\citep{matejka_rational_2015}, or data compression
-\citep{caplin_rationally_2022}. However, this is not applicable when
-weights can be allocated across time periods. Hence, I propose two
-axioms that can characterize Shannon cost function in the intertemporal
-choice setting.
-
-\textbf{Axiom 1}: For any reward sequence \(X_T\), \(X'_T\), \(X''_T\)
-and \(\alpha\in(0,1)\), \(X_T\succ X'_T\) implies
-\(\alpha X_T+ (1-\alpha)X''_T \succ \alpha X'_T + (1-\alpha) X''_T\).
-
-Axiom 1 can be interpreted by Lemma 1.\footnote{The preference relation
-  \(x \succ y\) is defined by the opposite of \(y\succsim x\); the
-  preference relation \(x\sim y\) is defined by the joint satisfaction
-  of \(x\succsim y\) and \(y \succsim x\).}
-
-\textbf{Lemma 1}: (\emph{state independence}) Suppose preference
-relation \(\succsim\) has an ADU representation and satisfies Axiom 1.
-If \(p_1+p_2+...p_n=1\), and for any \(i\in\{1,2,…,n\}\), \(0<p_i<1\),
-then for any deterministic reward sequence \(S^1_T\), \(S^2_T\), \ldots,
-\(S^n_T\), we have\[
-U(p_1 S^1_T+p_2S^2_T+...+p_nS^n_T)=p_1U(S^1_T)+p_2U(S^2_T)+...+p_nU(S^n_T)
-\]Lemma 1 implies that, the determination of discounting factors for one
-potential realization of a reward sequence will not interfere with that
-for another potential realization of it. Suppose \(S_T\) and \(S'_{T}\)
-are both potential realizations of a reward sequence \(X_T\), one can
-solve \(w_t(S_T)\) and \(w_t(S'_T)\) by constructing a constrained
-optimal discounting problem for each then solving it independently.
-
-\textbf{Axiom 2}: For any non-negative real number \(c\) and
-deterministic reward sequence \(S_T\), let \(cS_T\) denote
-\([c,s_0,s_1,...,s_T]\), there always exists \(\alpha\in(0,1)\) such
-that \(cS_T\sim (1-\alpha)c+\alpha S_T\).
-
-Axiom 2 can be interpreted by Lemma 2.
-
-\textbf{Lemma 2}: (\emph{spread-consistency correlation}) Suppose
-preference relation \(\succsim\) has an ADU representation and satisfies
-Axiom 2. If there exist \(c\) and \(S_T\) such that, for any \(c'\) and
-\(S_T'\), \(cS_T\succsim c'S_T'\), where
-\(c+\sum_{t=0}^Ts_t=c'+\sum_{t=0}^Ts_t'\), then for any \(S'_T\), we
-have \[S_T \succsim S_T' \Longleftrightarrow c\sim S_T\]where
-\(\sum_{t=0}^Ts_t=\sum_{t=0}^Ts_t'\).
-
-Lemma 2 implies that, when allocating a consumption budget across time
-periods, the decision maker keeps her choice dynamically consistent if
-and only if she performs a strong preference for spread. Given that
-people are typically assumed to be impatient (preferring a declining
-sequence), one intuitive interpretation of Lemma 2 is that the less
-impatient a decision maker is in the present, the less inclined she is
-to deviate from the original choice in the future.
-
-\textbf{Proposition 1}: \(\succsim\) \emph{has an ADUS representation if
-and only if it has an ADU representation and satisfies Axiom 1-2.}
 
 \hypertarget{implications-in-time-preferences}{%
 \section{\texorpdfstring{Implications in Time Preferences
@@ -662,8 +607,158 @@ decision makers should strictly prefer \(y\) to \(x\).
 \section{The Role of Attention in Inconsistent
 Planning}\label{the-role-of-attention-in-inconsistent-planning}}
 
-\hypertarget{empirical-analysis}{%
-\section{Empirical Analysis}\label{empirical-analysis}}
+\hypertarget{attention-grabbing-and-updating}{%
+\subsection{Attention Grabbing and
+Updating}\label{attention-grabbing-and-updating}}
+
+Suppose a decision maker has budget \(m\) (\(m>0\)) and is considering
+how to spend it over different time periods. We can use a reward
+sequence \(x\) to represent this decision problem, where the decision
+maker's spending in period \(t\) is \(x_t\). In period 0, she wants to
+find a \(x\) such
+that\[ \tag{3} \max_{x}\;\sum_{t=0}^T w_t u(x_t)\quad s.t. \;\sum_{t=0}^T x_t = m   \]
+
+where \(w_t\) is the attention-adjusted discounting factor in period
+\(t\). I assume
+\(w_t=\delta^t e^{u(x_t)/\lambda}/\sum_{t=\tau}^T \delta^{\tau} e^{u(x_\tau)/\lambda}\)
+and there is no risk under this setting.
+
+In models like exponential and hyperbolic discounting, the discounting
+factor of a future period is consistently smaller than that of the
+current period. Thus, the decision maker should spend more at the
+present than in the future. By contrast, in ADU, when increasing the
+spending in a certain period, the discounting factor corresponding to
+that period should also increase. So it is possible that the decision
+maker spends more in the future and that a future period has a greater
+discounting factor than the current period. This is consistent with
+\citet{loewenstein_preferences_1993} that find people sometimes prefer
+improving sequences to declining sequences.
+
+ADU suggests there are two mechanisms that can help explain why people
+may perform dynamically inconsistent behavior. The first is
+\emph{attention-grabbing effect}, that is, keeping the others equal,
+when we increase \(x_t\) (which lead to an increase in \(w_t\)), the
+discounting factor in any other period should decrease due to limited
+attention. After omitting a previous period from the decision problem in
+Equation (3), the decision maker can assign more weights to remaining
+periods; thus, the attention-grabbing effect is enhanced. The increased
+attention-grabbing effect will offset some benefit of increasing
+spending toward a certain period. Therefore, when the decision maker
+prefers improving sequences, the attention-grabbing effect will make her
+perform a present bias-like behavior (always feeling that she should
+spend more at the present than the original plan); when the decision
+maker prefers declining sequences, this effect will maker her perform a
+future bias-like behavior (always feeling she should spend more in the
+future).
+
+The second mechanism is \emph{initial attention updating}. As is assumed
+above, in period 0, prior to evaluating each reward sequence, the
+decision maker's initial weight on period \(t\) is proportional to
+\(\delta^t\); after evaluation, the weight becomes being proportional to
+\(\delta^t e^{u(x_t)/\lambda}\). In period 1, if she implements the
+evaluation based on the information attained in period 0, the initial
+weight should be updated to being proportional
+\(\delta^t e^{u(x_t)/\lambda}\); thus, the weight after evaluation
+should become being proportional to \(\delta e^{2u(x_t)/\lambda}\). As a
+result, the benefit of increasing spending toward a certain period gets
+strengthened. The updated initial attention can make those who prefer
+improving sequences perform present bias and those who prefer declining
+sequences perform future bias.
+
+Both the attention-grabbing effect and initial attention updating are
+affected by the curvature of utility function. They jointly decide which
+behavior pattern that people should perform in dynamics.
+
+\textbf{Proposition 6} (\emph{spread-consistency correlation}) Suppose
+\(\succsim\) has a ADU representation and satisfies Axiom 2-4. If there
+exist \(b\) and \(S_T\) such that, for any \(b'\) and \(S_T'\),
+\(bS_T\succsim b'S_T'\), where
+\(b+\sum_{t=0}^Ts_t=b'+\sum_{t=0}^Ts_t'\), then for any \(S'_T\), we
+have \[S_T \succsim S_T' \Longleftrightarrow b\sim S_T\]where
+\(\sum_{t=0}^Ts_t=\sum_{t=0}^Ts_t'\).
+
+Proposition 6 implies that, when allocating a consumption budget across
+time periods, the decision maker keeps her choice dynamically consistent
+if and only if she performs a strong preference for spread. Given that
+people are typically assumed to be impatient (preferring a declining
+sequence), one intuitive interpretation of Lemma 2 is that the less
+impatient a decision maker is in the present, the less inclined she is
+to deviate from the original choice in the future.
+
+\hypertarget{axiomatic-characterization-of-adus}{%
+\section{Axiomatic Characterization of
+ADUS}\label{axiomatic-characterization-of-adus}}
+
+In a static choice setting, the rationale for the usage of Shannon cost
+function can be interpreted with independence of irrelevant alternatives
+\citep{matejka_rational_2015}, or data compression
+\citep{caplin_rationally_2022}. However, this is not applicable when
+weights can be allocated across time periods. Hence, I propose two
+axioms that can characterize Shannon cost function in the intertemporal
+choice setting.
+
+\textbf{Axiom 1}: (\emph{state independence}) For any reward sequence
+\(X_T\), \(X'_T\), \(X''_T\) and \(\alpha\in(0,1)\), \(X_T\succ X'_T\)
+implies
+\(\alpha X_T+ (1-\alpha)X''_T \succ \alpha X'_T + (1-\alpha) X''_T\).
+
+Axiom 1 can be interpreted by Lemma 1.\footnote{The preference relation
+  \(x \succ y\) is defined by the opposite of \(y\succsim x\); the
+  preference relation \(x\sim y\) is defined by the joint satisfaction
+  of \(x\succsim y\) and \(y \succsim x\).}
+
+\textbf{Lemma 1}: Suppose preference relation \(\succsim\) has an ADU
+representation and satisfies Axiom 1. If \(p_1+p_2+...p_n=1\), and for
+any \(i\in\{1,2,…,n\}\), \(0<p_i<1\), then for any deterministic reward
+sequence \(S^1_T\), \(S^2_T\), \ldots, \(S^n_T\), we
+have\[ U(p_1 S^1_T+p_2S^2_T+...+p_nS^n_T)=p_1U(S^1_T)+p_2U(S^2_T)+...+p_nU(S^n_T) \]Lemma
+1 implies that, the determination of discounting factors for one
+potential realization of a reward sequence will not interfere with that
+for another potential realization of it. Suppose \(S_T\) and \(S'_{T}\)
+are both potential realizations of a reward sequence \(X_T\), one can
+solve \(w_t(S_T)\) and \(w_t(S'_T)\) by constructing a constrained
+optimal discounting problem for each then solving it independently.
+
+\textbf{Axiom 2}: \emph{(sequential outcome-betweenness)} For any
+non-negative real number \(b\) and deterministic reward sequence
+\(S_T\), let \(S_Tb\) denote \([s_0,s_1,...,s_T,b]\), there always
+exists \(\alpha\in(0,1)\) such that \(S_Tb\sim \alpha S_T+(1-\alpha)b\).
+
+Axiom 2 implies that if we add a new element to a given sequence, the
+overall utility of the new sequence will lies between the utility of the
+original sequence and the utility of the newly added element. It also
+implies that the value of a sequence can be represented by a linear
+combination of the values of each element.
+
+\textbf{Axiom 3}: (\emph{sequential} \emph{bracket-independence}) For
+any non-negative real number \(b\), \(c\) and deterministic sequence
+\(S_T\), if there exist \(\alpha_1\), \(\alpha_2\), \(\alpha_3\),
+\(\beta_1\), \(\beta_2\in \mathbb{R}_{>0}\) such that
+\[ S_Tbc\sim \alpha_1S_T+\alpha_2b+\alpha_3c \quad\text{and}\quad  S_Tbc\sim \beta_1S_T+\beta_2(bc) \]where
+\(bc\) denote a sequence with reward \(b\) delivered at the present then
+\(c\) delivered the next, we must have \(\alpha_1=\beta_1\)
+
+Axiom 3 implies that if we segment a given sequence into different
+elements, and use the linear combination of these elements to represent
+the value of the overall sequence, then the weight for an element in
+this linear combination can hold constant regardless of how we segment
+or bracket the other elements.
+
+\textbf{Axiom 4}: (\emph{aggregate invariance of constant sequences})
+For any deterministic sequences \(S_T\), \(S'_T\), given non-negative
+real number \(c'\), \(c\) and \(\alpha\in(0,1)\), if
+\(\alpha s'_t+(1-\alpha)c'\succ\alpha s_t+(1-\alpha)c\) holds for every
+period \(t\), then
+\(\alpha S'_T+(1-\alpha)c'\succ \alpha S_T+(1-\alpha)c\).
+
+Axiom 4 implies that if the utility of every element in a given sequence
+plus an equal amount, the overall utility of the sequence will plus the
+same amount. It is a weak version of Separability of Sequences. \emph{If
+the sequences are separability, then any sequences should be should be
+aggregate invariant.}
+
+\textbf{Proposition 1}: \(\succsim\) \emph{has an ADUS representation if
+and only if it has an ADU representation and satisfies Axiom 1-4.}
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
