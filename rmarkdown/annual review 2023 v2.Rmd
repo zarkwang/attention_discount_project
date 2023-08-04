@@ -55,11 +55,11 @@ inattention theories. I have designed the experimental program.
 Expected discounted utility framework has been widely used in behavioral
 and economic research. Given a sequence of rewards
 $X_T=[x_0,x_1,...,x_T]$, which yields reward $x_t$ in time period
-$t$.[^1] For any $t \in \{0,1,...,T\}$, the reward level $x_t$ is a
-random variable defined on $\mathbb{R}_{\geq 0}$. Then, the expected
-discounted utility of $X_T$ is calculated by$$
+$t$,[^1] $t \in \{0,1,...,T\}$, the expected discounted utility of $X_T$
+is then calculated by$$
 EDU(X_T)= \mathbb{E}\left[\sum_{t=0}^T d_t u(x_t)\right]
-$$where $d_t$ is the discounting factor of time period $t$, $u(.)$
+$$where $d_t$ is the discounting factor of time period $t$, reward level
+$x_t$ is a random variable defined on $\mathbb{R}_{\geq 0}$, $u(.)$
 denote the decision maker's instantaneous utility function, where $u'>0$
 and $u''<0$. The time length of this sequence, denoted by $T$, is
 finite.
@@ -67,33 +67,41 @@ finite.
 [^1]: I use uppercase letters to represent a sequence and lowercase
     letters to represent each element within the sequence.
 
-I develop a model that incorporates attentional mechanism into the
-valuation of a reward sequence. I term the model as *attentional
-discounted utility with Shannon cost function* (ADUS). It remains the
-expected discounted utility framework, but modifies the discounting
-factor $d_t$ to an attention weight $w_t$, where
+I define a class of models that incorporates attentional mechanism into
+such a valuation process of sequential rewards. In such models, a
+decision maker allocates attention across sequential outcomes when
+processing information about rewards, and attends more to the outcomes
+with larger rewards. I refer to this class of models as *Attentional
+Discounted Utility* (ADU). Previous studies exploring the ADU setting
+include the works by @gershman_rationally_2020 and @noor_optimal_2022.
+Specifically, I focus on a particular variant of ADU, which I term as
+*ADU with Shannon cost function* (ADUS). ADUS retains the architecture
+of expected discounted utility, but modifies the conventional
+discounting factor $d_t$ to $w_t$, which I refer to as attention weight
+hereafter, where
 
 ```{=tex}
 \begin{equation}\tag{1}\label{eq:wt}
 w_t = \frac{d_t e^{u(x_t)/\lambda}}{\sum_{\tau=0}^T d_\tau e^{u(x_\tau)/\lambda}}
 \end{equation}
 ```
-Equation (\ref{eq:wt}) indicates three properties of attention. First,
-the sum of all $w_t$ is 1, which indicates the decision maker has
-limited attention to allocate for each period. Second, $w_t$ is
-increasing in $x_t$, which indicates the decision maker is motivated to
-allocate more attention to periods with larger rewards. This is in line
-with the substantial evidence that suggests people tend to attend more
-to pleasant information and avoid unpleasant information (e.g. ostrich
-effect). Third, $d_t$ serves as the original attention weight assigned
-to each period, and $w_t$ seems "anchored" in it. This indicates the
-attention adjustment process is costly. $\lambda$ is a parameter that
-measures the cost of attention adjustment.
+In Equation (\ref{eq:wt}), $w_t$ adopts a form resembling logistic
+function. It indicates three properties of attention. First, the sum of
+all $w_t$ equals 1, which indicates the attention available to be
+allocated across sequential outcomes is limited. Second, $w_t$ is
+increasing in $x_t$, indicating the decision maker is naturally inclined
+to allocate more attention to periods with larger potential rewards.
+This is in line with existing evidence, suggesting people often pay much
+attention to pleasant information and avoid to know unpleasant
+information (e.g. ostrich effect). Third, it appears that $w_t$ is
+anchored in $d_t$. This indicates that $d_t$ represents the original
+attention weight assigned to each period, and the attention adjustment
+process (converting $d_t$ to $w_t$) is costly. The parameter $\lambda$
+quantifies the cost of attention adjustment.
 
 I provide two rationales for Equation (\ref{eq:wt}). The first is based
-on rational inattention theories. The second is an axiomatic
-characaterization. I present the first here and discuss the second in
-Section \ref{axiom}.
+on rational inattention theories. The second is an axiomatic theory. I
+present the first here and discuss the second in Section \ref{axiom}.
 
 The necessary notations and definitions are described as follows. Let
 $S_T=[s_0,s_1,...,s_T]$ be a potential realization of $X_T$, and
@@ -105,17 +113,17 @@ function $w(s_t)$. I follow Noor and Takeoka [-@noor_optimal_2022;
 -@noor_constrained_2023] to define the process that generates $w(s_t)$
 as *constrained optimal discounting*. The key assumption of constrained
 optimal discounting process is that, when evaluating a reward sequence,
-the decision maker tends to re-allocate attention weights across the
-time periods, in order to maximize the anticipatory utility that she can
-obtain from the sequence. However, doing this will trigger a cognitive
-cost. She needs to balance the benefit of focusing on periods that
-contain larger rewards and the cognitive cost of shifting attention. The
-formal definition is given by Definition 1.
+the decision maker wants to find an allocation policy for attention
+weights, in order to maximize the anticipatory utility that she can
+obtain from the sequence. However, this attention re-allocation process
+triggers a cognitive cost. She needs to balance the benefit of focusing
+on periods containing larger rewards and the cognitive cost of shifting
+attention. The formal definition is given by Definition 1.
 
-**Definition 1**: Let $W$ be the smallest set containing all possible
-weight functions. Given a stochastic reward sequence $X_T$, the
-following optimization problem is called the *constrained optimal
-discounting* problem for $X_T$:$$ 
+**Definition 1**: Let $W$ be the support of all possible weight
+functions. Given a stochastic reward sequence $X_T$, the following
+optimization problem is called the *constrained optimal discounting*
+problem for $X_T$:$$ 
 \begin{aligned}
 \max_{w\in W}  \quad & \sum_{S_T\in \mathcal{S}(X_T)}\sum_{t=0}^T w(s_t)u(s_t) - C(w) \\
 s.t. \quad &  \sum_{S_T\in \mathcal{S}}\sum_{t=0}^T w(s_t)=m \\
@@ -123,29 +131,29 @@ s.t. \quad &  \sum_{S_T\in \mathcal{S}}\sum_{t=0}^T w(s_t)=m \\
 \end{aligned}
 $$where $m$ is a constant, $C:[0,m]^{T+1}\rightarrow \mathbb{R}_{>0}$ is
 called *information cost* function, $\partial C/\partial w(s_t)>0$ and
-$\partial^2 C/\partial w(s_t)^2>0$. That is, the cost of information is
+$\partial^2 C/\partial w(s_t)^2>0$. That is, the information cost is
 increasing and convex in $w(s_t)$.
 
-The cognitive cost $C(.)$ is also called information cost function,
-because it depends on which piece of reward information that the
-decision maker wants to focus on. A well-known specification of
-information cost function is the Shannon cost function, proposed by
-@matejka_rational_2015. The Shannon cost function was originally used to
-justify the multinominal logit model in discrete choice analysis, and so
-far has been topical in rational inattention literature. To construct
-this style of information cost function, @matejka_rational_2015
-introduce three assumptions. The first is that the sum of all weights
-$m\equiv1$. The second assumption is, before acquiring any information,
-the decision maker establishes an initial allocation of weights for
-different attributes, which remains invariant over states. The weights
-are then updated in a manner consistent with Bayes rule. Suppose the
-initial weight assigned to period $t$ is $d_t$, then
+In Definition 1, the cognitive cost of shifting attention is decided by
+an information cost function $C(.)$ . This implies that the cognitive
+cost is generated by focusing on certain reward information. A
+well-known specification of $C(.)$ is the Shannon cost function,
+proposed by @matejka_rational_2015. The Shannon cost function was
+originally used to justify the multinominal logit model in discrete
+choice analysis, and so far has been topical in rational inattention
+literature. To construct this style of information cost function,
+@matejka_rational_2015 introduce three assumptions. The first is that
+the sum of all weights $m\equiv1$. The second assumption is, before
+acquiring any information, the decision maker establishes an initial
+weight allocation for different attributes (outcomes), which remains
+invariant across states. The weights are then updated in a manner
+consistent with Bayes rule. In ADU setting, it means
 $d_t=\sum_{S_T\in \mathcal{S}(X_T)} w(s_t)$. The third assumption is,
-the cost of information is linear to the information gains, measured by
+the information cost is linear to the information gains, measured by
 Shannon mutual information. That
 is,$$ C(w)= \lambda \sum_{S_T\in \mathcal{S}(X_T)}\sum_{t=0}^T w(s_t) \log\left(\frac{w_t(S_T)}{d_t}\right) $$where
 $\lambda$ is a parameter denoting unit cost of information
-($\lambda>0$). With the Shannon cost function, the constrained optimal
+($\lambda>0$). With this Shannon cost function, the constrained optimal
 discounting problem can be easily solved by Lagrangian method, and the
 solution is the same as Equation (\ref{eq:wt}).
 
@@ -161,10 +169,14 @@ choice. Each of them can be precisely proved.
 
 3.  The model specifies a novel condition for common difference effect.
 
-4.  ADUS suggests that the discount function may be concave for the near
-    future and convex for the far future.
+4.  The model suggests that the discount function may be concave for the
+    near future and convex for the far future.
 
 5.  The model offers an alternative account for S-shaped value function.
+
+6.  In dynamic budget allocation, decision makers who exihibit greater
+    patience at the beginning will perform less inconsistent behaviors
+    in subsequent periods.
 
 ## Axiomatic Characterization \label{axiom}
 
