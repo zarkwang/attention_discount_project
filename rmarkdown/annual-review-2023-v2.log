@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  7 AUG 2023 16:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  8 AUG 2023 19:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -488,90 +488,101 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 79.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 107.
+(Font)              <12> on input line 109.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 107.
+(Font)              <8> on input line 109.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 107.
+(Font)              <6> on input line 109.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 109.
+(Font)              <5> on input line 111.
 [1
 
 {c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}] [2{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 181.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 183.
 
 [3] [4] [5]
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.299 \begin{equation}
+l.301 \begin{equation}
                       \tag{2}\label{eq:w2}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.299 \begin{equation}
+l.301 \begin{equation}
                       \tag{2}\label{eq:w2}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.299 \begin{equation}
+l.301 \begin{equation}
                       \tag{2}\label{eq:w2}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.299 \begin{equation}
+l.301 \begin{equation}
                       \tag{2}\label{eq:w2}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.305 \begin{equation}
+l.307 \begin{equation}
                       \tag{3}\label{eq:gt}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.305 \begin{equation}
+l.307 \begin{equation}
                       \tag{3}\label{eq:gt}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.305 \begin{equation}
+l.307 \begin{equation}
                       \tag{3}\label{eq:gt}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.305 \begin{equation}
-                      \tag{3}\label{eq:gt} [6] [7]
-Underfull \hbox (badness 3250) in paragraph at lines 411--415
+l.307 \begin{equation}
+                      \tag{3}\label{eq:gt} [6]
+<images/plot-discount-value.png, id=176, 511.9125pt x 227.4096pt>
+File: images/plot-discount-value.png Graphic file (type png)
+<use images/plot-discount-value.png>
+Package pdftex.def Info: images/plot-discount-value.png  used on input line 377.
+(pdftex.def)             Requested size: 469.75449pt x 208.68152pt.
+[7] [8 <./images/plot-discount-value.png>]
+Underfull \hbox (badness 3250) in paragraph at lines 430--434
 []\T1/lmr/m/n/12 Previously, re-searchers of-ten em-ploy ``present bias'' ([]Laib-son[], []1997[]) or ``naiveté''
  []
 
-[8] [9] (./annual-review-2023-v2.bbl [10] [11])
+<images/plot-budget-dynamic.png, id=211, 469.2732pt x 198.9834pt>
+File: images/plot-budget-dynamic.png Graphic file (type png)
+<use images/plot-budget-dynamic.png>
+Package pdftex.def Info: images/plot-budget-dynamic.png  used on input line 467.
+(pdftex.def)             Requested size: 469.29352pt x 198.992pt.
+[9] [10 <./images/plot-budget-dynamic.png>] [11] (./annual-review-2023-v2.bbl [12])
 
 Package caption Warning: Unused \captionsetup[table] on input line 58.
 See the caption package documentation for explanation.
 
-[12] (./annual-review-2023-v2.aux)
+[13] (./annual-review-2023-v2.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-03>
  ***********
 Package rerunfilecheck Info: File `annual-review-2023-v2.out' has not changed.
-(rerunfilecheck)             Checksum: B2423B8464FD0B9D206CEF94B5E39E82;4102.
+(rerunfilecheck)             Checksum: 492B20EFA1C235D8B17B2E3CBA511CCB;4214.
  ) 
 Here is how much of TeX's memory you used:
- 13101 strings out of 477147
- 209096 string characters out of 5811263
+ 13132 strings out of 477147
+ 209915 string characters out of 5811263
  1926248 words of memory out of 5000000
- 33875 multiletter control sequences out of 15000+600000
+ 33901 multiletter control sequences out of 15000+600000
  624685 words of font info for 86 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,8n,79p,585b,558s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,79p,585b,556s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on annual-review-2023-v2.pdf (12 pages, 304761 bytes).
+Output written on annual-review-2023-v2.pdf (13 pages, 528527 bytes).
 PDF statistics:
- 339 PDF objects out of 1000 (max. 8388607)
- 281 compressed objects within 3 object streams
- 67 named destinations out of 1000 (max. 500000)
- 113 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 356 PDF objects out of 1000 (max. 8388607)
+ 295 compressed objects within 3 object streams
+ 72 named destinations out of 1000 (max. 500000)
+ 131 words of extra memory for PDF output out of 10000 (max. 10000000)
 

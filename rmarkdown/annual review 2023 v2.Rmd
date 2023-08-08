@@ -1,12 +1,13 @@
 ---
 title: "Progress Report for Annual Review 22/23 - v2"
-author: "Zark Zijian Wang"
+author: "Zijian Zark Wang"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 bibliography: reference.bib
 biblio-style: apalike
 header-includes: 
   \usepackage{setspace}
   \usepackage{amsmath}
+  \usepackage{graphicx}
   \usepackage{array}
   \usepackage{caption}
   \usepackage{longtable}
@@ -34,19 +35,22 @@ output:
 
 # Introduction
 
-In this document, I introduce three pieces of work.
+In this document, I present three pieces of work.
 
-The first is a model I term "attentional discounted utility". I leverage
-attentional mechanism to explain the anomalies in intertemporal choice.
-The model is developed based on expected discounted utility framework.
+The first is a novel model of intertemporal choice. The model
+incorporates attentional mechanism into the expected discounted utility
+framework. It assumes that people have limited attention to allocate
+across sequential outcomes and tend to pay more attention to the
+outcomes with larger rewards. I show that it can explain a broad set of
+decision anomalies, and present an axiomatic characterization.
 
 The second is an experimental test on whether (and how) attentional
 mechanism can influence intertemporal choice.
 
-The third is an experiment aiming to test how people valuate risky
-outcomes and efforts. One prominent application of the findings from
-this experiment is that to help us validate a key hypothesis in rational
-inattention theories. I have designed the experimental program.
+The third is an experiment aiming to test how people jointly evaluate
+risky outcomes and efforts. The findings from this experiment can inform
+the research in rational inattention. I am working on the experimental
+program.
 
 # Attentional Discounted Utility
 
@@ -298,11 +302,22 @@ Most models of time discounting (e.g. hyperbolic and quasi-hyperbolic
 discounting) assume a convex discount function. However, some studies
 suggest the discount function may be concave for the near future and
 convex for the far future [@onay_intertemporal_2007;
-@takeuchi_non-parametric_2011; @dejarnette_time_2020].
+@takeuchi_non-parametric_2011; @dejarnette_time_2020]. This property can
+emerge in ADUS due to the attention weight following a logistic-like
+function.
 
 In Equation (\ref{eq:w2}), $w_T$ produces this style of discount
-function when $x_T$ is greater than a positive finite number.
+function when $x_T$ is greater than a positive finite number. This is
+illustrated in Figure \ref{fig:plot-discount-value}(a).
 
+```{=tex}
+\begin{figure}
+  \centering
+  \includegraphics{images/plot-discount-value.png}
+  \caption{Simulation results for choices between SS and LL. Value of reward sequence is calculated by $w_T\cdot u(x_T)$, where $w_T$ is calculated using Equation (2), $\delta=0.75$, $\lambda=1$, utility funtion $u(x)=x^{0.6}$.}
+  \label{fig:plot-discount-value}
+\end{figure}
+```
 ### ADUS offers an alternative account for S-shaped value function
 
 The S-shaped value function has been widely adopted by behavioral
@@ -311,18 +326,25 @@ economists. Some theories justifies it by reference-dependent utility
 efficient coding of numerical values [@frydman_efficient_2021]. I offer
 an account based on selective attention to sequential outcomes.
 
-Suppose a decision maker faces a choice between a risky lottery and a
-fixed amount of money. At the period when she makes this choice, she
-does not obtain any money from either option. Thus, she perceives the
-outcome of each option as something that will happen in the future. She
-allocates attention between the current period which has no reward and
-the period when she may receive the money. Assume that she perceives the
-outcome will be realized in period $T$, and in a certain state, the
-option she chooses yields reward $x_T$, then we can use Equation
-(\ref{eq:w2}) to derive the value function, i.e. $w_T\cdot u(x_T)$. I
-find that when the curvature of utility function satisfies a certain
-condition, or the unit cost of information $\lambda$ is small enough, we
-can obverse a S-shaped value function.
+Imagine that a decision maker faces a choice between two lotteries. At
+the moment when the choice is made, she does not receive any money from
+either option. Thus, she may perceive the outcome of each option as
+something that will happen in the future. She allocates attention
+between the current period, which offers no reward, and the future
+period when she could receive the money. When the amount of money that
+she could receive is increased, not just does its utility increases, but
+her attention is more directed towards that particular period.
+
+Assuming the decision maker perceives the outcome will be realized in
+period $T$, and in a certain state, the option she chooses yields reward
+$x_T$. We can use Equation (\ref{eq:w2}) to derive the value function,
+i.e. $w_T\cdot u(x_T)$. Both utility function $u(.)$ and attention
+weight $w_T$ exhibit diminishing sensitivity to the reward outcome
+$x_T$. However, when the reward is small enough, their product may be
+convex . Notably, when the curvature of utility function satisfies a
+certain condition, or the unit cost of information $\lambda$ is small
+enough, we can obverse a S-shaped value function. Figure
+\ref{fig:plot-discount-value}(b) illustrates this.
 
 ### Inattentive decision makers perform less inconsistent behaviors
 
@@ -369,10 +391,19 @@ not mind much about the task and always forgets the information acquired
 in the last period, then in period 1 and any subsequent period, her
 initial attention weight will keep proportional to $\delta^t$. Thus, she
 could perform less inconsistent behaviors than the attentive decision
-makers. This contrast may shed light on why some nudges that reduce the
+makers. \ref{fig:plot-budget-dynamic} offers an illustration for this
+contrast. The contrast may shed light on why some nudges that reduce the
 demand for attention commitment, such as a default choice, can improve
 the consistency in choices.
 
+```{=tex}
+\begin{figure}
+  \centering
+  \includegraphics{images/plot-budget-dynamic.png}
+  \caption{Simulation results for budget allocation. The decision maker allocations a budget of $B=100$ across five periods, $\delta=0.9$, $\lambda=70$. For each period $t$, utility funtion $u(x_t)=x_t^{0.6}$.}
+  \label{fig:plot-budget-dynamic}
+\end{figure}
+```
 ## Axiomization of ADUS \label{axiom}
 
 In this subsection, I provide an axiomatic rationale for using Shannon
@@ -447,3 +478,5 @@ has an ADU representation and satisfies Axiom 1-4.
 # Valuation of Risk and Effort
 
 # Time Schedule
+
+# Reference
