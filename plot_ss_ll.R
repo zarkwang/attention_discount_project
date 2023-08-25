@@ -1,6 +1,7 @@
 
 library(tidyverse)
 library(gridExtra)
+library(png)
 
 setwd('E:/Attention_discounting/attention_discount_project')
 
@@ -183,5 +184,30 @@ ggsave(path,gridplot2,width=16.5,height=7,units='cm')
 
 
 
+# ---- load data ----
+
+img_T <- "E:/Attention_discounting/mydata/Plot_A=100_Y=70.png"
+img_Y <- "E:/Attention_discounting/mydata/Plot_A=100_T=3.png"
+
+img_T <- readPNG(img_T)
+img_Y <- readPNG(img_Y)
+
+grid_T <- rasterGrob(img_T, interpolate=TRUE)
+grid_Y <- rasterGrob(img_Y, interpolate=TRUE)
+
+subtitle_T <- textGrob("(a) Y=70", x=0.23, y=10.2,
+                       gp = gpar(fontsize=8.5, fontfamily = "Times New Roman"))
+subtitle_Y <- textGrob("(b) T=3", x=0.23, y =10.2,
+                       gp = gpar(fontsize=8.5,fontfamily = "Times New Roman"))
+
+grid_image1_with_subtitle <- arrangeGrob(grid_T, bottom = subtitle_T)
+grid_image2_with_subtitle <- arrangeGrob(grid_Y, bottom = subtitle_Y)
+
+pilot_show <- arrangeGrob(grid_image1_with_subtitle, grid_image2_with_subtitle, nrow = 2)
+
+
+path = 'rmarkdown/images/pilot-result.png'
+
+ggsave(path,pilot_show,width=6,height=10,units='cm')
 
 

@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  8 AUG 2023 19:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  14 AUG 2023 14:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**annual-review-2023-v2.tex
-(./annual-review-2023-v2.tex
+**annual-review-material-2023.tex
+(./annual-review-material-2023.tex
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-03>
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
@@ -253,20 +253,26 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisruleclass=\count283
 \@lastruleclass=\count284
 \@thisrulewidth=\dimen183
+) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip59
+\multirow@cntb=\count285
+\multirow@dima=\skip60
+\bigstrutjot=\dimen184
 ) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2019/06/20 v3.9 Customized lists
-\labelindent=\skip59
-\enit@outerparindent=\dimen184
+\labelindent=\skip61
+\enit@outerparindent=\dimen185
 \enit@toks=\toks28
 \enit@inbox=\box60
-\enit@count@id=\count285
-\enitdp@description=\count286
+\enit@count@id=\count286
+\enitdp@description=\count287
 ) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip60
-\bibsep=\skip61
+\bibhang=\skip62
+\bibsep=\skip63
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count287
+\c@NAT@ctr=\count288
 ) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2023-07-08 v7.01b Hypertext links for LaTeX
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
@@ -300,14 +306,14 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count288
+\c@section@level=\count289
 ) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count289
+\etb@tempcnta=\count290
 )
-\@linkdim=\dimen185
-\Hy@linkcounter=\count290
-\Hy@pagecounter=\count291
+\@linkdim=\dimen186
+\Hy@linkcounter=\count291
+\Hy@pagecounter=\count292
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2023-07-08 v7.01b Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -315,7 +321,7 @@ Now handling font encoding PD1 ...
 ) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count292
+\Hy@SavedSpaceFactor=\count293
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2023-07-08 v7.01b Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -329,21 +335,21 @@ Package hyperref Info: Plain pages OFF on input line 4182.
 Package hyperref Info: Backreferencing OFF on input line 4187.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4434.
-\c@Hy@tempcnt=\count293
+\c@Hy@tempcnt=\count294
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4772.
-\XeTeXLinkMargin=\dimen186
+\XeTeXLinkMargin=\dimen187
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count294
-\Field@Width=\dimen187
-\Fld@charsize=\dimen188
+\Fld@menulength=\count295
+\Field@Width=\dimen188
+\Fld@charsize=\dimen189
 Package hyperref Info: Hyper figures OFF on input line 6051.
 Package hyperref Info: Link nesting OFF on input line 6056.
 Package hyperref Info: Hyper index ON on input line 6059.
@@ -355,9 +361,9 @@ Package hyperref Info: PDF/A mode OFF on input line 6081.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count295
-\c@Item=\count296
-\c@Hfootnote=\count297
+\Hy@abspage=\count296
+\c@Item=\count297
+\c@Hfootnote=\count298
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
@@ -366,8 +372,8 @@ File: hpdftex.def 2023-07-08 v7.01b Hyperref driver for pdfTeX
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
 )
-\Fld@listcount=\count298
-\c@bookmark@seq@number=\count299
+\Fld@listcount=\count299
+\c@bookmark@seq@number=\count300
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -375,17 +381,21 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
-\Hy@SectionHShift=\skip62
+\Hy@SectionHShift=\skip64
 )
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 77.
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count300
+\l__color_backend_stack_int=\count301
 \l__pdf_internal_box=\box61
-) (./annual-review-2023-v2.aux)
-\openout1 = `annual-review-2023-v2.aux'.
+) (./annual-review-material-2023.aux
+
+LaTeX Warning: Label `tab:timeline' multiply defined.
+
+)
+\openout1 = `annual-review-material-2023.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
 LaTeX Font Info:    ... okay on input line 77.
@@ -453,9 +463,9 @@ Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
 Package hyperref Info: Link coloring OFF on input line 77.
-(./annual-review-2023-v2.out) (./annual-review-2023-v2.out)
+(./annual-review-material-2023.out) (./annual-review-material-2023.out)
 \@outlinefile=\write3
-\openout3 = `annual-review-2023-v2.out'.
+\openout3 = `annual-review-material-2023.out'.
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 79.
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
@@ -486,103 +496,123 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 79.
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 109.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 109.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 109.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 111.
-[1
+) [1
 
-{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}] [2{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
+{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 149.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 149.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 149.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 151.
+[2{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}] [3{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 183.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 245.
 
-[3] [4] [5]
+[4] [5] [6] [7]
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.301 \begin{equation}
+l.404 \begin{equation}
                       \tag{2}\label{eq:w2}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.301 \begin{equation}
+l.404 \begin{equation}
                       \tag{2}\label{eq:w2}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.301 \begin{equation}
+l.404 \begin{equation}
                       \tag{2}\label{eq:w2}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.301 \begin{equation}
+l.404 \begin{equation}
                       \tag{2}\label{eq:w2}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.307 \begin{equation}
+l.410 \begin{equation}
                       \tag{3}\label{eq:gt}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.307 \begin{equation}
+l.410 \begin{equation}
                       \tag{3}\label{eq:gt}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.307 \begin{equation}
+l.410 \begin{equation}
                       \tag{3}\label{eq:gt}
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.307 \begin{equation}
-                      \tag{3}\label{eq:gt} [6]
-<images/plot-discount-value.png, id=176, 511.9125pt x 227.4096pt>
+l.410 \begin{equation}
+                      \tag{3}\label{eq:gt} [8] [9]
+<images/plot-discount-value.png, id=246, 511.9125pt x 227.4096pt>
 File: images/plot-discount-value.png Graphic file (type png)
 <use images/plot-discount-value.png>
-Package pdftex.def Info: images/plot-discount-value.png  used on input line 377.
+Package pdftex.def Info: images/plot-discount-value.png  used on input line 480.
 (pdftex.def)             Requested size: 469.75449pt x 208.68152pt.
-[7] [8 <./images/plot-discount-value.png>]
-Underfull \hbox (badness 3250) in paragraph at lines 430--434
+[10 <./images/plot-discount-value.png>]
+Underfull \hbox (badness 3250) in paragraph at lines 535--539
 []\T1/lmr/m/n/12 Previously, re-searchers of-ten em-ploy ``present bias'' ([]Laib-son[], []1997[]) or ``naiveté''
  []
 
-<images/plot-budget-dynamic.png, id=211, 469.2732pt x 198.9834pt>
+[11]
+<images/plot-budget-dynamic.png, id=283, 469.2732pt x 198.9834pt>
 File: images/plot-budget-dynamic.png Graphic file (type png)
 <use images/plot-budget-dynamic.png>
-Package pdftex.def Info: images/plot-budget-dynamic.png  used on input line 467.
+Package pdftex.def Info: images/plot-budget-dynamic.png  used on input line 572.
 (pdftex.def)             Requested size: 469.29352pt x 198.992pt.
-[9] [10 <./images/plot-budget-dynamic.png>] [11] (./annual-review-2023-v2.bbl [12])
+[12] [13 <./images/plot-budget-dynamic.png>] [14] [15]
+<images/example-question.png, id=313, 416.757pt x 257.325pt>
+File: images/example-question.png Graphic file (type png)
+<use images/example-question.png>
+Package pdftex.def Info: images/example-question.png  used on input line 723.
+(pdftex.def)             Requested size: 416.75598pt x 257.32436pt.
+[16 <./images/example-question.png>] [17]
+<images/pilot-result.png, id=326, 170.5572pt x 284.5029pt>
+File: images/pilot-result.png Graphic file (type png)
+<use images/pilot-result.png>
+Package pdftex.def Info: images/pilot-result.png  used on input line 795.
+(pdftex.def)             Requested size: 170.55678pt x 284.5022pt.
+[18] [19 <./images/pilot-result.png>]
+<images/screenshot-demo.png, id=343, 416.976pt x 362.445pt>
+File: images/screenshot-demo.png Graphic file (type png)
+<use images/screenshot-demo.png>
+Package pdftex.def Info: images/screenshot-demo.png  used on input line 846.
+(pdftex.def)             Requested size: 352.3189pt x 306.24358pt.
 
-Package caption Warning: Unused \captionsetup[table] on input line 58.
-See the caption package documentation for explanation.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-[13] (./annual-review-2023-v2.aux)
+[20] [21 <./images/screenshot-demo.png>] [22] (./annual-review-material-2023.bbl [23] [24]) [25] (./annual-review-material-2023.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-03>
  ***********
-Package rerunfilecheck Info: File `annual-review-2023-v2.out' has not changed.
-(rerunfilecheck)             Checksum: 492B20EFA1C235D8B17B2E3CBA511CCB;4214.
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package rerunfilecheck Info: File `annual-review-material-2023.out' has not changed.
+(rerunfilecheck)             Checksum: 7282E2539EAFF0DBD8F9DAB58659AE44;4952.
  ) 
 Here is how much of TeX's memory you used:
- 13132 strings out of 477147
- 209915 string characters out of 5811263
- 1926248 words of memory out of 5000000
- 33901 multiletter control sequences out of 15000+600000
+ 13307 strings out of 477147
+ 213737 string characters out of 5811263
+ 1931248 words of memory out of 5000000
+ 34034 multiletter control sequences out of 15000+600000
  624685 words of font info for 86 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,8n,79p,585b,556s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,13n,79p,591b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on annual-review-2023-v2.pdf (13 pages, 528527 bytes).
+Output written on annual-review-material-2023.pdf (25 pages, 1183843 bytes).
 PDF statistics:
- 356 PDF objects out of 1000 (max. 8388607)
- 295 compressed objects within 3 object streams
- 72 named destinations out of 1000 (max. 500000)
- 131 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 497 PDF objects out of 1000 (max. 8388607)
+ 417 compressed objects within 5 object streams
+ 110 named destinations out of 1000 (max. 500000)
+ 186 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -196,7 +196,9 @@ Given that $t\geq1$, we have $g\geq 1$ and thus $\frac{2}{2+\ln g}$ should be po
 
 ## F. Others
 
-## 
+@steiner_rational_2017 propose a dynamic choice model based on the typical setting of rational inattention. In their model, limited attention hinders the decision maker from acquiring all the latest information at every decision step, thus causes status quo bias and behavioral inertia. Nevertheless, their model may not be convenient to be applied to the scenarios where options are fully described or choices are made in only one step. Such scenarios are common in many intertemporal choice experiments. As I show in the next subsection, the present model is well matched to such decision scenarios.
+
+Moreover, @gabaix_myopia_2017 also assume that, in intertemporal choices, the value of a reward in each period is uncertain. Specifically, they assume the value follows a normal distribution and the decision maker updates her estimation about this value via learning.
 
 Suppose when having no information, the weight on period $t$ across each potentially realized sequence is equal ($\equiv w^0_t$). Let $W$ and $P$ be the minimal sets that contain all available function $w$ and $p$ respectively. We can use an optimization problem to represent the described evaluation procedure.
 

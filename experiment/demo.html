@@ -2,8 +2,37 @@
 <html>
 <head>
   <title>Demo</title>
-  <script src="https://cdn.jsdelivr.net/npm/captcha.js/dist/captcha.min.js"></script>
   <style>
+	body {
+	  display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+	#container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 350px;
+    }
+
+	#instruction {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+	#captcha-image {
+      margin-top: 20px;
+    }
+
+    #submit-button {
+      margin-top: 20px;
+    }
+
     .ball {
       width: 50px;
       height: 50px;
@@ -18,16 +47,49 @@
     .blue {
       background-color: blue;
     }
+
+    .instructions {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .button {
+	  padding: 10px 20px;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 2px;
+      font-size: 14px;
+      cursor: pointer;
+	}
   </style>
 </head>
 <body>
-  <div id="container"></div>
+	<div id="instruction">
+		<p>Red ball is worth <span id="redScore">X</span>, blue ball is worth <span id="blueScore">Y</span></p>
+	</div>
 
-  <script>
+	<div id="container"></div>
+	<div id="captcha-image"></div>
+
+	<div id="submit-button">
+		<button class="button">Take a draw</button>
+	</div>
+
+	<script>
 	window.addEventListener('DOMContentLoaded', function() {
 		var container = document.getElementById('container');
-		var redBallsCount = 5; // 红色球形的数量
-		var blueBallsCount = 5; // 蓝色球形的数量
+		var submitButton = document.getElementById('submit-button');
+		var captcha = generateCaptcha();
+
+		var redBallsCount = 5; // The number of red balls
+		var blueBallsCount = 5; // The number of blue balls
+		var redScore = 10; // score of red ball
+      	var blueScore = 5; // score of blue ball
+
+      	document.getElementById('redScore').textContent = redScore;
+      	document.getElementById('blueScore').textContent = blueScore;
+		
 
 		for (var i = 0; i < redBallsCount; i++) {
 			createBall('red');
@@ -37,46 +99,48 @@
 			createBall('blue');
 		}
 
-		var submitButton = document.createElement('button');
-		submitButton.textContent = '提交';
+		
+		// Submit button: take a draw
 		submitButton.addEventListener('click', function() {
 			var balls = document.getElementsByClassName('ball');
 			var randomIndex = Math.floor(Math.random() * balls.length);
 			var selectedBall = balls[randomIndex];
-			var color = selectedBall.classList.contains('red') ? '红色' : '蓝色';
-			alert('抽出的球的颜色为：' + color);
+			var color = selectedBall.classList.contains('red') ? 'Red' : 'Blue';
+			alert('The ball you draw: ' + color);
 		});
 
-		container.appendChild(submitButton);
 
-		var captcha = generateCaptcha();
-
+		// Create the balls
 		function createBall(color) {
 			var ballContainer = document.createElement('div');
 			ballContainer.className = 'ball-container';
 
 			var ball = document.createElement('div');
 			ball.className = 'ball ' + color;
+
 			ball.addEventListener('click', function() {
-			var userInput = prompt('请输入验证码：');
-			if (userInput === captcha) {
-				ball.classList.toggle('red');
-				ball.classList.toggle('blue');
-			} else {
-				alert('验证码错误！');
-			}
-			updateCaptchaImage();
+				//var captcha = generateCaptcha(); 
+				var userInput = prompt("Please enter the code:" + captcha);
+				if (userInput === captcha) {
+					ball.classList.toggle('red');
+					ball.classList.toggle('blue');
+				} else {
+					alert('Wrong code!');
+				}
+				captcha = generateCaptcha(); 
+    			updateCaptchaImage(captcha);     
 			});
 
 			ballContainer.appendChild(ball);
 			container.appendChild(ballContainer);
 		}
 
+		// Captcha image
 		var captchaCanvas = document.createElement('canvas');
 		var captchaContext = captchaCanvas.getContext('2d');
 
 		function generateCaptcha() {
-			var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+			var characters = 'abcdefghijkmnopqrstuvwxyz0123456789';
 			var captcha = '';
 			for (var i = 0; i < 6; i++) {
 			captcha += characters.charAt(Math.floor(Math.random() * characters.length));
@@ -84,26 +148,23 @@
 			return captcha;
 		}
 
-		function updateCaptchaImage() {
+		function updateCaptchaImage(captcha) {
 			captchaCanvas.width = 150;
 			captchaCanvas.height = 50;
-			
+			//var captcha = generateCaptcha();
 			captchaContext.font = '24px Arial';
-			captchaContext.fillText(captcha, 10, 30);
+			captchaContext.fillText(captcha, 30, 40);
 
 			var captchaImage = new Image();
 			captchaImage.src = captchaCanvas.toDataURL();
 
-			var existingCaptchaImage = container.querySelector('.captcha-image');
-			if (existingCaptchaImage) {
-			container.removeChild(existingCaptchaImage);
-			}
-			captchaImage.className = 'captcha-image';
-			container.appendChild(captchaImage);
+			var captchaImageElement = document.getElementById('captcha-image');
+        	captchaImageElement.innerHTML = ''; 
+        	captchaImageElement.appendChild(captchaImage);
 		}
 
-		updateCaptchaImage();
+		updateCaptchaImage(captcha);
 	});
-  </script>
+	</script>
 </body>
 </html>
