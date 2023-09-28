@@ -603,8 +603,29 @@ In a static choice setting, the rationale for the usage of Shannon cost
 function can be interpreted with independence of irrelevant alternatives
 [@matejka_rational_2015], or data compression [@caplin_rationally_2022].
 However, this is not applicable when weights can be allocated across
-time periods. Hence, I propose three axioms that can characterize
-Shannon cost function in the intertemporal choice setting.
+time periods. Hence, I propose four axioms that can characterize Shannon
+cost function in the intertemporal choice setting.
+
+**Axiom 1**: (*state independence*) For any reward sequence $X_T$,
+$X'_T$, $X''_T$ and $\alpha\in(0,1)$, $X_T\succ X'_T$ implies
+$\alpha X_T+ (1-\alpha)X''_T \succ \alpha X'_T + (1-\alpha) X''_T$.
+
+Axiom 1 can be interpreted by Lemma 1.The preference relation
+$x \succ y$ is defined by the opposite of $y\succsim x$; the preference
+relation $x\sim y$ is defined by the joint satisfaction of $x\succsim y$
+and $y \succsim x$.
+
+**Lemma 1**: Suppose preference relation $\succsim$ has an ADU
+representation and satisfies Axiom 1. If $p_1+p_2+...p_n=1$, and for any
+$i\in\{1,2,…,n\}$, $0<p_i<1$, then for any deterministic reward sequence
+$S^1_T$, $S^2_T$, ..., $S^n_T$, we
+have$$ U(p_1 S^1_T+p_2S^2_T+...+p_nS^n_T)=p_1U(S^1_T)+p_2U(S^2_T)+...+p_nU(S^n_T) $$Lemma
+1 implies that, the determination of discounting factors for one
+potential realization of a reward sequence will not interfere with that
+for another potential realization of it. Suppose $S_T$ and $S'_{T}$ are
+both potential realizations of a reward sequence $X_T$, one can solve
+$w_t(S_T)$ and $w_t(S'_T)$ by constructing a constrained optimal
+discounting problem for each then solving it independently.
 
 **Axiom 1**: *(sequential outcome-betweenness)* For any non-negative
 real number $b$ and deterministic reward sequence $S_T$, let $S_Tb$
@@ -644,7 +665,7 @@ sequences are separability, then any sequences should be should be
 aggregate invariant.*
 
 **Proposition 1**: $\succsim$ *has an ADUS representation if and only if
-it has an ADU representation and satisfies Axiom 1-3.*
+it has an ADU representation and satisfies Axiom 1-4.*
 
 # Discussion
 
