@@ -1,0 +1,136 @@
+---
+title: "Psychological Reason"
+author: "Zark Zijian Wang"
+date: "`r Sys.Date()`"
+bibliography: reference.bib
+biblio-style: apalike
+header-includes: 
+  \usepackage{setspace}
+  \usepackage{amsmath}
+  \usepackage{array}
+  \usepackage{caption}
+  \usepackage{longtable}
+  \usepackage{booktabs}
+  \usepackage{enumitem}
+  \renewcommand{\arraystretch}{1}
+  \captionsetup[table]{skip=5pt}
+  \setstretch{1.5} 
+fontsize: 12pt
+geometry: margin=1in
+editor_options: 
+  markdown: 
+    wrap: 72
+output:
+  #word_document:
+    #number_sections: true
+  pdf_document:
+    number_sections: true
+    citation_package: natbib
+    keep_tex: true
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+I developed a theory that I term "*attentional discounted utility*". The
+purpose of this theory is to incorporate an attentional mechanism into
+the discounted utility framework. One benefit of doing this is that you
+may only need to introduce one additional parameter to a conventional
+discounted utility model, in order to account for a broad set of
+anomalies. The model also makes some new predictions (such as what I
+hope to test in the experiment).
+
+# Attention and Intertemporal Choice
+
+## Reward
+
+In psychological experiments and the real world, it is often found that
+people tend to pay more attention to information with higher reward
+values, either implicitly or explicitly.
+
+Vision: 1. value-driven attention capture 2. contradicts with the
+current goal
+
+For example, in visual search tasks,
+
+search for a salient target can be slowed when a distractor is
+associated with a large reward in previous trials [@anderson2011].
+
+@hickey2010 reward changes salience
+
+@failing2018 provides a good review
+
+Finance and risky choices: ostrich effect
+
+General: 1. information has hedonic value 2. utility-weighted sampling
+3. relevant - wishful thinking
+
+In finance, investors tend to check their accounts more frequently when
+they anticipate gains rather than losses [@golman_information_2017;
+@olafsson_ostrich_2017].
+
+I apply this insight to intertemporal choices.
+
+In intertemporal choice, @noor_intertemporal_2011 advocate using a model
+in which the larger reward is less discounted to account for the
+magnitude effect.
+
+## Attention as an active sampler
+
+The role of attention in decision making can be understood using the
+metaphor of an information-processing system. When the system receives
+signals from multiple sources and is unable to process all of this
+information at the same time, attention acts as a random sampler,
+actively sampling these signals and thus limiting the amount of
+information that enters higher-order processing. This view of attention
+can be traced back to Broadbent (1958) and is re-emphasized by Gottlieb
+(2012). You can see some other decision theories also adopting a similar
+view, e.g. decision field theory (Busemeyer and Townsend, 1993).
+
+## Decision process
+
+Suppose time is discrete. Let $X_T$ denote the sequence of rewards
+$[x_0,x_1,...,x_T]$, which yields reward $x_t$ in time period $t$.[^1]
+The time length of this sequence, denoted by $T$, is finite. For any
+$t \in \{0,1,...,T\}$, the reward level $x_t$ is a random variable
+defined on $\mathbb{R}_{\geq 0}$. I assume that making an intertemporal
+choice involves three steps:
+
+[^1]: I use uppercase letters to represent a sequence and lowercase
+    letters to represent elements within the sequence.
+
+\setlength{\leftskip}{1cm}
+
+Step 1. (Sampling) The decision maker subjectively draws a few potential
+realizations of $X_T$, and from each drawn realization, she draws a few
+time periods and observes their rewards; then, she combines all observed
+rewards into a sample.
+
+Step 2. (Valuation) The decision maker uses the mean utility of sampled
+rewards as an approximate value representation of $X_T$.
+
+Step 3. (Choice-making) She chooses the sequence with the highest value
+from all the available reward sequences.
+
+\setlength{\leftskip}{0pt}
+
+In the decision process described above, Step 3 is standard. By Step
+1-2, I take the notion that, to evaluate a stimuli, the decision maker
+needs to assess all the relevant information, while her information
+processing capacity is limited. Consequently, she selectively attends to
+only *a subset* of the available information (which is termed *a
+sample*), then aggregates the attributes observed in the sample to
+calculate the stimuli value. This sampling process is not unbiased; on
+the contrary, the decision maker aims to retain more of the information
+that they consider more relevant in the sample. Such a notion has a long
+history in psychological research.[^2] In recent years, many theories
+grounded in this (or similar notions) have made significant progress in
+explaining choice anomalies, such as decision field theory
+[@busemeyer_decision_1993], decision-by-sampling
+[@stewart_decision_2006], utility-weighted sampling
+[@lieder_overrepresentation_2018] and efficient coding theory
+[@heng_efficient_2020]. In the next subsection, I describe the sampling
+and valuation process in detail.
+
+[^2]: @weber_mindful_2009 and @chun_taxonomy_2011 provide good reviews
+    for such studies.
