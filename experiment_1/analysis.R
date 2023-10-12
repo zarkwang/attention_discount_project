@@ -144,17 +144,44 @@ df_time_equiv <- df_time_choice %>%
   group_by(prolific_id,pid,cond,a_rw,b_fixed_rw,b_delay) %>%
   summarise(b_vary_rw = mean(b_vary_rw))
 
-# save data
-write.csv(df_time_choice,file='intertemporal_choice_obs.csv')
-
 
 sum_time_equiv <- df_time_equiv %>% 
   group_by(cond,a_rw,b_fixed_rw,b_delay) %>%
   summarise(mean_vary_rw = mean(b_vary_rw),
             std_vary_rw = sd(b_vary_rw))
 
+ggplot(data=sum_time_equiv,
+       aes(x=factor(b_fixed_rw),
+           y=std_vary_rw))+
+  geom_point(aes(shape= factor(b_delay),
+                 color= factor(a_rw)),
+             size = 2)+
+  geom_line(aes(group = interaction(b_delay, a_rw)),
+            linetype = 'dashed', color = 'grey') +
+  facet_wrap(~cond,
+             labeller = as_labeller(
+               c('Immed_Rw_Vary' = 'Immediate reward varies',
+                 'Delayed_Rw_Vary' = 'Delayed reward varies')))+
+  labs(x = 'reward amount constant across rows in B (×£10)',
+       y = 'standard deviation') +
+  scale_shape_discrete(name = "Time length of B (month)") +
+  scale_color_discrete(name = "Reward amount of A (×£10)") +
+  theme_bw(12)+
+  theme(
+    legend.position = 'top',
+    legend.key.width = unit(0.3, "cm"),
+    axis.title.x = element_text(margin = margin(t = 8)),
+    axis.title.y = element_text(margin = margin(r = 8)),
+    text = element_text(family = "Times New Roman")
+  )
+
+ggsave('fig_std_switch.png',device = 'png',width = 18, height = 9, units = 'cm')
+
 df_time_immed <- df_time_choice[df_time_choice$cond == 'Immed_Rw_Vary',]
 df_time_delayed <- df_time_choice[df_time_choice$cond == 'Delayed_Rw_Vary',]
+
+# save data
+write.csv(df_time_choice,file='intertemporal_choice_obs.csv')
 
 # ----------------------------------
 #       Baseline Model
