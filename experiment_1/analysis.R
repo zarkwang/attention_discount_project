@@ -82,11 +82,12 @@ nrow(df_filtered)
 # ----------------------------------
 
 # Gather data to make each choice occupy a row
-# Split choice data into intertemporal choices and risky choices
 df_choice <- df_filtered %>% 
   mutate(pid = factor(1:nrow(df_filtered))) %>%
   gather(key = 'question', value = 'choice', -c(pid, prolific_id,duration))
 
+
+# Split choice data into intertemporal choices and risky choices
 # risky choices: Q10, Q11, Q12
 risky_cols <- cols[grep("Q10|Q11|Q12", cols)]
 
@@ -117,6 +118,10 @@ ra_est %>% group_by(risk_amount) %>%
 crra <- mean(ra_est$implied_rra)
 
 
+# ----------------------------------
+#      Descriptive Analysis
+# ----------------------------------
+
 # intertemporal choices: Q5 (Immed_Rw_Vary), Q6 (Delayed_Rw_Vary)
 df_time_choice <- df_choice %>%
   filter(!question %in% risky_cols) %>%
@@ -132,6 +137,24 @@ df_time_choice <- df_choice %>%
          a_rw = a_rw *0.1) %>%
   select(-c(q_id,cond_id,row_id,question))
 
+
+df_time_equiv <- df_time_choice %>%
+  group_by(prolific_id,pid,cond,a_rw,b_fixed_rw,b_delay,choice) %>%
+  summarise(b_vary_rw = ifelse(unique(choice) == 0,max(b_vary_rw),min(b_vary_rw)))%>%
+  group_by(prolific_id,pid,cond,a_rw,b_fixed_rw,b_delay) %>%
+  summarise(b_vary_rw = mean(b_vary_rw))
+
+# save data
+write.csv(df_time_choice,file='intertemporal_choice_obs.csv')
+
+
+sum_time_equiv <- df_time_equiv %>% 
+  group_by(cond,a_rw,b_fixed_rw,b_delay) %>%
+  summarise(mean_vary_rw = mean(b_vary_rw),
+            std_vary_rw = sd(b_vary_rw))
+
+df_time_immed <- df_time_choice[df_time_choice$cond == 'Immed_Rw_Vary',]
+df_time_delayed <- df_time_choice[df_time_choice$cond == 'Delayed_Rw_Vary',]
 
 # ----------------------------------
 #       Baseline Model
@@ -241,28 +264,6 @@ fe_logit_u2
 
 # Mapping reward amount to utility does not change fitting performance
 
-# ----------------------------------
-#       Bias-Reduced Model
-# ----------------------------------
 
-# Firth's Bias-Reduced Regression: Immed_Rw_Vary
-#sample_id <- sample(unique(df_time_immed$pid),20)
-#sample <- df_time_immed[df_time_immed$pid %in% sample_id,]
-
-firth1 <- logistf(formula1, 
-                  data = df_time_immed, 
-                  family = binomial(link='logit'))
-
-save(firth1, file = "firth1.RData")
-
-# Firth's Bias-Reduced Regression: Delayed_Rw_Vary
-#sample_id <- sample(unique(df_time_delayed$pid),20)
-#sample <- df_time_delayed[df_time_delayed$pid %in% sample_id,]
-
-firth2 <- logistf(formula2, 
-                  data = df_time_delayed, 
-                  family = binomial(link='logit'))
-
-save(firth2, file = "firth2.RData")
 
 
