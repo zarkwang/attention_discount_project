@@ -109,6 +109,7 @@ class firthLogit:
 
         wald_result = {'var_name':self.X.columns,
                        'coef':self.coef,
+                       'bse':self.bse,
                        'wald_p':waldp,
                        'lower_bound':wald_lower,
                        'upper_bound':wald_upper}
@@ -130,3 +131,27 @@ class firthLogit:
             lrtp.append(lrt_pvalue)
         
         return lrtp
+    
+    # Prediction
+    def predict(self,method = None):
+
+        if method is None:
+            linear_sum = self.coef @ self.X.T
+        
+        elif method == 'flic': # using the FLIC method to reduce prediction bias
+            
+            # calculate b1 * X1 + ... + bm * Xm (removing intercept)
+            linear_sum_no_intercept = self.coef[1:] @ self.X.iloc[:,1:].T
+        
+            # logistic regression
+            X_ = sm.add_constant(linear_sum_no_intercept)
+            logit_flic = sm.Logit(self.y,X_).fit()
+
+            print('original intercept: ',self.coef[0])
+            print('new intercept: ',logit_flic.params[0])
+        
+            linear_sum = logit_flic.params[0] + linear_sum_no_intercept
+        
+        pred = 1/(1+np.exp(-linear_sum))
+
+        return pred
