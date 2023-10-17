@@ -172,10 +172,10 @@ var_name_delayed_u <- c('$u(M)$',
 
 # Panel A: Immed_Rw_Vary
 tab1 <- make_ci_tab(fe_logit_u1,add_var_name = TRUE)[-1,]
-tab2 <- make_ci_tab(fe_logit_c1,add_var_name = TRUE)[-1,]
-tab3 <- make_ci_tab(fe_logit_a1,add_var_name = TRUE)[-1,]
+tab2 <- make_ci_tab(fe_logit_a1,add_var_name = TRUE)[-1,]
+tab3 <- make_ci_tab(fe_logit_c1,add_var_name = TRUE)[-1,]
 
-union_rows <- data.frame(var_name = union(rownames(tab2),rownames(tab3)))
+union_rows <- data.frame(var_name = union(rownames(tab1),rownames(tab2)))
 
 tab1_adj <- left_join(union_rows, tab1, by = "var_name")[,-1]
 tab2_adj <- left_join(union_rows, tab2, by = "var_name")[,-1]
@@ -188,18 +188,18 @@ remove(tab1,tab2,tab3,tab1_adj,tab2_adj,tab3_adj)
 
 row_mod <- sprintf(" & \\multicolumn{2}{c}{%s} & \\multicolumn{2}{c}{%s} & \\multicolumn{2}{c}{%s} \\\\",
                    "(3) Utility model",
-                   "(4) Censored data",
-                   "(5) Add interation")
+                   "(4) Add interation",
+                   "(5) Censored data")
 
 row_name <- "& Coef & 95\\% CI & Coef & 95\\% CI & Coef & 95\\% CI \\\\"
 row_obs <- sprintf("\\hline observations & \\multicolumn{2}{c}{%d} & \\multicolumn{2}{c}{%d} & \\multicolumn{2}{c}{%d} \\\\",
                    nrow(df_time_immed),
-                   nrow(df_censor_immed),
-                   nrow(df_time_immed))
+                   nrow(df_time_immed),
+                   nrow(df_censor_immed))
 row_aic <- sprintf("AIC & \\multicolumn{2}{c}{%.2f} & \\multicolumn{2}{c}{%.2f} & \\multicolumn{2}{c}{%.2f} \\\\",
                    logit_u1$aic,
-                   logit_c1$aic,
-                   logit_a1$aic)
+                   logit_a1$aic,
+                   logit_c1$aic)
   
 
 addtorow <- list()
@@ -217,11 +217,15 @@ tab1 <- make_ci_tab(fe_logit_u2,add_var_name = TRUE)[-1,]
 tab2 <- make_ci_tab(fe_logit_c2,add_var_name = TRUE)[-1,]
 tab3 <- make_ci_tab(fe_logit_a2,add_var_name = TRUE)[-1,]
 
-union_rows <- data.frame(var_name = union(rownames(tab2),rownames(tab3)))
+union_rows <- data.frame(var_name = union(rownames(tab1),rownames(tab2)))
+
+union_rows
 
 tab1_adj <- left_join(union_rows, tab1, by = "var_name")[,-1]
 tab2_adj <- left_join(union_rows, tab2, by = "var_name")[,-1]
 tab3_adj <- left_join(union_rows, tab3, by = "var_name")[,-1]
+
+
 
 tab_mod_b <- cbind(tab1_adj,tab2_adj,tab3_adj)
 rownames(tab_mod_b) <- var_name_delayed_u
@@ -247,6 +251,7 @@ addtorow <- list()
 addtorow$pos <- list(0,0,nrow(tab_mod_b),nrow(tab_mod_b))
 addtorow$command  <- as.vector(c(row_mod,row_name,row_obs,row_aic),mode='character')
 
+
 write_reg_tab('./tables/utility_B.tex',tab_mod_b,
               var_name=var_name_delayed_u,
               document=write_document,
@@ -266,7 +271,8 @@ tab_immed <- df_time_immed %>%
   summarise(mean_choice = mean(choice),
             pred_logit = mean(pred_logit),
             pred_logit_u = mean(pred_logit_u),
-            pred_logit_a = mean(pred_logit_a)
+            pred_logit_a = mean(pred_logit_a),
+            pred_logit_c = mean(pred_logit_c)
             ) %>%
   left_join(firth_pred_immed) %>%
   mutate(b_vary_rw = b_vary_rw*10,
@@ -280,7 +286,7 @@ fig_immed_1 <- ggplot(data = tab_immed[tab_immed$a_rw == unique(tab_immed$a_rw)[
                           color = factor(b_fixed_rw), 
                           shape = factor(b_delay))) +
   geom_point(size=2)+
-  geom_line(aes(y=pred_logit_a),linetype = 'dashed',alpha=0.75)+
+  geom_line(aes(y=pred_logit_c),linetype = 'dashed',alpha=0.75)+
   ggtitle(paste0('(1) option A: £',unique(tab_immed$a_rw)[1], ''))+
   labs(x = "immediate reward in option B (£)", 
        y = "probability of choosing B")+
@@ -305,7 +311,7 @@ fig_immed_2 <- ggplot(data = tab_immed[tab_immed$a_rw == unique(tab_immed$a_rw)[
                           color = factor(b_fixed_rw), 
                           shape = factor(b_delay))) +
   geom_point(size=2)+
-  geom_line(aes(y=pred_logit_a),linetype='dashed',alpha=0.75)+
+  geom_line(aes(y=pred_logit_c),linetype='dashed',alpha=0.75)+
   ggtitle(paste0('(2) option A: £',unique(tab_immed$a_rw)[2], ''))+
   labs(x = "immediate reward in option B (£)", 
        y = "")+
@@ -336,7 +342,8 @@ tab_delayed <- df_time_delayed %>%
   summarise(mean_choice = mean(choice),
             pred_logit = mean(pred_logit),
             pred_logit_u = mean(pred_logit_u),
-            pred_logit_a = mean(pred_logit_a)) %>%
+            pred_logit_a = mean(pred_logit_a),
+            pred_logit_c = mean(pred_logit_c)) %>%
   left_join(firth_pred_delayed) %>%
   mutate(b_vary_rw = b_vary_rw*10,
          b_fixed_rw = b_fixed_rw*10,
@@ -348,7 +355,7 @@ fig_delayed_1 <- ggplot(data = tab_delayed[tab_delayed$a_rw == unique(tab_delaye
                             y = mean_choice, 
                             color = factor(b_fixed_rw))) +
   geom_point(size=2)+
-  geom_line(aes(y=pred_logit_a),linetype='dashed',alpha=0.75)+
+  geom_line(aes(y=pred_logit_c),linetype='dashed',alpha=0.75)+
   ggtitle(paste0('(1) option A: £',unique(tab_delayed$a_rw)[1], ''))+
   labs(x = "delayed reward in option B (£)", 
        y = "probability of choosing B")+
@@ -368,7 +375,7 @@ fig_delayed_2 <- ggplot(data = tab_delayed[tab_delayed$a_rw == unique(tab_delaye
                             y = mean_choice, 
                             color = factor(b_fixed_rw))) +
   geom_point(size=2)+
-  geom_line(aes(y=pred_logit_a),linetype='dashed',alpha=0.75)+
+  geom_line(aes(y=pred_logit_c),linetype='dashed',alpha=0.75)+
   ggtitle(paste0('(2) option A: £',unique(tab_delayed$a_rw)[2], ''))+
   labs(x = "delayed reward in option B (£)", 
        y = "")+
@@ -403,9 +410,6 @@ fig_grand <- grid.arrange(panel_immed_with_title,
                       heights = c(1.15,1))
 
 ggsave('./figures/fig_grand_pred.png',fig_grand,device = 'png',width = 18, height = 20, units = 'cm')
-
-
-
 
 
 

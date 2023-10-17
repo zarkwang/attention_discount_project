@@ -151,6 +151,9 @@ df_time_equiv <- df_time_choice %>%
 
 
 sum_time_equiv <- df_time_equiv %>% 
+  mutate(a_rw = a_rw*10,
+         b_fixed_rw = b_fixed_rw*10,
+         b_vary_rw = b_vary_rw*10) %>%
   group_by(cond,a_rw,b_fixed_rw,b_delay) %>%
   summarise(mean_vary_rw = mean(b_vary_rw),
             std_vary_rw = sd(b_vary_rw))
@@ -167,14 +170,16 @@ ggplot(data=sum_time_equiv,
              labeller = as_labeller(
                c('Immed_Rw_Vary' = 'Immediate reward varies',
                  'Delayed_Rw_Vary' = 'Delayed reward varies')))+
-  labs(x = 'reward amount constant across rows in B (×£10)',
+  labs(x = 'the amount constant across rows in option B (£)',
        y = 'standard deviation') +
-  scale_shape_discrete(name = "Time length of B (month)") +
-  scale_color_discrete(name = "Reward amount of A (×£10)") +
+  scale_shape_discrete(name = "time length of option B (month)") +
+  scale_color_discrete(name = "option A (£)") +
   theme_bw(12)+
   theme(
     legend.position = 'top',
-    legend.key.width = unit(0.3, "cm"),
+    #legend.box = "vertical",
+    #legend.spacing.y = unit(-0.2, "cm"),
+    legend.key.width = unit(0, "cm"),
     axis.title.x = element_text(margin = margin(t = 8)),
     axis.title.y = element_text(margin = margin(r = 8)),
     text = element_text(family = "Times New Roman")
@@ -301,40 +306,6 @@ df_time_delayed$pred_logit_u <- predict(logit_u2,type='response')
 
 print('Utility model fitted')
 
-# ------------------------------------------
-#   Utility + Eliminating Uniform Choices
-# ------------------------------------------
-# Immed_Rw_Vary
-q_filter1 <- df_time_immed %>% 
-  group_by(a_rw,b_fixed_rw,b_delay,b_vary_rw) %>%
-  summarise(mean_choice = mean(choice)) %>%
-  filter(mean_choice >0 & mean_choice <1)
-
-df_censor_immed <- df_time_immed %>% inner_join(q_filter1)
-
-logit_c1 <- glm(formula_u1, 
-                data = df_censor_immed,
-                family = binomial(link='logit'))
-
-fe_logit_c1 <- coef_confint(logit_c1,coef_name = coef_name_u1)
-
-
-# Delayed_Rw_Vary
-q_filter2 <- df_time_delayed %>% 
-  group_by(a_rw,b_fixed_rw,b_vary_rw) %>%
-  summarise(mean_choice = mean(choice)) %>%
-  filter(mean_choice >0 & mean_choice <1)
-
-df_censor_delayed <- df_time_delayed %>% inner_join(q_filter2)
-
-logit_c2 <- glm(formula_u2, 
-                data = df_censor_delayed,
-                family = binomial(link='logit'))
-
-fe_logit_c2 <- coef_confint(logit_c2,coef_name = coef_name_u2)
-
-print('Utility model without uniform choices fitted')
-
 
 # ------------------------------------------
 #     Utility + Option A as Treatment
@@ -373,9 +344,48 @@ df_time_delayed$pred_logit_a <- predict(logit_a2,type='response')
 print('Utility model with option A treatment fitted')
 
 # ------------------------------------------
+#         Utility + Censored Data
+# ------------------------------------------
+# Immed_Rw_Vary
+q_filter1 <- df_time_immed %>% 
+  group_by(a_rw,b_fixed_rw,b_delay,b_vary_rw) %>%
+  summarise(mean_choice = mean(choice)) %>%
+  filter(mean_choice >0 & mean_choice <1)
+
+df_censor_immed <- df_time_immed %>% inner_join(q_filter1)
+
+logit_c1 <- glm(formula_a1, 
+                data = df_censor_immed,
+                family = binomial(link='logit'))
+
+summary(logit_c1)$coef
+
+fe_logit_c1 <- coef_confint(logit_c1,coef_name = coef_name_a1)
+
+df_time_immed$pred_logit_c <- predict(logit_c1,type='response',newdata=df_time_immed)
+
+# Delayed_Rw_Vary
+q_filter2 <- df_time_delayed %>% 
+  group_by(a_rw,b_fixed_rw,b_vary_rw) %>%
+  summarise(mean_choice = mean(choice)) %>%
+  filter(mean_choice >0 & mean_choice <1)
+
+df_censor_delayed <- df_time_delayed %>% inner_join(q_filter2)
+
+logit_c2 <- glm(formula_a2, 
+                data = df_censor_delayed,
+                family = binomial(link='logit'))
+
+fe_logit_c2 <- coef_confint(logit_c2,coef_name = coef_name_a2)
+
+df_time_delayed$pred_logit_c <- predict(logit_c2,type='response',newdata=df_time_delayed)
+
+print('Utility model with censored data fitted')
+
+
+# ------------------------------------------
 #             Save Results
 # ------------------------------------------
 
 write.csv(rbind(df_time_immed,df_time_delayed),file='intertemporal_choice_obs.csv')
-
 

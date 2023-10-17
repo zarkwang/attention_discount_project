@@ -1,0 +1,95 @@
+---
+title: "Experiment Results"
+author: "Zark Zijian Wang"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+#bibliography: ref_experiment.bib
+biblio-style: apalike
+header-includes: 
+  \usepackage{setspace}
+  \usepackage{amsmath}
+  \usepackage{array}
+  \usepackage{caption}
+  \usepackage{longtable}
+  \usepackage{booktabs}
+  \usepackage{enumitem}
+  \renewcommand{\arraystretch}{1}
+  \captionsetup[table]{skip=5pt}
+  \setstretch{1.5} 
+fontsize: 12pt
+geometry: margin=1in
+editor_options: 
+  markdown: 
+    wrap: 72
+output:
+  #word_document:
+    #number_sections: true
+  pdf_document:
+    number_sections: true
+    citation_package: natbib
+    keep_tex: true
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+# Experimental Procedure
+
+In our survey, each question is a choice list. In each row of the list,
+participants are required to choose between an immediate reward
+(labelled as "option A") and a two-reward sequence (labelled as "option
+B"). The two-reward sequence is constituted by an immediate reward and a
+delayed reward. Every participant is presented with the same questions.
+
+There are two conditions in the survey. The first condition is called
+"Immediate reward varies". In each question of this condition, the
+amount of the immediate reward in option B increases by £10 with each
+row, starting from £10 and going up to £100, while the other variables
+keep constant. The second condition is called "Delayed reward varies".
+In the second condition, the amount of the delayed reward in option B
+varies across the rows, following the same pattern as the first
+condition, while the others keep constant. For each condition, the
+reward amount of option A is selected from {£120, £100}, the reward
+constant across rows in option B is selected from {£90, £70, £50}. The
+time length of option B, e.g. when the delayed reward is delivered, is
+selected from {18 months, 9 months, 1 month} for the first condition and
+is 3 months for the second condition.
+
+# Data
+
+160 participants were recruited via Prolific. All the participants are
+British residents. 50% of them are female, and the median age is 41. On
+average, it took around 11.6 minutes for participants to finish the
+survey, with nine tenths of the participants finishing within 20
+minutes. Each participants received £2 after completing the survey. 157
+participants passed attention check.
+
+# Descriptive Statistics
+
+Standard deviation
+
+```{=tex}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.96\textwidth]{figures/fig_switch_sd.png}
+  \caption{Standard deviation of the swtich points in each question}
+  \label{fig:choice-sd}
+\end{figure}
+```
+# Regression Analysis
+
+## Baseline Model
+
+## Utility Models
+
+```{=tex}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.96\textwidth]{figures/fig_grand_pred.png}
+  \caption{Data and model predicted choice probabilities.}
+  \caption*{\small Dots are the propotions of participants choosing option B in the data, dashed curves are the mean predicted choice probabilities for option B. The curves are fitted by a logit model on the censored data, with $X_v$ being transformed to $u(X_v)$, $M$ being added into interaction terms.}
+  \label{fig:choice-predicted}
+\end{figure}
+```
+# Discussion
+
+# Reference
