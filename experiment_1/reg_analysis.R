@@ -1,9 +1,10 @@
 
 library(readxl)
+library(tidyverse)
 library(stringr)
 library(lme4)
-library(optimx)
-library(xtable)
+#library(optimx)
+
 
 options(digits = 3)
 
@@ -18,84 +19,34 @@ coef_confint <- function(model, coef_name = NULL, conf_level = 0.95){
   if(is.null(coef_name)){
     coef_est <- summary(model)[,"Estimate"]
     se <- summary(model)$coef[, "Std. Error"]
+    p_value <- summary(model)$coef[, "Pr(>|z|)"]
   }else{
     coef_est <- summary(model)$coef[coef_name,"Estimate"]
     se <- summary(model)$coef[coef_name, "Std. Error"]
+    p_value <- summary(model)$coef[coef_name, "Pr(>|z|)"]
   }
 
-  conf_int <- data.frame(Coef = coef_est,
-                     `Std.Err` = se) %>%
-              mutate(`CI 2.5\\%` = Coef - critical*`Std.Err`,
-                     `CI 97.5\\%` = Coef + critical*`Std.Err`
+  conf_int <- data.frame(coef = coef_est,
+                         bse = se,
+                         p_value = p_value) %>%
+              mutate(lower_bound = coef - critical*bse,
+                     upper_bound = coef + critical*bse
                      )
   
   print(paste0('Confidence level:',conf_level))
   return(conf_int)
 }
 
-
-
 ara_solver <- function(x_risk,x_safe){
+  
   a <- seq(0.001,0.2,by=0.001)
   u_risk <- 1-exp(-a*x_risk)
   u_safe <- 1-exp(-a*x_safe)
   diff <- abs(0.5*u_risk - u_safe)
+  
   a[which.min(diff)]
 }
 
-star <- function(p){
-  if(p < 0.001){
-    star = '$^{***}$'
-  } else if(p < 0.01){
-    star = '$^{**}$'
-  } else if(p < 0.05){
-    star = '$^{*}$'
-  } else {
-    star = ''
-  }
-  return(star)
-}
-
-ci_tab <- function(model,coef_name){
-
-  ci <- coef_confint(model,coef_name = coef_name)
-  
-  res_tab <- summary(model)$coef[rownames(summary(model)$coef)%in% coef_name,4]
-  
-  ci$Coef = paste0(round(ci$Coef,3),mapply(star,res_tab))
-  
-  return(ci)
-}
-
-
-write_reg_tab <- function(filename,
-                          tab,var_name = NULL,
-                          document = FALSE,
-                          output = TRUE){
-  
-  begin_doc <- "%\n\\documentclass[12pt]{article}\n \\begin{document}"
-  end_doc <- '\\end{document}'
-  
-  if(!is.null(var_name)){
-    rownames(tab) <- var_name
-  }
-  
-  table <- xtable(tab)
-  align(table) <- rep('l',ncol(tab)+1)
-
-  reg_table <-print.xtable(table, 
-                      hline.after = c(-1, 0, nrow(tab)),
-                      table.placement = "h",
-                      floating = FALSE,
-                      sanitize.text.function = function(x) {x})
-  if(document == TRUE){
-    reg_table <- paste0(begin_doc,str_split(reg_table, '\n', n = 2)[[1]][2],end_doc)
-  }
-  
-  if(output == TRUE){
-  write(reg_table, file = filename)
-  }
-}
 # ----------------------------------
 #         Load Data
 # ----------------------------------
@@ -304,7 +255,6 @@ df_time_delayed$pred_logit <- predict(logit2,type='response')
 # summary(mod2)
 # confint(mod2, method = "Wald")
 
-
 print('Baseline model fitted')
 
 # ----------------------------------
@@ -385,39 +335,47 @@ fe_logit_c2 <- coef_confint(logit_c2,coef_name = coef_name_u2)
 
 print('Utility model without uniform choices fitted')
 
+
+# ------------------------------------------
+#     Utility + Option A as Treatment
+# ------------------------------------------
+# Logitstic Regression:Immed_Rw_Vary
+
+formula_a1 <- as.formula("choice ~ u_b_vary_rw*factor(a_rw) + 
+                u_b_vary_rw*factor(b_fixed_rw) + 
+                u_b_vary_rw*factor(b_delay) + factor(pid)")
+
+logit_a1 <- glm(formula_a1, 
+                data = df_time_immed, 
+                family = binomial(link='logit'))
+
+coef_name_a1 <- names(logit_a1$coefficients)[-grep('pid',names(logit_a1$coefficients))]
+
+fe_logit_a1 <- coef_confint(logit_a1,coef_name = coef_name_a1)
+
+df_time_immed$pred_logit_a <- predict(logit_a1,type='response')
+
+# Logitstic Regression:Delayed_Rw_Vary
+
+formula_a2 <- as.formula("choice ~ u_b_vary_rw*factor(a_rw) + 
+                       u_b_vary_rw*factor(b_fixed_rw) + factor(pid)")
+
+logit_a2 <- glm(formula_a2, 
+                data = df_time_delayed, 
+                family = binomial(link='logit'))
+
+coef_name_a2 <- names(logit_a2$coefficients)[-grep('pid',names(logit_a2$coefficients))]
+
+fe_logit_a2 <- coef_confint(logit_a2,coef_name = coef_name_a2)
+
+df_time_delayed$pred_logit_a <- predict(logit_a2,type='response')
+
+print('Utility model with option A treatment fitted')
+
 # ------------------------------------------
 #             Save Results
 # ------------------------------------------
 
 write.csv(rbind(df_time_immed,df_time_delayed),file='intertemporal_choice_obs.csv')
 
-
-
-var_name_immed <- c('$M$',
-                    '$X_v$',
-                    '$\\textbf{1}\\{X_f = 7\\}$',
-                    '$\\textbf{1}\\{X_f = 9\\}$',
-                    '$\\textbf{1}\\{T = 9\\}$',
-                    '$\\textbf{1}\\{T = 18\\}$',
-                    '$X_v\\cdot\\textbf{1}\\{X_f = 7\\}$',
-                    '$X_v\\cdot\\textbf{1}\\{X_f = 9\\}$',
-                    '$X_v\\cdot\\textbf{1}\\{T = 9\\}$',
-                    '$X_v\\cdot\\textbf{1}\\{T = 18\\}$')
-
-var_name_delayed <- c('$M$',
-                    '$X_v$',
-                    '$\\textbf{1}\\{X_f = 7\\}$',
-                    '$\\textbf{1}\\{X_f = 9\\}$',
-                    '$X_v\\cdot\\textbf{1}\\{X_f = 7\\}$',
-                    '$X_v\\cdot\\textbf{1}\\{X_f = 9\\}$')
-
-# baseline regression tables
-res_logit1 <- ci_tab(logit1,coef_name = coef_name1)[-1,]
-res_logit2 <- ci_tab(logit2,coef_name = coef_name2)[-1,]
-
-write_reg_tab('./tables/logit1.tex',res_logit1,
-              var_name = var_name_immed)
-
-write_reg_tab('./tables/logit2.tex',res_logit2,
-              var_name = var_name_delayed)
 

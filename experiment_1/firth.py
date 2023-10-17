@@ -110,7 +110,7 @@ class firthLogit:
         wald_result = {'var_name':self.X.columns,
                        'coef':self.coef,
                        'bse':self.bse,
-                       'wald_p':waldp,
+                       'p_value':waldp,
                        'lower_bound':wald_lower,
                        'upper_bound':wald_upper}
         
