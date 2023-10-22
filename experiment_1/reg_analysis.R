@@ -170,10 +170,10 @@ ggplot(data=sum_time_equiv,
              labeller = as_labeller(
                c('Immed_Rw_Vary' = 'Immediate reward varies',
                  'Delayed_Rw_Vary' = 'Delayed reward varies')))+
-  labs(x = 'the amount constant across rows in option B (£)',
+  labs(x = 'the constant-across-rows amount in sequence options (£)',
        y = 'standard deviation') +
-  scale_shape_discrete(name = "time length of option B (month)") +
-  scale_color_discrete(name = "option A (£)") +
+  scale_shape_discrete(name = "time length of sequence (month)") +
+  scale_color_discrete(name = "single-reward option (£)") +
   theme_bw(12)+
   theme(
     legend.position = 'top',
@@ -301,8 +301,6 @@ coef_name_u2 <- names(logit_u2$coefficients)[-grep('pid',names(logit_u2$coeffici
 fe_logit_u2 <- coef_confint(logit_u2,coef_name = coef_name_u2)
 
 df_time_delayed$pred_logit_u <- predict(logit_u2,type='response')
-
-# Mapping reward amount to utility does not change fitting performance
 
 print('Utility model fitted')
 

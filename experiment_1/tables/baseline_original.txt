@@ -1,0 +1,37 @@
+
+\documentclass[12pt]{article}
+\usepackage{subcaption}
+
+
+\begin{document}
+\begin{table}
+    \captionsetup[sub]{singlelinecheck=false}
+    \caption{Regression results for the baseline model}
+    \vspace*{12pt}
+    
+    \begin{subtable}{\textwidth}
+        \centering
+        \captionsetup{justification=centering}
+        \caption*{Panel A: Immediate reward varies}
+        % INSERT baseline_A
+    \end{subtable}
+    
+    \vspace*{12pt}
+
+    \begin{subtable}{\textwidth}
+        \centering
+        \captionsetup{justification=centering}
+        \caption*{Panel B: Delayed reward varies}
+        % INSERT baseline_B 
+    \end{subtable} 
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.85\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.001$. The p-values and confidence intervals (CI) are calculated via Wald test. Each unit of $M$, $X_v$ and $X_c$ represents £10. The middle and highest levels of $X_c$ are denoted by $X_{mid}$, $X_{high}$. The middle and highest levels of $T$ are denoted by $T_{mid}$, $T_{high}$. The intercept and individual-specific dummy variables are omitted in the table.}
+    \end{minipage}
+    \label{tab:baseline}
+\end{table}
+
+\end{document}
+

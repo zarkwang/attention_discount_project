@@ -49,7 +49,7 @@ write_reg_tab <- function(filename,
                           output = TRUE,
                           addtorow = NULL){
   
-  begin_doc <- "%\n\\documentclass[12pt]{article}\n \\begin{document}"
+  begin_doc <- "%\n\\documentclass{standalone}\n \\begin{document}"
   end_doc <- '\\end{document}'
   
   if(!is.null(var_name)){
@@ -81,21 +81,21 @@ write_reg_tab <- function(filename,
 # ----------------------------------
 var_name_immed <- c('$M$',
                     '$X_v$',
-                    '$\\textbf{1}\\{X_f = 7\\}$',
-                    '$\\textbf{1}\\{X_f = 9\\}$',
-                    '$\\textbf{1}\\{T = 9\\}$',
-                    '$\\textbf{1}\\{T = 18\\}$',
-                    '$X_v\\cdot\\textbf{1}\\{X_f = 7\\}$',
-                    '$X_v\\cdot\\textbf{1}\\{X_f = 9\\}$',
-                    '$X_v\\cdot\\textbf{1}\\{T = 9\\}$',
-                    '$X_v\\cdot\\textbf{1}\\{T = 18\\}$')
+                    '$\\textbf{1}\\{X_c = X_{mid}\\}$',
+                    '$\\textbf{1}\\{X_c = X_{high}\\}$',
+                    '$\\textbf{1}\\{T = T_{mid}\\}$',
+                    '$\\textbf{1}\\{T = T_{high}\\}$',
+                    '$X_v\\cdot\\textbf{1}\\{X_c = X_{mid}\\}$',
+                    '$X_v\\cdot\\textbf{1}\\{X_c = X_{high}\\}$',
+                    '$X_v\\cdot\\textbf{1}\\{T = T_{mid}\\}$',
+                    '$X_v\\cdot\\textbf{1}\\{T = T_{high}\\}$')
 
 var_name_delayed <- c('$M$',
                       '$X_v$',
-                      '$\\textbf{1}\\{X_f = 7\\}$',
-                      '$\\textbf{1}\\{X_f = 9\\}$',
-                      '$X_v\\cdot\\textbf{1}\\{X_f = 7\\}$',
-                      '$X_v\\cdot\\textbf{1}\\{X_f = 9\\}$')
+                      '$\\textbf{1}\\{X_c = X_{mid}\\}$',
+                      '$\\textbf{1}\\{X_c = X_{high}\\}$',
+                      '$X_v\\cdot\\textbf{1}\\{X_c = X_{mid}\\}$',
+                      '$X_v\\cdot\\textbf{1}\\{X_c = X_{high}\\}$')
 
 
 # Panel A: Immed_Rw_Vary
@@ -106,8 +106,8 @@ tab_baseline_a <- cbind(tab1,tab2)
 remove(tab1,tab2)
 
 row_mod <- sprintf(" & \\multicolumn{2}{c}{%s} & \\multicolumn{2}{c}{%s} \\\\",
-                   "(1) Logit model",
-                   "(2) Firth's model")
+                   "(1) MLE",
+                   "(2) Firth's estimator")
 row_name <- "& Coef & 95\\% CI & Coef & 95\\% CI \\\\"
 row_obs <- sprintf("\\hline observations & \\multicolumn{2}{c}{%d} & \\multicolumn{2}{c}{%d} \\\\",
                    nrow(df_time_immed),
@@ -143,32 +143,32 @@ write_reg_tab('./tables/baseline_B.tex',tab_baseline_b,
               document=write_document,
               addtorow = addtorow)
 
-
+print('Baseline model: table made')
 
 # ----------------------------------
 #     Table for Utility Models
 # ----------------------------------
 var_name_immed_u <- c('$u(M)$',
                       '$u(X_v)$',
-                      '$\\textbf{1}\\{X_f = 7\\}$',
-                      '$\\textbf{1}\\{X_f = 9\\}$',
-                      '$\\textbf{1}\\{T = 9\\}$',
-                      '$\\textbf{1}\\{T = 18\\}$',
-                      '$u(X_v)\\cdot\\textbf{1}\\{X_f = 7\\}$',
-                      '$u(X_v)\\cdot\\textbf{1}\\{X_f = 9\\}$',
-                      '$u(X_v)\\cdot\\textbf{1}\\{T = 9\\}$',
-                      '$u(X_v)\\cdot\\textbf{1}\\{T = 18\\}$',
-                      '$\\textbf{1}\\{M = 12\\}$',
-                      '$u(X_v)\\cdot\\textbf{1}\\{M = 12\\}$')
+                      '$\\textbf{1}\\{X_c = X_{mid}\\}$',
+                      '$\\textbf{1}\\{X_c = X_{high}\\}$',
+                      '$\\textbf{1}\\{T = T_{mid}\\}$',
+                      '$\\textbf{1}\\{T = T_{high}\\}$',
+                      '$u(X_v)\\cdot\\textbf{1}\\{X_c = X_{mid}\\}$',
+                      '$u(X_v)\\cdot\\textbf{1}\\{X_c = X_{high}\\}$',
+                      '$u(X_v)\\cdot\\textbf{1}\\{T = T_{mid}\\}$',
+                      '$u(X_v)\\cdot\\textbf{1}\\{T = T_{high}\\}$',
+                      '$\\textbf{1}\\{M = M_{high}\\}$',
+                      '$u(X_v)\\cdot\\textbf{1}\\{M = M_{high}\\}$')
 
 var_name_delayed_u <- c('$u(M)$',
                       '$u(X_v)$',
-                      '$\\textbf{1}\\{X_f = 7\\}$',
-                      '$\\textbf{1}\\{X_f = 9\\}$',
-                      '$u(X_v)\\cdot\\textbf{1}\\{X_f = 7\\}$',
-                      '$u(X_v)\\cdot\\textbf{1}\\{X_f = 9\\}$',
-                      '$\\textbf{1}\\{M = 12\\}$',
-                      '$u(X_v)\\cdot\\textbf{1}\\{M = 12\\}$')
+                      '$\\textbf{1}\\{X_c = X_{mid}\\}$',
+                      '$\\textbf{1}\\{X_c = X_{high}\\}$',
+                      '$u(X_v)\\cdot\\textbf{1}\\{X_c = X_{mid}\\}$',
+                      '$u(X_v)\\cdot\\textbf{1}\\{X_c = X_{high}\\}$',
+                      '$\\textbf{1}\\{M = M_{high}\\}$',
+                      '$u(X_v)\\cdot\\textbf{1}\\{M = M_{high}\\}$')
 
 # Panel A: Immed_Rw_Vary
 tab1 <- make_ci_tab(fe_logit_u1,add_var_name = TRUE)[-1,]
@@ -214,8 +214,8 @@ write_reg_tab('./tables/utility_A.tex',tab_mod_a,
 
 # Panel A: Delayed_Rw_Vary
 tab1 <- make_ci_tab(fe_logit_u2,add_var_name = TRUE)[-1,]
-tab2 <- make_ci_tab(fe_logit_c2,add_var_name = TRUE)[-1,]
-tab3 <- make_ci_tab(fe_logit_a2,add_var_name = TRUE)[-1,]
+tab2 <- make_ci_tab(fe_logit_a2,add_var_name = TRUE)[-1,]
+tab3 <- make_ci_tab(fe_logit_c2,add_var_name = TRUE)[-1,]
 
 union_rows <- data.frame(var_name = union(rownames(tab1),rownames(tab2)))
 
@@ -231,20 +231,14 @@ tab_mod_b <- cbind(tab1_adj,tab2_adj,tab3_adj)
 rownames(tab_mod_b) <- var_name_delayed_u
 remove(tab1,tab2,tab3,tab1_adj,tab2_adj,tab3_adj)
 
-row_mod <- sprintf(" & \\multicolumn{2}{c}{%s} & \\multicolumn{2}{c}{%s} & \\multicolumn{2}{c}{%s} \\\\",
-                   "(3) Utility model",
-                   "(4) Censored data",
-                   "(5) Add interation")
-
-row_name <- "& Coef & 95\\% CI & Coef & 95\\% CI & Coef & 95\\% CI \\\\"
 row_obs <- sprintf("\\hline observations & \\multicolumn{2}{c}{%d} & \\multicolumn{2}{c}{%d} & \\multicolumn{2}{c}{%d} \\\\",
                    nrow(df_time_delayed),
-                   nrow(df_censor_delayed),
-                   nrow(df_time_delayed))
+                   nrow(df_time_delayed),
+                   nrow(df_censor_delayed))
 row_aic <- sprintf("AIC & \\multicolumn{2}{c}{%.2f} & \\multicolumn{2}{c}{%.2f} & \\multicolumn{2}{c}{%.2f} \\\\",
                    logit_u2$aic,
-                   logit_c2$aic,
-                   logit_a2$aic)
+                   logit_a2$aic,
+                   logit_c2$aic)
 
 
 addtorow <- list()
@@ -256,6 +250,8 @@ write_reg_tab('./tables/utility_B.tex',tab_mod_b,
               var_name=var_name_delayed_u,
               document=write_document,
               addtorow = addtorow)
+
+print('Utility model: table made')
 
 # ----------------------------------
 #     Plot Prediction Results
@@ -287,12 +283,12 @@ fig_immed_1 <- ggplot(data = tab_immed[tab_immed$a_rw == unique(tab_immed$a_rw)[
                           shape = factor(b_delay))) +
   geom_point(size=2)+
   geom_line(aes(y=pred_logit_c),linetype = 'dashed',alpha=0.75)+
-  ggtitle(paste0('(1) option A: £',unique(tab_immed$a_rw)[1], ''))+
-  labs(x = "immediate reward in option B (£)", 
-       y = "probability of choosing B")+
+  ggtitle(paste0('(1) single-reward option: £',unique(tab_immed$a_rw)[1], ''))+
+  labs(x = "immediate reward in sequence option (£)", 
+       y = "probability of choosing the sequence")+
   scale_x_continuous(breaks = c(1:10)*10) +
-  scale_shape_discrete(name = "time length of option B (month)") +
-  scale_color_discrete(name = "delayed reward in option B (£)") +
+  scale_shape_discrete(name = "time length of sequence (month)") +
+  scale_color_discrete(name = "delayed reward in sequence option (£)") +
   theme_bw(12)+
   theme(
     legend.position = "bottom",
@@ -312,12 +308,12 @@ fig_immed_2 <- ggplot(data = tab_immed[tab_immed$a_rw == unique(tab_immed$a_rw)[
                           shape = factor(b_delay))) +
   geom_point(size=2)+
   geom_line(aes(y=pred_logit_c),linetype='dashed',alpha=0.75)+
-  ggtitle(paste0('(2) option A: £',unique(tab_immed$a_rw)[2], ''))+
-  labs(x = "immediate reward in option B (£)", 
+  ggtitle(paste0('(2) single-reward option: £',unique(tab_immed$a_rw)[2], ''))+
+  labs(x = "immediate reward in sequence option (£)", 
        y = "")+
   scale_x_continuous(breaks = c(1:10)*10) +
-  scale_shape_discrete(name = "time length of option B (month)") +
-  scale_color_discrete(name = "delayed reward in option B (£)") +
+  scale_shape_discrete(name = "time length of sequence (month)") +
+  scale_color_discrete(name = "delayed reward in sequence option (£)") +
   theme_bw(12)+
   theme(
     legend.position = "bottom",
@@ -356,11 +352,11 @@ fig_delayed_1 <- ggplot(data = tab_delayed[tab_delayed$a_rw == unique(tab_delaye
                             color = factor(b_fixed_rw))) +
   geom_point(size=2)+
   geom_line(aes(y=pred_logit_c),linetype='dashed',alpha=0.75)+
-  ggtitle(paste0('(1) option A: £',unique(tab_delayed$a_rw)[1], ''))+
-  labs(x = "delayed reward in option B (£)", 
-       y = "probability of choosing B")+
+  ggtitle(paste0('(1) single-reward option: £',unique(tab_delayed$a_rw)[1], ''))+
+  labs(x = "delayed reward in sequence option (£)", 
+       y = "probability of choosing the sequence")+
   scale_x_continuous(breaks = c(1:10)*10) +
-  scale_color_discrete(name = "immediate reward in option B (£)") +
+  scale_color_discrete(name = "immediate reward in sequence option (£)") +
   theme_bw(12)+
   theme(
     legend.position = "bottom",
@@ -376,11 +372,11 @@ fig_delayed_2 <- ggplot(data = tab_delayed[tab_delayed$a_rw == unique(tab_delaye
                             color = factor(b_fixed_rw))) +
   geom_point(size=2)+
   geom_line(aes(y=pred_logit_c),linetype='dashed',alpha=0.75)+
-  ggtitle(paste0('(2) option A: £',unique(tab_delayed$a_rw)[2], ''))+
-  labs(x = "delayed reward in option B (£)", 
+  ggtitle(paste0('(2) single-reward option: £',unique(tab_delayed$a_rw)[2], ''))+
+  labs(x = "delayed reward in sequence option (£)", 
        y = "")+
   scale_x_continuous(breaks = c(1:10)*10) +
-  scale_color_discrete(name = "immediate reward in option B (£)") +
+  scale_color_discrete(name = "immediate reward in sequence option (£)") +
   theme_bw(12)+
   theme(
     legend.position = "bottom",
@@ -412,7 +408,7 @@ fig_grand <- grid.arrange(panel_immed_with_title,
 ggsave('./figures/fig_grand_pred.png',fig_grand,device = 'png',width = 18, height = 20, units = 'cm')
 
 
-
+print('Predition plot made')
 
 
 

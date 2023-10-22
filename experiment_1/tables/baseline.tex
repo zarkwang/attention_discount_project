@@ -1,0 +1,60 @@
+
+\documentclass[12pt]{article}
+\usepackage{subcaption}
+
+
+\begin{document}
+\begin{table}
+    \captionsetup[sub]{singlelinecheck=false}
+    \caption{Regression results for the baseline model}
+    \begin{subtable}{\textwidth}
+        \centering
+        \captionsetup{justification=centering}
+        \caption*{Panel A: Immediate reward varies}
+        % latex table generated in R 4.3.1 by xtable 1.8-4 package
+% Wed Oct 18 04:09:07 2023
+\begin{tabular}{lcccc}
+  \hline
+   & \multicolumn{2}{c}{(1) Logit model} & \multicolumn{2}{c}{(2) Firth's model} \\ & Coef & 95\% CI & Coef & 95\% CI \\ \hline
+$M$ & -1.230$^{***}$ & [-1.302, -1.158] & -1.200$^{***}$ & [-1.271, -1.130] \\ 
+  $X_v$ & 2.559$^{***}$ & [2.400, 2.719] & 2.496$^{***}$ & [2.340, 2.651] \\ 
+  $\textbf{1}\{X_f = 7\}$ & 6.247$^{***}$ & [5.143, 7.351] & 6.084$^{***}$ & [5.002, 7.166] \\ 
+  $\textbf{1}\{X_f = 9\}$ & 11.125$^{***}$ & [10.047, 12.204] & 10.846$^{***}$ & [9.791, 11.902] \\ 
+  $\textbf{1}\{T = 9\}$ & 0.020 & [-0.378, 0.419] & 0.019 & [-0.374, 0.412] \\ 
+  $\textbf{1}\{T = 18\}$ & -0.139 & [-0.582, 0.305] & -0.136 & [-0.574, 0.301] \\ 
+  $X_v\cdot\textbf{1}\{X_f = 7\}$ & -0.356$^{***}$ & [-0.523, -0.188] & -0.345$^{***}$ & [-0.509, -0.181] \\ 
+  $X_v\cdot\textbf{1}\{X_f = 9\}$ & -0.817$^{***}$ & [-0.977, -0.657] & -0.796$^{***}$ & [-0.953, -0.639] \\ 
+  $X_v\cdot\textbf{1}\{T = 9\}$ & -0.368$^{***}$ & [-0.447, -0.288] & -0.359$^{***}$ & [-0.437, -0.280] \\ 
+  $X_v\cdot\textbf{1}\{T = 18\}$ & -0.620$^{***}$ & [-0.710, -0.531] & -0.605$^{***}$ & [-0.693, -0.517] \\ 
+   \hline observations & \multicolumn{2}{c}{18840} & \multicolumn{2}{c}{18840} \\ \hline
+\end{tabular}
+
+% INSERT baseline_A
+    \end{subtable}
+    
+    \vspace*{12pt}
+
+    \begin{subtable}{\textwidth}
+        \centering
+        \captionsetup{justification=centering}
+        \caption*{Panel B: Delayed reward varies}
+        % latex table generated in R 4.3.1 by xtable 1.8-4 package
+% Wed Oct 18 04:09:07 2023
+\begin{tabular}{lcccc}
+  \hline
+   & \multicolumn{2}{c}{(1) Logit model} & \multicolumn{2}{c}{(2) Firth's model} \\ & Coef & 95\% CI & Coef & 95\% CI \\ \hline
+$M$ & -2.908$^{***}$ & [-3.124, -2.692] & -2.657$^{***}$ & [-2.853, -2.462] \\ 
+  $X_v$ & 3.397$^{***}$ & [3.145, 3.650] & 3.106$^{***}$ & [2.880, 3.332] \\ 
+  $\textbf{1}\{X_f = 7\}$ & 7.828$^{***}$ & [6.413, 9.243] & 7.161$^{***}$ & [5.837, 8.484] \\ 
+  $\textbf{1}\{X_f = 9\}$ & 14.283$^{***}$ & [12.803, 15.763] & 13.065$^{***}$ & [11.704, 14.426] \\ 
+  $X_v\cdot\textbf{1}\{X_f = 7\}$ & -0.197 & [-0.400, 0.006] & -0.181 & [-0.372, 0.010] \\ 
+  $X_v\cdot\textbf{1}\{X_f = 9\}$ & -0.279$^{**}$ & [-0.481, -0.078] & -0.257$^{**}$ & [-0.448, -0.067] \\ 
+   \hline observations & \multicolumn{2}{c}{9420} & \multicolumn{2}{c}{9420} \\ \hline
+\end{tabular}
+
+% INSERT baseline_B
+    \end{subtable}        
+\end{table}
+
+\end{document}
+

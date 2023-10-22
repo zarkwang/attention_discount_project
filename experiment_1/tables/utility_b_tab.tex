@@ -1,4 +1,13 @@
-% latex table generated in R 4.3.1 by xtable 1.8-4 package
+
+\documentclass[12pt]{article}
+
+\begin{document}
+\begin{table}
+    \centering
+    \caption{Regression with utility tranformation (Delayed reward varies)}
+    \vspace*{12pt}
+        
+    % latex table generated in R 4.3.1 by xtable 1.8-4 package
 % Sat Oct 21 03:55:44 2023
 \begin{tabular}{lcccccc}
   \hline
@@ -13,4 +22,15 @@ $u(M)$ & -12.576$^{***}$ & [-13.508, -11.644] &  &  &  &  \\
   $u(X_v)\cdot\textbf{1}\{M = M_{high}\}$ &  &  & 1.825$^{***}$ & [1.330, 2.321] & 1.710$^{***}$ & [1.205, 2.215] \\ 
    \hline observations & \multicolumn{2}{c}{9420} & \multicolumn{2}{c}{9420} & \multicolumn{2}{c}{6594} \\ AIC & \multicolumn{2}{c}{2202.54} & \multicolumn{2}{c}{2148.11} & \multicolumn{2}{c}{2137.28} \\ \hline
 \end{tabular}
+
+% INSERT utility_B
+	
+	\vspace*{4pt}
+    \centering
+    \begin{minipage}{1.2\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.001$. The p-values and confidence intervals (CI) are calculated via Wald test. The utility function is $u(x)=x^{0.746}/10$. The middle and highest levels of $X_c$ are denoted by $X_{mid}$, $X_{high}$. The higher level of $M$ is denoted by $M_{high}$. The intercept and individual-specific dummy variables are omitted in the table.}
+    \end{minipage}
+    \label{tab:utility-delayed}
+\end{table}
+\end{document}
 
