@@ -72,7 +72,7 @@
 
 \title{Experiment Results}
 \author{Zark Zijian Wang}
-\date{October 22, 2023}
+\date{October 24, 2023}
 
 \begin{document}
 \maketitle
@@ -459,8 +459,74 @@ predicted choice probabilities using Model (5) and the choice data.
   \label{fig:choice-predicted}
 \end{figure}
 
-\hypertarget{alternative-mechanisms}{%
-\section{Alternative Mechanisms}\label{alternative-mechanisms}}
+\hypertarget{alternative-account}{%
+\section{Alternative Account}\label{alternative-account}}
+
+In our intertemporal choice task, one account for why people are
+insensitive to the changes in a sequence option might be, they are
+uncertain about the value of that option. This notion is closely related
+to the term ``cognitive imprecision'' or ``cognitive uncertainty'' in
+recent literature \citep{khaw2021cognitive, enke2023cognitive}. Such
+literature proposes that many decision anomalies can be explained by
+assuming the decision makers construct a noisy mental representation of
+the given decision context. In an intertemporal choice, the mental noise
+could come from a random discounting factor or a random coding of the
+reward amount. \citet{gabaix2017myopia} and \citet{lu2018random} discuss
+the modelling issue for the former, while \citet{heng2020efficient} and
+\citet{khaw2021cognitive} discuss the latter. Although these models do
+not directly explain our hypotheses, they offer some useful insights.
+
+The insights from random coding of reward amounts may help account for
+H1. For example, \citet{frydman2022efficient} experimentally investigate
+how random coding of amounts may affect people's choices between a sure
+reward and a binary lottery (e.g.~``receive \$20 with probability
+50\%''). In their experiments, the prize amount of the lottery is
+pre-determined, but is randomly drawn from a certain range. They
+proposed and found that, as the range becomes wider, e.g.~from {[}\$15,
+\$25{]} to {[}\$5, \$35{]}, to obtain a certainty equivalence of the
+lottery, people have to split cognitive resources over a wider range, so
+they are less sensitive to each number in that range. As a result, their
+choices are less sensitive the changes in the prize.
+
+Similarly, in our intertemporal choice task, suppose participants need
+to choose between ``receive £100 today'' (option A) and ``receive
+\(X_v\) today and £70 in 1 month'' (option B) in a choice list, where
+\(X_v\) is ranged from £10 to £100. It is obvious that nobody would
+choose option B when \(X_v \leq £30\), and all participants would choose
+option B when \(X_v=£100\). Thus, the amount \(X_v\) that makes people
+indifferent between option A and B must lie between £30 and £100. If we
+increase the delayed reward in option B from £70 to £90, then the
+indifference point must lie between £10 and £100. In the latter case,
+participants may have to split cognitive resources over and find the
+indifference point from a wider range (a range between £10 and £100).
+This could lead them to be less sensitive to the changes in \(X_v\).
+
+The insights from random discounting may help account for H2. In these
+models, a longer delay is often associated with a higher uncertainty.
+Thus, consider we convert a sequence option ``receive \(X_v\) today and
+£70 in 1 month'' to ``receive \(X_v\) today and £70 in 9 months''. Given
+that the time when the delayed reward is delivered has been increased
+from 1 month to 9 months, the mental representation of the delayed
+reward could become noisier. As a consequence, the subjective value for
+the latter sequence should also be nosier than the former sequence,
+which leads people to be less sensitive to the changes in \(X_v\) in the
+latter sequence.
+
+In experimental studies, \citet{bulley2022intertemporal} and
+\citet{enke2023cognitive} measure the degree of ``cognitive
+uncertainty'' by asking participants to rate how confident or certain
+they feel about their choice's correctness right after making it.
+\citet{bulley2022intertemporal} found, when people are required to
+choose between a small sooner reward (SS) and a large later reward (LL),
+and they are less confident about their choice's correctness, their
+choice probability is less sensitive to the difference in discounted
+utility between two options. Moreover, as the delay of LL increases,
+people generally become less confident. \citet{enke2023cognitive} found,
+in risky choices, when people valuate a binary lottery, their certainty
+equivalence is less sensitive to increase in the probability of winning
+the prize when their cognitive uncertainty is lower. While there have
+been no experiments investigating the issue in our intertemporal choice
+task, these findings can offer some clues for future research design.
 
 \renewcommand\refname{Reference}
   \bibliography{experiment-ref.bib}
