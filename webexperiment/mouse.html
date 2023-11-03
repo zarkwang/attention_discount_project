@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<style>
+    .container {
+    display: flex;
+}
+
+.card {
+    width: 150px;
+    height: 100px;
+    background-color: #ccc;
+    margin: 10px;
+    text-align: center;
+    line-height: 100px;
+}
+</style>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card" id="card1">Card 1</div>
+        <div class="card" id="card2">Card 2</div>
+    </div>
+    <div id="duration">Hover Duration: <span id="time">0</span> seconds</div>
+    <script src="script.js"></script>
+</body>
+<script>
+    const card1 = document.getElementById("card1");
+const card2 = document.getElementById("card2");
+const timeDisplay = document.getElementById("time");
+
+let hoverStart;
+let hoverEnd;
+
+card1.addEventListener("mouseover", () => {
+    hoverStart = Date.now();
+    card1.innerText = "Card 1 - Hovering";
+});
+
+card1.addEventListener("mouseout", () => {
+    hoverEnd = Date.now();
+    card1.innerText = "Card 1";
+    const duration = (hoverEnd - hoverStart) / 1000; // Calculate duration in seconds
+    timeDisplay.innerText = duration + " seconds";
+});
+
+card2.addEventListener("mouseover", () => {
+    hoverStart = Date.now();
+    card2.innerText = "Card 2 - Hovering";
+});
+
+card2.addEventListener("mouseout", () => {
+    hoverEnd = Date.now();
+    card2.innerText = "Card 2";
+    const duration = (hoverEnd - hoverStart) / 1000; // Calculate duration in seconds
+    timeDisplay.innerText = duration + " seconds";
+});
+</script>
+</html>
