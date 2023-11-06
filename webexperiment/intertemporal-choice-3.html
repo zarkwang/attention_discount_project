@@ -57,23 +57,28 @@
         <ul id="clickedButtonsList"></ul>
     </div>
 
+    <div id="currentRow">
+        <h2>Swtich Row:<span id="switchRow"></span></h2>
+    </div>
+
     <script>
         var clickedButtonIds = [];
+        var maxAmount = 200;
 
         // Function to generate the price list rows
         function generatePriceList() {
             var table = document.getElementById("priceListTable");
-            for (var x = 1; x <= 200; x++) {
+            for (var x = 0; x <= maxAmount; x++) {
                 var row = document.createElement("tr");
 
                 var rowNumberCell = document.createElement("td");
                 rowNumberCell.textContent = x;
                 row.appendChild(rowNumberCell);
 
-                if (x === 1) {
+                if (x === 0) {
                     var optionACell = document.createElement("td");
                     optionACell.textContent = "Receive $30 today and $30 in 3 months";
-                    optionACell.rowSpan = 200;
+                    optionACell.rowSpan = maxAmount +1;
                     row.appendChild(optionACell);
                 }
 
@@ -91,21 +96,25 @@
                     updateClickedButtonsList();
 
                     // Automatically check "Option A" buttons above and "Option B" buttons below
-                    var currentRow = this.id.split("_")[1];
-                    for (var i = 1; i < currentRow; i++) {
+                    currentRow = parseInt(this.id.split("_")[1]);
+                    for (var i = 0; i < currentRow; i++) {
                         var optionABtn = document.getElementById("optionAButton_" + i);
                         if (optionABtn) {
                             optionABtn.checked = true;
                         }
                     }
-                    for (var j = currentRow; j <= 200; j++) {
+                    for (var j = currentRow; j <= maxAmount; j++) {
                         var optionBBtn = document.getElementById("optionBButton_" + j);
                         if (optionBBtn) {
                             optionBBtn.checked = true;
                         }
                     }
                     // Automatically click the "Show/Hide Rows" button
-                    autoClickShowHideRowsButton(currentRow, 'option A');
+                    if (currentRow % 10 == 0 && currentRow > 0){
+                        toggleHiddenRows(currentRow-9,currentRow-1)
+                    };
+
+                    updateSwtichRow();
                 });
 
                 var optionBRadio = document.createElement("input");
@@ -118,21 +127,25 @@
                     updateClickedButtonsList();
 
                     // Automatically check "Option A" buttons above and "Option B" buttons below
-                    var currentRow = this.id.split("_")[1];
-                    for (var i = 1; i < currentRow; i++) {
+                    currentRow = parseInt(this.id.split("_")[1]);
+                    for (var i = 0; i < currentRow; i++) {
                         var optionABtn = document.getElementById("optionAButton_" + i);
                         if (optionABtn) {
                             optionABtn.checked = true;
                         }
                     }
-                    for (var j = currentRow; j <= 200; j++) {
+                    for (var j = currentRow; j <= maxAmount; j++) {
                         var optionBBtn = document.getElementById("optionBButton_" + j);
                         if (optionBBtn) {
                             optionBBtn.checked = true;
                         }
                     }
                     // Automatically click the "Show/Hide Rows" button
-                    autoClickShowHideRowsButton(currentRow, 'option B');
+                    if (currentRow % 10 == 0 && currentRow > 0){
+                        toggleHiddenRows(currentRow-9,currentRow-1)
+                    };
+
+                    updateSwtichRow();
                 });
 
                 var optionAButton = document.createElement("label");
@@ -175,25 +188,29 @@
         // Function to show hidden rows within a range
         function toggleHiddenRows(start, end) {
             hideRowsWithNonIntegerCondition();
+
+            var table = document.getElementById("priceListTable");
             for (var x = start; x <= end; x++) {
-                var row = document.querySelector("tr:nth-child(" + x + ")");
+                var row = table.getElementsByTagName('tr')[x];
                 if (row) {
                     var isHidden = row.style.display === "none";
                     row.style.display = isHidden ? "table-row" : "none";
-                }
-                // Un-check the radios
-                var radios = row.querySelectorAll("input[type='radio']");
+                    
+                    // Un-check the radios
+                    var radios = row.querySelectorAll("input[type='radio']");
                     radios.forEach(function (radio) {
                         radio.checked = false;
                     });
+                }   
             }
         }
 
         // Function to initially hide rows where x/10 is not an integer
         function hideRowsWithNonIntegerCondition() {
-            for (var x = 1; x <= 200; x++) {
-                if (x % 10 !== 0) {
-                    var rowToHide = document.querySelector("tr:nth-child(" + x + ")");
+            var table = document.getElementById("priceListTable");
+            for (var x = 1; x <= maxAmount; x++) {
+                if ((x-1) % 10 !== 0) {
+                    var rowToHide = document.getElementsByTagName("tr")[x];
                     if (rowToHide) {
                         rowToHide.style.display = "none";
                     }
@@ -202,40 +219,28 @@
         }
 
         // Dynamically create buttons for specific ranges
-        var buttonContainer = document.getElementById("buttonContainer");
-        for (var i = 1; i <= 200; i += 10) {
-            let start = i;
-            let end = i + 8;
-            var button = document.createElement("button");
-            button.id = "showHideButton_" + start + "-" + end; // Unique ID for each button
-            button.textContent = "Show/Hide Rows " + start + "-" + end;
-            button.addEventListener("click", function () {
-                toggleHiddenRows(start, end);
-            });
-            buttonContainer.appendChild(button);
-        }
+        // var buttonContainer = document.getElementById("buttonContainer");
+        // for (var i = 1; i <= maxAmount; i += 10) {
+        //     let start = i;
+        //     let end = i + 8;
+        //     var button = document.createElement("button");
+        //     button.id = "showHideButton_" + start + "-" + end; // Unique ID for each button
+        //     button.textContent = "Show/Hide Rows " + start + "-" + end;
+        //     button.addEventListener("click", function () {
+        //         toggleHiddenRows(start, end);
+        //     });
+        //     buttonContainer.appendChild(button);
+        // };
 
-        
-        // Function to auto-click the corresponding Show/Hide Rows button
-        function autoClickShowHideRowsButton(currentRow, choice) {
-            if (choice === "option A") {
-                // Click "Show/Hide Rows x+1 - x+8"
-                var buttonId = "showHideButton_" + (currentRow + 1) + "-" + (currentRow + 8);
-                var button = document.getElementById(buttonId);
-                if (button) {
-                    button.click();
-                }
-            } else if (choice === "option B") {
-                // Click "Show/Hide Rows x-9 - x-1"
-                var buttonId = "showHideButton_" + (currentRow - 9) + "-" + (currentRow - 1);
-                var button = document.getElementById(buttonId);
-                if (button) {
-                    button.click();
-                }
+        hideRowsWithNonIntegerCondition();
+
+        // Show the swtich point: indifference point of option B for option A
+        function updateSwtichRow() {
+            var switchRow = document.getElementById("switchRow");    
+            if (switchRow) {
+                switchRow.innerHTML = currentRow;
             }
         }
-
-        hideRowsWithNonIntegerCondition(); 
     </script>
 </body>
 </html>
