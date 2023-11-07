@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="multiple-price-list.js"></script> 
+    <link href="element-style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <p>
+      Which option would you prefer in each row?
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <th>Option A</th>
+                <th>Choice</th>
+                <th>Option B</th>
+            </tr>
+        </thead>
+        <tbody id="priceListTable">
+            <!-- Rows will be generated here using JavaScript -->
+        </tbody>
+    </table>
+
+    <div id="buttonContainer"></div>
+
+    <!-- <div id="clickedButtons">
+        <h2>Clicked Buttons:</h2>
+        <ul id="clickedButtonsList"></ul>
+    </div> -->
+
+    <div id="currentRow">
+        <h2>Swtich Row:<span id="switchRow"></span></h2>
+    </div>
+
+    <button id="nextButton">Next</button>
+    
+    <script>
+    
+        let currentIndex=0
+
+        fetch('stimuli-timeline.json')
+            .then(response => response.json())
+            .then(data => {
+                // Iterate over each object in the array
+                const frontAmount = data[currentIndex].front_amount;
+                const backendAmount = data[currentIndex].backend_amount;
+                const seqLength = data[currentIndex].seq_length;
+                const cond = data[currentIndex].condition;
+
+                // Do something with each object's properties
+                // console.log(`Front Amount: ${frontAmount}`);
+                // console.log(`Backend Amount: ${backendAmount}`);
+                // console.log(`Sequence Length: ${seqLength}`);
+                // console.log(`Condition: ${condition}`);
+            })
+            .catch(error => {
+                console.error('Error reading the JSON file:', error);
+            });
+
+        generatePriceList(frontAmount, backendAmount, seqLength, cond);
+        hideRowsWithNonIntegerCondition();
+
+
+        // Next button
+        const nextButton = document.getElementById("nextButton");
+        nextButton.addEventListener("click", function() {
+    
+            currentIndex++;
+    
+            window.location.href = "confidence-check.html?index=${currentIndex}"
+        }); 
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

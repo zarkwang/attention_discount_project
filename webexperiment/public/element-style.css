@@ -1,0 +1,28 @@
+table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.radio-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+#clickedButtons {
+    text-align: center;
+}
