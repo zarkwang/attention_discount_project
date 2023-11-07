@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slider Example</title>
+</head>
+<body>
+    <h1>To what extent you are sure that x is greater than y</h1>
+    <input type="range" id="confidenceSlider" min="1" max="10" value="5">
+    <p id="sliderValue">5</p>
+
+    <script>
+        // JavaScript code to display the current slider value
+        const slider = document.getElementById("confidenceSlider");
+        const sliderValueDisplay = document.getElementById("sliderValue");
+
+        sliderValueDisplay.innerHTML = slider.value; // Display the default slider value
+
+        // Update the slider value when the user interacts with it
+        slider.oninput = function() {
+            sliderValueDisplay.innerHTML = this.value;
+        };
+    </script>
+</body>
+</html>

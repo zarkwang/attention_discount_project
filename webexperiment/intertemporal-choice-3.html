@@ -39,7 +39,6 @@
     <table>
         <thead>
             <tr>
-                <th>Row Number</th>
                 <th>Option A</th>
                 <th>Choice</th>
                 <th>Option B</th>
@@ -70,10 +69,6 @@
             var table = document.getElementById("priceListTable");
             for (var x = 0; x <= maxAmount; x++) {
                 var row = document.createElement("tr");
-
-                var rowNumberCell = document.createElement("td");
-                rowNumberCell.textContent = x;
-                row.appendChild(rowNumberCell);
 
                 if (x === 0) {
                     var optionACell = document.createElement("td");
