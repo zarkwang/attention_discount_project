@@ -1,4 +1,0 @@
-[
-    {"front_amount": 30, "backend_amount": 30, "seq_length": "3 months", "condition": "front-align", "indiff_point": "", "confidence": ""},
-    {"front_amount": 100, "backend_amount": 30, "seq_length": "3 months", "condition": "front-align", "indiff_point": "", "confidence": ""}
-    ]

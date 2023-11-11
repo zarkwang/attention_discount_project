@@ -1,0 +1,97 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jatos.js"></script>
+    <script src="lib/jquery-1.11.1.min.js"></script>
+    <script src="lib/multiple-price-list.js"></script> 
+    <script src="lib/stimuli-timeline.js"></script> 
+    <link href="lib/element-style.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/survey-jquery@1.9.116/survey.jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/survey-jquery@1.9.116/defaultV2.min.css" />
+</head>
+<body>
+    <div id="content-container">
+        <!-- Content will be created by Javascript -->
+    </div>
+    <div class="navigation-block">
+        <button id="nextButton">Next</button>
+    </div>
+
+    <script>
+    // Define the variables for the current question
+
+        var currentIndex = 0; 
+        data = [];
+
+        function loadStimuli(index){
+            let qOrder = Math.floor(index/2);
+            let presentStimulus = stimuli[qOrder];
+            presentStimulus['q_present_order'] = qOrder;
+
+            return(presentStimulus)
+        };
+
+        function loadPage(index) {
+
+            let configQuestion = loadStimuli(currentIndex);
+            let frontAmount = configQuestion.front_amount;
+            let backendAmount = configQuestion.backend_amount;
+            let seqLength = configQuestion.seq_length;
+            let condition = configQuestion.condition;
+            let pageID = pageIteration[currentIndex % 2];
+
+            if(pageID === "intertemporal-choice"){
+                $('#content-container').html(intertemporalChoicePage);
+                
+                generatePriceList(frontAmount, backendAmount, seqLength, condition);
+                hideRowsInitial();
+            } else if (pageID === "confidence-check"){
+
+                var confidenceCheckText = `
+                To what extent are you sure that you prefer 
+                receiving £${frontAmount} today and £${backendAmount} in ${seqLength} over 
+                receiving £${data[data.length-1].indiff_point-1} today
+                and less than receiving £${data[data.length-1].indiff_point} today?
+                `
+                configConfidenceCheck.elements[0].title = confidenceCheckText;
+                confidenceRate = new Survey.Model(configConfidenceCheck);
+
+                $(document).keydown(function(event){
+                    console.log(confidenceRate.data);
+                });
+
+                $("#content-container").Survey({ model: confidenceRate });
+            }
+            console.log(`Page Index: ${currentIndex}`)
+            console.log(`Front Amount: ${frontAmount}`);
+            console.log(`Backend Amount: ${backendAmount}`);
+            console.log(`Sequence Length: ${seqLength}`);
+            console.log(`Condition: ${condition}`);
+        };
+
+        
+        $('#nextButton').on('click', function () {
+
+            let newData = loadStimuli(currentIndex);
+            let pageID = pageIteration[currentIndex % 2];
+
+            if(pageID === "intertemporal-choice"){
+                newData["indiff_point"] = $("#switchRow").html();
+                data.push(newData);
+            } else if (pageID === "confidence-check"){
+                data[data.length-1]["confidence"] = confidenceRate.data.confidence_rate;
+            }
+
+            currentIndex++;
+
+            
+            loadPage(currentIndex);
+        });
+
+        loadPage(currentIndex);
+
+    //});
+    </script>
+</body>
+</html>
