@@ -8,7 +8,7 @@ const toggleRowNumber = 8;
 // Function to generate the price list rows
 function generatePriceList(frontAmount, backAmount, seqLength, condition) {
 
-    var sequenceText = "Receive £" + frontAmount + " today and £" + backAmount + " in " + seqLength
+    var sequenceText = "£" + frontAmount + " today and £" + backAmount + " in " + seqLength
 
     var table = document.getElementById("priceListTable");
     for (var x = 0; x <= maxRowNumber; x++) {
@@ -49,7 +49,7 @@ function generatePriceList(frontAmount, backAmount, seqLength, condition) {
                 }
             }
             // Automatically click the "Show/Hide Rows" button
-            if (currentRow % toggleRowNumber == 0 && currentRow > 0){
+            if (currentRow % toggleRowNumber == 0 && currentRow >= 0){
                 toggleHiddenRows(currentRow+1,currentRow+toggleRowNumber-1)
             };
 
@@ -104,14 +104,20 @@ function generatePriceList(frontAmount, backAmount, seqLength, condition) {
 
         var optionBCell = document.createElement("td");
         if (condition === "front-align"){
-            optionBCell.textContent = "Receive £" + amountBreak*x + " today";
+            optionBCell.textContent = "£" + amountBreak*x + " today";
         } else if (condition === "back-align") {
-            optionBCell.textContent = "Receive £" + amountBreak*x + " in " + seqLength;
+            optionBCell.textContent = "£" + amountBreak*x + " in " + seqLength;
         }
         
         row.appendChild(optionBCell);
 
         table.appendChild(row);
+    }
+
+    var rowWithoutBorder = 1;
+    while(rowWithoutBorder < maxRowNumber){
+        removeBorder(table,rowWithoutBorder,rowWithoutBorder+6);
+        rowWithoutBorder+=toggleRowNumber;
     }
 };
 
@@ -161,6 +167,18 @@ function updateSwtichRow(row, option) {
     }
 }
 
+// Remove border
+function removeBorder(table,startRow, endRow) {
+    var rows = table.getElementsByTagName("tr"); 
+
+    for (var i = startRow; i <= endRow; i++) {
+        var cells = rows[i].getElementsByTagName("td"); 
+        for (var j = 0; j < cells.length; j++) {
+            cells[j].style.borderBottom = "none";
+            cells[j].style.borderTop = "none"; 
+        }
+    }
+}
 
 //Function to update the list of clicked button IDs
 // function updateClickedButtonsList() {

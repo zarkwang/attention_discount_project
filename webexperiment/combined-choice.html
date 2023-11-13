@@ -18,11 +18,14 @@
 
     <script>
     // Define the variables for the current question
-
+        const participant_ID = 1;
+        const stimuli = drawStimuli(participant_ID,'front-align').concat(drawStimuli(participant_ID*888,'back-align'));
+        
         var currentIndex = 0; 
         data = [];
 
         function loadStimuli(index){
+
             let qOrder = Math.floor(index/2);
             let presentStimulus = stimuli[qOrder];
             presentStimulus['q_present_order'] = qOrder;
