@@ -23,6 +23,58 @@ th {
 }
 
 
-#clickedButtons {
-    text-align: center;
+body { color: #333333; 
+    font-family: sans-serif; 
+    font-size: 16px; 
+    font-weight: 300; 
+    line-height: 1.5625; 
+    margin-bottom: 15px; }
+
+
+#nextButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
 }
+
+#content-container {
+    width: 800px; 
+    background-color: lightgray;
+    position: absolute;
+    top: 0; 
+    left: 50%; 
+    transform: translateX(-50%); 
+}
+
+#error-message {
+    color: red; 
+    font-family: 'Trebuchet MS', sans-serif; 
+    font-size: 16px; 
+    font-weight: 300; 
+    line-height: 1.5625; 
+    margin-bottom: 15px;
+}
+
+#intertemporalQuestionContent {
+    display: block; 
+    margin-left: 50px; 
+    margin-top: 20px;
+    margin-bottom: 20px; 
+}
+
+#switchRowContainer {
+    display: none;
+}
+
+#confidenceQuestionBlock {
+    display: block; 
+    margin: 50px; 
+}
+

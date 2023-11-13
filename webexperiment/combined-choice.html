@@ -2,13 +2,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="jatos.js"></script>
+    <!-- <script src="jatos.js"></script> -->
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/multiple-price-list.js"></script> 
     <script src="lib/stimuli-timeline.js"></script> 
     <link href="lib/element-style.css" rel="stylesheet" type="text/css" />
-    <script src="https://unpkg.com/survey-jquery@1.9.116/survey.jquery.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/survey-jquery@1.9.116/defaultV2.min.css" />
 </head>
 <body>
     <div id="content-container">
@@ -48,20 +46,34 @@
                 hideRowsInitial();
             } else if (pageID === "confidence-check"){
 
-                var confidenceCheckText = `
-                To what extent are you sure that you prefer 
-                receiving £${frontAmount} today and £${backendAmount} in ${seqLength} over 
-                receiving £${data[data.length-1].indiff_point-1} today
-                and less than receiving £${data[data.length-1].indiff_point} today?
+                var amount_1 = data[data.length-1].indiff_point-amountBreak;
+                var amount_2 = data[data.length-1].indiff_point;
+                var currentCond = condition === 'front-align'?'today':seqLength;
+
+                var questionText = `
+                To what extent are you sure that you prefer receiving 
+                <span style="color: MediumVioletRed">
+                    £${frontAmount} today and £${backendAmount} in ${seqLength} 
+                </span>
+                    over receiving 
+                <span style="color: MediumVioletRed">
+                    £${amount_1} ${currentCond}
+                </span>
+                    and less than receiving
+                <span style="color: MediumVioletRed">
+                £${amount_2} ${currentCond}?
+                </span>
                 `
-                configConfidenceCheck.elements[0].title = confidenceCheckText;
-                confidenceRate = new Survey.Model(configConfidenceCheck);
+
+                $('#content-container').html(confidenceCheckPage);
+                generateConfidenceQuestion(questionText);
+                
 
                 $(document).keydown(function(event){
-                    console.log(confidenceRate.data);
+                    let confidenceValue = $('input[name="confidenceLevel"]:checked').val();
+                    console.log(`Confidence Level: ${confidenceValue}`);
                 });
 
-                $("#content-container").Survey({ model: confidenceRate });
             }
             console.log(`Page Index: ${currentIndex}`)
             console.log(`Front Amount: ${frontAmount}`);
@@ -77,16 +89,37 @@
             let pageID = pageIteration[currentIndex % 2];
 
             if(pageID === "intertemporal-choice"){
-                newData["indiff_point"] = $("#switchRow").html();
-                data.push(newData);
-            } else if (pageID === "confidence-check"){
-                data[data.length-1]["confidence"] = confidenceRate.data.confidence_rate;
+                let allChoicesChecked = true;
+
+                for (let x = 0; x <= maxRowNumber; x++) {
+                    const choiceChecked = $('input[name="choice_'+amountBreak*x +'"]:checked').val();
+                    if (!choiceChecked) {
+                        allChoicesChecked = false;
+                        $('#error-message').html(error_intertemporalChoice);
+                    break; 
+                    } 
+                }
+
+                if(allChoicesChecked){
+                    newData["indiff_point"] = $("#switchRow").html();
+                    data.push(newData);
+                
+                    currentIndex++;
+                    loadPage(currentIndex);
+                }
+            } else 
+            if (pageID === "confidence-check"){
+                let confidenceValue = $('input[name="confidenceLevel"]:checked').val();
+                if(!confidenceValue){
+                    $('#error-message').html(error_confidenceCheck);
+                } else {
+                    data[data.length-1]["confidence"] = confidenceValue;
+                    
+                    currentIndex++;
+                    loadPage(currentIndex);
+                }
             }
 
-            currentIndex++;
-
-            
-            loadPage(currentIndex);
         });
 
         loadPage(currentIndex);

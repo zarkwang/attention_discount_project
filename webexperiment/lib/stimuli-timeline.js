@@ -11,7 +11,10 @@ const stimuli = [
 const pageIteration = ['intertemporal-choice','confidence-check']
 
 const intertemporalChoicePage = `
-    <p>Which option would you prefer in each row?</p>
+    <div id='intertemporalQuestionContent'>
+        <div id='error-message'></div>
+        Which option would you prefer in each row?
+    </div>
     <table>
         <thead>
             <tr>
@@ -30,24 +33,20 @@ const intertemporalChoicePage = `
     </div>
 `
 
-const configConfidenceCheck = {
-    "elements": [
-      {
-        "type": "radiogroup",
-        "name": "confidence_rate",
-        "title": "To what extent are you sure about your choice?",
-        "isRequired": true,
-        "colCount": 1,
-        "choices": [ "Totally not sure", 
-                     "Slightly sure", 
-                     "Moderately sure", 
-                     "Quite sure", 
-                     "Absolutely sure"],
-        "separateSpecialChoices": true,
-        "showClearButton": true
-      }
-    ],
-    "showQuestionNumbers": false,
-    "showNavigationButtons": false,
-    "width": "1000px"
-  };
+const confidenceCheckPage = `
+    <div id="confidenceQuestionBlock">
+        <div id='error-message'></div>
+        <div id="confidenceQuestionContent"></div>
+        <form id="confidenceForm">
+    </div>
+`
+const confidenceLevels = ["Totally not sure", 
+                         "Slightly sure", 
+                         "Moderately sure", 
+                         "Quite Sure", 
+                         "Absolutely sure"];
+
+
+const error_intertemporalChoice = "* Please complete all choices before proceeding.";
+const error_confidenceCheck = "* Please select an option before proceeding."
+

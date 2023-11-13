@@ -189,8 +189,31 @@ function updateSwtichRow(row, option) {
 // };
 
 
-// Call the function to generate the price list
+function generateConfidenceQuestion(question){
 
+    const questionContent = document.getElementById('confidenceQuestionContent');
+    const form = document.getElementById("confidenceForm");
+
+    questionContent.innerHTML = question;
+
+    confidenceLevels.forEach((level, index) => {
+        const listItem = document.createElement('ul');
+        const radioBtn = document.createElement('input');
+
+        radioBtn.type = 'radio';
+        radioBtn.id = 'level' + index;
+        radioBtn.name = 'confidenceLevel';
+        radioBtn.value = level;
+
+        const label = document.createElement('label');
+        label.htmlFor = 'level' + index;
+        label.appendChild(document.createTextNode(level));
+
+        listItem.appendChild(radioBtn); 
+        listItem.appendChild(label); 
+        form.appendChild(listItem); 
+    });
+}
 
 
 
