@@ -8,18 +8,21 @@ const toggleRowNumber = 8;
 // Function to generate the price list rows
 function generatePriceList(frontAmount, backAmount, seqLength, condition) {
 
-    var sequenceText = "£" + frontAmount + " today and £" + backAmount + " in " + seqLength
+    //var sequenceText = "£" + frontAmount + " today and £" + backAmount + " in " + seqLength
 
     var table = document.getElementById("priceListTable");
     for (var x = 0; x <= maxRowNumber; x++) {
         var row = document.createElement("tr");
 
-        if (x === 0) {
-            var optionACell = document.createElement("td");
-            optionACell.textContent = sequenceText;
-            optionACell.rowSpan = maxRowNumber +1;
-            row.appendChild(optionACell);
+        
+        var optionACell = document.createElement("td");
+        if (condition === "front-align"){
+            optionACell.textContent = "£" + amountBreak*x + " today";
+        } else if (condition === "back-align") {
+            optionACell.textContent = "£" + amountBreak*x + " in " + seqLength;
         }
+        
+        row.appendChild(optionACell);
 
         var choiceCell = document.createElement("td");
         var radioContainer = document.createElement("div");
@@ -34,23 +37,23 @@ function generatePriceList(frontAmount, backAmount, seqLength, condition) {
             //clickedButtonIds.push(this.id);
             //updateClickedButtonsList();
 
-            // Automatically check "Option A" buttons above and "Option B" buttons below
+            // Automatically check "Option A" buttons below and "Option B" buttons above
             currentRow = parseInt(this.id.split("_")[1])/amountBreak;
-            for (var i = 0; i <= currentRow; i++) {
-                var optionABtn = document.getElementById("optionA_" + amountBreak*i);
-                if (optionABtn) {
-                    optionABtn.checked = true;
-                }
-            }
-            for (var j = currentRow+1; j <= maxRowNumber; j++) {
-                var optionBBtn = document.getElementById("optionB_" + amountBreak*j);
+            for (var i = 0; i < currentRow; i++) {
+                var optionBBtn = document.getElementById("optionB_" + amountBreak*i);
                 if (optionBBtn) {
                     optionBBtn.checked = true;
                 }
             }
+            for (var j = currentRow; j <= maxRowNumber; j++) {
+                var optionABtn = document.getElementById("optionA_" + amountBreak*j);
+                if (optionABtn) {
+                    optionABtn.checked = true;
+                }
+            }
             // Automatically click the "Show/Hide Rows" button
             if (currentRow % toggleRowNumber == 0 && currentRow >= 0){
-                toggleHiddenRows(currentRow+1,currentRow+toggleRowNumber-1)
+                toggleHiddenRows(currentRow-toggleRowNumber+1,currentRow-1)
             };
 
             updateSwtichRow(currentRow, 'A');
@@ -65,23 +68,23 @@ function generatePriceList(frontAmount, backAmount, seqLength, condition) {
             //clickedButtonIds.push(this.id);
             //updateClickedButtonsList();
 
-            // Automatically check "Option A" buttons above and "Option B" buttons below
+            // Automatically check "Option A" buttons below and "Option B" buttons above
             currentRow = parseInt(this.id.split("_")[1])/amountBreak;
-            for (var i = 0; i < currentRow; i++) {
-                var optionABtn = document.getElementById("optionA_" + amountBreak*i);
-                if (optionABtn) {
-                    optionABtn.checked = true;
-                }
-            }
-            for (var j = currentRow; j <= maxRowNumber; j++) {
-                var optionBBtn = document.getElementById("optionB_" + amountBreak*j);
+            for (var i = 0; i <= currentRow; i++) {
+                var optionBBtn = document.getElementById("optionB_" + amountBreak*i);
                 if (optionBBtn) {
                     optionBBtn.checked = true;
                 }
             }
+            for (var j = currentRow+1; j <= maxRowNumber; j++) {
+                var optionABtn = document.getElementById("optionA_" + amountBreak*j);
+                if (optionABtn) {
+                    optionABtn.checked = true;
+                }
+            }
             // Automatically click the "Show/Hide Rows" button
-            if (currentRow % toggleRowNumber == 0 && currentRow > 0){
-                toggleHiddenRows(currentRow-toggleRowNumber+1,currentRow-1)
+            if (currentRow % toggleRowNumber == 0 && currentRow >= 0){
+                toggleHiddenRows(currentRow+1,currentRow+toggleRowNumber-1)
             };
 
             updateSwtichRow(currentRow, 'B');
@@ -102,15 +105,25 @@ function generatePriceList(frontAmount, backAmount, seqLength, condition) {
         choiceCell.appendChild(radioContainer);
         row.appendChild(choiceCell);
 
-        var optionBCell = document.createElement("td");
-        if (condition === "front-align"){
-            optionBCell.textContent = "£" + amountBreak*x + " today";
-        } else if (condition === "back-align") {
-            optionBCell.textContent = "£" + amountBreak*x + " in " + seqLength;
-        }
-        
-        row.appendChild(optionBCell);
 
+        if (x === 0) {
+            var optionBCell = document.createElement("td");
+            var optionBDiv = document.createElement("div");
+
+            optionBDiv.id = "sequenceOption";
+            optionBCell.rowSpan = maxRowNumber +1;
+
+            var seqContent = sequenceContent(frontAmount,backAmount,seqLength);
+
+            if (optionBDiv) {
+                optionBDiv.innerHTML = seqContent; 
+            }
+
+            optionBCell.appendChild(optionBDiv);
+            row.appendChild(optionBCell);
+        }
+
+        
         table.appendChild(row);
     }
 
@@ -178,6 +191,19 @@ function removeBorder(table,startRow, endRow) {
             cells[j].style.borderTop = "none"; 
         }
     }
+}
+
+function sequenceContent(frontAmount,backAmount,seqLength){
+    const sequenceOption = `
+                <div class='card' id='card1'> 
+                    <div id='cardContent1'></br> £${frontAmount}</br> today</div>
+                </div> 
+                    and
+                <div class='card' id='card2'> 
+                    <div id='cardContent2'></br> £${backAmount}</br> in ${seqLength}</div>
+                </div>
+    `
+    return(sequenceOption);
 }
 
 //Function to update the list of clicked button IDs

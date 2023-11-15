@@ -37,7 +37,7 @@
 
             let configQuestion = loadStimuli(currentIndex);
             let frontAmount = configQuestion.front_amount;
-            let backendAmount = configQuestion.backend_amount;
+            let backAmount = configQuestion.backend_amount;
             let seqLength = configQuestion.seq_length;
             let condition = configQuestion.condition;
             let pageID = pageIteration[currentIndex % 2];
@@ -45,7 +45,7 @@
             if(pageID === "intertemporal-choice"){
                 $('#content-container').html(intertemporalChoicePage);
                 
-                generatePriceList(frontAmount, backendAmount, seqLength, condition);
+                generatePriceList(frontAmount, backAmount, seqLength, condition);
                 hideRowsInitial();
             } else if (pageID === "confidence-check"){
 
@@ -53,24 +53,11 @@
                 var amount_2 = data[data.length-1].indiff_point;
                 var currentCond = condition === 'front-align'?'today':seqLength;
 
-                var questionText = `
-                To what extent are you sure that you prefer receiving 
-                <span style="color: MediumVioletRed">
-                    £${frontAmount} today and £${backendAmount} in ${seqLength} 
-                </span>
-                    over receiving 
-                <span style="color: MediumVioletRed">
-                    £${amount_1} ${currentCond}
-                </span>
-                    and less than receiving
-                <span style="color: MediumVioletRed">
-                £${amount_2} ${currentCond}?
-                </span>
-                `
+                var questionText = confidenceQuestionText(frontAmount,backAmount,seqLength,
+                                                            amount_1,amount_2,currentCond)
 
                 $('#content-container').html(confidenceCheckPage);
                 generateConfidenceQuestion(questionText);
-                
 
                 $(document).keydown(function(event){
                     let confidenceValue = $('input[name="confidenceLevel"]:checked').val();
@@ -80,7 +67,7 @@
             }
             console.log(`Page Index: ${currentIndex}`)
             console.log(`Front Amount: ${frontAmount}`);
-            console.log(`Backend Amount: ${backendAmount}`);
+            console.log(`Backend Amount: ${backAmount}`);
             console.log(`Sequence Length: ${seqLength}`);
             console.log(`Condition: ${condition}`);
         };

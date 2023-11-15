@@ -1,4 +1,7 @@
 
+const nFrontAlign = 3;
+const nBackAlign = 3;
+
 const amount_frontVary = [
     {"front_amount": 40, "backend_amount": 40},
     {"front_amount": 80, "backend_amount": 40},
@@ -27,12 +30,11 @@ const amount_backVary = [
 
 
 const seqLengthList = ['1 month','9 months'];
-const nFrontAlign = 3;
-const nBackAlign = 3;
-
 const stimuli_frontAlign = fullStimuli('front-align');
 const stimuli_backAlign = fullStimuli('back-align');
 
+
+// Generate the full stimuli array
 function fullStimuli(condition){
     let amountArray = condition === 'front-align'?amount_frontVary:amount_backVary;
     let stimuliArray = [];
@@ -49,7 +51,7 @@ function fullStimuli(condition){
     return(stimuliArray);
 };
 
-
+// Randomly draw stimuli from each stimuli array
 function drawStimuli(seed,condition){
     
     let stimuliArray = condition === 'front-align'?stimuli_frontAlign:stimuli_backAlign;
@@ -58,6 +60,68 @@ function drawStimuli(seed,condition){
     let stimuliDrawn = qID.map(qID => stimuliArray[qID]);
     return(stimuliDrawn)
 };
+
+
+const pageIteration = ['intertemporal-choice','confidence-check']
+
+const intertemporalChoicePage = `
+    <div id='intertemporalQuestionContent'>
+        <div id='error-message'></div>
+        Which option would you prefer in each row?
+    </div>
+    <table id='tableContainer'>
+        <thead>
+            <tr>
+                <th>Option A</th>
+                <th>Choice</th>
+                <th>Option B</th>
+            </tr>
+        </thead>
+        <tbody id="priceListTable">
+            <!-- Rows will be generated here using JavaScript -->
+        </tbody>
+    </table>
+
+    <div id="switchRowContainer">
+        <h2>Switch Row:<span id="switchRow"></span></h2>
+    </div>
+`
+
+const confidenceCheckPage = `
+    <div id="confidenceQuestionBlock">
+        <div id='error-message'></div>
+        <div id="confidenceQuestionContent"></div>
+        <form id="confidenceForm">
+    </div>
+`
+const confidenceLevels = ["Totally not sure", 
+                         "Slightly sure", 
+                         "Moderately sure", 
+                         "Quite Sure", 
+                         "Absolutely sure"];
+
+function confidenceQuestionText(frontAmount,backAmount,seqLength,amount_1,amount_2,currentCond){
+    const qStyle = "color:#ff0040"
+    const questionText = `
+                How sure are you that you prefer receiving 
+                <span style=${qStyle}>
+                    £${frontAmount} today and £${backAmount} in ${seqLength} 
+                </span>
+                    over receiving 
+                <span style=${qStyle}>
+                    £${amount_1} ${currentCond}
+                </span>
+                    and less than receiving
+                <span style=${qStyle}>
+                £${amount_2} ${currentCond}?
+                </span>
+                `
+    return(questionText);
+}
+
+
+const error_intertemporalChoice = "* Please complete all choices before proceeding.";
+const error_confidenceCheck = "* Please select an option before proceeding."
 
 
 
@@ -105,49 +169,4 @@ function cyrb128(str) {
     h1 ^= (h2 ^ h3 ^ h4), h2 ^= h1, h3 ^= h1, h4 ^= h1;
     return [h1>>>0, h2>>>0, h3>>>0, h4>>>0];
 };
-
-
-
-
-const pageIteration = ['intertemporal-choice','confidence-check']
-
-const intertemporalChoicePage = `
-    <div id='intertemporalQuestionContent'>
-        <div id='error-message'></div>
-        Which option would you prefer in each row?
-    </div>
-    <table id='tableContainer'>
-        <thead>
-            <tr>
-                <th>Option A</th>
-                <th>Choice</th>
-                <th>Option B</th>
-            </tr>
-        </thead>
-        <tbody id="priceListTable">
-            <!-- Rows will be generated here using JavaScript -->
-        </tbody>
-    </table>
-
-    <div id="switchRowContainer">
-        <h2>Switch Row:<span id="switchRow"></span></h2>
-    </div>
-`
-
-const confidenceCheckPage = `
-    <div id="confidenceQuestionBlock">
-        <div id='error-message'></div>
-        <div id="confidenceQuestionContent"></div>
-        <form id="confidenceForm">
-    </div>
-`
-const confidenceLevels = ["Totally not sure", 
-                         "Slightly sure", 
-                         "Moderately sure", 
-                         "Quite Sure", 
-                         "Absolutely sure"];
-
-
-const error_intertemporalChoice = "* Please complete all choices before proceeding.";
-const error_confidenceCheck = "* Please select an option before proceeding."
 
