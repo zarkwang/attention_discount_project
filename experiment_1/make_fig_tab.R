@@ -275,7 +275,6 @@ tab_immed <- df_time_immed %>%
          b_fixed_rw = b_fixed_rw*10,
          a_rw = a_rw*10)
 
-
 fig_immed_1 <- ggplot(data = tab_immed[tab_immed$a_rw == unique(tab_immed$a_rw)[1],],
                       aes(x = b_vary_rw,
                           y = mean_choice,
@@ -328,6 +327,7 @@ fig_immed_2 <- ggplot(data = tab_immed[tab_immed$a_rw == unique(tab_immed$a_rw)[
 
 panel_immed <- ggarrange(fig_immed_1, fig_immed_2, 
           ncol = 2, common.legend = TRUE, legend="bottom")
+
 
 
 # Plots: Delayed_Rw_Vary
