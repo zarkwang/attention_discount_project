@@ -1,0 +1,209 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{setspace} \usepackage{amsmath} \usepackage{array} \usepackage{caption} \usepackage{longtable} \usepackage{booktabs} \usepackage{enumitem} \renewcommand{\arraystretch}{1} \captionsetup[table]{skip=5pt} \setstretch{1.5}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Proof},
+  pdfauthor={Zark Zijian Wang},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Proof}
+\author{Zark Zijian Wang}
+\date{December 02, 2023}
+
+\begin{document}
+\maketitle
+
+We define \(s_{0\rightarrow T}=[s_0,s_1,...,s_T]\) as a sequence of
+rewards, starting at period 0 and ending at period \(T\). Similarly,
+\(s_{0\rightarrow t}=[s_0,…,s_t]\) is defined as a sub-sequence of it.
+Let \(\mathcal{W}=[w_0,...,w_T]\) denote the attention weights for all
+rewards in sequence \(s_{0\rightarrow T}\), where \(W\in[0,1]^{T+1}\).
+Let \(C(\mathcal{W})\) denote the information cost function. We can
+construct the following constrained optimal discounting problem for
+\(s_{0\rightarrow T}\):\[\tag{A.1}
+\begin{aligned}
+\max_{\mathcal{W}}  \quad &\sum_{t=0}^T w_tu(s_t) - C(\mathcal{W}) \\
+s.t. \quad &  \sum_{t=0}^T w_t=1,\; w_t \geq 0 \text{ for all } t\in\{0,1,…,T\} \\ \\
+\end{aligned}
+\]We assume \(C(\mathcal{W})\) is constituted by separable costs, that
+is, \(C(\mathcal{W})=\sum_{t=0}^Tf_t(w_t)\), where \(f_t(w_t)\) is an
+increasing and convex function.
+
+Axiom 1 (sequential outcome-betweenness) For any \(s_{0\rightarrow T}\),
+there exists a \(\alpha\in(0,1)\) such that
+\(s_{0\rightarrow T} \sim \alpha\cdot s_{0\rightarrow T-1}+(1-\alpha) \cdot s_T\).
+
+Axiom 2 (sequential bracket-independence) For any
+\(s_{0\rightarrow T}\), if there exists non-negative real numbers
+\(\alpha_1\), \(\alpha_2\), \(\beta_0\), \(\beta_1\), \(\beta_2\), such
+that
+\(s_{0\rightarrow T}\sim \alpha_1 \cdot s_{0\rightarrow T-1} + \alpha_2 \cdot s_{T}\),
+and
+\(s_{0\rightarrow T}\sim \beta_0 \cdot s_{0\rightarrow T-2}+\beta_1 \cdot s_{T-1}+\beta_2 \cdot s_{T}\),
+then we must have \(\alpha_2 = \beta_2\).
+
+Axiom 3 (aggregate invariance to constant sequences) Consider two
+constant sequences, denoted as \(s_c\) and \(s'_c\), where each element
+in \(s_c\) is equal to \(c\) and each element in \(s'_c\) is equal to
+\(c'\). For any \(s_{0\rightarrow T}\), \(s'_{0\rightarrow T}\) and
+\(\alpha\in(0,1)\), if
+\(\alpha \cdot s_t+(1-\alpha)\cdot c\sim\alpha \cdot s'_t+(1-\alpha)\cdot c'\)
+holds for every \(t\), then
+\(\alpha \cdot s_{0\rightarrow T}+(1-\alpha)\cdot s_c\sim \alpha \cdot s'_{0\rightarrow T}+(1-\alpha)\cdot s'_c\).
+
+Axiom 4 (state independence) If \(s_t \succ s'_t\), then for any
+\(\alpha \in (0,1)\) and reward \(c\),
+\(\alpha \cdot s_t + (1-\alpha)\cdot c \succ \alpha \cdot s'_t + (1-\alpha)\cdot c\).
+
+Proposition: \(\succsim\) admits an ADU representation if it admits a DU
+representation subject to the constrained optimal discounting problem,
+and satisfies Axiom 1-4.
+
+\textbf{Proof.}
+
+\emph{Lemma 1}. If Axiom 1 holds, for any \(s_{0\rightarrow T}\), there
+exist non-negative real numbers \(w_0\), \(w_1\),\ldots, \(w_T\) such
+that
+\(s_{0\rightarrow T} \sim w_0 \cdot s_0 +w_1\cdot s_1 + ...+w_T\cdot s_T\)
+where \(\sum_{t=0}^T w_t=1\).
+
+When \(T=1\), the claim of Lemma 1 is a direct application of Axiom 1.
+When \(T\geq 2\), according to Axiom 1, for any \(2\leq t\leq T\), there
+should exist a real number \(\alpha_t\in(0,1)\) such that
+\(s_{0\rightarrow t}\sim \alpha_t\cdot s_{0\rightarrow t-1}+(1-\alpha_t)\cdot s_{t}\).
+For sequence \(s_{0\rightarrow T}\), we can recursively apply these
+preference relations as follows:
+
+\[
+\begin{aligned}
+s_{0\rightarrow T} &\sim \alpha_{T-1}\cdot s_{0\rightarrow T-1} + (1-\alpha_{T-1})\cdot s_T \\
+&\sim  \alpha_{T-1}\alpha_{T-2}\cdot s_{0\rightarrow T-2} + \alpha_{T-1}(1-\alpha_{T-2})\cdot s_{T-1} + (1-\alpha_{T-1})\cdot s_T \\
+& \sim ...\\
+& \sim w_0 \cdot s_0 + w_1\cdot s_1 +... +w_T\cdot s_T
+\end{aligned}
+\]
+
+where \(w_0=\prod_{t=0}^{T-1}\alpha_t\), \(w_T = 1-\alpha_{T-1}\), and
+for \(0<t<T\),
+\(w_t=(1-\alpha_{t-1})\prod_{\tau=t}^{T-1}\alpha_{\tau}\). It is easy to
+show the sum of all these weights, denoted by \(w_t\)
+(\(0\leq t\leq T\)), equals 1.
+
+Thus, if Axiom 1 holds, for any sequence \(s_{0\rightarrow T}\), we can
+always find a convex combination of all elements in it, such that the
+decision maker is indifferent between the sequence and the convex
+combination of its elements. By Lemma 2, I show this convex combination
+is unique.
+
+\emph{Lemma 2}. If Axiom 1-2 holds, then suppose
+\(s_{0\rightarrow T}\sim \sum_{t=0}^T w_t \cdot s_t\) and
+\(s_{0\rightarrow T+1} \sim \sum_{t=0}^{T+1} w'_t\cdot s_t\), where
+\(w_t >0\), \(w'_t>0\), \(\sum_{t=0}^Tw_t=1\), and
+\(\sum_{t=0}^{T+1}w'_t=1\), we must have
+\(\frac{w_0}{w'_0}=\frac{w_1}{w'_1}=…=\frac{w_T}{w'_T}\).
+
+Corollary 1.
+
+Lemma 3. If Axiom 1 and Axiom 3-4 holds, then for any
+\(s_{0\rightarrow T}\) and \(s'_{0\rightarrow T}\), where
+\(u(s_t)= u(s'_t)+\Delta u\) holds for any \(t\) and \(\Delta u\) is a
+constant real number, we have \(w_t=w'_t\).
+
+Suppose
+\(\alpha \cdot s_t+(1-\alpha)\cdot c\sim\alpha \cdot s'_t+(1-\alpha)\cdot c'\)
+
+From Axiom 4,
+\(\alpha \cdot u(s_t)+(1-\alpha)\cdot u(c)=\alpha \cdot u(s'_t)+(1-\alpha)\cdot u(c')\)
+
+This yields \(u(s_t)-u(s'_t)=\Delta u\), where
+\(\Delta u=\frac{1-\alpha}{\alpha} (u(c')-u(c))\).
+
+By Lemma 1, if Axiom 1 holds, we have \(V(s_c)=u(c)\). The same applies
+to \(V(s'_c)\).
+
+By Axiom 3, we have
+\(V(s_{0\rightarrow T})=V(s'_{0\rightarrow T})+\Delta u\).
+
+This yields \(\sum_{t=0}^T w_tu(s_t)- w'_tu(s'_t)=\Delta u\)
+
+Replace \(\Delta u\), we have
+\(\sum_{t=0}^T w_tu(s_t)- w'_tu(s'_t)=\sum_{t=0}^T w_t(u(s_t)- u(s'_t))\)
+
+So, \(\sum_{t=0}^T (w_t-w'_t) u(s'_t)=0\)
+
+Given each instantaneous utility can be any non-negative real number, we
+must have \(w_t=w'_t\).
+
+The FOC condition of the constrained optimal discounting problem is:
+
+\[
+f'_t(w_t)=u(s_t)+\theta,\; \forall t\in\{0,1,...,T\}
+\]
+
+  \bibliography{reference.bib}
+
+\end{document}
