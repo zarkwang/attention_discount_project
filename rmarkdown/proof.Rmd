@@ -32,25 +32,29 @@ output:
     number_sections: true
 ---
 
-<<<<<<< HEAD
-Optimal discounting: $s_{0\rightarrow T}\sim \sum_{t=0}^T w_t \cdot s_t$
-where $\{w_t\}_{t=0}^T$ is determined by an optimization problem
+We define $s_{0\rightarrow T}=[s_0,s_1,...,s_T]$ as a sequence of
+rewards, starting at period 0 and ending at period $T$. We define
+$s_{0\rightarrow t}=[s_0,…,s_t]$ where $t\leq T$, as a sub-sequence of
+it. Let $\mathcal{W}=[w_0,...,w_T]$ be the attention weights for all
+rewards in sequence $s_{0\rightarrow T}$, where $W\in[0,1]^{T+1}$. Let
+$C(\mathcal{W})$ denote the information cost function.
 
-$$
+The decision maker's preference for sequences, denoted by $\succsim$,
+has a optimal discounting representation if
+$s_{0\rightarrow T} \succsim s'_{0\rightarrow T'}$ implies
+$\sum_{t=0}^T w_t\cdot s_t \succsim \sum_{t=0}^{T'} w'_t \cdot s'_t$,
+where $\{w_t\}_{t=0}^T$ is determined by the following optimization
+problem$$
 \begin{aligned}
 &\max_{\mathcal{W}}\;&&\sum_{t=0}^T w_tu(s_t) - C(\mathcal{W}) \\
-&s.t.\; &&\sum_{t=0}^Tw_t =A \\
+&s.t.\; &&\sum_{t=0}^Tw_t =M \\
 &&& w_t >0 \text{ for all } t\in \{0,1,...,T\}
 \end{aligned}
 $$
 
-with separable information cost function
-
-$$
-C(\mathcal{W})=\sum_{t=0}^Tf_t(w_t)
-$$
-
-where $f_t(.)$ is twice differentiable, $f_t'(.)>0$, $f_t''(.)>0$.
+We assume $C(\mathcal{W})$ is constituted by time-separable costs, that
+is, $C(\mathcal{W})=\sum_{t=0}^Tf_t(w_t)$, where $f_t(.)$ is twice
+differentiable and strictly convex.
 
 Axiom 1 $\succsim$ is complete, transitive, continuous and
 state-independent.
@@ -59,66 +63,34 @@ state-independent.
 $\alpha \in (0,1)$ and reward $c$,
 $\alpha \cdot s_t + (1-\alpha)\cdot c \succsim \alpha \cdot s'_t + (1-\alpha)\cdot c$.
 
-According to expected utility theorem, suppose
-$s_{0\rightarrow T} \sim \sum_{t=0}^T w_t\cdot s_t$ and
-$s_{0\rightarrow T'}\sim \sum_{t=0}^{T'} w'_t\cdot s'_t$, Axiom 1 holds
-if and only if $s_{0\rightarrow T} \succsim s_{0\rightarrow T'}$ implies
+According to expected utility theorem, Axiom 1 holds if and only if
+$s_{0\rightarrow T} \succsim s_{0\rightarrow T'}$ implies
 $\sum_{t=0}^T w_tu(s_t) \geq \sum_{t=0}^{T'} w'_tu(s'_t)$.
 
 Axiom 2 (sequential outcome betweenness) For any $s_{0\rightarrow T}$,
 there exists a $\alpha\in(0,1)$ such that
 $s_{0\rightarrow T} \sim \alpha\cdot s_{0\rightarrow T-1}+(1-\alpha) \cdot s_T$.
 
-Axiom 3 (sequential bracket independence) For any $s_{0\rightarrow T}$,
-=======
-We define $s_{0\rightarrow T}=[s_0,s_1,...,s_T]$ as a sequence of
-rewards, starting at period 0 and ending at period $T$. Similarly,
-$s_{0\rightarrow t}=[s_0,…,s_t]$ is defined as a sub-sequence of it. Let
-$\mathcal{W}=[w_0,...,w_T]$ denote the attention weights for all rewards
-in sequence $s_{0\rightarrow T}$, where $W\in[0,1]^{T+1}$. Let
-$C(\mathcal{W})$ denote the information cost function. We can construct
-the following constrained optimal discounting problem for
-$s_{0\rightarrow T}$:$$\tag{A.1}
-\begin{aligned}
-\max_{\mathcal{W}}  \quad &\sum_{t=0}^T w_tu(s_t) - C(\mathcal{W}) \\
-s.t. \quad &  \sum_{t=0}^T w_t=1,\; w_t \geq 0 \text{ for all } t\in\{0,1,…,T\} \\ \\
-\end{aligned}
-$$We assume $C(\mathcal{W})$ is constituted by separable costs, that is,
-$C(\mathcal{W})=\sum_{t=0}^Tf_t(w_t)$, where $f_t(w_t)$ is an increasing
-and convex function.
-
-Axiom 1 (sequential outcome-betweenness) For any $s_{0\rightarrow T}$,
-there exists a $\alpha\in(0,1)$ such that
-$s_{0\rightarrow T} \sim \alpha\cdot s_{0\rightarrow T-1}+(1-\alpha) \cdot s_T$.
-
-Axiom 2 (sequential bracket-independence) For any $s_{0\rightarrow T}$,
->>>>>>> 06181f9ba6a6863cc3f71040b7af51c1e271a799
-if there exists non-negative real numbers $\alpha_1$, $\alpha_2$,
-$\beta_0$, $\beta_1$, $\beta_2$, such that
+Axiom 3 (sequential bracket-independence) For any $s_{0\rightarrow T}$,
+and $T\geq 2$ if there exists non-negative real numbers $\alpha_1$,
+$\alpha_2$, $\beta_0$, $\beta_1$, $\beta_2$, such that
 $s_{0\rightarrow T}\sim \alpha_1 \cdot s_{0\rightarrow T-1} + \alpha_2 \cdot s_{T}$,
 and
 $s_{0\rightarrow T}\sim \beta_0 \cdot s_{0\rightarrow T-2}+\beta_1 \cdot s_{T-1}+\beta_2 \cdot s_{T}$,
 then we must have $\alpha_2 = \beta_2$.
 
-Axiom 4 (aggregate invariance to constant sequences) Consider two
-constant sequences, denoted as $s_c$ and $s'_c$, where each element in
-$s_c$ equals $c$ and each element in $s'_c$ equals $c'$. For any
-$s_{0\rightarrow T}$, $s'_{0\rightarrow T}$ and $\alpha\in(0,1)$, if
+Axiom 4 (aggregate invariance to constant sequences) Let
+$s^c_{0 \rightarrow T}$ denote a constant sequence where each reward is
+equal to $c$. For any sequence $s_{0\rightarrow T}$,
+$s'_{0\rightarrow T}$, any non-negative $c$, $c'$, and $\alpha\in(0,1)$,
+if
 $\alpha \cdot s_t+(1-\alpha)\cdot c\sim\alpha \cdot s'_t+(1-\alpha)\cdot c'$
 holds for every $t$, then
-$\alpha \cdot s_{0\rightarrow T}+(1-\alpha)\cdot s_c\sim \alpha \cdot s'_{0\rightarrow T}+(1-\alpha)\cdot s'_c$.
+$\alpha \cdot s_{0\rightarrow T}+(1-\alpha)\cdot s^c_{0 \rightarrow T}\sim \alpha \cdot s'_{0\rightarrow T}+(1-\alpha)s^{c'}_{0 \rightarrow T}$.
 
-<<<<<<< HEAD
-=======
-Axiom 4 (state independence) If $s_t \succ s'_t$, then for any
-$\alpha \in (0,1)$ and reward $c$,
-$\alpha \cdot s_t + (1-\alpha)\cdot c \succ \alpha \cdot s'_t + (1-\alpha)\cdot c$.
+Proposition: $\succsim$ has an ADU representation if it has an optimal
+discounting representation and satisfies Axiom 1-4.
 
-Proposition: $\succsim$ admits an ADU representation if it admits a DU
-representation subject to the constrained optimal discounting problem,
-and satisfies Axiom 1-4.
-
->>>>>>> 06181f9ba6a6863cc3f71040b7af51c1e271a799
 **Proof.**
 
 *Lemma 1*. If Axiom 1-2 holds, for any $s_{0\rightarrow T}$, there exist
@@ -131,11 +103,7 @@ When $T=1$, the lemma is a direct application of Axiom 2.
 When $T\geq 2$, according to Axiom 1-2, for any $2\leq t\leq T$, there
 should exist a real number $\alpha_t\in(0,1)$ such that
 $s_{0\rightarrow t}\sim \alpha_t\cdot s_{0\rightarrow t-1}+(1-\alpha_t)\cdot s_{t}$.
-<<<<<<< HEAD
-For sequence $s_{0\rightarrow T}$, we can recursively apply such
-=======
 For sequence $s_{0\rightarrow T}$, we can recursively apply these
->>>>>>> 06181f9ba6a6863cc3f71040b7af51c1e271a799
 preference relations as follows:
 
 $$
@@ -160,7 +128,6 @@ is unique.
 
 *Lemma 2*. If Axiom 1-3 holds, suppose
 $s_{0\rightarrow T}\sim \sum_{t=0}^T w_t \cdot s_t$ and
-<<<<<<< HEAD
 $s_{0\rightarrow T+1} \sim \sum_{t=0}^{T-1} w'_t\cdot s_t$, where
 $w_t >0$, $w'_t>0$, $\sum_{t=0}^Tw_t=1$, $\sum_{t=0}^{T+1}w'_t=1$, we
 must have $\frac{w'_0}{w_0}=\frac{w'_1}{w_1}=…=\frac{w'_T}{w_T}$.
@@ -210,11 +177,9 @@ $\alpha$ must be unique (otherwise there will be a contradiction).
 When $T\geq 2$, we have
 $s_{0\rightarrow T+1} \sim \zeta\alpha\cdot s_{0\rightarrow T-1} + \zeta(1-\alpha)\cdot s_T + (1-\zeta)\cdot s_{T+1}$
 and we know that $\alpha$ is fixed.
-=======
 $s_{0\rightarrow T+1} \sim \sum_{t=0}^{T+1} w'_t\cdot s_t$, where
 $w_t >0$, $w'_t>0$, $\sum_{t=0}^Tw_t=1$, and $\sum_{t=0}^{T+1}w'_t=1$,
 we must have $\frac{w_0}{w'_0}=\frac{w_1}{w'_1}=…=\frac{w_T}{w'_T}$.
->>>>>>> 06181f9ba6a6863cc3f71040b7af51c1e271a799
 
 Then, $\zeta$ must be unique too.
 
@@ -245,16 +210,33 @@ $\sum_{t=0}^T w_tu(s_t)- w'_tu(s'_t)=\sum_{t=0}^T w_t(u(s_t)- u(s'_t))$
 
 So, $\sum_{t=0}^T (w_t-w'_t) u(s'_t)=0$
 
-<<<<<<< HEAD
-Given instantaneous utility can be any non-negative real number, we must
-have $w_t=w'_t$.
-=======
 Given each instantaneous utility can be any non-negative real number, we
 must have $w_t=w'_t$.
->>>>>>> 06181f9ba6a6863cc3f71040b7af51c1e271a799
 
-The FOC condition of the constrained optimal discounting problem is:
+Proposition.
+
+The FOC condition of the optimal discounting problem is:
 
 $$
 f'_t(w_t)=u(s_t)+\theta,\; \forall t\in\{0,1,...,T\}
 $$
+
+where $\theta$ is the Lagrangian multiplier. Given that $f'_t(.)$ is
+strictly convex, $w_t$ is increasing with $u(s_t)+\theta$. Define the
+solution as $w_t \equiv \phi_t(u(s_t)+\theta)$.
+
+Lemma 1 indicates $M=1$.
+
+Adding a new reward $S_{T+1}$ to the end of the sequence will only
+change $\theta$. Suppose this changes $\theta$ to $\bar{\theta}$, and
+the attention weights in the new sequence are denoted by
+$\{w^*_t\}_{t=0}^{T+1}$.
+
+Lemma 2 indicates for any $i,j \in \{0,1,...,T\}$ and $i\neq j$, we have
+$\frac{w_i}{w^*_i}=\frac{w_j}{w^*_j}$, which implies
+
+$$
+\frac{\phi_i(u(s_i)+\theta)}{\phi_i(u(s_i)+\bar{\theta})}=\frac{\phi_j(u(s_j)+\theta)}{\phi_j(u(s_j)+\bar{\theta})}
+$$
+
+Lemma 3 indicates that
