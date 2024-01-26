@@ -134,3 +134,43 @@ and valuation process in detail.
 
 [^2]: @weber_mindful_2009 and @chun_taxonomy_2011 provide good reviews
     for such studies.
+    
+Axiom 4 (aggregate invariance to constant sequences) Let
+$s^c_{0 \rightarrow T}$ denote a constant sequence where each reward is
+equal to $c$. For any sequence $s_{0\rightarrow T}$,
+$s'_{0\rightarrow T}$, any non-negative $c$, $c'$, and $\alpha\in(0,1)$,
+if
+$\alpha \cdot s_t+(1-\alpha)\cdot c\sim\alpha \cdot s'_t+(1-\alpha)\cdot c'$
+holds for every $t$, then
+$\alpha \cdot s_{0\rightarrow T}+(1-\alpha)\cdot s^c_{0 \rightarrow T}\sim \alpha \cdot s'_{0\rightarrow T}+(1-\alpha)s^{c'}_{0 \rightarrow T}$.
+
+
+Lemma 3. If Axiom 1-2 and Axiom 4 holds, then for any
+$s_{0\rightarrow T}$ and $s'_{0\rightarrow T}$, where
+$u(s_t)= u(s'_t)+\Delta u$ holds for any $t$ and $\Delta u$ is a
+constant real number, we have $w_t=w'_t$.
+
+Suppose
+$\alpha \cdot s_t+(1-\alpha)\cdot c\sim\alpha \cdot s'_t+(1-\alpha)\cdot c'$
+
+From Axiom 1,
+$\alpha \cdot u(s_t)+(1-\alpha)\cdot u(c)=\alpha \cdot u(s'_t)+(1-\alpha)\cdot u(c')$
+
+This yields $u(s_t)-u(s'_t)=\Delta u$, where
+$\Delta u=\frac{1-\alpha}{\alpha} (u(c')-u(c))$.
+
+By Lemma 1, if Axiom 1-2 holds, we have $V(s_c)=u(c)$. The same applies
+to $V(s'_c)$.
+
+By Axiom 4, we have
+$V(s_{0\rightarrow T})=V(s'_{0\rightarrow T})+\Delta u$.
+
+This yields $\sum_{t=0}^T w_tu(s_t)- w'_tu(s'_t)=\Delta u$
+
+Replace $\Delta u$, we have
+$\sum_{t=0}^T w_tu(s_t)- w'_tu(s'_t)=\sum_{t=0}^T w_t(u(s_t)- u(s'_t))$
+
+So, $\sum_{t=0}^T (w_t-w'_t) u(s'_t)=0$
+
+Given each instantaneous utility can be any non-negative real number, we
+must have $w_t=w'_t$.

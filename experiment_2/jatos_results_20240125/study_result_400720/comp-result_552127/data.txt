@@ -1,0 +1,1 @@
+{"task":"income-earlier-later","choice_label":"later","choice_value":1,"response_time_mel":33720,"worker_id":"434958","url":{"STUDY_ID":"65adc7b8bea7b0a2d8439e51","code":"ShSZGoqzxnu","PROLIFIC_PID":"5797bc9aad1a6c000146818c","SESSION_ID":"65b23076400a95931ba869a7"}}
