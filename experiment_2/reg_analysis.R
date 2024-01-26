@@ -49,8 +49,8 @@ ggplot(data=df_choice_vary)+
 library('MASS')
 
 
-model <- rlm(value_surplus ~ front_amount:seq_length + factor(worker_id), 
-            data = df_time_valid, maxit=100)
+model <- rlm(value_surplus ~ front_amount:seq_length:factor(label) + factor(worker_id), 
+            data = df_time_label, maxit=100)
 
 summary(model)
 
@@ -60,4 +60,33 @@ sort(df_time_valid$value_surplus,decreasing=T)[1:15]
 sort(df_time_valid$value_surplus)[1:15]
 
 12 / nrow(df_time_valid)
+
+
+
+
+
+
+
+
+setwd('D:/attention/attention_discount_project/experiment_2')
+
+df_time_label <- read.csv('labeled_result.csv')
+
+df_label_filtered <- df_time_label[(df_time_label$value_surplus > sort(df_time_label$value_surplus)[6])&
+                               (df_time_label$value_surplus < sort(df_time_label$value_surplus,decreasing = TRUE)[6]),]
+
+
+model <- lm(value_surplus ~ front_amount:seq_length:factor(label) + factor(worker_id), 
+            data = df_label_filtered)
+
+
+summary(model)
+
+confint(model)
+
+# front-end amount increases by 100, average value of back-end amount decrease
+# 1.5 - 2.8 when delay = 12 months
+# 1.2 - 2.5 when delay = 6 months
+
+
 
