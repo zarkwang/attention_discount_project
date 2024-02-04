@@ -1,9 +1,59 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 import statsmodels.api as sm
 import multiprocessing as mp 
 from scipy import stats
 from tqdm import tqdm
+
+
+def median_plot(data,label_name):
+
+        # calculate median answer for each condition of the data
+        df_plot_median = data.groupby(['seq_length','front_amount',label_name])['value_surplus'].median().to_frame().reset_index()
+        front_amount_list = df_plot_median['front_amount'].unique()
+        seq_length_list = df_plot_median['seq_length'].unique()
+
+        # configure color and linewidth
+        color_list = ['c','m']
+        linewidth_list = [4,3]
+
+        # create a figure
+        fig,ax  = plt.subplots(2, 1, figsize=(9, 7), gridspec_kw={'height_ratios': [0.15, 0.85]})
+
+        # draw lines
+        for t in range(len(seq_length_list)):
+                tab_plot_0 = df_plot_median[(df_plot_median['seq_length'] == seq_length_list[t]) & (df_plot_median[label_name] == 0)]
+                tab_plot_1 = df_plot_median[(df_plot_median['seq_length'] == seq_length_list[t]) & (df_plot_median[label_name] == 1)]
+                ax[1].plot(tab_plot_0['front_amount'],tab_plot_0['value_surplus'],ls='solid',c=color_list[t],lw=linewidth_list[t])
+                ax[1].plot(tab_plot_1['front_amount'],tab_plot_1['value_surplus'],ls='dashed',c=color_list[t],lw=linewidth_list[t])
+
+        ax[1].plot(np.NaN,np.NaN,ls='solid',c='black')
+        ax[1].plot(np.NaN,np.NaN,ls='dashed',c='black')
+
+        # calculate the number of subjects in each cluster
+        n_dot_cluster = np.bincount(data[label_name]) / len(data) * len(data['worker_id'].unique())
+        cluster_1 = f"cluster 1 (N={int(n_dot_cluster[0])})"
+        cluster_2 = f"cluster 2 (N={int(n_dot_cluster[1])})"
+
+        # make legends
+        lines = ax[1].get_lines()
+        legend1 = plt.legend([lines[i] for i in [0,2]], ["12 months", "6 months"], title='sequence length',
+                        loc='upper center', bbox_to_anchor=(0.3, 1.26))
+        legend2 = plt.legend([lines[i] for i in [4,5]], [cluster_1, cluster_2], title='cluster',
+                        loc='upper center', bbox_to_anchor=(0.62, 1.26))
+        ax[1].add_artist(legend1)
+        ax[1].add_artist(legend2)
+
+        ax[0].axis('off')
+
+        # add axis ticks and labels        
+        plt.yticks(np.arange(20,70,step=5))
+        plt.xticks(front_amount_list)
+        plt.xlabel('Front-end amount (£)')
+        plt.ylabel('Indifference point minus front-end amount (£)')
+        plt.tight_layout()
+        plt.show()
 
 
 def alpha_outlier(data_array,scale_est='std',alpha_tilde=0.05,hampel_threshold=5.2,display=True):
@@ -81,7 +131,7 @@ class bootstrap_model:
         self.n_bootstrap = n_bootstrap
         self.fe = fe
 
-    def fit(self,maxiter=100):
+    def fit(self,maxiter=200):
 
         boots_sample = self.stratified_sample(self.data,model=self.model)
 
@@ -96,42 +146,85 @@ class bootstrap_model:
         boots_y = sample['value_surplus']
         boots_X = sm.add_constant(sample[endog_cols]).astype(float)
 
-        boots_rlm = sm.RLM(endog=boots_y,exog=boots_X,M=sm.robust.norms.HuberT()).fit(maxiter=maxiter)
+        boots_rlm = sm.RLM(endog=boots_y,exog=boots_X,M=sm.robust.norms.HuberT())
 
-        return boots_rlm
+        return boots_rlm.fit(maxiter=maxiter,scale_est=sm.robust.scale.HuberScale())
     
 
     def fit_func(self,i):
         return i,self.fit()
     
 
-    def bootstrap(self,n_jobs=4):
+    def bootstrap(self,n_jobs=8):
 
         with mp.Pool(processes=n_jobs) as pool:
 
             _names = ['const'] + self.param_names
 
-            result_dict = {p:[] for p in _names + ['scale','deviance','nobs','conditional_loss','sample_id']}
+            result_dict = {p:[] for p in _names + ['scale','deviance','nobs','cond_loss','sample_id']}
 
             for i,result in tqdm(
                                 pool.imap_unordered(self.fit_func,range(self.n_bootstrap)),
                                 total=self.n_bootstrap):
 
                 for param in _names:
-                    result_dict[param] += [result.params[param]]
-
-                result_dict['scale'] += [result.scale]
-                result_dict['deviance'] += [result.fit_history['deviance'][-1]]
-                result_dict['nobs'] += [result.nobs]
-                result_dict['conditional_loss'] += [self.muller_welsh_loss(result)]
+                    try:
+                        result_dict[param] += [result.params[param]]
+                    except:
+                        result_dict[param] += [np.NaN]
+                
+                try:
+                    result_dict['scale'] += [result.scale]
+                    result_dict['deviance'] += [result.fit_history['deviance'][-1]]
+                    result_dict['nobs'] += [result.nobs]
+                    result_dict['cond_loss'] += [self.muller_welsh_loss(result)]
+                except:
+                    result_dict['scale'] += [np.NaN]
+                    result_dict['deviance'] += [np.NaN]
+                    result_dict['nobs'] += [np.NaN]
+                    result_dict['cond_loss'] += [np.NaN]
+                                                 
                 result_dict['sample_id'] += [i]
 
         pool.join()
         pool.close()
 
-        return pd.DataFrame(result_dict)
+        self.bootstrapResult = pd.DataFrame(result_dict)
+
+        try:
+            self.mull_welsh_score = self.muller_welsh_criterion()
+            self.ci = self.conf_int()
+        except:
+            self.mull_welsh_score = None
+            self.ci = None
+
+        return self.bootstrapResult
 
 
+    def muller_welsh_criterion(self):
+        
+        term_1 = self.muller_welsh_loss(model=self.model)
+        term_2 = self.model.nobs * len(self.model.params)
+        term_3 = self.bootstrapResult['conditional_loss'].mean()
+
+        criterion = self.model.scale / self.model.nobs * (term_1 + term_2 + term_3)
+        
+        return criterion
+    
+    
+    def conf_int(self,sig=0.05):
+
+        _names = ['const'] + self.param_names
+
+        coef = self.bootstrapResult[_names].median() 
+        se = self.bootstrapResult[_names].std() 
+        mad = self.bootstrapResult[_names].apply(lambda x:np.median(np.abs(x - np.median(x))))
+        ci_lower = self.bootstrapResult[_names].apply(lambda x:sorted(x)[int(sig/2 * len(self.bootstrapResult))])
+        ci_upper = self.bootstrapResult[_names].apply(lambda x:sorted(x,reverse=True)[int(sig/2 * len(self.bootstrapResult))])
+        
+        return pd.DataFrame({'median_coef':coef,'se':se,'mad':mad,'ci_lower':ci_lower,'ci_upper':ci_upper})
+    
+    
     @staticmethod
     def muller_welsh_loss(model,b=2):
 
@@ -139,8 +232,9 @@ class bootstrap_model:
 
         return loss
     
+    
     @staticmethod
-    def stratified_sample(data,model=None,col_name=None,ratio_of_sample_size=0.3,
+    def stratified_sample(data,model=None,col_name=None,ratio_of_sample_size=0.5,
                       scale_est='mad',display=False,**kwargs):
     
         if model is not None:
@@ -175,6 +269,8 @@ class bootstrap_model:
 
 
         return df_union
+    
+    
 
 
 
