@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 from sklearn.cluster import KMeans
+from sklearn.mixture import GaussianMixture
 
 pd.options.mode.chained_assignment = None
 
@@ -143,12 +144,22 @@ if __name__ == '__main__':
     kmeans = KMeans(n_clusters=2,random_state=42)
     kmeans.fit(df_time_pivot.values)
 
+    gmm = GaussianMixture(n_components=2, random_state=42)
+    gmm.fit(df_time_pivot.values)
+    gmm_labels = gmm.predict(df_time_pivot.values)
+
     # cluster results
-    df_time_pivot['label'] = kmeans.labels_
-    cols = ['label'] + [col for col in df_time_pivot if col != 'label']
+    df_time_pivot['label_kmeans'] = kmeans.labels_
+    df_time_pivot['label_gmm'] = np.abs(gmm_labels - 1)
+    df_time_pivot.to_csv('cluster_result_data.csv')
+
+    cols = ['label_kmeans','label_gmm'] + [col for col in df_time_pivot if (col != 'label_kmeans') and (col != 'label_gmm')]
     df_time_pivot = df_time_pivot[cols].reset_index()
-    print('Number of participants in each cluster:',np.bincount(kmeans.labels_))
+    print('Number of subjects in each cluster:')
+    print('K-means',np.bincount(df_time_pivot['label_kmeans']))
+    print('GMM',np.bincount(df_time_pivot['label_gmm']))
 
     # save the data
-    df_time_label = pd.merge(df_time_valid,df_time_pivot[['worker_id','label']],on=['worker_id'])
+    df_time_label = pd.merge(df_time_valid,df_time_pivot[['worker_id','label_kmeans','label_gmm']],on=['worker_id'])
+    df_time_label = df_time_label.rename(columns={'choice_value':'choice_peli'})
     df_time_label.to_csv('valid_sequence_data.csv')
