@@ -238,7 +238,7 @@ class bootstrap_model:
         y = self.data['value_surplus']
         X = sm.add_constant(self.data[self.endog_cols]).astype(float)
 
-        _sresid = (y - result.predict(self.X)) / self.model.scale
+        _sresid = (y - result.predict(X)) / self.model.scale
 
         loss = _sresid.apply(lambda x:min(x**2,b**2)) @ self.model.weights
 
