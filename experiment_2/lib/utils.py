@@ -127,30 +127,35 @@ def get_reg_result(model,coef_names):
 
 class bootstrap_model:
 
-    def __init__(self,data,model,param_names,n_bootstrap,fe=False):
+    def __init__(self,data,model,param_names,n_bootstrap,fe=False,ratio_of_sample_size=0.5):
         self.data = data
         self.model = model
         self.param_names = param_names
         self.n_bootstrap = n_bootstrap
         self.fe = fe
-
-    def fit(self,maxiter=200,ratio_of_sample_size=0.5):
-
-        boots_sample = self.stratified_sample(self.data,model=self.model,
-                                              ratio_of_sample_size=ratio_of_sample_size)
+        self.ratio_of_sample_size=ratio_of_sample_size
 
         if self.fe:
-            sample = pd.concat([boots_sample,pd.get_dummies(boots_sample['worker_id'], prefix='worker_id')],
+            self.data = pd.concat([self.data,pd.get_dummies(self.data['worker_id'], prefix='worker_id')],
                                axis=1)
-            endog_cols = self.param_names + [col for col in sample.columns if col.startswith('worker_id_')]
+            self.endog_cols = self.param_names + [col for col in self.data.columns if col.startswith('worker_id_')]
         else:
-            sample = boots_sample
-            endog_cols = self.param_names
+            self.endog_cols = self.param_names
 
-        boots_y = sample['value_surplus']
-        boots_X = sm.add_constant(sample[endog_cols]).astype(float)
 
-        boots_rlm = sm.RLM(endog=boots_y,exog=boots_X,M=sm.robust.norms.HuberT())
+    def fit(self,maxiter=200,bootstrap=True):
+
+        if bootstrap == True:
+            sample = self.stratified_sample(self.data,model=self.model,
+                                                ratio_of_sample_size=self.ratio_of_sample_size)
+
+            y = sample['value_surplus']
+            X = sm.add_constant(sample[self.endog_cols]).astype(float)
+        else:
+            y = self.data['value_surplus']
+            X = sm.add_constant(self.data[self.endog_cols]).astype(float)
+
+        boots_rlm = sm.RLM(endog=y,exog=X,M=sm.robust.norms.HuberT())
 
         return boots_rlm.fit(maxiter=maxiter,scale_est=sm.robust.scale.HuberScale())
     
@@ -183,7 +188,7 @@ class bootstrap_model:
                 
                 try:
                     dev = result.fit_history['deviance'][-1]
-                    cond_loss = self.muller_welsh_loss(result)
+                    cond_loss = self.get_cond_loss(result)
                 except:
                     dev = result['deviance']
                     cond_loss = result['cond_loss']
@@ -205,7 +210,7 @@ class bootstrap_model:
 
     def muller_welsh_criterion(self):
         
-        term_1 = self.muller_welsh_loss(model=self.model)
+        term_1 = self.get_cond_loss(result=self.model)
         term_2 = 2*np.log(self.model.nobs) * len(self.model.params)
         term_3 = self.bootstrapResult['cond_loss'].mean()
 
@@ -227,11 +232,15 @@ class bootstrap_model:
         
         return pd.DataFrame({'median_coef':coef,'se':se,'mad':mad,'ci_lower':ci_lower,'ci_upper':ci_upper})
     
-    
-    @staticmethod
-    def muller_welsh_loss(model,b=2):
+   
+    def get_cond_loss(self,result,b=2):
 
-        loss = model.sresid.apply(lambda x:min(x**2,b**2)) @ model.weights
+        y = self.data['value_surplus']
+        X = sm.add_constant(self.data[self.endog_cols]).astype(float)
+
+        _sresid = (y - result.predict(self.X)) / self.model.scale
+
+        loss = _sresid.apply(lambda x:min(x**2,b**2)) @ self.model.weights
 
         return loss
     
@@ -312,10 +321,27 @@ class bootstrap_model:
     #     return p_value
 
 
-    
-    
+def get_star(p):
+    if p > 0.05:
+        return ''
+    elif p > 0.01:
+        return '$^{*}$'
+    elif p > 0.005:
+        return '$^{**}$'
+    else:
+        return '$^{***}$'
 
 
+def add_border(input_string):
+
+    # Replace '\toprule', '\midrule', '\bottomrule' with '\hline'
+    output_string = input_string.replace('\\toprule', '\\hline').replace('\\midrule', '\\hline').replace('\\bottomrule', '\\hline')
+    
+    # Insert '\hline' before '\nobservations'
+    index = output_string.find('\nobservations')
+    output_string = output_string[:index] + '\\hline\n' + output_string[index:]
+
+    return output_string
 
 
     
