@@ -5,3 +5,4 @@ scipy
 scikit-learn
 statsmodels
 tqdm
+jinja2
