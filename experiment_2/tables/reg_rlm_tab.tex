@@ -1,0 +1,47 @@
+
+\documentclass[12pt]{article}
+
+
+\begin{document}
+\begin{table}
+    \caption{Robust Linear Regressions}
+    \vspace*{12pt}
+    \centering
+
+      \begin{tabular}{lllll}
+\hline
+ & (5) Pooled & (6) Pooled & (7) FE & (8) FE \\
+\hline
+$Y_1\cdot1\{T=T_L\}$ & -0.005 &  & -0.005$^{***}$ &  \\
+ & (0.003) &  & (0.001) &  \\
+$Y_1\cdot1\{T=T_H\}$ & -0.006$^{*}$ &  & -0.006$^{***}$ &  \\
+ & (0.003) &  & (0.001) &  \\
+$Y_1\cdot1\{T=T_L\}\times$ Cluster 1 &  & 0.015$^{***}$ &  & 0.0 \\
+ &  & (0.002) &  & (0.001) \\
+$Y_1\cdot1\{T=T_H\}\times$ Cluster 1 &  & 0.015$^{***}$ &  & -0.0 \\
+ &  & (0.002) &  & (0.001) \\
+$Y_1\cdot1\{T=T_L\}\times$ Cluster 2 &  & -0.061$^{***}$ &  & -0.017$^{***}$ \\
+ &  & (0.003) &  & (0.002) \\
+$Y_1\cdot1\{T=T_H\}\times$ Cluster 2 &  & -0.067$^{***}$ &  & -0.022$^{***}$ \\
+ &  & (0.003) &  & (0.002) \\
+PELI & -0.848 & -1.014 & 2.181$^{***}$ & 2.206$^{***}$ \\
+ & (0.861) & (0.64) & (0.319) & (0.31) \\
+Constant & 55.0$^{***}$ & 55.829$^{***}$ & 52.158$^{***}$ & 52.385$^{***}$ \\
+ & (0.963) & (0.717) & (0.361) & (0.351) \\\hline
+
+observations & 2198 & 2198 & 2198 & 2198 \\
+Muller-Welsh & 427.482 & 233.493 & 128.457 & 122.183 \\
+\hline
+\end{tabular}
+% INSERT reg_rlm
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.85\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.001$. Standard errors are reported in the parentheses. Each model is estimated using Huber's M-estimator (where the threshold is set at 1.345) and the scale estimator is Huber's proposal 2 estimator. Each p-value for RLM is calculated based on a normal distribution with i.i.d. assumption. A smaller Muller-Welsh score indicates the model has a greater ability to both parsimoniously fit the data and predict new independent obeservations. $Y_1$ and $T$ denote the front-end amount and the sequence length in Option A. $\underline{T}$ and $\bar{T}$ are 6 months and 12 months, respectively. Clustering results are obtained through k-means method. FE denotes fixed effects.}
+    \end{minipage}
+    \label{tab:seq_value_rlm}
+\end{table}
+
+\end{document}
+

@@ -25,11 +25,11 @@ def median_plot(data,label_name):
         for t in range(len(seq_length_list)):
                 tab_plot_0 = df_plot_median[(df_plot_median['seq_length'] == seq_length_list[t]) & (df_plot_median[label_name] == 0)]
                 tab_plot_1 = df_plot_median[(df_plot_median['seq_length'] == seq_length_list[t]) & (df_plot_median[label_name] == 1)]
-                ax[1].plot(tab_plot_0['front_amount'],tab_plot_0['value_surplus'],ls='solid',c=color_list[t],lw=linewidth_list[t])
-                ax[1].plot(tab_plot_1['front_amount'],tab_plot_1['value_surplus'],ls='dashed',c=color_list[t],lw=linewidth_list[t])
+                ax[1].plot(tab_plot_0['front_amount'],tab_plot_0['value_surplus'],ls='dashed',c=color_list[t],lw=linewidth_list[t])
+                ax[1].plot(tab_plot_1['front_amount'],tab_plot_1['value_surplus'],ls='solid',c=color_list[t],lw=linewidth_list[t])
 
-        ax[1].plot(np.NaN,np.NaN,ls='solid',c='black')
         ax[1].plot(np.NaN,np.NaN,ls='dashed',c='black')
+        ax[1].plot(np.NaN,np.NaN,ls='solid',c='black')
 
         # calculate the number of subjects in each cluster
         n_dot_cluster = np.bincount(data[label_name]) / len(data) * len(data['worker_id'].unique())
@@ -332,6 +332,47 @@ def get_star(p):
         return '$^{***}$'
 
 
+def draw_df_from_result(reg_result,col_names,digit=3):
+
+    result_table = {k:[] for k in col_names}
+    result_table['model'] = list(reg_result.keys())
+
+    for r in col_names:
+        for m in list(reg_result.keys()):
+            b_coef = r.split('b_',1)
+            se_coef = r.split('se_',1)
+            coef_name = reg_result[m]['coef_name']
+
+            if len(b_coef) > 1 and b_coef[1] in coef_name:
+                _b = reg_result[m]['params'][coef_name.index(b_coef[1])]
+                _p_value = reg_result[m]['pvalues'][coef_name.index(b_coef[1])]
+
+                if b_coef[1] == 'const':
+                    _b = _b + reg_result[m]['contrast_mean']
+
+                result_table[r] += [ str(round(_b,digit)) + get_star(_p_value)]
+
+            elif len(se_coef) > 1 and se_coef[1] in coef_name:
+                _se = reg_result[m]['bse'][coef_name.index(se_coef[1])]
+                result_table[r] += [ '(' + str(round(_se,digit)) + ')' ]
+
+            elif r == 'nobs':
+                result_table[r] += [ int(reg_result[m][r]) ]
+            
+            elif r == 'rsquared_adj':
+                try:
+                    result_table[r] += [ str(round(reg_result[m][r],digit)) ]
+                except:
+                    result_table[r] += ['']
+                
+            else:
+                result_table[r] += ['']
+
+    return pd.DataFrame(result_table)
+
+
+
+
 def add_border(input_string):
 
     # Replace '\toprule', '\midrule', '\bottomrule' with '\hline'
@@ -344,9 +385,37 @@ def add_border(input_string):
     return output_string
 
 
-    
+def make_table(input_df,output_path):
+    with open(output_path,'w') as f:
+        # tex_code = '\\documentclass[12px]{article} \n \\begin{document} \n' + input_df.to_latex() + '\n \end{document}'
+        tex_code = input_df.to_latex()
+        tex_code = add_border(tex_code)
+        f.write(tex_code)
 
     
+
+def get_ci(model,digit=3):
+
+    row_names_ci = ['front_amount_6m',
+             'front_amount_12m',
+             'front_amount_6m_0',
+             'front_amount_12m_0',
+             'front_amount_6m_1',
+             'front_amount_12m_1',
+             'choice_peli',
+             'const']
+    
+    ci_table = model.conf_int()
+    ci_list = []
+    for r in row_names_ci:
+        if r in ci_table.index:
+            _lower = np.round(ci_table.loc[r]['ci_lower'],digit)
+            _upper = np.round(ci_table.loc[r]['ci_upper'],digit)
+            ci_list += ['[' + str(_lower) + ', ' + str(_upper) + ']']
+        else:
+            ci_list += ['']
+
+    return ci_list
     
 
 

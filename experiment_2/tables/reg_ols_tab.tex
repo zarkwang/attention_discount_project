@@ -1,0 +1,47 @@
+
+\documentclass[12pt]{article}
+
+
+\begin{document}
+\begin{table}
+    \caption{OLS Regressions (outliers removed)}
+    \vspace*{12pt}
+    \centering
+
+      \begin{tabular}{lllll}
+\hline
+ & (1) Pooled & (2) Pooled & (3) FE & (4) FE \\
+\hline
+$Y_1\cdot1\{T=T_L\}$ & -0.005$^{**}$ &  & -0.005$^{*}$ &  \\
+ & (0.002) &  & (0.002) &  \\
+$Y_1\cdot1\{T=T_H\}$ & -0.006$^{***}$ &  & -0.005$^{**}$ &  \\
+ & (0.002) &  & (0.002) &  \\
+$Y_1\cdot1\{T=T_L\}\times$ Cluster 1 &  & 0.022$^{***}$ &  & 0.002 \\
+ &  & (0.004) &  & (0.002) \\
+$Y_1\cdot1\{T=T_H\}\times$ Cluster 1 &  & 0.023$^{***}$ &  & 0.003 \\
+ &  & (0.004) &  & (0.002) \\
+$Y_1\cdot1\{T=T_L\}\times$ Cluster 2 &  & -0.06$^{***}$ &  & -0.019$^{***}$ \\
+ &  & (0.005) &  & (0.004) \\
+$Y_1\cdot1\{T=T_H\}\times$ Cluster 2 &  & -0.062$^{***}$ &  & -0.021$^{***}$ \\
+ &  & (0.005) &  & (0.004) \\
+PELI & -0.239 & -0.645 & 9.187$^{***}$ & 7.215$^{***}$ \\
+ & (3.95) & (2.638) & (0.015) & (0.364) \\
+Constant & 53.742$^{***}$ & 54.037$^{***}$ & 46.434$^{***}$ & 47.965$^{***}$ \\
+ & (3.619) & (2.684) & (0.485) & (0.432) \\\hline
+
+observations & 2186 & 2186 & 2186 & 2186 \\
+adj-$R^2$ & 0.0 & 0.334 & 0.648 & 0.654 \\
+\hline
+\end{tabular}
+% INSERT reg_ols
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.85\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.001$. Standard errors are clustered at the subject level and are reported in the parentheses. Each p-value is calculated based on t-test. $Y_1$ and $T$ denote the front-end amount and the sequence length in Option A. $\underline{T}$ and $\bar{T}$ are 6 months and 12 months, respectively. FE denotes fixed effects. Clustering results are obtained through k-means method.}
+    \end{minipage}
+    \label{tab:seq_value_ols}
+\end{table}
+
+\end{document}
+

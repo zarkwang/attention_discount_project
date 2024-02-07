@@ -1,0 +1,62 @@
+---
+title: "Results of Experiment 2"
+author: "Zark Zijian Wang"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+bibliography: experiment-ref.bib
+biblio-style: apalike
+header-includes: 
+  \usepackage{setspace,lscape}
+  \usepackage{amsmath}
+  \usepackage{array}
+  \usepackage{caption,subcaption}
+  \usepackage{longtable}
+  \usepackage{booktabs}
+  \usepackage{enumitem}
+  \usepackage{standalone}
+  \renewcommand{\arraystretch}{1.5}
+  \captionsetup[table]{skip=5pt}
+  \setstretch{1.5} 
+fontsize: 12pt
+geometry: margin=1in
+editor_options: 
+  markdown: 
+    wrap: 72
+output:
+  #word_document:
+    #number_sections: true
+  pdf_document:
+    number_sections: true
+    citation_package: natbib
+    keep_tex: true
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+# Sample
+
+Participants have to fill in the blank with the amount that would make
+them value Option B equally as much as Option B (I term this amount as
+\"indifference point\"). The answer indicates that they value the
+back-end amount in Option A (£60 in this example) at the same level as
+receiving the indifference point minus the front-end amount in Option A
+(£185 in this example). Note that the back-end amount in Option A is
+fixed at £60.
+
+I recruited 200 subjects via Prolific, of which 197 subjects (female:
+50%) completed the survey. The median age for those who completed the
+survey is 38, the median completion time is 4.8 minutes. The minimum
+completion time is 1.83 minutes. I set up 4 choice questions for
+consistency check. There are 157 subjects having passed consistency
+check. Each subject who completed the survey needs to answer 14
+fill-in-the-blank questions. So, we got 2198 observations.
+
+# Heterogeneity in Responses
+
+# Regression Results
+
+\input{tables/reg_combined_tab.tex}
+
+# Discussion
+
+# Reference

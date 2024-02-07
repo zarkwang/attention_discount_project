@@ -1,0 +1,22 @@
+
+\documentclass[12pt]{article}
+
+
+\begin{document}
+\begin{table}
+    \caption{OLS Regressions (outliers removed)}
+    \vspace*{12pt}
+    \centering
+
+      % INSERT reg_ols
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.85\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.001$. Standard errors are clustered at the subject level and are reported in the parentheses. Each p-value is calculated based on t-test. $Y_1$ and $T$ denote the front-end amount and the sequence length in Option A. $\underline{T}$ and $\bar{T}$ are 6 months and 12 months, respectively. FE denotes fixed effects. Clustering results are obtained through k-means method.}
+    \end{minipage}
+    \label{tab:seq_value_ols}
+\end{table}
+
+\end{document}
+

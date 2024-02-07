@@ -1,0 +1,48 @@
+
+\documentclass[12pt]{article}
+
+
+\begin{document}
+\begin{table}
+    \caption{Regression Results}
+    \vspace*{12pt}
+    \centering
+
+      \begin{tabular}{lllllll}
+\hline
+ & (1) Pool & (2) Pool & (3) FE & (4) FE & (5) RLM & (6) RLM \\
+\hline
+$Y_1\cdot1\{T=T_L\}$ & -0.005$^{**}$ &  & -0.005$^{*}$ &  & -0.005$^{***}$ &  \\
+ & (0.002) &  & (0.002) &  & (0.001) &  \\
+$Y_1\cdot1\{T=T_H\}$ & -0.006$^{***}$ &  & -0.005$^{**}$ &  & -0.006$^{***}$ &  \\
+ & (0.002) &  & (0.002) &  & (0.001) &  \\
+$Y_1\cdot1\{T=T_L\}\times$CL1 &  & 0.022$^{***}$ &  & 0.002 &  & 0.0 \\
+ &  & (0.004) &  & (0.002) &  & (0.001) \\
+$Y_1\cdot1\{T=T_H\}\times$CL1 &  & 0.023$^{***}$ &  & 0.003 &  & -0.0 \\
+ &  & (0.004) &  & (0.002) &  & (0.001) \\
+$Y_1\cdot1\{T=T_L\}\times$CL2 &  & -0.06$^{***}$ &  & -0.019$^{***}$ &  & -0.017$^{***}$ \\
+ &  & (0.005) &  & (0.004) &  & (0.002) \\
+$Y_1\cdot1\{T=T_H\}\times$CL2 &  & -0.062$^{***}$ &  & -0.021$^{***}$ &  & -0.022$^{***}$ \\
+ &  & (0.005) &  & (0.004) &  & (0.002) \\
+PELI & -0.239 & -0.645 & 9.187$^{***}$ & 7.215$^{***}$ & 2.181$^{***}$ & 2.206$^{***}$ \\
+ & (3.95) & (2.638) & (0.015) & (0.364) & (0.319) & (0.31) \\
+Constant & 53.742$^{***}$ & 54.037$^{***}$ & 46.434$^{***}$ & 47.965$^{***}$ & 52.158$^{***}$ & 52.385$^{***}$ \\
+ & (3.619) & (2.684) & (0.485) & (0.432) & (0.361) & (0.351) \\\hline
+
+observations & 2186 & 2186 & 2186 & 2186 & 2198 & 2198 \\
+adj-$R^2$ & 0.0 & 0.334 & 0.648 & 0.654 &  &  \\
+Muller-Welsh &  &  &  &  & 128.457 & 122.183 \\
+\hline
+\end{tabular}
+% INSERT reg_combined
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{1.0\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.001$. Standard errors are reported in the parentheses. Model (1)-(2) are pooled OLS models, model (3)-(4) are fixed-effect OLS models, model (5)-(6) are fixed-effect robust linear regressions (RLM). For OLS, standard errors are clustered at the subject level, and p-values are calculated using t-tests. For RLM, each model is estimated using Huber's M-estimator (the threshold for loss function is set at 1.345) and the scale estimator is Huber's proposal 2 estimator. Each p-value for RLM is calculated based on a normal distribution with i.i.d. assumption. A smaller Muller-Welsh score indicates the model has a greater ability to both parsimoniously fit the data and predict new independent obeservations. $Y_1$ and $T$ denote the front-end amount and the sequence length in Option A. $T_L$ and $T_H$ are 6 months and 12 months, respectively. Clustering results are obtained through k-means method.}
+    \end{minipage}
+    \label{tab:seq_value_reg}
+\end{table}
+
+\end{document}
+

@@ -1,0 +1,87 @@
+
+\documentclass[12pt]{article}
+\usepackage{subcaption}
+
+
+\begin{document}
+\begin{table}
+    \captionsetup[sub]{singlelinecheck=false}
+    \caption{Regression results}
+    \vspace*{12pt}
+    
+    \begin{subtable}{\textwidth}
+        \centering
+        \captionsetup{justification=centering}
+        \caption*{Panel A: OLS model, outliers removed}
+        \begin{tabular}{lllll}
+\hline
+ & (1) Pooled & (2) Pooled & (3) FE & (4) FE \\
+\hline
+$Y_1\cdot\text{1}\{T=\underline{T}\}$ & -0.005$^{**}$ &  & -0.005$^{*}$ &  \\
+ & (0.002) &  & (0.002) &  \\
+$Y_1\cdot\text{1}\{T=\bar{T}\}$ & -0.006$^{***}$ &  & -0.005$^{**}$ &  \\
+ & (0.002) &  & (0.002) &  \\
+$Y_1\cdot\text{1}\{T=\underline{T}\}\times$ Cluster 1 &  & 0.022$^{***}$ &  & 0.002 \\
+ &  & (0.004) &  & (0.002) \\
+$Y_1\cdot\text{1}\{T=\bar{T}\}\times$ Cluster 1 &  & 0.023$^{***}$ &  & 0.003 \\
+ &  & (0.004) &  & (0.002) \\
+$Y_1\cdot\text{1}\{T=\underline{T}\}\times$ Cluster 2 &  & -0.06$^{***}$ &  & -0.019$^{***}$ \\
+ &  & (0.005) &  & (0.004) \\
+$Y_1\cdot\text{1}\{T=\bar{T}\}\times$ Cluster 2 &  & -0.062$^{***}$ &  & -0.021$^{***}$ \\
+ &  & (0.005) &  & (0.004) \\
+PELI & -0.239 & -0.645 & 9.187$^{***}$ & 7.215$^{***}$ \\
+ & (3.95) & (2.638) & (0.015) & (0.364) \\
+Constant & 53.742$^{***}$ & 54.037$^{***}$ & 46.434$^{***}$ & 47.965$^{***}$ \\
+ & (3.619) & (2.684) & (0.485) & (0.432) \\\hline
+
+observations & 2186 & 2186 & 2186 & 2186 \\
+adj-$R^2$ & 0.0 & 0.334 & 0.648 & 0.654 \\
+\hline
+\end{tabular}
+% INSERT reg_ols
+    \end{subtable}
+    
+    \vspace*{12pt}
+
+    \begin{subtable}{\textwidth}
+        \centering
+        \captionsetup{justification=centering}
+        \caption*{Panel B: Robust regression}
+        \begin{tabular}{lllll}
+\hline
+ & (5) Pooled & (6) Pooled & (7) FE & (8) FE \\
+\hline
+$Y_1\cdot\text{1}\{T=\underline{T}\}$ & -0.005 &  & -0.005$^{***}$ &  \\
+ & (0.003) &  & (0.001) &  \\
+$Y_1\cdot\text{1}\{T=\bar{T}\}$ & -0.006$^{*}$ &  & -0.006$^{***}$ &  \\
+ & (0.003) &  & (0.001) &  \\
+$Y_1\cdot\text{1}\{T=\underline{T}\}\times$ Cluster 1 &  & 0.015$^{***}$ &  & 0.0 \\
+ &  & (0.002) &  & (0.001) \\
+$Y_1\cdot\text{1}\{T=\bar{T}\}\times$ Cluster 1 &  & 0.015$^{***}$ &  & -0.0 \\
+ &  & (0.002) &  & (0.001) \\
+$Y_1\cdot\text{1}\{T=\underline{T}\}\times$ Cluster 2 &  & -0.061$^{***}$ &  & -0.017$^{***}$ \\
+ &  & (0.003) &  & (0.002) \\
+$Y_1\cdot\text{1}\{T=\bar{T}\}\times$ Cluster 2 &  & -0.067$^{***}$ &  & -0.022$^{***}$ \\
+ &  & (0.003) &  & (0.002) \\
+PELI & -0.848 & -1.014 & 2.181$^{***}$ & 2.206$^{***}$ \\
+ & (0.861) & (0.64) & (0.319) & (0.31) \\
+Constant & 55.0$^{***}$ & 55.829$^{***}$ & 52.158$^{***}$ & 52.385$^{***}$ \\
+ & (0.963) & (0.717) & (0.361) & (0.351) \\\hline
+
+observations & 2198 & 2198 & 2198 & 2198 \\
+Muller-Welsh & 427.482 & 233.493 & 128.457 & 122.183 \\
+\hline
+\end{tabular}
+% INSERT reg_rlm 
+    \end{subtable} 
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.85\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.001$. Standard errors are reported in the parentheses. In the fixed-effect models (FE), dummies are created for each subject. For OLS, standard errors are clustered at the subject level, and p-values are calculated using t-test. For robust regression, each model is estimated using Huber's M-estimator (where the threshold is set at 1.345) and the scale estimator is Huber's proposal 2 estimator. A smaller Muller-Welsh score indicates the model has a greater ability to both parsimoniously fit the data and predict new independent obeservations. $Y_1$ and $T$ denote the front-end amount and the sequence length in Option A. $\underline{T}$ and $\bar{T}$ are 6 months and 12 months, respectively. Cluster results are obtained through k-means clustering.}
+    \end{minipage}
+    \label{tab:baseline}
+\end{table}
+
+\end{document}
+
