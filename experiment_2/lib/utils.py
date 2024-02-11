@@ -197,10 +197,15 @@ class bootstrap_model:
                     dev = result['deviance']
                     cond_loss = result['cond_loss']
                 
-                result_dict['nobs'] += [result.nobs] 
-                result_dict['scale'] += [result.scale]
-                result_dict['deviance'] += [dev]
-                result_dict['cond_loss'] += [cond_loss]          
+                try:
+                    result_dict['nobs'] += [result.nobs] 
+                    result_dict['scale'] += [result.scale]
+                    result_dict['deviance'] += [dev]
+                    result_dict['cond_loss'] += [cond_loss]
+                except:
+                    for score in ['scale','deviance','cond_loss','nobs']:
+                        result_dict[score] += [np.NaN]
+
                 result_dict['sample_id'] += [i]
 
         pool.join()
