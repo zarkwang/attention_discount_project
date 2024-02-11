@@ -1,1 +1,45 @@
-{"task":"consistency-check","worker_id":"434940","screen_width":1536,"url":{"STUDY_ID":"65adc7b8bea7b0a2d8439e51","code":"ShSZGoqzxnu","PROLIFIC_PID":"62d5cc956051642fc69be235","SESSION_ID":"65b22fdbf2aa850ee59191ef"},"choice":[{"front_amount":185,"backend_amount":60,"single_amount":300,"sequence_single_choice":"single","response_time_choice":6578},{"front_amount":25,"backend_amount":60,"single_amount":100,"sequence_single_choice":"single","response_time_choice":4037},{"front_amount":345,"backend_amount":60,"single_amount":345,"sequence_single_choice":"sequence","response_time_choice":5047},{"front_amount":505,"backend_amount":60,"single_amount":505,"sequence_single_choice":"sequence","response_time_choice":5080}]}
+{
+    "task": "consistency-check",
+    "worker_id": "434940",
+    "screen_width": 1536,
+    "url": {
+        "STUDY_ID": "65adc7b8bea7b0a2d8439e51",
+        "code": "ShSZGoqzxnu",
+        "PROLIFIC_PID": "62d5cc956051642fc69be235",
+        "SESSION_ID": "65b22fdbf2aa850ee59191ef"
+    },
+    "choice": [
+        {
+            "front_amount": 185,
+            "backend_amount": 60,
+            "single_amount": 300,
+            "sequence_single_choice": "single",
+            "response_time_choice": 6578,
+            "seq_length": "6 months"
+        },
+        {
+            "front_amount": 25,
+            "backend_amount": 60,
+            "single_amount": 100,
+            "sequence_single_choice": "single",
+            "response_time_choice": 4037,
+            "seq_length": "12 months"
+        },
+        {
+            "front_amount": 345,
+            "backend_amount": 60,
+            "single_amount": 345,
+            "sequence_single_choice": "sequence",
+            "response_time_choice": 5047,
+            "seq_length": "6 months"
+        },
+        {
+            "front_amount": 505,
+            "backend_amount": 60,
+            "single_amount": 505,
+            "sequence_single_choice": "sequence",
+            "response_time_choice": 5080,
+            "seq_length": "6 months"
+        }
+    ]
+}

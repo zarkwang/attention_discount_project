@@ -72,17 +72,85 @@
 
 \title{Results of Experiment 2}
 \author{Zark Zijian Wang}
-\date{February 07, 2024}
+\date{February 10, 2024}
 
 \begin{document}
 \maketitle
 
-\hypertarget{survey-desigm}{%
-\section{Survey Desigm}\label{survey-desigm}}
+\hypertarget{sample}{%
+\section{Sample}\label{sample}}
+
+In this experiment, each subject was required to complete a same survey.
+The survey contains 4 choice questions for consistency check, 14
+fill-in-the-blank questions as the main task, and one additional choice
+question for measuring impatience.
+
+In each fill-in-the-blank question, participants will face two reward
+sequences - Option A and Option B. Option A offers two rewards at two
+specific times: one today and another after a certain delay (e.g.
+``receive £185 today and £60 in 6 months''). Option B offers an unknown
+amount today and no amount after the same delay. Participants have to
+identify which level of this unknown amount would make them value the
+two options equally, and fill in the blank with their answer. Figure
+\ref{fig:fill-blank-screen} presents an example question. We term their
+answer as the ``indifference point'' between the two options. Throughout
+the survey, the back-end amount in Option A is fixed at £60. We set up
+seven levels for the front-end amount (£25, £105, £185, £265, £345,
+£425, £505), and two levels for the delay (6 months and 12 months.
+Overall, there are 14 fill-in-the-blank questions, presented in a random
+order.
+
+\begin{figure}
+  \vspace{16pt}
+  \centering
+  \includegraphics[width=0.96\textwidth]{figures/screenshot.png}
+  \caption{Screenshot of an fill-in-the-blank question}
+  \label{fig:fill-blank-screen}
+\end{figure}
+
+Before participants start doing the main task, there are four
+consistency check questions. Each consistency check question contains
+two options: one is the same as Option A in a subsequent
+fill-in-the-blank question; the other is framed in the way as Option B,
+offering a specific amount today and no amount in the certain delay. In
+the latter option, the amount offered today is either the same as that
+of the former option, or above the total money in the former option.
+Participants are required to choose the option they prefer. We exclude
+the participants whose choices are incompatible with their answers in
+the correponding fill-in-the-blank questions. For example, a participant
+may face a choice between ``receive £185 today and £60 in 6 months'' and
+``receive £300 today and £0 in 6 months''. If she choose the latter
+option, then when she meets the former option in a subsequent
+fill-in-the-blank question, she should fill in an amount smaller than
+£300. Finally, at the end of the survey, we add one additional question
+to measure the participants' impatience. The question is the same as the
+``Preference for Earlier vs Later Income'' (PELI) task in
+\citet{burro2022patience}.
+
+Two hundred subjects (female: 50\%) were recruited via Prolific, of
+which 197 subjects completed the survey\footnote{When a question was
+  loaded multiple times during the survey completion process, the survey
+  will be automatically ended and submitted, in order to prevent
+  duplicate responses. This situation occurred with three participants.
+  We thus abort their answers.}. The median age for those who completed
+the survey is 38, the median completion time is 4.8 minutes. The minimum
+completion time is 1.83 minutes. We offer £1.2 for each participant.
+There were 157 subjects having passed the consistency check. Given that
+each subject completed 14 fill-in-the-blank questions, we construct a
+sample of 2,198 observations.
+
+\hypertarget{heterogeneity-in-responses}{%
+\section{Heterogeneity in Responses}\label{heterogeneity-in-responses}}
+
+\hypertarget{regression-results}{%
+\section{Regression Results}\label{regression-results}}
 
 \input{tables/reg_combined_tab.tex}
 
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
 \renewcommand\refname{Reference}
-  \bibliography{experiment-ref.bib}
+  \bibliography{experiment-2-ref.bib}
 
 \end{document}

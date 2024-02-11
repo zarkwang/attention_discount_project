@@ -2,7 +2,7 @@
 title: "Results of Experiment 2"
 author: "Zark Zijian Wang"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-bibliography: experiment-ref.bib
+bibliography: experiment-2-ref.bib
 biblio-style: apalike
 header-includes: 
   \usepackage{setspace,lscape}
@@ -35,21 +35,66 @@ output:
 
 # Sample
 
-Participants have to fill in the blank with the amount that would make
-them value Option B equally as much as Option B (I term this amount as
-\"indifference point\"). The answer indicates that they value the
-back-end amount in Option A (£60 in this example) at the same level as
-receiving the indifference point minus the front-end amount in Option A
-(£185 in this example). Note that the back-end amount in Option A is
-fixed at £60.
+In this experiment, each subject was required to complete a same survey.
+The survey contains 4 choice questions for consistency check, 14
+fill-in-the-blank questions as the main task, and one additional choice
+question for measuring impatience.
 
-I recruited 200 subjects via Prolific, of which 197 subjects (female:
-50%) completed the survey. The median age for those who completed the
-survey is 38, the median completion time is 4.8 minutes. The minimum
-completion time is 1.83 minutes. I set up 4 choice questions for
-consistency check. There are 157 subjects having passed consistency
-check. Each subject who completed the survey needs to answer 14
-fill-in-the-blank questions. So, we got 2198 observations.
+In each fill-in-the-blank question, participants will face two reward
+sequences - Option A and Option B. Option A offers two rewards at two
+specific times: one today and another after a certain delay (e.g.
+"receive £185 today and £60 in 6 months"). Option B offers an unknown
+amount today and no amount after the same delay. Participants have to
+identify which level of this unknown amount would make them value the
+two options equally, and fill in the blank with their answer. Figure
+\ref{fig:fill-blank-screen} presents an example question. We term their
+answer as the "indifference point" between the two options. Throughout
+the survey, the back-end amount in Option A is fixed at £60. We set up
+seven levels for the front-end amount (£25, £105, £185, £265, £345,
+£425, £505), and two levels for the delay (6 months and 12 months.
+Overall, there are 14 fill-in-the-blank questions, presented in a random
+order.
+
+```{=tex}
+\begin{figure}
+  \vspace{16pt}
+  \centering
+  \includegraphics[width=0.96\textwidth]{figures/screenshot.png}
+  \caption{Screenshot of an fill-in-the-blank question}
+  \label{fig:fill-blank-screen}
+\end{figure}
+```
+Before participants start doing the main task, there are four
+consistency check questions. Each consistency check question contains
+two options: one is the same as Option A in a subsequent
+fill-in-the-blank question; the other is framed in the way as Option B,
+offering a specific amount today and no amount in the certain delay. In
+the latter option, the amount offered today is either the same as that
+of the former option, or above the total money in the former option.
+Participants are required to choose the option they prefer. We exclude
+the participants whose choices are incompatible with their answers in
+the correponding fill-in-the-blank questions. For example, a participant
+may face a choice between "receive £185 today and £60 in 6 months" and
+"receive £300 today and £0 in 6 months". If she choose the latter
+option, then when she meets the former option in a subsequent
+fill-in-the-blank question, she should fill in an amount smaller than
+£300. Finally, at the end of the survey, we add one additional question
+to measure the participants' impatience. The question is the same as the
+"Preference for Earlier vs Later Income" (PELI) task in
+@burro2022patience.
+
+Two hundred subjects (female: 50%) were recruited via Prolific, of which
+197 subjects completed the survey[^1]. The median age for those who
+completed the survey is 38, the median completion time is 4.8 minutes.
+The minimum completion time is 1.83 minutes. We offer £1.2 for each
+participant. There were 157 subjects having passed the consistency
+check. Given that each subject completed 14 fill-in-the-blank questions,
+we construct a sample of 2,198 observations.
+
+[^1]: When a question was loaded multiple times during the survey
+    completion process, the survey will be automatically ended and
+    submitted, in order to prevent duplicate responses. This situation
+    occurred with three participants. We thus abort their answers.
 
 # Heterogeneity in Responses
 

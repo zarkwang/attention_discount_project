@@ -7,10 +7,14 @@ from scipy import stats
 from tqdm import tqdm
 
 
-def median_plot(data,label_name):
+def median_plot(data,label_name,method='median'):
 
         # calculate median answer for each condition of the data
-        df_plot_median = data.groupby(['seq_length','front_amount',label_name])['value_surplus'].median().to_frame().reset_index()
+        if method == 'mean':
+             df_plot_median = data.groupby(['seq_length','front_amount',label_name])['value_surplus'].mean().to_frame().reset_index()
+        else:
+            df_plot_median = data.groupby(['seq_length','front_amount',label_name])['value_surplus'].median().to_frame().reset_index()
+        
         front_amount_list = df_plot_median['front_amount'].unique()
         seq_length_list = df_plot_median['seq_length'].unique()
 
