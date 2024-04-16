@@ -4,16 +4,16 @@
 
 \begin{document}
 \begin{table}
-    \caption{Robust Linear Regressions}
+    \caption{Robust Linear Regressions, Using Gaussian Mixture Model for Clustering}
     \vspace*{12pt}
     \centering
 
-      % INSERT reg_rlm
+      % INSERT reg_rlm_GMM
 
     \vspace*{4pt}
     \centering
     \begin{minipage}{0.85\textwidth}
-    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.001$. Standard errors are reported in the parentheses. Each model is estimated using Huber's M-estimator (where the threshold is set at 1.345) and the scale estimator is Huber's proposal 2 estimator. Each p-value for RLM is calculated based on a normal distribution with i.i.d. assumption. A smaller Muller-Welsh score indicates the model has a greater ability to both parsimoniously fit the data and predict new independent obeservations. $Y_1$ and $T$ denote the front-end amount and the sequence length in Option A. $\underline{T}$ and $\bar{T}$ are 6 months and 12 months, respectively. Clustering results are obtained through k-means method. FE denotes fixed effects.}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.005$. Standard errors are reported in the parentheses. Each model is estimated using Huber's M-estimator (where the threshold is set at 1.345) and the scale estimator is Huber's proposal 2 estimator. Each p-value for RLM is calculated based on a normal distribution with i.i.d. assumption. A smaller Muller-Welsh score indicates the model has a greater ability to both parsimoniously fit the data and predict new independent obeservations. $Y_1$ and $T$ denote the front-end amount and the sequence length in Option A. $T_L$ and $T_H$ are 6 months and 12 months respectively. Clustering results are obtained through Gaussian mixture model. FE denotes fixed effects.}
     \end{minipage}
     \label{tab:seq_value_rlm}
 \end{table}

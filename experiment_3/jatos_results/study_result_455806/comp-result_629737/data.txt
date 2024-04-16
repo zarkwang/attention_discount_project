@@ -1,0 +1,1 @@
+{"prolific_id":"6110f9fd3a01425bd66a1251","worker_id":"481810","choice":[{"front_amount":3,"single_amount":7,"backend_amount":5,"preference":"single","response_time":18450,"check_true":false,"wrong_amount":6},{"front_amount":3,"single_amount":8,"backend_amount":4,"preference":"single","response_time":9394,"check_true":false,"wrong_amount":8}],"task_part":"rabbit-memory"}

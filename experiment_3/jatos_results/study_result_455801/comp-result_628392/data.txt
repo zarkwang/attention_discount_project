@@ -1,0 +1,1 @@
+{"prolific_id":"5e8f8ebc09b58f28c329da6f","worker_id":"481805","screen_width":1920}

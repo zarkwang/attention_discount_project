@@ -1,0 +1,1 @@
+{"prolific_id":"5e41ca7d393e97062ed73c94","worker_id":"481693","choice":[{"front_amount":2,"backend_amount":6,"single_amount":5,"preference":"sequence","response_time":2512,"mouseX":37,"mouseY":294},{"front_amount":4,"backend_amount":3,"single_amount":8,"preference":"single","response_time":3971,"mouseX":28,"mouseY":202}],"task_part":"rabbit-pure"}

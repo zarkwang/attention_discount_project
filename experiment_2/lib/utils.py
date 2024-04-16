@@ -7,7 +7,7 @@ from scipy import stats
 from tqdm import tqdm
 
 
-def median_plot(data,label_name,method='median'):
+def median_plot(data,label_name,method='median',hide_axis=False):
 
         # calculate median answer for each condition of the data
         if method == 'mean':
@@ -23,7 +23,12 @@ def median_plot(data,label_name,method='median'):
         linewidth_list = [4,3]
 
         # create a figure
-        fig,ax  = plt.subplots(2, 1, figsize=(9, 7), gridspec_kw={'height_ratios': [0.15, 0.85]})
+        if hide_axis == False:
+            fig_size = (9,8)
+        else:
+            fig_size = (8.5,8)
+            
+        fig,ax  = plt.subplots(2, 1, figsize=fig_size, gridspec_kw={'height_ratios': [0.2, 0.8]})
 
         # draw lines
         for t in range(len(seq_length_list)):
@@ -41,21 +46,25 @@ def median_plot(data,label_name,method='median'):
         cluster_2 = f"cluster 2 (N={int(n_dot_cluster[1])})"
 
         # make legends
-        lines = ax[1].get_lines()
-        legend1 = plt.legend([lines[i] for i in [0,2]], ["12 months", "6 months"], title='sequence length',
-                        loc='upper center', bbox_to_anchor=(0.3, 1.26))
-        legend2 = plt.legend([lines[i] for i in [4,5]], [cluster_1, cluster_2], title='cluster',
-                        loc='upper center', bbox_to_anchor=(0.62, 1.26))
-        ax[1].add_artist(legend1)
-        ax[1].add_artist(legend2)
+        if hide_axis == False:
+            lines = ax[1].get_lines()
+            legend1 = plt.legend([lines[i] for i in [0,2]], ["12 months", "6 months"], title='sequence length',
+                            loc='upper center', bbox_to_anchor=(0.25, 1.35))
+            legend2 = plt.legend([lines[i] for i in [4,5]], [cluster_1, cluster_2], title='cluster',
+                            loc='upper center', bbox_to_anchor=(0.75, 1.35))
+            ax[1].add_artist(legend1)
+            ax[1].add_artist(legend2)
+
 
         ax[0].axis('off')
 
-        # add axis ticks and labels        
+        # add axis ticks and labels 
+        if hide_axis == False:       
+            plt.ylabel('Indifference point minus front-end amount (£)')
+
+        plt.xlabel('Front-end amount (£)')
         plt.yticks(np.arange(20,70,step=5))
         plt.xticks(front_amount_list)
-        plt.xlabel('Front-end amount (£)')
-        plt.ylabel('Indifference point minus front-end amount (£)')
         plt.tight_layout()
         plt.show()
 

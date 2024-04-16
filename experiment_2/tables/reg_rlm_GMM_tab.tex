@@ -1,0 +1,43 @@
+
+\documentclass[12pt]{article}
+
+
+\begin{document}
+\begin{table}
+    \caption{Robust Linear Regressions, Using Gaussian Mixture Model for Clustering}
+    \vspace*{12pt}
+    \centering
+
+      \begin{tabular}{lll}
+\hline
+ & (1) Pooled & (2) FE \\
+\hline
+$Y_1\cdot1\{T=T_L\}\times$CL1 & -0.026$^{***}$ & -0.01$^{***}$ \\
+ & (0.003) & (0.001) \\
+$Y_1\cdot1\{T=T_H\}\times$CL1 & -0.029$^{***}$ & -0.013$^{***}$ \\
+ & (0.003) & (0.001) \\
+$Y_1\cdot1\{T=T_L\}\times$CL2 & 0.021$^{***}$ & 0.002 \\
+ & (0.003) & (0.002) \\
+$Y_1\cdot1\{T=T_H\}\times$CL2 & 0.021$^{***}$ & 0.002 \\
+ & (0.003) & (0.002) \\
+PELI & 0.154 & 1.73$^{***}$ \\
+ & (0.776) & (0.328) \\
+Constant & 54.553$^{***}$ & 52.648$^{***}$ \\
+ & (0.87) & (0.37) \\\hline
+
+observations & 2254 & 2254 \\
+Muller-Welsh & 382.354 & 143.607 \\
+\hline
+\end{tabular}
+% INSERT reg_rlm_GMM
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.85\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.005$. Standard errors are reported in the parentheses. Each model is estimated using Huber's M-estimator (where the threshold is set at 1.345) and the scale estimator is Huber's proposal 2 estimator. Each p-value for RLM is calculated based on a normal distribution with i.i.d. assumption. A smaller Muller-Welsh score indicates the model has a greater ability to both parsimoniously fit the data and predict new independent obeservations. $Y_1$ and $T$ denote the front-end amount and the sequence length in Option A. $T_L$ and $T_H$ are 6 months and 12 months respectively. Clustering results are obtained through Gaussian mixture model. FE denotes fixed effects.}
+    \end{minipage}
+    \label{tab:seq_value_rlm}
+\end{table}
+
+\end{document}
+

@@ -33,11 +33,12 @@ output:
 ---
 
 We define $s_{0\rightarrow T}=[s_0,s_1,...,s_T]$ as a sequence of
-rewards, starting at period 0 and ending at period $T$. We define
-$s_{0\rightarrow t}=[s_0,…,s_t]$ where $t\leq T$, as a sub-sequence of
-it. Let $\mathcal{W}=[w_0,...,w_T]$ be the attention weights for all
-rewards in sequence $s_{0\rightarrow T}$, where $W\in[0,1]^{T+1}$. Let
-$C(\mathcal{W})$ denote the information cost function.
+rewards, starting at period 0 and ending at period $T$. For any integer
+$t$ such that $0<t<T$, we define $s_{0\rightarrow t}=[s_0,…,s_t]$ as a
+sub-sequence of $s_{0\rightarrow T}$. Let $\mathcal{W}=[w_0,...,w_T]$ be
+the attention weights for all rewards in sequence $s_{0\rightarrow T}$,
+where $W\in[0,1]^{T+1}$. Let $C(\mathcal{W})$ denote the information
+cost function.
 
 The decision maker's preference for sequences, denoted by $\succsim$,
 has a optimal discounting representation if

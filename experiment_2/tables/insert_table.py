@@ -44,10 +44,10 @@ if __name__ == '__main__':
                 destination_type='.txt',
                 output='reg_ols_tab.tex')
     
-    insert_tab(tab_name='reg_rlm',
+    insert_tab(tab_name='reg_rlm_GMM',
                destination_content='reg_rlm_original',
                destination_type='.txt',
-               output='reg_rlm_tab.tex')
+               output='reg_rlm_GMM_tab.tex')
     
     insert_tab(tab_name='reg_combined',
                destination_content='reg_combined_original',
