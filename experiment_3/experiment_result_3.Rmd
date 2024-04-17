@@ -1,0 +1,68 @@
+---
+title: "Results of Experiment 2"
+author: "Zijian Zark Wang"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+bibliography: experiment-2-ref.bib
+biblio-style: apalike
+header-includes: 
+  \usepackage{setspace,lscape}
+  \usepackage{amsmath}
+  \usepackage{array}
+  \usepackage{caption,subcaption}
+  \usepackage{longtable}
+  \usepackage{booktabs}
+  \usepackage{enumitem}
+  \usepackage{standalone}
+  \renewcommand{\arraystretch}{1.5}
+  \captionsetup[table]{skip=5pt}
+  \setstretch{1.5} 
+fontsize: 12pt
+geometry: margin=1in
+editor_options: 
+  markdown: 
+    wrap: 72
+output:
+  #word_document:
+    #number_sections: true
+  pdf_document:
+    number_sections: true
+    citation_package: natbib
+    keep_tex: true
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+# Experiment 3: Causal Manipulation of Attention
+
+## Procedure
+
+We recruited 300 UK residents via Prolific. Participants are asked to complete a series of choice tasks. At each time there is only one task presented on the screen. These tasks are divided into four parts. Before each part begins, there are 2-3 example tasks to help participants get familiarized with the tasks in the corresponding part. 
+
+In Part 1-2, each choice is between a single immediate monetary reward and a sequence of two monetary rewards. Participants have to choose the option they prefer.
+
+```{=tex}
+\begin{figure}
+  \centering
+  \begin{subfigure}{\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/exp3_intertemporal_task.png}
+    \subcaption{Intertemporal Choice Task}
+  \end{subfigure}
+  \begin{subfigure}{\textwidth}
+    \vspace{2em}
+    \centering
+    \includegraphics[width=\linewidth]{figures/exp3_rabbit_task.png}
+    \subcaption{Count-the-Rabbits Task}
+  \end{subfigure}
+  \caption{Screenshot of Experiment 3}
+  \label{fig:exp3_screenshot}
+\end{figure}
+```
+\input{tables/exp3_choice_tab.tex}
+
+\input{tables/exp3_rabbit_tab.tex}
+
+\input{tables/exp3_response_tab.tex}
+
+# Reference

@@ -1,0 +1,22 @@
+
+\documentclass[12pt]{article}
+
+
+\begin{document}
+\begin{table}
+    \caption{The Relationship Between Response Time, Choice and Intervetions}
+    \vspace*{12pt}
+    \centering
+
+      % INSERT reg_response_time
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.85\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.001$. Both models are estimated through 2SLS method. Standard errors are clustered at the subject level and are reported in the parentheses. The p-values are calculated based on t-tests. Intercept, subject-specific dummies, reward (rabbit) numbers and their interactions with predicted choice are omitted in this table.}
+    \end{minipage}
+    \label{tab:manipulate_response_time}
+\end{table}
+
+\end{document}
+

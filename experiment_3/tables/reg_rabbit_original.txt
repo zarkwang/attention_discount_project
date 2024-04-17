@@ -1,0 +1,22 @@
+
+\documentclass[12pt]{article}
+
+
+\begin{document}
+\begin{table}
+    \caption{Regression Results for Count-the-Rabbit Tasks}
+    \vspace*{12pt}
+    \centering
+
+      % INSERT reg_rabbit
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.85\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.001$. Standard errors are clustered at the subject level and are reported in the parentheses. The p-values are calculated based on Wald tests. FE denotes fixed effects. Subject-specific dummies are omitted in this table.}
+    \end{minipage}
+    \label{tab:manipulate_rabbit}
+\end{table}
+
+\end{document}
+
