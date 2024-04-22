@@ -4,7 +4,7 @@
 
 \begin{document}
 \begin{table}
-    \caption{Regression Results for Count-the-Rabbit Tasks}
+    \caption{Regression Results for Count-the-Rabbits Tasks}
     \vspace*{12pt}
     \centering
 
@@ -13,9 +13,9 @@
     \vspace*{4pt}
     \centering
     \begin{minipage}{0.85\textwidth}
-    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.001$. Standard errors are clustered at the subject level and are reported in the parentheses. The p-values are calculated based on Wald tests. FE denotes fixed effects. Subject-specific dummies are omitted in this table.}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.005$. Standard errors are clustered at the subject level and are reported in the parentheses. The p-values are calculated based on Wald tests. FE denotes individual fixed-effects. Model (1)-(2) are run upon the full sample, (3) is for those having changed choices at least once in intertemporal choice tasks, (4) is for those having made wrong choices in count-the-rabbits tasks. Intercepts and subject-specific dummies are omitted in this table.}
     \end{minipage}
-    \label{tab:manipulate_rabbit}
+    \label{tab:exp3_reg_rabbit_choice}
 \end{table}
 
 \end{document}

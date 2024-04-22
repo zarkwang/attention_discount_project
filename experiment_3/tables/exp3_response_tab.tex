@@ -4,7 +4,7 @@
 
 \begin{document}
 \begin{table}
-    \caption{The Relationship Between Response Time, Choice and Intervetions}
+    \caption{The Relationship Between Response Time, Choice and Experimental Conditions}
     \vspace*{12pt}
     \centering
 
@@ -12,24 +12,24 @@
 \hline
  & Intertemporal Choice & Rabbit \\
 \hline
-Group & -0.706$^{***}$ & -2.438$^{***}$ \\
- & (0.144) & (0.118) \\
-Question$\cdot1\{\text{Group}=0\}$ & -0.102 & 0.787$^{***}$ \\
- & (0.166) & (0.15) \\
-Questsion$\cdot1\{\text{Group}=1\}$ & 0.414$^{***}$ & 0.784$^{***}$ \\
- & (0.108) & (0.109) \\
-Choice & 0.434 & 0.499$^{***}$ \\
- & (0.336) & (0.063) \\
-Choice$\times$Group & -0.69$^{*}$ & -1.17$^{***}$ \\
- & (0.3) & (0.199) \\
-Choice$\times$Question$\cdot1\{\text{Group}=0\}$ & -0.133 & -0.122 \\
- & (0.233) & (0.214) \\
-Choice$\times$Question$\cdot1\{\text{Group}=1\}$ & -0.011 & 0.313$^{*}$ \\
- & (0.207) & (0.153) \\\hline
+Group & -0.706$^{***}$ & -0.792$^{***}$ \\
+ & (0.144) & (0.144) \\
+Question$\cdot1\{\text{Group}=0\}$ & -0.102 & 0.897$^{***}$ \\
+ & (0.166) & (0.201) \\
+Question$\cdot1\{\text{Group}=1\}$ & 0.414$^{***}$ & 0.833$^{***}$ \\
+ & (0.108) & (0.13) \\
+Choice & 0.434 & 0.244 \\
+ & (0.336) & (0.243) \\
+Choice$\times$Group & -0.69$^{*}$ & -1.299$^{***}$ \\
+ & (0.3) & (0.229) \\
+Choice$\times$Question$\cdot1\{\text{Group}=0\}$ & -0.133 & -0.124 \\
+ & (0.233) & (0.236) \\
+Choice$\times$Question$\cdot1\{\text{Group}=1\}$ & -0.011 & 0.311 \\
+ & (0.207) & (0.171) \\\hline
 
-observations & 4393 & 3486 \\
-aic & 18552.742 & 14236.621 \\
-adj-$R^2$ & 0.378 & 0.569 \\
+observations & 4393 & 2179 \\
+aic & 18552.742 & 8727.792 \\
+adj-$R^2$ & 0.378 & 0.546 \\
 \hline
 \end{tabular}
 % INSERT reg_response_time
@@ -37,9 +37,9 @@ adj-$R^2$ & 0.378 & 0.569 \\
     \vspace*{4pt}
     \centering
     \begin{minipage}{0.85\textwidth}
-    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.001$. Both models are estimated through 2SLS method. Standard errors are clustered at the subject level and are reported in the parentheses. The p-values are calculated based on t-tests. Intercept, subject-specific dummies, reward (rabbit) numbers and their interactions with predicted choice are omitted in this table.}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.005$. Both models are estimated through 2SLS method. Standard errors are clustered at the subject level and are reported in the parentheses. The p-values are calculated based on t-tests. Intercept, subject-specific dummies, reward levels (rabbit numbers) and their interactions with the predicted choice are also included in each model, though they are not reported in this table.}
     \end{minipage}
-    \label{tab:manipulate_response_time}
+    \label{tab:exp3_reg_response_time}
 \end{table}
 
 \end{document}

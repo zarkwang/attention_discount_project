@@ -4,7 +4,7 @@
 
 \begin{document}
 \begin{table}
-    \caption{The Relationship Between Response Time, Choice and Intervetions}
+    \caption{The Relationship Between Response Time, Choice and Experimental Conditions}
     \vspace*{12pt}
     \centering
 
@@ -13,9 +13,9 @@
     \vspace*{4pt}
     \centering
     \begin{minipage}{0.85\textwidth}
-    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.001$. Both models are estimated through 2SLS method. Standard errors are clustered at the subject level and are reported in the parentheses. The p-values are calculated based on t-tests. Intercept, subject-specific dummies, reward (rabbit) numbers and their interactions with predicted choice are omitted in this table.}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.005$. Both models are estimated through 2SLS method. Standard errors are clustered at the subject level and are reported in the parentheses. The p-values are calculated based on t-tests. Intercept, subject-specific dummies, reward levels (rabbit numbers) and their interactions with the predicted choice are also included in each model, though they are not reported in this table.}
     \end{minipage}
-    \label{tab:manipulate_response_time}
+    \label{tab:exp3_reg_response_time}
 \end{table}
 
 \end{document}
