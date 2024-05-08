@@ -69,7 +69,7 @@ def fit_firth(y, X,
         intercept = beta_iterations[-1][0]
         beta = beta_iterations[-1][1:].tolist()
         bse = np.sqrt(np.diagonal(np.linalg.pinv(-logit_model.hessian(beta_iterations[-1]))))
-        
+
         return_fit = intercept, beta, bse, fitll
 
     return return_fit
@@ -87,14 +87,15 @@ class firthLogit:
         (intercept, beta, bse, fitll) = fit_firth(self.y,self.X,
                                                 start_vec = None, 
                                                 step_limit = 1000, 
-                                                convergence_limit = 1e-5)
+                                                convergence_limit = 1e-5,
+                                                )
         
         self.coef = [intercept] + beta
         self.bse = bse
         self.fitll = fitll
 
     # Wald test
-    def wald(self, confidence_level=0.95):
+    def wald(self, confidence_level=0.95, use_cluster=False):
 
         alpha = 1 - confidence_level
         z_critical = stats.norm.ppf(1 - alpha / 2)
@@ -102,14 +103,20 @@ class firthLogit:
         waldp = []
         wald_lower = []
         wald_upper = []
-        for coef_val, bse_val in zip(self.coef, self.bse):
+
+        if use_cluster == False:
+            se = self.bse
+        else:
+            se = self.cluster_se
+
+        for coef_val, bse_val in zip(self.coef, se):
             waldp.append(2 * (1 - stats.norm.cdf(abs(coef_val/bse_val))))
             wald_lower.append(coef_val - z_critical * bse_val)
             wald_upper.append(coef_val + z_critical * bse_val)
 
         wald_result = {'var_name':self.X.columns,
                        'coef':self.coef,
-                       'bse':self.bse,
+                       'bse':se,
                        'p_value':waldp,
                        'lower_bound':wald_lower,
                        'upper_bound':wald_upper}
@@ -155,3 +162,36 @@ class firthLogit:
         pred = 1/(1+np.exp(-linear_sum))
 
         return pred
+
+    # Cluster se
+    def clusterSE(self,cluster_var: pd.Series):
+
+        # Calculate residuals
+        resid = self.y - self.predict()
+
+        clusters = cluster_var.unique()
+
+        # Initialize variables
+        n_params = len(self.coef)
+        V = np.zeros((n_params, n_params))
+
+        # Compute V_c for each cluster
+        for cluster in clusters:
+            cluster_indices = self.X[cluster_var == cluster].index
+
+            cluster_residuals = resid[cluster_indices]
+            cluster_X = self.X.loc[cluster_indices]
+            cluster_size = len(cluster_indices)
+            cluster_V_c = np.dot(cluster_residuals.T, cluster_residuals) / cluster_size
+            V += np.dot(np.dot(cluster_X.T, cluster_V_c), cluster_X)
+        
+        V /= len(clusters)
+
+        # Invert the sandwich matrix to get the variance-covariance matrix
+        V_inv = np.linalg.inv(V)
+
+        # Extract standard errors for coefficients
+        self.cluster_se = np.sqrt(np.diag(V_inv))
+
+
+

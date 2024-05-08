@@ -95,6 +95,16 @@ df_choice <- df_filtered %>%
 # risky choices: Q10, Q11, Q12
 risky_cols <- cols[grep("Q10|Q11|Q12", cols)]
 
+df_risky <- df_risky_choice <- df_choice %>%
+  filter(question %in% risky_cols) %>%
+  mutate(row_id = str_extract(question, "(?<=_)(\\d+)$"),
+         q_id = str_extract(question, "(?<=Q)\\d+"),
+         choice = choice -1) %>%
+  mutate_at(vars(c(q_id,row_id)),as.numeric) %>% 
+  left_join(risky_design, by =c('q_id','row_id'))
+
+write.csv(df_risky,file='risky_choice_obs.csv')
+
 df_risky_choice <- df_choice %>%
   filter(question %in% risky_cols) %>%
   mutate(row_id = str_extract(question, "(?<=_)(\\d+)$"),
@@ -105,6 +115,8 @@ df_risky_choice <- df_choice %>%
   left_join(risky_design) %>%
   group_by(prolific_id,pid,risk_amount) %>%
   summarise(safe_amount = mean(safe_amount))
+
+
 
 ra_est <- df_risky_choice %>% 
   mutate(implied_rra = log(0.5,base = safe_amount/risk_amount),
@@ -149,7 +161,6 @@ df_time_equiv <- df_time_choice %>%
   group_by(prolific_id,pid,cond,a_rw,b_fixed_rw,b_delay) %>%
   summarise(b_vary_rw = mean(b_vary_rw))
 
-
 sum_time_equiv <- df_time_equiv %>% 
   mutate(a_rw = a_rw*10,
          b_fixed_rw = b_fixed_rw*10,
@@ -168,12 +179,12 @@ ggplot(data=sum_time_equiv,
             linetype = 'dashed', color = 'grey') +
   facet_wrap(~cond,
              labeller = as_labeller(
-               c('Immed_Rw_Vary' = 'Immediate reward varies',
-                 'Delayed_Rw_Vary' = 'Delayed reward varies')))+
-  labs(x = 'the constant-across-rows amount in sequence options (£)',
+               c('Immed_Rw_Vary' = 'Front-end amount varies',
+                 'Delayed_Rw_Vary' = 'Back-end amount varies')))+
+  labs(x = 'The amount constant across rows in sequence options (£)',
        y = 'standard deviation') +
-  scale_shape_discrete(name = "time length of sequence (month)") +
-  scale_color_discrete(name = "single-reward option (£)") +
+  scale_shape_discrete(name = "sequence length (month)") +
+  scale_color_discrete(name = "amount in single options (£)") +
   theme_bw(12)+
   theme(
     legend.position = 'top',

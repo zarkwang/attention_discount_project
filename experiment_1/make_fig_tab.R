@@ -13,7 +13,7 @@ write_document = FALSE
 # ----------------------------------
 
 star <- function(p){
-  if(p < 0.001){
+  if(p < 0.005){
     star = '$^{***}$'
   } else if(p < 0.01){
     star = '$^{**}$'

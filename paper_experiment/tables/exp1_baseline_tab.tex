@@ -1,0 +1,44 @@
+
+\documentclass[12pt]{article}
+
+
+\begin{document}
+\begin{table}
+    \caption{Regression results with risk-neutral utility function for Experiment 3}
+    \vspace*{12pt}
+    \centering
+
+      \begin{tabular}{lllll}
+\hline
+ & \multicolumn{2}{r}{Front-end amount varies} & \multicolumn{2}{r}{Back-end amount varires} \\
+ & (1) Pooled & (2) FE & (1) Pooled & (2) FE \\
+\hline
+$X_v$ & 0.181 & 0.316$^{***}$ & 0.139$^{***}$ & 0.318$^{***}$ \\
+ & (0.339) & (0.044) & (0.011) & (0.03) \\
+$X_v\cdot1\{M=M_{high}\}$ & 0.022$^{***}$ & 0.031$^{***}$ & 0.039$^{***}$ & 0.071$^{***}$ \\
+ & (0.006) & (0.006) & (0.007) & (0.017) \\
+$X_v\cdot1\{X_c=X_{mid}\}$ & -0.047 & -0.079$^{*}$ & -0.015 & -0.024 \\
+ & (0.032) & (0.04) & (0.009) & (0.023) \\
+$X_v\cdot1\{X_c=X_{high}\}$ & -0.083$^{**}$ & -0.135$^{***}$ & -0.026$^{**}$ & -0.031 \\
+ & (0.031) & (0.041) & (0.01) & (0.023) \\
+$X_v\cdot1\{T=T_{mid}\}$ & -0.033$^{***}$ & -0.058$^{***}$ &  &  \\
+ & (0.006) & (0.012) &  &  \\
+$X_v\cdot1\{T=T_{high}\}$ & -0.046$^{***}$ & -0.085$^{***}$ &  &  \\
+ & (0.012) & (0.015) &  &  \\\hline
+
+observations & 18840 & 18840 & 9420 & 9420 \\
+AIC & 11455.38 & 6963.578 & 4215.293 & 2158.83 \\
+\hline
+\end{tabular}
+% INSERT exp1_baseline_model
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.85\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.005$. Standard errors are clustered at the subject level and are reported in the parentheses. The $p$-values are calculated based on Wald tests. $X_c$ denotes the amount constant in a choice list, and its middle and highest levels are $X_{mid}$ and $X_{high}$. $T$ denotes the delay of the back-end amount, and its middle and highest levels are $T_{mid}$ and $T_{high}$. $M$ denotes amount in the single option, and its higher level is $M_{high}$. $X_v$ denotes the amount varying across rows. Every model includes question-specific dummies as random intercepts. Column (2) and (4) come from a model including participant-specific dummies as random intercepts.}
+    \end{minipage}
+    \label{tab:exp1_reg_baseline}
+\end{table}
+
+\end{document}
+

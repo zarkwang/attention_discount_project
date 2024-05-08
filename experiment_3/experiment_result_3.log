@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.22)  22 APR 2024 10:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.22)  23 APR 2024 01:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -578,46 +578,42 @@ File: figures/seq_choice_ratio.png Graphic file (type png)
 <use figures/seq_choice_ratio.png>
 Package pdftex.def Info: figures/seq_choice_ratio.png  used on input line 315.
 (pdftex.def)             Requested size: 469.76144pt x 196.19995pt.
-[7 <./figures/seq_choice_ratio.png>] (./tables/exp3_choice_tab.tex
-
-LaTeX Warning: Float too large for page by 13.36362pt on input line 50.
-
-)
-<figures/wrong_rabbit_choice.png, id=96, 383.7537pt x 266.6763pt>
+[7 <./figures/seq_choice_ratio.png>] (./tables/exp3_choice_tab.tex) [8]
+<figures/wrong_rabbit_choice.png, id=105, 383.7537pt x 266.6763pt>
 File: figures/wrong_rabbit_choice.png Graphic file (type png)
 <use figures/wrong_rabbit_choice.png>
 Package pdftex.def Info: figures/wrong_rabbit_choice.png  used on input line 370.
 (pdftex.def)             Requested size: 352.31401pt x 244.82838pt.
-[8] [9] (./tables/exp3_rabbit_tab.tex) [10 <./figures/wrong_rabbit_choice.png>] [11]
-<figures/mouse_intertemporal.png, id=128, 416.976pt x 172.353pt>
+[9 <./figures/wrong_rabbit_choice.png>] (./tables/exp3_rabbit_tab.tex) [10]
+<figures/mouse_intertemporal.png, id=124, 416.976pt x 172.353pt>
 File: figures/mouse_intertemporal.png Graphic file (type png)
 <use figures/mouse_intertemporal.png>
 Package pdftex.def Info: figures/mouse_intertemporal.png  used on input line 433.
 (pdftex.def)             Requested size: 416.99403pt x 172.36046pt.
-<figures/mouse_rabbit.png, id=129, 416.757pt x 153.738pt>
+<figures/mouse_rabbit.png, id=125, 416.757pt x 153.738pt>
 File: figures/mouse_rabbit.png Graphic file (type png)
 <use figures/mouse_rabbit.png>
 Package pdftex.def Info: figures/mouse_rabbit.png  used on input line 439.
 (pdftex.def)             Requested size: 416.76233pt x 153.73996pt.
-[12] [13 <./figures/mouse_intertemporal.png> <./figures/mouse_rabbit.png>] (./tables/exp3_response_tab.tex) (./experiment_result_3.bbl) [14] [15] (./experiment_result_3.aux)
+[11] [12 <./figures/mouse_intertemporal.png> <./figures/mouse_rabbit.png>] (./tables/exp3_response_tab.tex) (./experiment_result_3.bbl) [13] [14] (./experiment_result_3.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-03-14>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 15018 strings out of 476063
- 246147 string characters out of 5790856
- 1940496 words of memory out of 5000000
+ 15017 strings out of 476063
+ 246140 string characters out of 5790856
+ 1935496 words of memory out of 5000000
  36824 multiletter control sequences out of 15000+600000
  627675 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  95i,12n,93p,679b,619s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
-Output written on experiment_result_3.pdf (15 pages, 1098270 bytes).
+Output written on experiment_result_3.pdf (14 pages, 1097326 bytes).
 PDF statistics:
- 255 PDF objects out of 1000 (max. 8388607)
- 199 compressed objects within 2 object streams
- 46 named destinations out of 1000 (max. 500000)
+ 251 PDF objects out of 1000 (max. 8388607)
+ 196 compressed objects within 2 object streams
+ 45 named destinations out of 1000 (max. 500000)
  95 words of extra memory for PDF output out of 10000 (max. 10000000)
 

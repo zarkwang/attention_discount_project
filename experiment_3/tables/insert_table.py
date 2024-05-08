@@ -53,6 +53,11 @@ if __name__ == '__main__':
                 destination_content='reg_response_original',
                 destination_type='.txt',
                 output='exp3_response_tab.tex')
+
+    insert_tab(tab_name='chi_test_choice',
+                destination_content='chi_test_choice_original',
+                destination_type='.txt',
+                output='exp3_chi_test.tex')
     
     
     

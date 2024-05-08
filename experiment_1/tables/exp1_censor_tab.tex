@@ -1,0 +1,44 @@
+
+\documentclass[12pt]{article}
+
+
+\begin{document}
+\begin{table}
+    \caption{Regression results on the censored data in Experiment 3}
+    \vspace*{12pt}
+    \centering
+
+      \begin{tabular}{lllll}
+\hline
+ & \multicolumn{2}{r}{Front-end amount varies} & \multicolumn{2}{r}{Back-end amount varires} \\
+ & (1) Pooled & (2) FE & (1) Pooled & (2) FE \\
+\hline
+$u(X_v)$ & 0.914$^{**}$ & 1.584$^{***}$ & 0.712$^{***}$ & 1.65$^{***}$ \\
+ & (0.342) & (0.247) & (0.059) & (0.155) \\
+$u(X_v)\cdot1\{M=M_{high}\}$ & 0.107$^{*}$ & 0.193$^{***}$ & 0.187$^{***}$ & 0.484$^{***}$ \\
+ & (0.053) & (0.03) & (0.037) & (0.08) \\
+$u(X_v)\cdot1\{X_c=X_{mid}\}$ & -0.314$^{*}$ & -0.499$^{*}$ & -0.134$^{***}$ & -0.281$^{*}$ \\
+ & (0.129) & (0.226) & (0.047) & (0.111) \\
+$u(X_v)\cdot1\{X_c=X_{high}\}$ & -0.509$^{***}$ & -0.828$^{***}$ & -0.248$^{***}$ & -0.5$^{***}$ \\
+ & (0.127) & (0.231) & (0.048) & (0.111) \\
+$u(X_v)\cdot1\{T=T_{mid}\}$ & -0.115$^{***}$ & -0.212$^{***}$ &  &  \\
+ & (0.03) & (0.049) &  &  \\
+$u(X_v)\cdot1\{T=T_{high}\}$ & -0.163$^{***}$ & -0.312$^{***}$ &  &  \\
+ & (0.036) & (0.061) &  &  \\\hline
+
+observations & 14915 & 14915 & 6594 & 6594 \\
+AIC & 11226.482 & 6797.682 & 4120.484 & 2094.364 \\
+\hline
+\end{tabular}
+% INSERT exp1_utility_censor
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.9\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.005$. FE denotes a model including participant-specific dummies as random intercepts. Each model and the estimation method are the same as Table \ref{tab:exp1_reg_utility}. However, for each question, the rows where all participants choose the same option are removed from the sample. }
+    \end{minipage}
+    \label{tab:exp1_reg_censor}
+\end{table}
+
+\end{document}
+

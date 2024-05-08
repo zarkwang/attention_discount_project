@@ -1,0 +1,89 @@
+---
+output: latex_fragment
+---
+
+```{=tex}
+\newpage
+\renewcommand\thefigure{B.\arabic{figure}}    
+\setcounter{figure}{0}
+```
+```{=tex}
+\renewcommand\thetable{A.\arabic{table}}    
+\setcounter{table}{0}
+```
+# Appendix {.unnumbered}
+
+## A. Additional Tables {.unnumbered}
+
+\input{tables/exp3_response_tab.tex}
+
+\input{tables/exp1_baseline_tab.tex}
+
+\input{tables/exp1_censor_tab.tex}
+
+\newpage
+
+## B. Additional Figures {.unnumbered}
+
+```{=tex}
+\begin{figure}
+  \centering
+  \begin{subfigure}{\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/exp3_mouse_intertemporal.png}
+    \subcaption{Intertemporal Choice Task}
+  \end{subfigure}
+  \begin{subfigure}{\textwidth}
+    \vspace{1.5em}
+    \centering
+    \includegraphics[width=\linewidth]{figures/exp3_mouse_rabbit.png}
+    \subcaption{Count-the-Rabbits Task}
+  \end{subfigure}
+  \caption{Mouse positions recorded at the end of the forced viewing period}
+  \label{fig:exp3_mouse_position}
+\end{figure}
+```
+```{=tex}
+\begin{figure} 
+\centering
+\begin{subfigure}{0.85\textwidth}
+  \hfill
+  \includegraphics[width=0.85\linewidth]{figures/exp2_bootstrap_ci_baseline.png}
+\end{subfigure}
+\begin{subfigure}{0.85\textwidth} 
+  \hfill
+  \includegraphics[width=\linewidth]{figures/exp2_bootstrap_ci_label.png} 
+\end{subfigure}
+\caption{Bootstrap 95\% confidence intervals for coefficients in the robust regressions}
+\vspace*{4pt}
+\centering
+
+\begin{minipage}{1.0\textwidth}
+{\par\footnotesize Note: The subfigures on the top and the bottom correspond to Column (5) and (6) in Table \ref{tab:exp2_seq_value_reg} respectively. The dots are the original estimates and the error bars indicate the confidence intervals. To approximate the distribution for each coefficient, we use the stratified bootstrap method. The observations are divided into three strata based on RLM results: the upper tail (with high residuals and a weight of 1), the lower tail (with low residuals and a weight of 1), and the others. We draw observations with replacement within each stratum and use them to estimate the coefficients. Each bootstrap sample is the same size as the original sample, and the process is repeated 1,000 times. }
+\end{minipage}
+\label{fig:exp2_bootstrap_ci}
+\end{figure}
+```
+```{=tex}
+\begin{figure} 
+\centering
+\includegraphics[width=0.85\linewidth]{figures/exp2_bootstrap_ci_label_gmm_fe.png}
+\caption{Regression coefficients - using Gaussian mixture model for clustering}
+\vspace*{4pt}
+\centering
+
+\begin{minipage}{1.0\textwidth}
+{\par\footnotesize Note: The regression model is the same as Column (6) in Table \ref{tab:exp2_seq_value_reg}. Estimation method is the same as Figure \ref{fig:exp2_bootstrap_ci}. The dots are the original estimates and the error bars indicate the boostrap 95\% confidence intervals. }
+\end{minipage}
+\label{fig:exp2_bootstrap_ci_gmm}
+\end{figure}
+```
+\newpage
+
+## C. Method to estimate risk aversion coefficient {.unnumbered}
+
+For any risky choice $i$, let "get $X_i^R$ with a 50% chance" denote the risky option and "get $X_i^S$ with certainty" denote the safe option. Note $X_i^R$ is constant within a choice list while $X_i^S$ is varying across rows. Assume that participants choose the safe option with probability $P_i^{\text{risk}}$, and$$
+P_i^{\text{risk}} = \frac{1}{1+e^{-\frac{\Delta U}{\lambda}}}
+$$where $\Delta U = u(X_i^S) - 0.5\cdot u(X_i^R)$ and $\lambda$ ($\lambda >0$) is a temperature parameter that controls the randomness of choice. The utility function is $u(x)=(\omega+x)^\gamma$, $0<\gamma<1$, $\omega\geq 0$. We fit the model with the maximum likelihood method. The log-likelihood function is$$
+LL(\gamma,\lambda) = \sum_{i=1}^N \xi_i\ln(P_i^{\text{risk}})+(1-\xi_i)\ln(1-P_i^{\text{risk}}) 
+$$We use $\gamma=1$, $\lambda =1$ as the initial values and maximize the log-likelihood function with the SLSQP algorithm. The model is fitted on the 3,297 observations of the risky choices. In the solution, $LL=-1711.87$, $\gamma=0.695$, $\lambda=1.904$, $\omega\approx 2.245\times10^{-13}$.

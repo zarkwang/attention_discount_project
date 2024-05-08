@@ -1,0 +1,22 @@
+
+\documentclass[12pt]{article}
+
+
+\begin{document}
+\begin{table}
+    \caption{Regression results on the censored data in Experiment 3}
+    \vspace*{12pt}
+    \centering
+
+      % INSERT exp1_utility_censor
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.9\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.005$. FE denotes a model including participant-specific dummies as random intercepts. Each model and the estimation method are the same as Table \ref{tab:exp1_reg_utility}. However, for each question, the rows where all participants choose the same option are removed from the sample. }
+    \end{minipage}
+    \label{tab:exp1_reg_censor}
+\end{table}
+
+\end{document}
+

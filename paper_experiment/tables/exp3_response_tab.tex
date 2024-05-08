@@ -1,0 +1,41 @@
+
+\begin{table}[!h]
+    \caption{Predicting response times with choices and conditions in Experiment 1}
+    \vspace*{10pt}
+    \centering
+
+      \begin{tabular}{lll}
+\hline
+ & Intertemporal Choice & Count-the-Rabbits \\
+\hline
+Group & -0.684$^{***}$ & -0.792$^{***}$ \\
+ & (0.141) & (0.144) \\
+Question$\cdot1\{\text{Group}=0\}$ & -0.165 & 0.912$^{***}$ \\
+ & (0.174) & (0.199) \\
+Question$\cdot1\{\text{Group}=1\}$ & 0.457$^{***}$ & 0.849$^{***}$ \\
+ & (0.101) & (0.132) \\
+Choice & 0.954$^{*}$ & 1.291$^{***}$ \\
+ & (0.399) & (0.456) \\
+Choice$\times$Group & -0.762$^{*}$ & -1.265$^{***}$ \\
+ & (0.304) & (0.229) \\
+Choice$\times$Question$\cdot1\{\text{Group}=0\}$ & 0.001 & -0.138 \\
+ & (0.257) & (0.23) \\
+Choice$\times$Question$\cdot1\{\text{Group}=1\}$ & -0.12 & 0.263 \\
+ & (0.195) & (0.175) \\\hline
+
+observations & 4393 & 2179 \\
+AIC & 18560.034 & 8711.872 \\
+adj-$R^2$ & 0.381 & 0.55 \\
+\hline
+\end{tabular}
+% INSERT reg_response_time
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.85\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.005$. Both models are estimated through 2SLS method. For first-stage regression, we use the model for Column (2) in Table \ref{tab:exp3_reg_intertemporal_choice} to predict intertemporal choices, and the model for Column (3) in Table \ref{tab:exp3_reg_rabbit_choice} to predict count-the-rabbits choices. The variable Choice which is 1 if the predicted choice is the sequence option and is 0 otherwise. For second-stage regression, indepdent variables are the predictors shown in the table plus task-specific dummies and their interactions with Choice, and participant-specific dummies. Standard errors (in the parentheses) are clustered at the subject level. $p$-values are calculated based on t-tests. }
+    \end{minipage}
+    \label{tab:exp3_reg_response_time}
+\end{table}
+
+

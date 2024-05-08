@@ -1,0 +1,22 @@
+
+\documentclass[12pt]{article}
+
+
+\begin{document}
+\begin{table}
+    \caption{Comparing Choices Between Different Parts in Experiment 3}
+    \vspace*{12pt}
+    \centering
+
+      % INSERT chi_test_choice
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.85\textwidth}
+    {\par\footnotesize Note: For each kind of tasks and each group, the proportion of choices for the sequence option in each part (question/no question) is reported. In each row, we test whether the choices between the two parts follow the same distributions through $\Chi^2$-test. p-values are reported in parentheses. }
+    \end{minipage}
+    \label{tab:exp3_reg_response_time}
+\end{table}
+
+\end{document}
+

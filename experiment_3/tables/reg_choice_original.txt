@@ -13,7 +13,7 @@
     \vspace*{4pt}
     \centering
     \begin{minipage}{0.85\textwidth}
-    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.005$. Standard errors are clustered at the subject level and are reported in the parentheses. The p-values are calculated based on Wald tests. Model (2) includes subject-specific dummies for those having changed their choices at least once across all intertemporal choice tasks. Model (3) adds two dummies to Model (2) to capture whether a subject always chooses the sequence option, and the single option. Each model includes an intercept. }
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.005$. Standard errors are clustered at the subject level and are reported in the parentheses. The p-values are calculated based on Wald tests. Model (2) includes subject-specific dummies for those having changed their choices at least once across all intertemporal choice tasks. Model (3) adds two dummies to Model (2) to capture whether a subject always chooses the sequence option, and the single option. Each model includes an intercept and task-sepcific dummies.}
     \end{minipage}
     \label{tab:exp3_reg_intertemporal_choice}
 \end{table}

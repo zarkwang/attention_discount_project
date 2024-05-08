@@ -1,0 +1,674 @@
+---
+title: "An Attentional Model of Time Discounting"
+author: "Zark Zijian Wang"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+bibliography: reference.bib
+biblio-style: apalike
+header-includes: 
+  \usepackage{setspace}
+  \usepackage{amsmath}
+  \usepackage{array}
+  \usepackage{caption}
+  \usepackage{longtable}
+  \usepackage{booktabs}
+  \usepackage{enumitem}
+  \renewcommand{\arraystretch}{1}
+  \captionsetup[table]{skip=5pt}
+  \setstretch{1.5} 
+fontsize: 12pt
+geometry: margin=1in
+editor_options: 
+  markdown: 
+    wrap: 72
+output:
+  #word_document:
+    #number_sections: true
+  pdf_document:
+    number_sections: true
+    citation_package: natbib
+    keep_tex: true
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+# Introduction
+
+# The Model
+
+## The Decision Process
+
+Suppose time is discrete. Let $X_T$ denote the sequence of rewards
+$[x_0,x_1,...,x_T]$, which yields reward $x_t$ in time period $t$.[^1]
+The time length of this sequence, denoted by $T$, is finite. For any
+$t \in \{0,1,...,T\}$, the reward level $x_t$ is a random variable
+defined on $\mathbb{R}_{\geq 0}$. I assume that making an intertemporal
+choice involves three steps:
+
+[^1]: I use uppercase letters to represent a sequence and lowercase
+    letters to represent elements within the sequence.
+
+```{=latex}
+\begin{itemize}[leftmargin=2cm]
+\item[Step 1.] (\textit{Sampling}) The decision maker subjectively draws a few potential realizations of $X_T$, and from each drawn realization, she draws a few time periods and observes their rewards; then, she combines all observed rewards into a sample.
+
+\item[Step 2.] (\textit{Valuation}) The decision maker uses the mean utility of sampled rewards as an approximate value representation of $X_T$.
+
+\item[Step 3.] (\textit{Choice-making}) She chooses the sequence with the highest value from all the available reward sequences.
+\end{itemize}
+```
+In the decision process described above, Step 3 is standard. By Step
+1-2, I take the notion that, to evaluate a stimuli, the decision maker
+needs to assess all the relevant information, while her information
+processing capacity is limited. Consequently, she selectively attends to
+only *a subset* of the available information (which is termed *a
+sample*), then aggregates the attributes observed in the sample to
+calculate the stimuli value. This sampling process is not unbiased; on
+the contrary, the decision maker aims to retain more of the information
+that they consider more relevant in the sample. Such a notion has a long
+history in psychological research.[^2] In recent years, many theories
+grounded in this (or similar notions) have made significant progress in
+explaining choice anomalies, such as decision field theory
+[@busemeyer_decision_1993], decision-by-sampling
+[@stewart_decision_2006], utility-weighted sampling
+[@lieder_overrepresentation_2018] and efficient coding theory
+[@heng_efficient_2020]. In the next subsection, I describe the sampling
+and valuation process in detail.
+
+[^2]: @weber_mindful_2009 and @chun_taxonomy_2011 provide good reviews
+    for such studies.
+
+## Attention Mechanism and Optimal Discounting
+
+Let $S_T=[s_0,s_1,...,s_T]$ be a potential realization of $X_T$, and
+$\mathcal{S}(X_T)$ be the support of $X_T$, i.e. the smallest set
+containing any potentially realized sequence $S_T$, where
+$\mathcal{S}(X_T)\subseteq \mathbb{R}_{\geq 0}^{T+1}$. Let $w(s_t)$ be
+the probability that the reward of the $t$-th period in $S_T$ is in the
+sample, $u(s_t)$ be the utility obtained by reward $s_t$
+($t \in \{0,1,...,T\}$), where $u'>0$, $u''<0$. The function $w(.)$ and
+$u(.)$ are termed as weight function and instantaneous utility function
+respectively. The approximate value of $X_T$, which I term by $U(X_T)$,
+is calculated by
+$U(X_T)=\sum_{S_T\in \mathcal{S}(X_T)}\sum_{t=0}^T w(s_t) u(s_t)$.
+
+The sampling process is sequential. At the very beginning, the decision
+maker has no information about which period in a potentially realized
+sequence $S_T$ has a larger reward. After each sampling, she acquires
+new information in this regard, and adjusts the sampling weights for
+different time periods based on such information. Sampling and
+processing information require mental effort from the decision maker,
+thus trigger a cost $C$ at the cognitive level. I assume the decision
+maker's objective in this process is to find a sampling strategy,
+denoted by weight function $w(.)$, that can maximize the approximate
+value of the given reward sequence (hereafter referred as "overall
+utility") minus the cost of information, i.e. maximizing $U(X_T)-C$. As
+the decision maker pays a higher cost in sampling as well as processing
+information, these sampling weights will change in a way that increases
+the overall utility. Therefore, we consider the cognitive cost $C$ as a
+functional of weight function $w(.)$.
+
+The problem of determining the weight function under the above setting
+is termed as the constrained optimal discounting problem in Noor and
+Takeoka [-@noor_optimal_2022; -@noor_constrained_2023]. I follow their
+terminology.
+
+**Definition 1**: Let $W$ be the smallest set containing all possible
+weight functions. Given a stochastic reward sequence $X_T$, the
+following optimization problem is called the *constrained optimal
+discounting* problem for $X_T$:$$ 
+\begin{aligned}
+\max_{w\in W}  \quad & \sum_{S_T\in \mathcal{S}(X_T)}\sum_{t=0}^T w(s_t)u(s_t) - C(w) \\
+s.t. \quad &  \sum_{S_T\in \mathcal{S}}\sum_{t=0}^T w(s_t)=m \\
+& w(s_t)\geq 0, \forall t\in\{0,1,…,T\} \\
+\end{aligned}
+$$where $C:[0,1]^{T+1}\rightarrow \mathbb{R}_{>0}$ is called a
+*information cost* function, $\partial C/\partial w(s_t)>0$ and
+$\partial^2 C/\partial w(s_t)^2>0$. That is, the cost of information is
+increasing and convex in $w(s_t)$.
+
+The assumption that $C(.)$ is a convex function ensures the constrained
+optimal discounting problem has an interior solution. Notably, the
+objective function in Definition 1 implies that the decision maker tends
+to pay a cost to make any period or state with a larger reward be
+sampled more frequently. There are two reasons for using this objective
+function. First, there is substantial evidence indicating that people
+selectively attend to desirable information and avoid unpleasant
+information.[^3] For instance, it is found investors are more likely to
+check their brokerage accounts when stock market goes up
+[@sicherman_financial_2016]. In the intertemporal choice setting, this
+suggests that the periods or states with more desirable outcomes may
+receive more attention. Second, as is pointed out in
+@lieder_overrepresentation_2018, the sampling algorithm in the brain may
+share certain principles with optimal importance sampling. In importance
+sampling, to minimize the variance, the events with greater absolute
+utilities should be assigned more importance, i.e. being sampled with a
+higher probability. If the same principle is applicable to the brain, it
+also provides a rationale to this specific objective function.
+
+[^3]: This includes a wide range of behavioral biases, e.g. ostrich
+    effect, confirmation bias. For additional evidence, see
+    @golman_information_2017.
+
+After determining the weight function, the decision maker calculates the
+overall utility that she can obtain from a reward sequence. Let $p(S_T)$
+be the probability of $S_T$ being sampled in the brain. I define
+$w_t(S_T) = \frac{w(s_t)}{p(S_T)}$. Thus, the overall utility of $X_T$
+can be calculated using the expected discounted utility (EDU) framework,
+i.e. $U(X_T)=E_p[\sum_{t=0}^Tw_t(S_t)u(s_t)]$. Under EDU framework, the
+$w_t(S_T)$ in braces is commonly referred to as the *discounting factor*
+for period $t$ in $S_T$, a certain realization of sequence $X_T$. Given
+that attentional mechanism plays a prominent role in the valuation of
+$X_T$, I call any $U(X_T)$ calculated in this way the *attentional
+discounted utility*. When each alternative sequence has been valuated, I
+assume the decision maker will choose the sequence with highest
+attentional discounted utility (ADU). This is shown in Definition 2.
+
+**Definition 2**: For any sequence of rewards $X_T$, $X'_{T'}$,
+preference relation $\succsim$ has an *attentional discounted utility*
+(ADU) representation if and only if$$
+X_T \succsim X'_{T'} \Longleftrightarrow U(X_T)\geq U(X'_{T'})
+$$and $$
+U(X_T)=\sum_{S_T\in\mathcal{S}(X_T)}\sum_{t=0}^T w(s_t)u(s_t),\quad 
+U(X'_{T'})=\sum_{S_{T'}\in\mathcal{S}(X'_{T'})}\sum_{t=0}^{T'} w'(s_t)u(s_t)
+$$where $S_\tau$ denotes $[s_0, s_1,…, s_\tau]$, $\tau$ is the time
+length of $S_\tau$, $w(.)$ and $w'(.)$ are the solutions to constrained
+optimal discounting problems for $X_T$ and $X'_{T'}$.
+
+## ADU with Shannon Cost Function
+
+Hereafter I focus on a well-known specification of information cost
+function, which I term Shannon cost function, proposed by
+@matejka_rational_2015. The Shannon cost function was originally used to
+justify the multinominal logit model in discrete choice analysis, and so
+far has been topical in rational inattention literature. To construct
+this style of information cost function, @matejka_rational_2015
+introduce three assumptions. The first is that the sum of all weights is
+fixed at 1. The second assumption is, before acquiring any information,
+the decision maker estiablishes an initial allocation of weights for
+different attributes, which remains invariant over states. The weights
+are then updated in a manner consistent with Bayes rule. Suppose the
+initial weight assigned to period $t$ is $d_t$, then
+$d_t=\sum_{S_T\in \mathcal{S}(X_T)} w(s_t)$. The third assumption is,
+the cost of information is linear to the information gains, measured by
+Shannon mutual information. That
+is,$$ C(w)= \lambda \sum_{S_T\in \mathcal{S}(X_T)}\sum_{t=0}^T w(s_t) \log\left(\frac{w_t(S_T)}{d_t}\right) $$where
+$\lambda$ is a parameter denoting unit cost of information
+($\lambda>0$). With the Shannon cost function, the constrained optimal
+discounting problem can be easily solved by Lagrangian method.[^4] In
+its solution, the discounting factor is calculated by
+$$ w_t(S_T) =\frac{d_te^{u(s_t)/\lambda}}{\sum_{\tau=0}^T d_\tau e^{u(s_\tau)/\lambda}} $$
+
+[^4]: For how to solve this optimization problem, see
+    @matejka_rational_2015 or @mackowiak_rational_2023.
+
+In this case, $w_t(S_T)$ follows a logistic-like distribution. It is
+increasing with $u(x_t)$, indicating that the decision maker tends to
+pay more attention to the periods with larger rewards; and is "anchored"
+in the initial weight $d_t$, inidicating the adjustment of attention
+allocation is costly. Meanwhile, note that the sum of $w_t(S_T)$ for any
+given $S_T$ is fixed at 1, which implies the decision maker's capacity
+of information processing is limited. If Shannon cost function is used
+in determining weight function, I call the overall utility calculated in
+the subsequent step as *ADU with Shannon cost function* (hereafter
+referred to as ADUS).
+
+# Implications in Time Preferences \label{behavioral}
+
+To illustrate how ADU with Shannon cost function can account for a broad
+set of anomalies about time preferences, imagine that a decision maker
+receives a positive detereminstic reward in period $j$ (and no reward in
+other periods). That is, she receives a sequence of rewards
+$X_T=[x_0,x_1,…,x_T]$, where $x_j>0$ and is certain, and $x_t = 0$ for
+all $t \neq j$ (both $j$ and $t$ are in $\{0,1,...,T\}$).
+
+For the convenience of illustration, I assume the decision maker holds
+stationary time preferences before acquiring any information, that is,
+$d_t=\delta^t$. Meanwhile, $\delta\in(0,1]$, where $\delta=1$ implies
+the initial attention is uniformly distributed across periods. For
+simplicity, I define $v(x_t)=u(x_t)/\lambda$, and set $v(0)=0$. Let
+$w_t(X_T)$ denote the discounting factor for period $t$. From the
+formula of ADUS we can infer that$$ 
+w_j(X_T) = \left\{ \begin{aligned}
+& \delta^j \cdot\frac{1}{1+\frac{\delta}{1-\delta}(1-\delta^T)e^{-v(x_j)}}\;, & 0<\delta<1 \\
+& \frac{1}{1+T\cdot e^{-v(x_j)}}\; , & \delta=1
+\end{aligned}
+\right.
+$$
+
+Clearly, $w_j$ is decreasing in $T$. This offers an account for a
+phenomenon called *hidden zero effect*.
+
+## Hidden Zero Effect
+
+The most direct evidence that could support the ADUS model is likely the
+hidden zero effect [@magen_hidden-zero_2008]. The hidden zero effect
+means, supposing people face a small sooner reward (SS) and a large
+later reward (LL), they tend to exhibit more patience when SS and LL are
+framed as sequences rather than being framed as single-period rewards.
+For instance, suppose SS is "receive £100 today" and LL is "receive £120
+in 6 months", and we have
+
+SS~0~: "receive £100 today and £0 in 6 months"
+
+LL~0~: "receive £0 today and £120 in 6 months"
+
+people will be more likely to prefer LL~0~ over SS~0~ than preferring LL
+over SS. Subsequent research (e.g. @read_value_2017) suggests that the
+hidden zero effect is asymmetric. That is, shifting SS to SS~0~ and
+keeping LL unchanged leads to an increase in patience, whereas shifting
+LL to LL~0~ and keeping SS unchanged cannot increase patience. ADUS
+assumes that, within a sequence, attention is limited and the weight
+assigned to each period is anchored in an initial positive weight. These
+properties naturally explain the hidden zero effect. To illustrate, in
+SS, the decision maker perceives the length of sequence as "today" and
+allocate no attention to future. Whereas, in SS~0~, she perceives the
+length as "6 months". This makes some attention be paid to future
+periods with no reward, and decreases the attention paid to the only
+period with positive reward (given attention is limited); thus, the
+overall utility of sequence decreases. By contrast, shifting from LL to
+LL~0~ does not change the length of sequence, thus does not change
+overall utility.
+
+The existence of hidden zero effect also provides a hint in selection of
+time length $T$. When evaluating a reward delivered in period $j$, the
+range of $T$ is $[j,+\infty)$. Any increase in $T$ will reduce the
+overall utility. Thus, when comparing SS and LL, the decision maker may
+tend to set $T=j$ (the minimum length she can set), in order to maximize
+the overall utility. Any period out of this length can be perceived as
+irrelevant to the decision; so, she does not need to sample from the
+periods after $j$, when evaluating the given reward. Though, explicitly
+mentioning the periods after $j$ will direct her attention to those
+periods, and lead to the hidden zero effect. By setting $T=j$, we
+have$$ w_T(x_T) = \frac{1}{1+G(T)e^{-v(x_T)}} $$where$$ G(T) = \left\{ \begin{aligned} & \frac{1}{1-\delta}(\delta^{-T}-1) \; ,& 0<\delta<1\\ & T\; ,& \delta=1\ \end{aligned} \right. $$
+
+Given period $T$ is now the only period with a non-zero reward within
+the sequence, I use $x_T$ to directly represent the whole sequence, and
+let $w_T(x_T)$ denote the discounting factor for period $T$.
+Interestingly, when $\delta=1$, $w_T(x_T)$ takes a form similar with
+hyperbolic discounting.
+
+## Common Difference Effect
+
+A well-known anomaly about time preferences is *common difference
+effect*, firstly defined by @loewenstein_anomalies_1992. Suppose there
+are a large later reward $x_l$ arriving at period $t_l$ (denoted by LL)
+and a small sooner reward $x_s$ arriving at period $t_s$ (denoted by
+SS), where $x_l>x_s>0$, $t_l>t_s>0$. Define $V(x,t)=w_t(x_t)v(x_t)$. The
+common difference effect means, supposing$V(x_l,t_l)=V(x_s,t_l)$, we
+must have $V(x_l,t_l+\Delta t)>V(x_s,t_s+\Delta t)$ for any positive
+integer $\Delta t$.
+
+ADUS predicts that, if people are impatient, to observe the common
+difference effect, the difference between SS and LL in reward level must
+be set significantly larger than the difference in time delay. This is
+shown in Proposition 2.
+
+**Proposition 2**: *In ADUS, if the initial weights are uniformly
+distributed, then the common difference effect always holds; if the
+initial weights exponentially declines over time, the common difference
+effect holds when*
+$v(x_l)-v(x_s)+\ln\frac{v(x_l)}{v(x_s)}>-(t_l-t_s)\ln\delta$*.*
+
+Proposition 2 is interpreted as follows. When $\delta = 1$, ADUS
+predicts the decision maker always performs the common difference
+effect. This is obvious because discounting factor $w_T(x_T)$ takes a
+hyperbolic-like form. When $\delta<1$, there are four factors jointly
+deciding whether we could observe the common difference effect or not.
+First, without considering attentional mechanism, when we extend time
+delay, each of $w_{t_l}(x_l)$ and $w_{t_s}(x_s)$, i.e. the discounting
+factor for (and attention paid to) the only period with positive reward,
+declines in an exponential fashion. Second, without considering newly
+added time interval, due to the decline of $w_{t_l}(x_l)$ and
+$w_{t_s}(x_s)$, the decision maker frees up some attention and can
+reallocate it across periods. Given that in LL, the decision maker has
+to wait longer for reward, the periods where she wait can grab more
+attention from the released capacity of attention, compared with those
+in SS. In other words, an extension of delay makes she focus more on the
+waiting time in LL than in SS, which decreases the preference for LL.
+Third, the newly added time interval also grabs some attention from
+other periods. Note the time delay is extended by $[t_l,t_l+\Delta t]$
+in LL and by $[t_s, t_s+\Delta t]$ in SS; given $t_l>t_s$, if people are
+impatient, the newly added time interval will receive less attention in
+LL than in SS, without considering other factors. This increases the
+preference for LL. Fourth, ADU generally assumes that the decision maker
+tends to pay more attention to periods with larger rewards. Given
+$x_l>x_s$, the newly added interval grabs less attention from the period
+where $x_l$ is positioned (in LL) than from the period where $x_s$ is
+positioned (in SS). That is, the decision maker focuses comparatively
+more on reward level in LL than in SS, which mitigates the impact of
+discounting factor declining. This also increases the preference for LL.
+When the impact of the later two factors succeeds that of the second
+factor, the decision maker will perform the common difference effect.
+
+Notably, if we explicit mention the zeros in LL and SS, extending time
+delay always lead to the common difference effect.
+
+![](images/weight_LLvSS.pdf)
+
+![](images/value_LLvSS.pdf)
+
+## Magnitude Effect
+
+The *magnitude effect* is another well-known anormaly about time
+preferences. Assuming we have $t_l$, $t_s$, $x_s$ fixed, and want to
+find a $x_l$ such that $V(x_l,t_l) \equiv V(x_s,t_s)$, the magnitude
+effect implies that, if we increase $x_s$, then the $x_l/x_s$ that makes
+the equality valid will decrease.
+
+In standard discounted utility model, the magnitude effect requires the
+elasticity of utility function to increase with the reward level
+[@loewenstein_anomalies_1992]. This requirement might be too
+restrictive, so that many commonly used utility functions (such as power
+or CARA utility function) does not satisfy it. By contrast, in ADU
+model, decision maker is generally assumed to attend more to periods
+with larger rewards. This implies that when comparing SS and LL, she
+exhibits more patience towards larger reward level, which is naturally
+compatible with the magnitude effect [@noor_intertemporal_2011;
+@noor_optimal_2022]. By Proposition 3, I focus on ADU with Shannon cost
+function, and show how this requirement for curvature of utility
+function can be relaxed in this setting.
+
+**Proposition 3**: *Define* $v(x)\equiv u(x)/\lambda$ *as the utility
+function. In ADUS, the magnitude effect always holds true when function*
+$v(x)$ *satisfies*$$
+RRA_v(x)\leq 1-\frac{e_v(x)}{v(x)+1}
+$$*where* $RRA_v(x)$ *is the relative risk aversion coefficient of*
+$v(x)$*,* $e_v(x)$ *is the elasticity of* $v(x)$ *to* $x$*.*
+
+Note that Proposition 3 is a very broad condition. In Corollary 1 and
+Corollary 2, I show that power utility function and CARA utility
+function both satisfy this condition in most cases.
+
+**Corollary 1**: Suppose $v(x)=x^\gamma/\lambda$, where $0<\gamma<1$ and
+$\lambda>0$. Then magnitude effect holds true for any
+$x\in \mathbb{R}_{>0}$.
+
+**Corollary 2**: Suppose $v(x)=(1-e^{-\gamma x})/\lambda$, where
+$\gamma>0$ and $\lambda>0$. The magnitude effect holds true for any
+$x\geq \frac{1+\eta}{\gamma}$, where $\eta>0$ and
+$\eta e^{1+\eta}-\eta=1$ (it can be calculated that
+$\eta \approx 0.35$).
+
+## Concavity of Time Discounting
+
+Many time discounting models assumes discount function is convex in time
+delay, e.g. exponential and hyperbolic discounting. This style of
+discount function predicts decision maker is *risk seeking over time
+lotteries*. That is, suppose a deterministic reward of level $x$ is
+delivered in period $t_l$ with probability $\pi$ and delivered in period
+$t_s$ with probability $1-\pi$ ($0<\pi<1$, $c>0$); while another
+deterministic reward, of the same level, is delivered in a certain
+period $t_m$, where $t_m=\pi t_l +(1-\pi) t_s$. The decision maker
+should prefer the former reward to the latter reward. However, some
+experimental studies, such as @onay_intertemporal_2007 and
+@dejarnette_time_2020, suggest that people are often *risk averse over
+time lotteries*, i.e. preferring the reward delivered in a certain
+period.
+
+One way to accommodate the evidence about risk aversion over time
+lotteries, as is suggested by @dejarnette_time_2020, is to modify the
+convexity (concavity) of discount function. Under a general EDU
+framework, decision maker is risk averse over time lotteries when
+$\pi w_{t_l}(x)+(1-\pi)w_{t_s}(x)<w_{t_m}(x)$. Fixing $t_s$ and $t_l$,
+the inequality suggests $w_{t_m}(c)$ is concave in $t_m$. In reverse,
+being risk seeking over time lotteries suggests $w_{t_m}(x)$ is convex
+in $t_m$. Notably, @onay_intertemporal_2007 find that people are more
+likely to be risk averse over time lotteries when $\pi$ is small, and to
+be risk seeking over time lotteries when $\pi$ is large. Given that when
+$\pi$ gets larger, $t_m$ is also larger, we can conclude that the
+discount function may be concave in delay for the near future but convex
+for the far future. Moreover, @takeuchi_non-parametric_2011 also find
+evidence that support this shape of discount function.
+
+In Proposition 4, I show that ADUS can produce such a shape of discount
+function as long as the reward level $x$ is large enough.
+
+**Proposition 4**: In ADUS, *if* $\delta =1$*, then the discount
+function is convex in* $t$*. If* $0<\delta<1$*, then there are a reward
+threshold* $\underline{x}$ *and a time threshold* $\underline{t}$ *such
+that*
+
+1)  *when* $x\leq \underline{x}$*, the discount function is convex in*
+    $t$*;*
+2)  *when* $x > \underline{x}$*, the discount function is convex in* $t$
+    *given* $t\geq \underline{t}$*, and it is concave in* $t$ *given*
+    $t<\underline{t}$*.*
+
+*It can be derived that* $v(\underline{x})=\ln(\frac{2}{1-\delta})$*,
+and* $\underline{t}=\frac{\ln[(1-\delta)e^{v(x)}-1]}{-\ln\delta}$*.*
+
+![](images/concavity_discount.pdf)
+
+## S-Shaped Value Function
+
+In prospect theory, @kahneman_prospect_1979 propose an S-shaped value
+function that is convex for losses and concave for gains. Since that,
+S-shaped value functions have been widely embraced by behavioral
+economists. More recent theories have provided further justifications
+for it, including reference-dependent utility in a broad sense
+[@koszegi_model_2006], and efficient coding of values
+[@frydman_efficient_2021]. Here, I provide an account based on selective
+attention to time periods.
+
+Suppose a decision maker is faced with a choice between a risky lottery
+and a fixed amount of money. When making this choice, she does not
+obtain any money from either option. Thus, she perceives the outcome of
+each option as something that will happen in the future. She allocate
+her attention between the present period and the period when she may
+receive the money. Assume that she perceives the outcome will be
+realized in period $t$, and in a certain state, the option she chooses
+yields reward $x$, then we can use the attentional discounted utility
+$V(x,t)$ to represent the value function. I derive the conditions in
+which ADUS can produce a S-shaped value function in Proposition 5.
+
+**Proposition 5**: *Suppose* $t\geq1$*,*
+$\frac{d}{dx}\left(\frac{1}{v'(x)}\right)$ *is continuous in*
+$(0,+\infty)$*, in ADUS,*
+
+1)  *there exists a threshold* $\bar{x}$ *in* $(0,+\infty)$ *such that*
+    $V(x,t)$ *is strictly concave in* $x$ *when*
+    $x\in [\bar{x},+\infty)$*;*
+
+2)  *if* $\frac{d}{dx}\left(\frac{1}{v'(x)}\right)$ *is right-continuous
+    at* $x=0$*, and* $\frac{d}{dx}\left(\frac{1}{v'(0)}\right)<1$*, then
+    there exists a threshold* $x^*$ *in* $(0, \bar{x})$ *such that, for
+    any* $x\in (0,x^*)$*,* $V(x,t)$ *is strictly convex in* $x$*;*
+
+3)  *there exist a hyper-parameter* $\lambda^*$ *and an interval*
+    $(x_1,x_2)$ *such that, if* $\lambda<\lambda^*$*, for any*
+    $x\in(x_1,x_2)$*,* $V(x,t)$ *is strictly convex in* $x$*, where*
+    $\lambda^*>0$ *and* $(x_1,x_2)\subset(0,\bar{x})$*.*
+
+Proposition 5 implies, if the derivative of $\frac{1}{v'(x)}$ converges
+to a small number when $x\rightarrow 0^+$, or the unit cost of
+information $\lambda$ is small enough, value function $V(x,t)$ will
+perform an S shape in some interval of $x$. At the intuition level, note
+that $V(x,t)=w_t(x)v(x)$. When the level of reward $x$ grows, both the
+instantaneous utility of it, i.e. $v(x)$, and the discounting factor
+assigned to it, i.e. $w_t(x)$, can increase. These functions are both
+concave in $x$: when the level of reward is small, they both grow fast.
+So, it is possible that their product is convex in this case. By
+contrast, when the level of reward is large, they grow slowly, so their
+product keeps concave.
+
+![](images/S_shaped_value.pdf)
+
+## Inseparability of Sequences
+
+Let $x$ and $y$ denote two 2-period risky reward sequences. For $x$, the
+realized sequence is [£100,£100] with probability 1/2, and is [£3,£3]
+with probability 1/2. For $y$, the realized sequence is [£3,£100] with
+probability 1/2, and is [£100,£3] with probability 1/2. Classical models
+of intertemporal choice typically assume the separability of potentially
+realized sequences. This implies that the decision maker is indifferent
+between $x$ and $y$. However, @andersen_multiattribute_2018 find
+evidence of *intertemporal correlation aversion*, that is, people often
+prefer $y$ to $x$.
+
+ADU can naturally yield intertemporal correlation aversion. For
+simplicity, suppose the initial attention is uniformly distributed
+across the two periods. For $x$, under each potentially realized
+sequence, the decision maker equally weights each period. For $y$,
+decision maker tends to assign more weight to the period with a reward
+of £100 (suppose that weight is $w$). Then the value of $x$ is
+$\frac{1}{2} u(100) + \frac{1}{2} u(3)$ and the value of $y$ is
+$w\cdot u(100) +(1-w) \cdot u(3)$. Given that $x>\frac{1}{2}$, the
+decision makers should strictly prefer $y$ to $x$.
+
+-   Other evidence related to inseparability: common sequence effect,
+    (reverse) mere token effect, magnitude-increasing temporal
+    sensitivity
+
+# The Role of Attention in Inconsistent Planning
+
+## Attention Grabbing and Updating
+
+Suppose a decision maker has budget $m$ ($m>0$) and is considering how
+to spend it over different time periods. We can use a reward sequence
+$x$ to represent this decision problem, where the decision maker's
+spending in period $t$ is $x_t$. In period 0, she wants to find a $x$
+such
+that$$ \tag{3} \max_{x}\;\sum_{t=0}^T w_t u(x_t)\quad s.t. \;\sum_{t=0}^T x_t = m   $$
+
+where $w_t$ is the attention-adjusted discounting factor in period $t$.
+I assume
+$w_t=\delta^t e^{u(x_t)/\lambda}/\sum_{t=\tau}^T \delta^{\tau} e^{u(x_\tau)/\lambda}$
+and there is no risk under this setting.
+
+In models like exponential and hyperbolic discounting, the discounting
+factor of a future period is consistently smaller than that of the
+current period. Thus, the decision maker should spend more at the
+present than in the future. By contrast, in ADU, when increasing the
+spending in a certain period, the discounting factor corresponding to
+that period should also increase. So it is possible that the decision
+maker spends more in the future and that a future period has a greater
+discounting factor than the current period. This is consistent with
+@loewenstein_preferences_1993 that find people sometimes prefer
+improving sequences to declining sequences.
+
+ADU suggests there are two mechanisms that can help explain why people
+may perform dynamically inconsistent behavior. The first is
+*attention-grabbing effect*, that is, keeping the others equal, when we
+increase $x_t$ (which lead to an increase in $w_t$), the discounting
+factor in any other period should decrease due to limited attention.
+After omitting a previous period from the decision problem in Equation
+(3), the decision maker can assign more weights to remaining periods;
+thus, the attention-grabbing effect is enhanced. The increased
+attention-grabbing effect will offset some benefit of increasing
+spending toward a certain period. Therefore, when the decision maker
+prefers improving sequences, the attention-grabbing effect will make her
+perform a present bias-like behavior (always feeling that she should
+spend more at the present than the original plan); when the decision
+maker prefers declining sequences, this effect will maker her perform a
+future bias-like behavior (always feeling she should spend more in the
+future).
+
+The second mechanism is *initial attention updating*. As is assumed
+above, in period 0, prior to evaluating each reward sequence, the
+decision maker's initial weight on period $t$ is proportional to
+$\delta^t$; after evaluation, the weight becomes being proportional to
+$\delta^t e^{u(x_t)/\lambda}$. In period 1, if she implements the
+evaluation based on the information attained in period 0, the initial
+weight should be updated to being proportional
+$\delta^t e^{u(x_t)/\lambda}$; thus, the weight after evaluation should
+become being proportional to $\delta e^{2u(x_t)/\lambda}$. As a result,
+the benefit of increasing spending toward a certain period gets
+strengthened. The updated initial attention can make those who prefer
+improving sequences perform present bias and those who prefer declining
+sequences perform future bias.
+
+Both the attention-grabbing effect and initial attention updating are
+affected by the curvature of utility function. They jointly decide which
+behavior pattern that people should perform in dynamics.
+
+**Proposition 6** (*spread-consistency correlation*) Suppose $\succsim$
+has a ADU representation and satisfies Axiom 2-4. If there exist $b$ and
+$S_T$ such that, for any $b'$ and $S_T'$, $bS_T\succsim b'S_T'$, where
+$b+\sum_{t=0}^Ts_t=b'+\sum_{t=0}^Ts_t'$, then for any $S'_T$, we have
+$$S_T \succsim S_T' \Longleftrightarrow b\sim S_T$$where
+$\sum_{t=0}^Ts_t=\sum_{t=0}^Ts_t'$.
+
+Proposition 6 implies that, when allocating a consumption budget across
+time periods, the decision maker keeps her choice dynamically consistent
+if and only if she performs a strong preference for spread. Given that
+people are typically assumed to be impatient (preferring a declining
+sequence), one intuitive interpretation of Lemma 2 is that the less
+impatient a decision maker is in the present, the less inclined she is
+to deviate from the original choice in the future.
+
+# Axiomatic Characterization of ADUS
+
+In a static choice setting, the rationale for the usage of Shannon cost
+function can be interpreted with independence of irrelevant alternatives
+[@matejka_rational_2015], or data compression [@caplin_rationally_2022].
+However, this is not applicable when weights can be allocated across
+time periods. Hence, I propose four axioms that can characterize Shannon
+cost function in the intertemporal choice setting.
+
+**Axiom 1**: (*state independence*) For any reward sequence $X_T$,
+$X'_T$, $X''_T$ and $\alpha\in(0,1)$, $X_T\succ X'_T$ implies
+$\alpha X_T+ (1-\alpha)X''_T \succ \alpha X'_T + (1-\alpha) X''_T$.
+
+Axiom 1 can be interpreted by Lemma 1.The preference relation
+$x \succ y$ is defined by the opposite of $y\succsim x$; the preference
+relation $x\sim y$ is defined by the joint satisfaction of $x\succsim y$
+and $y \succsim x$.
+
+**Lemma 1**: Suppose preference relation $\succsim$ has an ADU
+representation and satisfies Axiom 1. If $p_1+p_2+...p_n=1$, and for any
+$i\in\{1,2,…,n\}$, $0<p_i<1$, then for any deterministic reward sequence
+$S^1_T$, $S^2_T$, ..., $S^n_T$, we
+have$$ U(p_1 S^1_T+p_2S^2_T+...+p_nS^n_T)=p_1U(S^1_T)+p_2U(S^2_T)+...+p_nU(S^n_T) $$Lemma
+1 implies that, the determination of discounting factors for one
+potential realization of a reward sequence will not interfere with that
+for another potential realization of it. Suppose $S_T$ and $S'_{T}$ are
+both potential realizations of a reward sequence $X_T$, one can solve
+$w_t(S_T)$ and $w_t(S'_T)$ by constructing a constrained optimal
+discounting problem for each then solving it independently.
+
+**Axiom 1**: *(sequential outcome-betweenness)* For any non-negative
+real number $b$ and deterministic reward sequence $S_T$, let $S_Tb$
+denote $[s_0,s_1,...,s_T,b]$, there always exists $\alpha\in(0,1)$ such
+that $S_Tb\sim \alpha S_T+(1-\alpha)b$.
+
+Axiom 1 implies that if we add a new element to a given sequence, the
+overall utility of the new sequence will lies between the utility of the
+original sequence and the utility of the newly added element. It also
+implies that the value of a sequence can be represented by a linear
+combination of the values of each element.
+
+**Axiom 2**: (*sequential* *bracket-independence*) For any non-negative
+real number $b$, $c$ and deterministic sequence $S_T$, if there exist
+$\alpha_1$, $\alpha_2$, $\alpha_3$, $\beta_1$,
+$\beta_2\in \mathbb{R}_{>0}$ such that
+$$ S_Tbc\sim \alpha_1S_T+\alpha_2b+\alpha_3c \quad\text{and}\quad  S_Tbc\sim \beta_1S_T+\beta_2(bc) $$where
+$bc$ denote a sequence with reward $b$ delivered at the present then $c$
+delivered the next, we must have $\alpha_1=\beta_1$
+
+Axiom 2 implies that if we segment a given sequence into different
+elements, and use the linear combination of these elements to represent
+the value of the overall sequence, then the weight for an element in
+this linear combination can hold constant regardless of how we segment
+or bracket the other elements.
+
+**Axiom 3**: (*aggregate invariance of constant sequences*) For any
+deterministic sequences $S_T$, $S'_T$, given non-negative real number
+$c'$, $c$ and $\alpha\in(0,1)$, if
+$\alpha s'_t+(1-\alpha)c'\succ\alpha s_t+(1-\alpha)c$ holds for every
+period $t$, then $\alpha S'_T+(1-\alpha)c'\succ \alpha S_T+(1-\alpha)c$.
+
+Axiom 3 implies that if the utility of every element in a given sequence
+plus an equal amount, the overall utility of the sequence will plus the
+same amount. It is a weak version of Separability of Sequences. *If the
+sequences are separability, then any sequences should be should be
+aggregate invariant.*
+
+**Proposition 1**: $\succsim$ *has an ADUS representation if and only if
+it has an ADU representation and satisfies Axiom 1-4.*
+
+# Discussion
+
+# Conclusion
+
+# Reference

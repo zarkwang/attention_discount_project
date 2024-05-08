@@ -39,23 +39,38 @@ if __name__ == '__main__':
     script_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(script_dir)
 
-    tmp_baseline = insert_tab(tab_name='baseline_A',
-                            destination_content='baseline_original',
-                            destination_type='.txt')
+    # tmp_baseline = insert_tab(tab_name='baseline_A',
+    #                         destination_content='baseline_original',
+    #                         destination_type='.txt')
     
-    insert_tab(tab_name='baseline_B',
-               destination_content=tmp_baseline,
-               output='baseline_tab.tex')
+    # insert_tab(tab_name='baseline_B',
+    #            destination_content=tmp_baseline,
+    #            output='baseline_tab.tex')
     
-    insert_tab(tab_name='utility_A',
-                destination_content='utility_original_a',
-                destination_type='.txt',
-                output='utility_a_tab.tex')
+    # insert_tab(tab_name='utility_A',
+    #             destination_content='utility_original_a',
+    #             destination_type='.txt',
+    #             output='utility_a_tab.tex')
 
-    insert_tab(tab_name='utility_B',
-                destination_content='utility_original_b',
+    # insert_tab(tab_name='utility_B',
+    #             destination_content='utility_original_b',
+    #             destination_type='.txt',
+    #             output='utility_b_tab.tex')
+
+    insert_tab(tab_name='exp1_utility_model',
+                destination_content='exp1_utility_original',
                 destination_type='.txt',
-                output='utility_b_tab.tex')
+                output='exp1_utility_tab.tex')
+    
+    insert_tab(tab_name='exp1_baseline_model',
+                destination_content='exp1_baseline_original',
+                destination_type='.txt',
+                output='exp1_baseline_tab.tex')
+    
+    insert_tab(tab_name='exp1_utility_censor',
+                destination_content='exp1_censor_original',
+                destination_type='.txt',
+                output='exp1_censor_tab.tex')
     
 
 

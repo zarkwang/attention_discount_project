@@ -1,0 +1,37 @@
+
+\documentclass[12pt]{article}
+
+
+\begin{document}
+\begin{table}
+    \caption{Regression results for intertemporal choice tasks}
+    \vspace*{12pt}
+    \centering
+
+      \begin{tabular}{llll}
+\hline
+ & (1) Pooled & (2) FE & (3) FE \\
+\hline
+Group & 0.085 & 0.047 & -0.096 \\
+ & (0.19) & (0.533) & (0.154) \\
+Question$\cdot1\{\text{Group}=0\}$ & 0.085 & 0.301 & 0.301 \\
+ & (0.059) & (0.189) & (0.187) \\
+Question$\cdot1\{\text{Group}=1\}$ & 0.218$^{***}$ & 0.53$^{***}$ & 0.53$^{***}$ \\
+ & (0.067) & (0.164) & (0.163) \\\hline
+
+observations & 7056 & 4416 & 7056 \\
+AIC & 9625.349 & 4253.529 & 4259.531 \\
+\hline
+\end{tabular}
+% INSERT reg_choice
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.85\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.005$. Standard errors are clustered at the subject level and are reported in the parentheses. The $p$-values are calculated based on Wald tests. Each model includes task-sepcific dummies as intercepts. Models for Column (2)-(3) include participant-specific dummies for those having changed their choices at least once across all intertemporal choice tasks. In addition, the model for Column (3) includes two dummies capture whether a participant always chooses the sequence option, and the single option. }
+    \end{minipage}
+    \label{tab:exp3_reg_intertemporal_choice}
+\end{table}
+
+\end{document}
+

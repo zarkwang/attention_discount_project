@@ -1,0 +1,22 @@
+
+\documentclass[12pt]{article}
+
+
+\begin{document}
+\begin{table}
+    \caption{Regression results with risk-neutral utility function for Experiment 3}
+    \vspace*{12pt}
+    \centering
+
+      % INSERT exp1_baseline_model
+
+    \vspace*{4pt}
+    \centering
+    \begin{minipage}{0.85\textwidth}
+    {\par\footnotesize Note: * $p<0.05$, ** $p<0.01$, *** $p<0.005$. Standard errors are clustered at the subject level and are reported in the parentheses. The p-values are calculated based on Wald tests. $X_c$ denotes the amount constant in a choice list, and its middle and highest levels are $X_{mid}$ and $X_{high}$. $T$ denotes the delay of the back-end amount, and its middle and highest levels are $T_{mid}$ and $T_{high}$. $M$ denotes amount in the single option, and its higher level is $M_{high}$. $X_v$ denotes the amount varying across rows. The utility function is $u(x)=x^{0.695}$. Column (2) and (4) reports the results of a fixed-effect (FE) model, which includes participant-specific dummies as random intercepts.}
+    \end{minipage}
+    \label{tab:exp1_reg_baseline}
+\end{table}
+
+\end{document}
+
