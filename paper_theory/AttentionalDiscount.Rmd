@@ -73,7 +73,6 @@ framework. The value of $s_{0\rightarrow T}$ is defined as
 $U(s_{0\rightarrow T})\equiv \sum_{t=0}^T w_{t}u(s_t)$, where $u(s_t)$
 is the instantaneous utility of receiving $s_t$, and $w_t$ is the
 decision weight (sometimes called discount factors) assigned to $s_t$.
-We assume the function $u(.)$ is twice differentiable, $u'>0$, $u''<0$.
 
 The determination of $w_t$ is central to this paper. We believe that,
 due to the DM's limited attention and demand for information, the DM
@@ -197,7 +196,9 @@ nosiy. For any $t\in\{0,1,…,T\}$, the signal sampled at information
 source $s_t$ could be represented by $x_t =u(s_t)+\epsilon_t$, where
 each $\epsilon_t$ is i.i.d. and
 $\epsilon_t \sim N(0,\sigma_\epsilon^2)$. The sampling weight for
-information source $s_t$ is denoted by $w_t$.
+information source $s_t$ is denoted by $w_t$. We assume the function
+$u(s_t)$ is strictly increasing with $s_t$ and for any $s_t>0$, we set
+$u(s_t)>0$.
 
 The DM's belief about the sequence value $U(s_{0\rightarrow T})$ is
 updated as follows. At first, she holds a prior $U_0$, and given she
@@ -263,11 +264,10 @@ likely to fall into a neighborhood of $u(s_t)$. Thus, the AAD which
 assumes $w_t \propto d_t e^{u(s_t)/\lambda}$ could be viewed as a proper
 approximation to the softmax exploration strategy.
 
-[^3]: The softmax strategy is popular in reinforcement learning. Classic
-    softmax strategy assumes the initial probability of taking an action
-    follows an uniform distribution. We relax this assumption by
-    importing $d_t$, so that the DM can hold an (initial) preference
-    over the dated rewards.
+[^3]: Classic softmax strategy assumes the initial probability of taking
+    an action follows an uniform distribution. We relax this assumption
+    by importing $d_t$, so that the DM can hold an initial preference of
+    sampling over the dated rewards.
 
 Those who familiar with reinforcement learning algorithms may notice
 that here $u(s_t)$ is a special case of action-value function (assuming
@@ -293,19 +293,20 @@ aims to provides a simple benchmark for understanding the role of
 attention in mental valuation of a reward sequence.
 
 Two strands of literature can justify the information maximizing
-approach to characterizing AAD. First,
-
-Second, the softmax exploration strategy is widely used by
-neuroscientists in fitting human actions in reinforcement learning tasks
-[@daw2006cortical; @niv2012neural; @fitzgerald2012action;
-@niv2015reinforcement; @leong2017dynamic]. For instance,
-@daw2006cortical find the softmax strategy can characterize humans'
-exploration behavior better than other classic strategies (e.g.
+approach to characterizing AAD. First, our assumption that the DM
+updates decision weights toward a greater $D_{KL}(U_k||U_0)$ is
+consistent with the finding that Bayesian surprises attract attention in
+vision research [@itti2009bayesian]. Second, the softmax exploration
+strategy is widely used by neuroscientists in fitting human actions in
+reinforcement learning tasks [@daw2006cortical; @niv2012neural;
+@fitzgerald2012action; @niv2015reinforcement; @leong2017dynamic]. For
+instance, @daw2006cortical find the softmax strategy can characterize
+humans' exploration behavior better than other classic strategies (e.g.
 $\epsilon$-greedy). Besides, @collins2014opponent show that models based
-on this strategy exhibit a good performance in explaining behaviors of
-the striatal dopaminergic system (which is central in brain's sensation
-of pleasure and learning of rewarding actions) in reinforcement
-learning.
+on the soft strategy exhibit a good performance in explaining behaviors
+of the striatal dopaminergic system (which is central in brain's
+sensation of pleasure and learning of rewarding actions) in
+reinforcement learning.
 
 ## Optimal Discounting \label{optimal_discount}
 
@@ -326,23 +327,23 @@ problem to capture this decision. In this paper, we adopt a variant of
 their original model. The formal definition of the optimal discounting
 problem is given by Definition 2. [^4]
 
-[^4]: There are three differences between our Definition 2 and the
-    original optimal discounting model
+[^4]: There are three differences between Definition 2 and the original
+    optimal discounting model
     \citep{noor2022optimal,noor2024constrained}. First, in our setting,
     shifting attention to future rewards may reduce the attention to the
     current reward, while this would never happen in
     \citet{noor2022optimal,noor2024constrained}. Second, the original
-    model assumes $f'(w_t)$ must be continuous at 0 and $w_t$ must be no
-    larger than 1. We relax these assumptions since $w_t=0$ or
-    $w_t\geq1$ is not in our solutions. Third, the original model
-    assumes that $f'(w_t)$\$ is left-continuous and $f'(w_t)=0$ when
-    $w_t$ is under a lower bound $\underline{w}$, $f'(w_t)=\infty$ when
-    $w_t$ is above a upper bound $\bar{w}$, and $f'(w_t)$ is strictly
-    increasing when $w_t \in [\underline{w},\bar{w}]$. To keep
-    simplicity, this paper restricts $f'(w_t)$ to be continuous and
-    strictly increasing. Our assumption can apply to many commonly used
-    cost functions, including the power cost function discussed in
-    \citet{noor2022optimal,noor2024constrained}.
+    model assumes $f'_t(w_t)$ must be continuous at 0 and $w_t$ must be
+    no larger than 1. We relax these assumptions since neither $w_t=0$
+    nor $w_t\geq1$ is included our solutions. Third, the original model
+    assumes that $f'_t(w_t)$ is left-continuous in $[0,1]$, and there
+    exist $\underline{w},\bar{w}\in[0,1]$ such that $f'_t(w_t)=0$ when
+    $w_t\leq\underline{w}$, $f'_t(w_t)=\infty$ when $w_t\geq\bar{w}$,
+    and $f'_t(w_t)$ is strictly increasing when
+    $w_t \in [\underline{w},\bar{w}]$. We simplify this assumption by
+    setting $f'_t(w_t)$ is continuous strictly increasing in $(0,1)$.
+    For behavior of $f'_t(w_t)$ near the border of $[0,1]$, we set
+    $\lim_{w_t\rightarrow 0} f'_t(w_t)=-\infty$ instead.
 
 \noindent \textbf{Definition 2}: *Given reward sequence*
 $s_{0\rightarrow T}=[s_0,...,s_T]$*, the following optimization problem
@@ -353,11 +354,11 @@ is called an optimal discounting problem for* $s_{0\rightarrow T}$*:*$$
 &&& w_t \geq 0 \text{ for all } t\in \{0,1,...,T\}
 \end{aligned}
 $$*where* $M>0$*,* $C(\mathcal{W})\geq 0$. For any $t\in\{0,1,…,T\}$,
-$u(s_t)\in\mathbb{R}$. $C(\mathcal{W})$ *is the cognitive cost function
-and is constituted by time-separable costs, i.e.*
+$u(s_t)<\infty$. $C(\mathcal{W})$ *is the cognitive cost function and is
+constituted by time-separable costs, i.e.*
 $C(\mathcal{W})=\sum_{t=0}^Tf_t(w_t)$*, where for all* $w_t\in(0,1)$*,*
-$f_t(w_t)$ *is differentiable and* $f'_t(w_t)$ *is continuous and*
-stric*tly increasing.*
+$f_t(w_t)$ *is differentiable.* $f'_t(w_t)$ *is continuous and*
+stric*tly increasing, and* $\lim_{w_t\rightarrow 0} f'_t(w_t)=-\infty$.
 
 Here $w_t$ reflects the attention paid to consider the feeling of
 $t$-period self. The DM's objective function is the attention-weighted
@@ -463,8 +464,8 @@ characterized by the preference for
 $w_0\cdot s_0+w_1\cdot s_1 +...+w_T\cdot s_T$. We use Definition 3 to
 capture this assumption.[^7]
 
-[^7]: In \citep{noor2022optimal}, it is claimed that $\succsim$
-    satisfying Definition 3 has a Costly Empathy representation.
+[^7]: \citet{noor2022optimal} refer the "optimal discounting
+    representation" in Definition 3 as Costly Empathy representation.
 
 \noindent \textbf{Definition 3}: *Given reward sequence*
 $s_{0\rightarrow T}=[s_0,...,s_T]$ *and*
@@ -523,8 +524,10 @@ decomposition is carried out inside $s_{0\rightarrow T-1}$, the weight
 of $s_T$ in the valuation of $s_{0\rightarrow T}$ will always remain the
 same. This axiom is an analog to independence of irrelevant alternatives
 in discrete choice problems (which is a key feature of softmax choice
-function). We show in Proposition 1 that the optimal discounting model
-plus Axiom 1-4 can exactly produce AAD.
+function).
+
+We show in Proposition 1 that the optimal discounting model plus Axiom
+1-4 can exactly produce AAD.
 
 \noindent \textbf{Proposition 1}: *Suppose* $\succsim$ *has an optimal
 discounting representation, then it has an AAD representation if and
@@ -546,7 +549,7 @@ Intertemporal correlation aversion
 
 Learning and inconsistent planning
 
-```{r child='Implications.Rmd'}
+```{# {r child='Implications.Rmd'}
 ```
 
 # Discussion

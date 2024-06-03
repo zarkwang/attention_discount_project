@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.24)  3 JUN 2024 12:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.24)  3 JUN 2024 16:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -529,175 +529,96 @@ LaTeX Warning: Command \textellipsis invalid in math mode on input line 105.
 
 {c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 133.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 132.
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 169.
+(Font)              <5> on input line 168.
 [2{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}] [3]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 243.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 242.
 
 [4] [5] [6] [7]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 403.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 405.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 428.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 430.
 
 [8] [9] [10] [11]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 617.
+(c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 617.
+(c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
+File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [12{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] (./AttentionalDiscount.bbl [13] [14] [15]) [16]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 618.
-
-
-Package natbib Warning: Citation `magen_hidden-zero_2008' on page 12 undefined on input line 642.
-
-[12]
-
-Package natbib Warning: Citation `read_value_2017' on page 13 undefined on input line 655.
-
-[13]
-
-Package natbib Warning: Citation `loewenstein_anomalies_1992' on page 14 undefined on input line 694.
-
-[14]
-<images/weight_LLvSS.pdf, id=284, 321.2pt x 212.795pt>
-File: images/weight_LLvSS.pdf Graphic file (type pdf)
-<use images/weight_LLvSS.pdf>
-Package pdftex.def Info: images/weight_LLvSS.pdf  used on input line 748.
-(pdftex.def)             Requested size: 321.20901pt x 212.80095pt.
-<images/value_LLvSS.pdf, id=285, 321.2pt x 212.795pt>
-File: images/value_LLvSS.pdf Graphic file (type pdf)
-<use images/value_LLvSS.pdf>
-Package pdftex.def Info: images/value_LLvSS.pdf  used on input line 750.
-(pdftex.def)             Requested size: 321.20901pt x 212.80095pt.
-[15 <./images/weight_LLvSS.pdf>]
-
-Package natbib Warning: Citation `loewenstein_anomalies_1992' on page 16 undefined on input line 763.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 666.
 
 
-Package natbib Warning: Citation `noor_intertemporal_2011' on page 16 undefined on input line 769.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 686.
 
 
-Package natbib Warning: Citation `noor_optimal_2022' on page 16 undefined on input line 769.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 706.
 
-[16 <./images/value_LLvSS.pdf>]
+[17] [18]
 
-Package natbib Warning: Citation `onay_intertemporal_2007' on page 17 undefined on input line 809.
-
-
-Package natbib Warning: Citation `dejarnette_time_2020' on page 17 undefined on input line 810.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 766.
 
 
-Package natbib Warning: Citation `dejarnette_time_2020' on page 17 undefined on input line 815.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 784.
 
 
-Package natbib Warning: Citation `onay_intertemporal_2007' on page 17 undefined on input line 822.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 785.
 
 
-Package natbib Warning: Citation `takeuchi_non-parametric_2011' on page 17 undefined on input line 827.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 793.
 
-[17]
-<images/concavity_discount.pdf, id=312, 321.2pt x 212.795pt>
-File: images/concavity_discount.pdf Graphic file (type pdf)
-<use images/concavity_discount.pdf>
-Package pdftex.def Info: images/concavity_discount.pdf  used on input line 854.
-(pdftex.def)             Requested size: 321.20901pt x 212.80095pt.
-
-Package natbib Warning: Citation `kahneman_prospect_1979' on page 18 undefined on input line 859.
-
-
-Package natbib Warning: Citation `koszegi_model_2006' on page 18 undefined on input line 864.
-
-
-Package natbib Warning: Citation `frydman_efficient_2021' on page 18 undefined on input line 865.
-
-[18 <./images/concavity_discount.pdf>]
-<images/S_shaped_value.pdf, id=326, 321.2pt x 212.795pt>
-File: images/S_shaped_value.pdf Graphic file (type pdf)
-<use images/S_shaped_value.pdf>
-Package pdftex.def Info: images/S_shaped_value.pdf  used on input line 916.
-(pdftex.def)             Requested size: 321.20901pt x 212.80095pt.
 [19]
 
-Package natbib Warning: Citation `andersen_multiattribute_2018' on page 20 undefined on input line 929.
-
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 946.
-(c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [20{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc} <./images/S_shaped_value.pdf>]
-Underfull \hbox (badness 2478) in paragraph at lines 964--968
-[]\T1/lmr/m/n/12 where $\OML/lmm/m/it/12 w[]$ \T1/lmr/m/n/12 is the attention-adjusted dis-count-ing fac-tor in pe-riod $\OML/lmm/m/it/12 t$\T1/lmr/m/n/12 . I as-sume
- []
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 833.
 
 
-Package natbib Warning: Citation `loewenstein_preferences_1993' on page 21 undefined on input line 977.
-
-[21] [22] (./AttentionalDiscount.bbl [23] [24] [25]) [26]
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1077.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 836.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1097.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 843.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1117.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 851.
 
-[27] [28]
+[20]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1177.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 878.
 
+[21]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1195.
-
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1196.
-
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1204.
-
-[29]
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1244.
-
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1247.
-
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1254.
-
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1262.
-
-[30]
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1289.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 910.
 
 
 Package caption Warning: Unused \captionsetup[table] on input line 58.
 See the caption package documentation for explanation.
 
-
-Package natbib Warning: There were undefined citations.
-
-[31] (./AttentionalDiscount.aux)
+[22] (./AttentionalDiscount.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-05-08>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 15270 strings out of 475952
- 251472 string characters out of 5788423
+ 15248 strings out of 475952
+ 250353 string characters out of 5788423
  1941907 words of memory out of 5000000
- 37102 multiletter control sequences out of 15000+600000
- 625060 words of font info for 87 fonts, out of 8000000 for 9000
+ 37103 multiletter control sequences out of 15000+600000
+ 625309 words of font info for 88 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 95i,9n,93p,728b,599s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on AttentionalDiscount.pdf (31 pages, 410518 bytes).
+ 95i,9n,93p,726b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on AttentionalDiscount.pdf (22 pages, 391664 bytes).
 PDF statistics:
- 619 PDF objects out of 1000 (max. 8388607)
- 528 compressed objects within 6 object streams
- 139 named destinations out of 1000 (max. 500000)
- 189 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 514 PDF objects out of 1000 (max. 8388607)
+ 436 compressed objects within 5 object streams
+ 112 named destinations out of 1000 (max. 500000)
+ 105 words of extra memory for PDF output out of 10000 (max. 10000000)
 

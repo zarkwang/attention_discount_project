@@ -106,7 +106,7 @@ recursively apply this equality to any sub-sequence
 \(s_{0\rightarrow t}\) (\(t\leq T\)) of \(s_{0\rightarrow T+1}\), so
 that the lemma will be proved. \emph{QED}.
 
-Now we move on to prove Proposition 1. The proof contains five steps.
+Now we move on to prove Proposition 1. The proof contains six steps.
 
 First, we add the constraints \(\sum_{t=0}^T w_t=1\) and \(w_t>0\) to
 the optimal discounting problem for \(s_{0\rightarrow T}\) so that the
@@ -163,15 +163,15 @@ to the utility function.
 In other words, for a given \(s_{0\rightarrow T}\) and \(s_{T+1}\), we
 can define a new utility function \(v(.)\) such that
 \(v(s_t) = u(s_t) +\theta-\Delta \theta\). So, Equation (A4) can be
-re-written as\[
+re-written as\[\tag{A5}
 w_t = \frac{\phi_t(v(s_t))}{\sum_{\tau=0}^{T}\phi_\tau(v(s_\tau))}
 \]If \(w_t\) takes the AAD form under the utility function \(v(.)\),
 i.e.~\(w_t \propto d_t e^{v(s_t)/\lambda}\), then it should also take
 the AAD form under the original utility function \(u(.)\).
 
-Fourth, we show \(\Delta \theta\) has two properties: (i)
-\(\Delta \theta\) is strictly increasing with \(u(s_{T+1})\); (ii)
-suppose \(\Delta \theta = \underline{\theta}\) when
+Fourth, we show that in Equation (A4), \(\Delta \theta\) has two
+properties: (i) \(\Delta \theta\) is strictly increasing with
+\(u(s_{T+1})\); (ii) suppose \(\Delta \theta = \underline{\theta}\) when
 \(u(s_{T+1})=\underline{u}\) and \(\Delta\theta=\bar{\theta}\) when
 \(u(s_{T+1})=\bar{u}\), where \(\underline{u}<\bar{u}\), then for any
 \(l \in(\underline{\theta},\bar{\theta})\), there exists
@@ -182,7 +182,7 @@ The property (i) can be shown by contradiction. Given \(w_0,…,w_{T+1}\)
 a sequence of decision weights for \(s_{0\rightarrow T+1}\). Suppose
 \(u(s_{T+1})\) is increased but \(\Delta \theta\) is constant. In this
 case, each of \(w'_0,…,w'_T\) should also be constant. However,
-\(w'_{T+1}\) must increase as it is stricly increasing with
+\(w'_{T+1}\) must increase as it is strictly increasing with
 \(u(s_{T+1})+\theta-\Delta \theta\) (\(\theta\) is determined by the
 optimal discounting problem for \(s_{0\rightarrow T}\); thus, any
 operations on \(s_{T+1}\) should have no effect on \(\theta\)). This
@@ -203,14 +203,14 @@ to show that \(u(s_t)+\theta-l\) is still in the domain of
 \(\phi_{T+1}(u(s_{T+1})+\theta-l)=\omega\).
 
 For the first stage, note \(\phi_t(.)\) is the inverse function of
-\(f'_t(.)\). Suppose when \(\Delta\theta=\underline{\theta}\), we have
-\(f'_t(w^{a}_t)=u(s_t)+\theta-\underline{\theta}\), and when
-\(\Delta\theta=\bar{\theta}\), we have
-\(f'_t(w^{b}_t)=u(s_t)+\theta-\bar{\theta}\). For any
+\(f'_t(.)\). Suppose when \(\Delta\theta=\bar{\theta}\), we have
+\(f'_t(w^{a}_t)=u(s_t)+\theta-\bar{\theta}\), and when
+\(\Delta\theta=\underline{\theta}\), we have
+\(f'_t(w^{b}_t)=u(s_t)+\theta-\underline{\theta}\). For any
 \(l\in(\underline{\theta},\bar{\theta})\), we have
-\(u(s_t)+\theta-l \in (f'_t(w^b_t),f'_t(w^a_t))\). Given that
+\(u(s_t)+\theta-l \in (f'_t(w^a_t),f'_t(w^b_t))\). Given that
 \(f'_t(.)\) is continuous and strictly increasing, there must be
-\(w_t\in(w^b_t,w^a_t)\) such that \(f'_t(w_t)=u(s_t)+\theta-l\). So,
+\(w_t\in(w^a_t,w^b_t)\) such that \(f'_t(w_t)=u(s_t)+\theta-l\). So,
 \(u(s_t)+\theta-l\) is in the domain of \(\theta_t(.)\). For the second
 stage, given an arbitrary \(\omega\in(0,1)\), we can set
 \(u(s_{T+1})=f'(\omega)-\theta+l\), so that the desired condition is
@@ -225,26 +225,58 @@ this, let us add a hypothetical \(s_{T+1}\) to the end of \(s_T\) and
 let \(w'_t=\phi_t(v(s_t))\) denote the decision weights for
 \(t=0,1,…,T+1\) in \(s_{0\rightarrow T+1}\). We change the hypothetical
 \(s_{T+1}\) within the set
-\(\{s_{T+1}|u(s_{T+1})\in[\underline{u},\bar{u}]\}\) and see what will
+\(\{s_{T+1}|v(s_{T+1})\in[\underline{v},\bar{v}]\}\) and see what will
 happen to the decision weights from period 0 to period \(T\). Suppose
-this changes each \(w'_t\) to \(\phi_t(v(s_t)+\theta')\). Set
-\(\theta'=a\) when \(u(s_{T+1})=\underline{u}\) and \(\theta'=b\) when
-\(u(s_{T+1})=\bar{u}\). By the second step, we have\[\tag{A5}
-\frac{\phi_t(v(s_t))}{\sum_{\tau=0}^{T}\phi_\tau(v(s_\tau))} = \frac{\phi_t(v(s_t)+\theta')}{\sum_{\tau=0}^{T}\phi_\tau(v(s_\tau)+\theta')}
+this changes each \(w'_t\) to \(\phi_t(v(s_t)-\eta)\). Set
+\(\eta=\underline{\eta}\) when \(u(s_{T+1})=\underline{v}\) and
+\(\eta=\bar{\eta}\) when \(u(s_{T+1})=\bar{v}\). By Equation (A5), we
+have\[\tag{A6}
+\frac{\phi_t(v(s_t))}{\sum_{\tau=0}^{T}\phi_\tau(v(s_\tau))} = \frac{\phi_t(v(s_t)-\eta)}{\sum_{\tau=0}^{T}\phi_\tau(v(s_\tau)-\eta)}
 \]For each \(t=0,1,...,T\), we can rewrite \(\phi_t(v(s_t))\) as
-\(e^{\ln \phi_t(v(s_t))}\). For the LHS of Equation (A5), multiplying
+\(e^{\ln \phi_t(v(s_t))}\). For the LHS of Equation (A6), multiplying
 both the numerator and the denominator by a same number will not affect
-the value. Therefore, Equation (A5) can be rewritten as \[
-\frac{e^{\ln\phi_t(v(s_t))+\kappa\theta'}}{\sum_{\tau=0}^{T}e^{\ln\phi_\tau(v(s_\tau))+\kappa\theta'}} = \frac{e^{\ln\phi_t(v(s_t)+\theta')}}{\sum_{\tau=0}^{T}e^{\ln\phi_\tau(v(s_\tau)+\theta')}}
+the value. Therefore, Equation (A6) can be rewritten as \[
+\frac{e^{\ln\phi_t(v(s_t))-\kappa\eta}}{\sum_{\tau=0}^{T}e^{\ln\phi_\tau(v(s_\tau))-\kappa\eta}} = \frac{e^{\ln\phi_t(v(s_t)-\eta)}}{\sum_{\tau=0}^{T}e^{\ln\phi_\tau(v(s_\tau)-\eta)}}
 \]where \(\kappa\) can be any real-valued constant. By properly
-selecting \(\kappa\), we can obtain
-\(\ln \phi_t(v(s_t))+\kappa\theta'=\ln \phi_t(v(s_t)+\theta')\) for all
-\(t=0,1,...,T\). And if \(\theta'>0\), we must have \(\kappa>0\).
+selecting \(\kappa\), we for all \(t=0,1,...,T\), can obtain\[\tag{A7}
+\ln \phi_t(v(s_t))-\kappa\eta=\ln \phi_t(v(s_t)-\eta)
+\]as long as \(\eta \in [\underline{\eta},\bar{\eta}]\). And given
+\(\ln\phi_t(.)\) is strictly increasing, for any \(\eta\neq 0\), we have
+\(\kappa>0\).
 
-This indicates a property of function \(\ln \phi_t(.)\): for any
-\(v\in \mathbb{R}\), we have
-\(\ln \phi_t(v)=\ln \phi_t(v-\theta')+\kappa\theta'\) as long as
-\(\theta' \in [a,b]\).
+Finally, we denote the maximum and minimum of \(\{v(s_t)\}_{t=0}^T\) by
+\(v_{\max}\) and \(v_{\min}\), and show that Equation (A7) can hold if
+\(\eta = v_{\max} - v_{\min}\). That is,
+\(v_{\max}-v_{\min}\in [\underline{\eta},\bar{\eta}]\), where
+\(\underline{\eta}, \bar{\eta}\) are the realizations of \(\eta\) when
+\(v(s_{T+1})=\underline{v}\) and \(v(s_{T+1})=\bar{v}\). Obviously,
+\(\underline{\eta}\) can take the value \(\underline{\eta}=0\). Thus, we
+focus on whether \(\bar{\eta}\) can take a value
+\(\bar{\eta}\geq v_{\max}-v_{\min}\).
 
-So, we can write \(\ln \phi_t (u(s_t))\) as
-\(\ln \phi_t(u(0))+\lambda u(s_t)\)
+The proof is similar with the fourth step and consists of two stages.
+First, we show that for \(t=0,1,…,T\), \(v(s_t)-v_{\max}+v_{\min}\) is
+in the domain of \(\phi_t(.)\). That is, under some \(w_t\), we have
+\(f'_t(w_t)=v(s_t)-v_{\max}+v_{\min}\). Note
+\(v_{\max}-v_{\min}\in[0,+\infty)\). On the one hand, there exists
+\(w_t\in(0,1)\) for \(f'_t(w_t)=v(s_t)\), which is the solution to
+Equation (A5). On the other hand, by Definition 2, we know
+\(\lim_{w_t\rightarrow 0}f'_t(w_t)=-\infty\). Given \(f'_t(w_t)\) is
+continuous and strictly increasing, there must be a solution \(w_t\) for
+\(f'_t(w_t)=v(s_t)-v_{\max}+v_{\min}\). Second, we show that for any
+\(\omega\in(0,1)\), there exists some \(v(s_{T+1})\) such that
+\(\phi_{T+1}(v(s_{T+1})-v_{\max}+v_{\min})=\omega\). This can be
+achieved by setting \(v(s_{T+1})=f'_{T+1}(\omega)+v_{\max}-v_{\min}\).
+
+As a result, for any period \(t\) in \(s_{0\rightarrow T}\), by Equation
+(A7), we have \(\ln \phi_t(v(s_t))=\ln\phi_t(v(s_t)-\eta)+\kappa\eta\)
+as long as \(\eta\in[0,v_{\max}-v_{\min}]\), where \(\kappa>0\). We can
+rewrite each \(\ln \phi_t(v(s_t))\) as
+\(\ln \phi_t(v_{\min})+\kappa(v(s_t)-v_{\min})\). Therefore, we
+have\[\tag{A8}
+w_t \propto \phi_t(v_{\min})\cdot e^{\kappa(v(s_t)-v_{\min})}
+\]and \(\sum_{t=0}^T w_t=1\). In Equation (A8), setting
+\(\phi_t(v_{\min})=d_t\), \(\lambda = 1/\kappa\), and apply the
+corollary of the third step, we can conclude that
+\(w_t\propto d_t e^{u(s_t)/\lambda}\), which is of the AAD form.
+\emph{QED}.
