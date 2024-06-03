@@ -1,260 +1,87 @@
 ---
-title: "Proof"
-author: "Zark Zijian Wang"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
-bibliography: reference.bib
-biblio-style: apalike
-header-includes: 
-  \usepackage{setspace}
-  \usepackage{amsmath}
-  \usepackage{array}
-  \usepackage{caption}
-  \usepackage{longtable}
-  \usepackage{booktabs}
-  \usepackage{enumitem}
-  \renewcommand{\arraystretch}{1}
-  \captionsetup[table]{skip=5pt}
-  \setstretch{1.5} 
-fontsize: 12pt
-geometry: margin=1in
-editor_options: 
-  markdown: 
-    wrap: 72
-output:
-  #word_document:
-    #number_sections: true
-  pdf_document:
-    #number_sections: true
-    citation_package: natbib
-    keep_tex: true
-  html_document:
-    toc: true
-    number_sections: true
+output: latex_fragment
 ---
 
-We define $s_{0\rightarrow T}=[s_0,s_1,...,s_T]$ as a sequence of
-rewards, starting at period 0 and ending at period $T$. For any integer
-$t$ such that $0<t<T$, we define $s_{0\rightarrow t}=[s_0,…,s_t]$ as a
-sub-sequence of $s_{0\rightarrow T}$. Let $\mathcal{W}=[w_0,...,w_T]$ be
-the attention weights for all rewards in sequence $s_{0\rightarrow T}$,
-where $W\in[0,1]^{T+1}$. Let $C(\mathcal{W})$ denote the information
-cost function.
+\newpage
 
-The decision maker's preference for sequences, denoted by $\succsim$,
-has a optimal discounting representation if
-$s_{0\rightarrow T} \succsim s'_{0\rightarrow T'}$ implies
-$\sum_{t=0}^T w_t\cdot s_t \succsim \sum_{t=0}^{T'} w'_t \cdot s'_t$,
-where $\{w_t\}_{t=0}^T$ is determined by the following optimization
-problem$$
-\begin{aligned}
-&\max_{\mathcal{W}}\;&&\sum_{t=0}^T w_tu(s_t) - C(\mathcal{W}) \\
-&s.t.\; &&\sum_{t=0}^Tw_t =M \\
-&&& w_t >0 \text{ for all } t\in \{0,1,...,T\}
-\end{aligned}
-$$
+# Appendix
 
-We assume $C(\mathcal{W})$ is constituted by time-separable costs, that
-is, $C(\mathcal{W})=\sum_{t=0}^Tf_t(w_t)$, where $f_t(.)$ is twice
-differentiable and strictly convex.
+## A. Proof of Proposition 1
 
-Axiom 1 $\succsim$ is complete, transitive, continuous and
-state-independent.
+The sufficiency is easy to validate. We present the proof of necessity here. That is, if $\succsim$ has an optimal discounting representation and satisfies Axiom 1-4, then it has an AAD representation.
 
-(state independence) $s_t \succsim s'_t$ implies that for any
-$\alpha \in (0,1)$ and reward $c$,
-$\alpha \cdot s_t + (1-\alpha)\cdot c \succsim \alpha \cdot s'_t + (1-\alpha)\cdot c$.
+\noindent \textbf{Lemma 1}: *If Axiom 1 and 3 hold, for any* $s_{0\rightarrow T}$*, there exist* $w_0, w_1, …, w_T > 0$ *such that* $s_{0\rightarrow T} \sim w_0 \cdot s_0 + ...+w_T\cdot s_T$*, where* $\sum_{t=0}^T w_t=1$*.*
 
-According to expected utility theorem, Axiom 1 holds if and only if
-$s_{0\rightarrow T} \succsim s_{0\rightarrow T'}$ implies
-$\sum_{t=0}^T w_tv(s_t) \geq \sum_{t=0}^{T'} w'_tv(s'_t)$.
-
-Axiom 2 (sequential outcome betweenness) For any $s_{0\rightarrow T}$,
-there exists a $\alpha\in(0,1)$ such that
-$s_{0\rightarrow T} \sim \alpha\cdot s_{0\rightarrow T-1}+(1-\alpha) \cdot s_T$.
-
-Axiom 3 (sequential bracket-independence) For any $s_{0\rightarrow T}$,
-and $T\geq 2$ if there exists non-negative real numbers $\alpha_1$,
-$\alpha_2$, $\beta_0$, $\beta_1$, $\beta_2$, such that
-$s_{0\rightarrow T}\sim \alpha_1 \cdot s_{0\rightarrow T-1} + \alpha_2 \cdot s_{T}$,
-and
-$s_{0\rightarrow T}\sim \beta_0 \cdot s_{0\rightarrow T-2}+\beta_1 \cdot s_{T-1}+\beta_2 \cdot s_{T}$,
-then we must have $\alpha_2 = \beta_2$.
-
-Proposition: $\succsim$ has an ADU representation if it has an optimal
-discounting representation and satisfies Axiom 1-3.
-
-**Proof.**
-
-*Lemma 1*. If Axiom 1-2 holds, for any $s_{0\rightarrow T}$, there exist
-non-negative real numbers $w_0$, $w_1$,..., $w_T$ such that
-$s_{0\rightarrow T} \sim w_0 \cdot s_0 +w_1\cdot s_1 + ...+w_T\cdot s_T$
-where $\sum_{t=0}^T w_t=1$.
-
-When $T=1$, the lemma is a direct application of Axiom 2.
-
-When $T\geq 2$, according to Axiom 1-2, for any $2\leq t\leq T$, there
-should exist a real number $\alpha_t\in(0,1)$ such that
-$s_{0\rightarrow t}\sim \alpha_t\cdot s_{0\rightarrow t-1}+(1-\alpha_t)\cdot s_{t}$.
-For sequence $s_{0\rightarrow T}$, we can recursively apply these
-preference relations as follows:
-
-$$
+\noindent \emph{Proof}: If $T=1$, Lemma 1 is a direct application of Axiom 3. If $T\geq 2$, for any $2\leq t\leq T$, there should exist $\alpha_t\in(0,1)$ such that $s_{0\rightarrow t}\sim \alpha_t\cdot s_{0\rightarrow t-1}+(1-\alpha_t)\cdot s_{t}$. By state-independence and reduction of compound alternatives, we can recursively apply this equivalence relation as follows:$$
 \begin{aligned}
 s_{0\rightarrow T} &\sim \alpha_{T-1}\cdot s_{0\rightarrow T-1} + (1-\alpha_{T-1})\cdot s_T \\
 &\sim  \alpha_{T-1}\alpha_{T-2}\cdot s_{0\rightarrow T-2} + \alpha_{T-1}(1-\alpha_{T-2})\cdot s_{T-1} + (1-\alpha_{T-1})\cdot s_T \\
 & \sim ...\\
 & \sim w_0 \cdot s_0 + w_1\cdot s_1 +... +w_T\cdot s_T
 \end{aligned}
-$$
+$$where $w_0=\prod_{t=0}^{T-1}\alpha_t$, $w_T = 1-\alpha_{T-1}$, and for $0<t<T$, $w_t=(1-\alpha_{t-1})\prod_{\tau=t}^{T-1}\alpha_{\tau}$. It is easy to show the sum of $w_0,…,w_T$ is equal to 1. *QED*.
 
-where $w_0=\prod_{t=0}^{T-1}\alpha_t$, $w_T = 1-\alpha_{T-1}$, and for
-$0<t<T$, $w_t=(1-\alpha_{t-1})\prod_{\tau=t}^{T-1}\alpha_{\tau}$. It is
-easy to show the sum of all these weights, denoted by $w_t$
-($0\leq t\leq T$), equals 1.
+Therefore, if Axiom 1 and 3 hold, for any reward sequence $s_{0\rightarrow T}$, we can always find a convex combination of all its elements, such that the DM is indifferent between the reward sequence and this convex combination. If $s_{0\rightarrow T}$ is a constant sequence, i.e. all its elements are constant, then we can directly assume $\mathcal{W}$ is AAD-style. Henceforth, we discuss whether AAD can also apply to non-constant sequences.
 
-Therefore, if Axiom 1-2 holds, for any sequence $s_{0\rightarrow T}$, we
-can always find a convex combination of all elements in it, such that
-the decision maker is indifferent between the sequence and the convex
-combination of its elements. By Lemma 2, I show this convex combination
-is unique.
+By Lemma 2, we show adding a new reward to the end of $s_{0\rightarrow T}$ has no impact on the relative decision weights of rewards in the original reward sequence.
 
-*Lemma 2*. If Axiom 1-3 holds, suppose
-$s_{0\rightarrow T}\sim \sum_{t=0}^T w_t \cdot s_t$ and
-$s_{0\rightarrow T+1} \sim \sum_{t=0}^{T-1} w'_t\cdot s_t$, where
-$w_t >0$, $w'_t>0$, $\sum_{t=0}^Tw_t=1$, $\sum_{t=0}^{T+1}w'_t=1$, we
-must have $\frac{w'_0}{w_0}=\frac{w'_1}{w_1}=…=\frac{w'_T}{w_T}$.
+\noindent \textbf{Lemma 2}: *For any* $s_{0\rightarrow T+1}$*, if* $s_{0\rightarrow T}\sim \sum_{t=0}^T w_t \cdot s_t$ *and* $s_{0\rightarrow T+1} \sim \sum_{t=0}^{T+1} w'_t\cdot s_t$*, where* $w_t, w'_t>0$ and $\sum_{t=0}^Tw_t=1$*,* $\sum_{t=0}^{T+1}w'_t=1$*, then when Axiom 1-4 hold, we can obtain* $\frac{w'_0}{w_0}=\frac{w'_1}{w_1}=…=\frac{w'_T}{w_T}$*.*
 
-According to Axiom 2, there exist $\alpha,\zeta \in (0,1)$ such that
-$s_{0 \rightarrow T}\sim\alpha\cdot s_{0 \rightarrow T-1} + (1-\alpha)\cdot s_T$,
-$s_{0\rightarrow T+1} \sim \zeta\cdot s_{0\rightarrow T} + (1-\zeta)\cdot s_{T+1}$.
-Meanwhile, we set
-$s_{0\rightarrow T+1} \sim \beta_0\cdot s_{0 \rightarrow T-1} + \beta_1\cdot s_T + (1-\beta_0-\beta_1)\cdot s_{T+1}$,
-where $\beta_0, \beta_1 > 0$.
+\noindent \emph{Proof}: According to Axiom 3, for any $s_{0\rightarrow T+1}$, there exist $\alpha,\zeta \in (0,1)$ such that$$\tag{A1}
+\begin{aligned}
+s_{0 \rightarrow T}\sim\alpha\cdot s_{0 \rightarrow T-1} + (1-\alpha)\cdot s_T \\
+s_{0\rightarrow T+1} \sim \zeta\cdot s_{0\rightarrow T} + (1-\zeta)\cdot s_{T+1}
+\end{aligned}
+$$On the other hand, we drawn on Lemma 1 and set$$\tag{A2}
+s_{0\rightarrow T+1} \sim \beta_0\cdot s_{0 \rightarrow T-1} + \beta_1\cdot s_T + (1-\beta_0-\beta_1)\cdot s_{T+1}
+$$where $\beta_0, \beta_1 > 0$. According to Axiom 4, $1-\zeta=1-\beta_0-\beta_1$. So, $\beta_1=\zeta-\beta_0$. This also implies $\zeta > \beta_0$.
 
-According to Axiom 3, we must have $1-\zeta=1-\beta_0-\beta_1$. So,
-$\beta_1=\zeta-\beta_0$.
+According to Axiom 2, we suppose there exists a reward sequence $s$ such that $s \sim \frac{\beta_0}{\zeta}\cdot s_{0 \rightarrow T-1} + (1-\frac{\beta_0}{\zeta})\cdot s_1$. By Equation (A2) and reduction of compound alternatives, we have $s_{0\rightarrow T+1}\sim \zeta \cdot s + (1-\zeta)\cdot s_{T+1}$. Combining Equation (A2) with the second line of Equation (A1) and applying transitivity and state-independence, we obtain $s_{0\rightarrow T} \sim \frac{\beta_0}{\zeta}\cdot s_{0 \rightarrow T-1} + (1-\frac{\beta_0}{\zeta})\cdot s_1$.
 
-According to state independence, it can be derived that
-$s_{0\rightarrow T} \sim \frac{\beta_0}{\zeta}\cdot s_{0 \rightarrow T-1} + (1-\frac{\beta_0}{\zeta})\cdot s_1$.
+We aim to prove that for any $s_{0\rightarrow T+1}$, we can obtain $\alpha=\frac{\beta_0}{\zeta}$. To do this, we first assume (without loss of generality) that $\alpha > \frac{\beta_0}{\zeta}$.
 
-Given that
-$s_{0\rightarrow T}\sim\alpha\cdot s_{0\rightarrow T-1} + (1-\alpha)\cdot s_T$,
-suppose $\alpha > \frac{w'_0}{\zeta}$, we can rewrite this preference
-relation as
-$s_{0\rightarrow T}\sim(\alpha-\frac{\beta_0}{\zeta})\cdot s_{0\rightarrow T-1} +(1-\alpha)\cdot s_T + \frac{\beta_0}{\zeta}\cdot s_{T-1}$.
+Consider the case that $s_{0 \rightarrow T-1} \succ s_T$. By state-independence, for any $c\in \mathbb{R}_{\geq 0}$, we have $(\alpha - \frac{\beta_0}{\zeta})\cdot s_{0\rightarrow T-1} + (1-\alpha+\frac{\beta_0}{\zeta})\cdot c \succ (\alpha - \frac{\beta_0}{\zeta})\cdot s_T + (1-\alpha+\frac{\beta_0}{\zeta})\cdot c$. By Axiom 2, there exists $z\in \mathbb{R}_{\geq 0}$ such that $(1-\alpha)\cdot s_T + \frac{\beta_0}{\zeta}\cdot s_{0\rightarrow T-1}\sim z$. Given $c$ is arbitrary, we set $(1-\alpha+\frac{\beta_0}{\zeta})\cdot c \sim z$. By reduction of compound alternatives, we can derive that$$
+(\alpha-\frac{\beta_0}{\zeta})\cdot s_{0\rightarrow T-1} +(1-\alpha)\cdot s_T + \frac{\beta_0}{\zeta}\cdot s_{0\rightarrow T-1} \succ (\alpha-\frac{\beta_0}{\zeta})\cdot s_T +(1-\alpha)\cdot s_T + \frac{\beta_0}{\zeta}\cdot s_{0\rightarrow T-1}
+$$where the LHS can be rearranged to $\alpha\cdot s_{0\rightarrow T-1} + (1-\alpha)\cdot s_T$, and the RHS can be rearranged to $\frac{\beta_0}{\zeta}\cdot s_{0 \rightarrow T-1} + (1-\frac{\beta_0}{\zeta})\cdot s_1$. They both should be indifferent from $s_{0\rightarrow T}$. This results in a contradiction. Similarly, in the case that $s_T \succ s_{0 \rightarrow T-1}$, we can also derive a contradiction. Meanwhile, when $s_{0\rightarrow T}\sim s_T$, $\alpha$ and $\frac{\beta_0}{\zeta}$ can be any number within $(0,1)$. So, we can directly set $\alpha = \frac{\beta_0}{\zeta}$.
 
-If $s_{0 \rightarrow T-1} \succ s_T$, by applying state independence, we
-can derive that
-$(\alpha-\frac{\beta_0}{\zeta})\cdot s_{0\rightarrow T-1} +(1-\alpha)\cdot s_T + \frac{\beta_0}{\zeta}\cdot s_{0\rightarrow T-1} \succ (\alpha-\frac{\beta_0}{\zeta})\cdot s_T +(1-\alpha)\cdot s_T + \frac{\beta_0}{\zeta}\cdot s_{0\rightarrow T-1}$,
-where the right-hand side, according to the above preference relation,
-is indifferent from $s_{0\rightarrow T}$. Thus, we get a contradiction.
+Thus, we have $\alpha = \frac{\beta_0}{\zeta}$ for any $s_{0\rightarrow T+1}$, which indicates $\frac{\beta_0}{\alpha}=\frac{\beta_1}{1-\alpha}=\zeta$. We can recursively apply this equality to any sub-sequence $s_{0\rightarrow t}$ ($t\leq T$) of $s_{0\rightarrow T+1}$, so that the lemma will be proved. *QED*.
 
-Similarly, suppose $\alpha < \frac{\beta_0}{\zeta}$, we will also get a
-contradiction.
+Now we move on to prove Proposition 1. The proof contains five steps.
 
-Thus, $\alpha = \frac{\beta_0}{\zeta}$, which indicates
-$\frac{\beta_0}{\alpha}=\frac{\beta_1}{1-\alpha}=\zeta$.
+First, we add the constraints $\sum_{t=0}^T w_t=1$ and $w_t>0$ to the optimal discounting problem for $s_{0\rightarrow T}$ so that the problem is compatible with Lemma 1. According to the FOC of its solution, for all $t=0,1,….,T$, we have$$\tag{A3}
+f_t'(w_t)=u(s_t)+\theta
+$$where $\theta$ is the Lagrange multiplier. Given that $f'_t(w_t)$ is strictly increasing, $w_t$ is increasing with $u(s_t)+\theta$. We define the solution as $w_t =\phi_t(u(s_t)+\theta)$.
 
-We can recursively apply this conclusion to any $T$. Then, we can obtain
-the lemma.
+Second, we add a new reward $s_{T+1}$ to the end of $s_{0\rightarrow T}$ and apply Lemma 2 as a constraint to optimal discounting problem. Look at the optimal discounting problem for $s_{0\rightarrow T+1}$. For all $t\leq T$, the FOC of its solution will take the same form as Equation (A3). So, if importing $s_{T+1}$ changes some $w_t$ to $w'_t$ ($w'_t \neq w_t$, where $w_t$ is the solution to optimal discounting problem for $s_{0\rightarrow T}$), the only way is through changing the multiplier $\theta$. Suppose importing $s_{T+1}$ changes $\theta$ to $\theta-\Delta \theta$, we have $w'_t = \phi_t(u(s_t)+\theta-\Delta \theta)$.
 
-Corollary 1. every sequence has a unique decomposition.
-
-We can finish the proof by mathematical induction.
-
-When $T=1$, we have
-$s_{0 \rightarrow T}\sim\alpha\cdot s_0 + (1-\alpha)\cdot s_1$ and
-$\alpha$ must be unique (otherwise there will be a contradiction).
-
-When $T\geq 2$, we have
-$s_{0\rightarrow T+1} \sim \zeta\alpha\cdot s_{0\rightarrow T-1} + \zeta(1-\alpha)\cdot s_T + (1-\zeta)\cdot s_{T+1}$
-and we know that $\alpha$ is fixed.
-$s_{0\rightarrow T+1} \sim \sum_{t=0}^{T+1} w'_t\cdot s_t$, where
-$w_t >0$, $w'_t>0$, $\sum_{t=0}^Tw_t=1$, and $\sum_{t=0}^{T+1}w'_t=1$,
-we must have $\frac{w_0}{w'_0}=\frac{w_1}{w'_1}=…=\frac{w_T}{w'_T}$.
-
-Then, $\zeta$ must be unique too.
-
-Proposition.
-
-The FOC condition of the optimal discounting problem is:
-
-$$
-f_t'(w_t)=u(s_t)+\theta,\; \forall t\in\{0,1,...,T\}
-$$
-
-where $\theta$ is the Lagrangian multiplier. Given that $C$ is strictly
-convex, $w_t$ is increasing with $u(s_t)+\theta$. Define the solution as
-$w_t \equiv \phi_t(u(s_t)+\theta)$.
-
-Lemma 1 indicates $M=1$.
-
-First, note that adding a new reward $s_{T+1}$ to the end of the
-sequence will only change $\theta$. Suppose this changes $\theta$ to
-$\theta-\Delta \theta$.
-
-Lemma 2 indicates that
-
-$$
+By Lemma 2, we know $\frac{w_0}{w'_0}=\frac{w_1}{w'_1}=…=\frac{w_T}{w'_T}$. In other words, for $t=0,1,…,T$, we have $w_t \propto \phi_t(u(s_t)+\theta-\Delta \theta)$. We can rewrite $w_t$ as $$\tag{A4}
 w_t = \frac{\phi_t(u(s_t)+\theta-\Delta \theta)}{\sum_{\tau=0}^{T}\phi_\tau(u(s_\tau)+\theta-\Delta \theta)}
 $$
 
-Second, note that $\Delta \theta$ is strictly increasing with $s_{T+1}$.
+Third, we show that in $s_{0\rightarrow T}$, if we change each $s_t$ to $z_t$ such that $u(z_t)=u(s_t)+\Delta u$, the decision weights $w_0,…,w_T$ will remain the same. Note $\sum_{t=0}^T \phi_t(u(s_t)+\theta)=1$. It is clear that $\sum_{t=0}^T \phi_t(u(z_t)+\theta-\Delta u)=1$. Suppose changing every $s_t$ to $z_t$ moves $\theta$ to $\theta'$ and $\theta'<\theta-\Delta u$. Then, we must have $\phi_t(u(z_t)+\theta')<\phi_t(u(z_t)+\theta-\Delta u)$ since $\phi_t(.)$ is strictly increasing. This results in $\sum_{t=0}^T \phi_t(u(z_t)+\theta')<1$, which contradicts with the constraint that the sum of all decision weights is 1. The same contradiction can apply to the case that $\theta'>\theta-\Delta u$. Therefore, changing every $s_t$ to $z_t$ must move $\theta$ to $\theta - \Delta u$, and each $w_t$ can only be moved to $\phi_t(u(z_t)+\theta -\Delta u)$, which is exactly the same as the original decision weight.
 
-If $u(s_{T+1})$ increases, then $w_{T+1}$ must increase.
+A natural corollary of this step is that, subtracting or adding a common number to all intantaneous utilities in a reward sequence has no effect on decision weights. What actually matters for determining the decision weights is the difference between instantaneous utilities. This indicates, for convenience, we can subtract or add an arbitrary number to the utility function.
 
-Suppose $\Delta \theta$ is unchanged, then $w_0,…,w_T$ will be
-unchanged.
+In other words, for a given $s_{0\rightarrow T}$ and $s_{T+1}$, we can define a new utility function $v(.)$ such that $v(s_t) = u(s_t) +\theta-\Delta \theta$. So, Equation (A4) can be re-written as$$
+w_t = \frac{\phi_t(v(s_t))}{\sum_{\tau=0}^{T}\phi_\tau(v(s_\tau))}
+$$If $w_t$ takes the AAD form under the utility function $v(.)$, i.e. $w_t \propto d_t e^{v(s_t)/\lambda}$, then it should also take the AAD form under the original utility function $u(.)$.
 
-So, $\Delta \theta$ should increase as well.
+Fourth, we show $\Delta \theta$ has two properties: (i) $\Delta \theta$ is strictly increasing with $u(s_{T+1})$; (ii) suppose $\Delta \theta = \underline{\theta}$ when $u(s_{T+1})=\underline{u}$ and $\Delta\theta=\bar{\theta}$ when $u(s_{T+1})=\bar{u}$, where $\underline{u}<\bar{u}$, then for any $l \in(\underline{\theta},\bar{\theta})$, there exists $u(s_{T+1})\in(\underline{u},\bar{u})$ such that $\Delta \theta = l$.
 
-We have to derive the range of $\Delta \theta$ and show that the any
-$\Delta \theta$ within this range can be reached through an appropriate
-$s_{T+1}$.
+The property (i) can be shown by contradiction. Given $w_0,…,w_{T+1}$ a sequence of decision weights for $s_{0\rightarrow T+1}$. Suppose $u(s_{T+1})$ is increased but $\Delta \theta$ is constant. In this case, each of $w'_0,…,w'_T$ should also be constant. However, $w'_{T+1}$ must increase as it is stricly increasing with $u(s_{T+1})+\theta-\Delta \theta$ ($\theta$ is determined by the optimal discounting problem for $s_{0\rightarrow T}$; thus, any operations on $s_{T+1}$ should have no effect on $\theta$). This contradicts with the constraint that $\sum_{t=0}^{T+1} w'_t =1$. The only way to avoid such contradictions is to set $\Delta \theta$ strictly increasing with $s_{T+1}$, so that $w'_0,…,w'_T$ are decreasing with $u(s_{T+1})$.
 
-Third, note that if we change $s_t$ to $s'_t$ such that
-$u(s'_t)=u(s_t)+\Delta u$, then $\theta$ must be moved to
-$\theta - \Delta u$.
+For property (ii), note that for any reward sequence $s_{0\rightarrow T+1}$ and a given $\theta$, $\Delta\theta$ is defined as the solution to $\sum_{t=0}^{T+1} \phi_t(u(s_t)+\theta-\Delta\theta)=1$. Given an arbitrary number $l\in(\underline{\theta},\bar{\theta})$, the proof of property (ii) consists of two stages. First, for $t=0,1,…,T$, we need to show that $u(s_t)+\theta-l$ is still in the domain of $\phi_t(.)$. Second, for period $T+1$, we need to show for any $\omega\in(0,1)$, there exists $u(s_{T+1})\in \mathbb{R}$ such that $\phi_{T+1}(u(s_{T+1})+\theta-l)=\omega$.
 
-So, what actually matters is the differences between utilities.
-Subtracting or adding a number to $u(.)$ has no impact on
-$\{w_t\}_{t=0}^T$.
+For the first stage, note $\phi_t(.)$ is the inverse function of $f'_t(.)$. Suppose when $\Delta\theta=\underline{\theta}$, we have $f'_t(w^{a}_t)=u(s_t)+\theta-\underline{\theta}$, and when $\Delta\theta=\bar{\theta}$, we have $f'_t(w^{b}_t)=u(s_t)+\theta-\bar{\theta}$. For any $l\in(\underline{\theta},\bar{\theta})$, we have $u(s_t)+\theta-l \in (f'_t(w^b_t),f'_t(w^a_t))$. Given that $f'_t(.)$ is continuous and strictly increasing, there must be $w_t\in(w^b_t,w^a_t)$ such that $f'_t(w_t)=u(s_t)+\theta-l$. So, $u(s_t)+\theta-l$ is in the domain of $\theta_t(.)$. For the second stage, given an arbitrary $\omega\in(0,1)$, we can set $u(s_{T+1})=f'(\omega)-\theta+l$, so that the desired condition is satisfied.
 
-Suppose at some appropriately chosen $s_{T+1}$ and some appropriately
-defined $u(.)$ such that $\theta-\Delta \theta=0$, we can represent
-$w_t$ by
+A corollary of this step is that we can manipulate $\Delta \theta$ in Equation (A4) at any level in $[\underline{\theta},\bar{\theta}]$ by changing a hypothetical $s_{T+1}$.
 
-$$
-w_t = \frac{\phi_t(u(s_t))}{\sum_{\tau=0}^{T}\phi_\tau(u(s_\tau))}
-$$ where $\phi_t$ is the inverse of the derivative of $f_t$ on $w_t$.
+Fifth, we show $\ln \phi_t(.)$ is linear under some conditions. To do this, let us add a hypothetical $s_{T+1}$ to the end of $s_T$ and let $w'_t=\phi_t(v(s_t))$ denote the decision weights for $t=0,1,…,T+1$ in $s_{0\rightarrow T+1}$. We change the hypothetical $s_{T+1}$ within the set $\{s_{T+1}|u(s_{T+1})\in[\underline{u},\bar{u}]\}$ and see what will happen to the decision weights from period 0 to period $T$. Suppose this changes each $w'_t$ to $\phi_t(v(s_t)+\theta')$. Set $\theta'=a$ when $u(s_{T+1})=\underline{u}$ and $\theta'=b$ when $u(s_{T+1})=\bar{u}$. By the second step, we have$$\tag{A5}
+\frac{\phi_t(v(s_t))}{\sum_{\tau=0}^{T}\phi_\tau(v(s_\tau))} = \frac{\phi_t(v(s_t)+\theta')}{\sum_{\tau=0}^{T}\phi_\tau(v(s_\tau)+\theta')}
+$$For each $t=0,1,...,T$, we can rewrite $\phi_t(v(s_t))$ as $e^{\ln \phi_t(v(s_t))}$. For the LHS of Equation (A5), multiplying both the numerator and the denominator by a same number will not affect the value. Therefore, Equation (A5) can be rewritten as $$
+\frac{e^{\ln\phi_t(v(s_t))+\kappa\theta'}}{\sum_{\tau=0}^{T}e^{\ln\phi_\tau(v(s_\tau))+\kappa\theta'}} = \frac{e^{\ln\phi_t(v(s_t)+\theta')}}{\sum_{\tau=0}^{T}e^{\ln\phi_\tau(v(s_\tau)+\theta')}}
+$$where $\kappa$ can be any real-valued constant. By properly selecting $\kappa$, we can obtain $\ln \phi_t(v(s_t))+\kappa\theta'=\ln \phi_t(v(s_t)+\theta')$ for all $t=0,1,...,T$. And if $\theta'>0$, we must have $\kappa>0$.
 
-Then, we move to any other $s_{T+1}$. Suppose that the attention weight
-for period $t$ in this case will become $\phi_t(u(s_t)+\theta')$.
+This indicates a property of function $\ln \phi_t(.)$. That is, for any $v\in \mathbb{R}$, we have $\ln \phi_t(v)=\ln \phi_t(v-\theta')+\kappa\theta'$ as long as $\theta' \in [a,b]$.
 
-$$
-\frac{\phi_t(u(s_t))}{\sum_{\tau=0}^{T}\phi_\tau(u(s_\tau))} = \frac{\phi_t(u(s_t)+\theta')}{\sum_{\tau=0}^{T}\phi_\tau(u(s_\tau)+\theta')}
-$$ We can rewrite this as
-
-$$
-\frac{e^{\ln\phi_t(u(s_t))}}{\sum_{\tau=0}^{T}e^{\ln\phi_\tau(u(s_\tau))}} = \frac{e^{\ln\phi_t(u(s_t)+\theta')}}{\sum_{\tau=0}^{T}e^{\ln\phi_\tau(u(s_\tau)+\theta')}}
-$$
-
-Suppose
-$\ln \phi_t (u(s_t)+\theta') = \ln \phi_t (u(s_t))+\lambda_t\theta'$
-
-we must have
-
-$$
-\sum_{\tau=0}^T (1-e^{(\lambda_\tau-\lambda_t)\theta'})\phi_\tau(u(s_\tau))=0
-$$
-
-for any $t$.
-
-When $\tau=t$, $\lambda_\tau - \lambda_t=0$. Note if $T=1$, $t$ can only
-take 0 or 1, and there is only one period other than $t$ in the
-summation equation. Thus, we must have $\lambda_0=\lambda_1$.
-
-Similarly, we have $\lambda_0=\lambda_1=…=\lambda$.
-
-So, we can write $\ln \phi_t (u(s_t))$ as
-$\ln \phi_t(u(0))+\lambda u(s_t)$
+So, we can write $\ln \phi_t (v(s_t)+\theta')$ as $\ln \phi_t(\theta')+\kappa v(s_t)$
