@@ -55,7 +55,7 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
-\usepackage{setspace,lscape} \usepackage{amsmath} \usepackage{array} \usepackage{caption,subcaption,multirow} \usepackage[hang]{footmisc} \usepackage{enumitem} \usepackage{standalone} \renewcommand{\arraystretch}{1.5} \captionsetup[table]{skip=5pt} \setstretch{1.5} \setlength{\parindent}{1em} \setlength{\footnotemargin}{3mm} \setlength{\footnotesep}{3mm} \renewcommand{\[}{\begin{equation}} \renewcommand{\]}{\end{equation}}
+\usepackage{setspace,lscape} \usepackage{amsmath} \usepackage{caption,subcaption,multirow} \usepackage[hang]{footmisc} \usepackage{enumitem} \usepackage{standalone} \renewcommand{\arraystretch}{1.5} \captionsetup[table]{skip=5pt} \setstretch{1.5} \setlength{\parindent}{1em} \setlength{\footnotemargin}{3mm} \setlength{\footnotesep}{3mm} \renewcommand{\[}{\begin{equation}} \renewcommand{\]}{\end{equation}}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -72,12 +72,26 @@
 
 \title{Attention and Valuation for Sequences of Rewards}
 \author{Zijian Zark Wang}
-\date{May 08, 2024}
+\date{June 03, 2024}
 
 \begin{document}
 \maketitle
 \begin{abstract}
-(to be added)
+Valuating a sequence of rewards requires people to consider both various
+attributes (time and amount) and values of rewards delivered at various
+time points. In three experiments, we explore the role of attention in
+this process. First, we investigate people's time preference in a
+setting in which they can either get a sum of money now or invest a
+fraction of money for a certain interest (getting a sequence of two
+positive rewards). We find people exhibit more patience when their
+attention is causally directed to the delayed reward in the sequence.
+Second, we elicit people's valuation of reward sequences by both
+fill-in-the-blank questions and choice lists. A substantial fraction of
+people totally ignore the time attribute and value a reward sequence
+simply by the sum of amounts. We also find people tend to overweight
+large rewards and underweight small rewards within a sequence. These
+findings can help us filter and improve theories of intertemporal
+choice.
 \end{abstract}
 
 \hypertarget{introduction}{%

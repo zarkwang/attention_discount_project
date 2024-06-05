@@ -1,14 +1,17 @@
 \newpage
 
 \hypertarget{appendix}{%
-\section{Appendix}\label{appendix}}
+\section*{Appendix}\label{appendix}}
+\addcontentsline{toc}{section}{Appendix}
 
 \hypertarget{a.-proof-of-proposition-1}{%
-\subsection{A. Proof of Proposition 1}\label{a.-proof-of-proposition-1}}
+\subsection*{A. Proof of Proposition
+1}\label{a.-proof-of-proposition-1}}
+\addcontentsline{toc}{subsection}{A. Proof of Proposition 1}
 
-The sufficiency is easy to validate. We present the proof of necessity
-here. That is, if \(\succsim\) has an optimal discounting representation
-and satisfies Axiom 1-4, then it has an AAD representation.
+We present the proof of sufficiency here. That is, if \(\succsim\) has
+an optimal discounting representation and satisfies Axiom 1-4, then it
+has an AAD representation.
 
 \noindent \textbf{Lemma 1}: \emph{If Axiom 1 and 3 hold, for any}
 \(s_{0\rightarrow T}\)\emph{, there exist} \(w_0, w_1, …, w_T > 0\)
@@ -220,7 +223,7 @@ A corollary of this step is that we can manipulate \(\Delta \theta\) in
 Equation (A4) at any level in \([\underline{\theta},\bar{\theta}]\) by
 changing a hypothetical \(s_{T+1}\).
 
-Fifth, we show \(\ln \phi_t(.)\) is linear under some conditions. To do
+Fifth, we show \(\ln \phi_t(.)\) is linear under some condition. To do
 this, let us add a hypothetical \(s_{T+1}\) to the end of \(s_T\) and
 let \(w'_t=\phi_t(v(s_t))\) denote the decision weights for
 \(t=0,1,…,T+1\) in \(s_{0\rightarrow T+1}\). We change the hypothetical
@@ -279,4 +282,243 @@ w_t \propto \phi_t(v_{\min})\cdot e^{\kappa(v(s_t)-v_{\min})}
 \(\phi_t(v_{\min})=d_t\), \(\lambda = 1/\kappa\), and apply the
 corollary of the third step, we can conclude that
 \(w_t\propto d_t e^{u(s_t)/\lambda}\), which is of the AAD form.
-\emph{QED}.
+
+\hypertarget{b.-proof-of-proposition-2}{%
+\subsection*{B. Proof of Proposition
+2}\label{b.-proof-of-proposition-2}}
+\addcontentsline{toc}{subsection}{B. Proof of Proposition 2}
+
+Note the instantaneous utilities of LL and SS are \(v_l\) and \(v_s\),
+and the delays for LL and SS are \(t_l\) and \(t_s\). According to
+Equation (3), the common difference effect implies that, if\[ \tag{B1}
+\frac{v_s}{1+G(t_s)e^{-v_s}} = \frac{v_l}{1+G(t_l)e^{-v_l}}
+\]then for any \(\Delta t \geq 0\), we have \[ \tag{B2}
+\frac{v_s}{1+G(t_s+\Delta t)e^{-v_s}} < \frac{v_l}{1+G(t_l+\Delta t)e^{-v_l}}
+\]If \(G(T)=T\), we have \(G(t+\Delta t) = G(t) + \Delta t\). In this
+case, combining Equation (B1) and (B2), we can obtain\[ \tag{B3}
+\frac{\Delta t e^{-v_s}}{v_s} > \frac{\Delta t e^{-v_l}}{v_l}
+\]Given that function \(\psi(v) = e^{-v}/v\) is decreasing with \(v\) so
+long as \(v>0\), Equation (B3) is valid.
+
+If \(G(T) = \frac{1}{1-\delta}(\delta^{-T}-1)\), we have\[
+1+G(t+\Delta t)e^{-v} = \delta^{-\Delta t}[1+G(t)e^{-v}]+(\delta^{-\Delta t}-1)(\frac{e^{-v}}{1-\delta}-1)
+\] Thus, combining Equation (B1) and (B2), we can obtain\[\tag{B4}
+(\delta^{-\Delta t}-1)\frac{\frac{e^{-v_s}}{1-\delta}-1}{v_s} >
+(\delta^{-\Delta t}-1)\frac{\frac{e^{-v_l}}{1-\delta}-1}{v_l}
+\] Given that \(0<\delta<1\), we have \(\delta^{-\Delta t}>1\). So,
+Equation (B4) is valid if and only if\[\tag{B5}
+\frac{1}{v_s}-\frac{1}{v_l}<\frac{1}{1-\delta}(\frac{e^{-v_s}}{v_s}-\frac{e^{-v_l}}{v_l})
+\] By Equation (B1), we know that\[\tag{B6}
+\frac{1}{v_s}-\frac{1}{v_l}=\frac{1}{1-\delta}\left[\frac{(\delta^{-t_l}-1)e^{-v_l}}{v_l} -\frac{(\delta^{-t_s}-1)e^{-v_s}}{v_s}\right]
+\] Combining Equation (B5) and (B6), we have\[
+\delta^{-t_l}\frac{e^{-v_l}}{v_l}<\delta^{-t_s}\frac{e^{-v_s}}{v_s} \Longleftrightarrow v_l - v_s + \ln \left(\frac{v_l}{v_s}\right)>-(t_l-t_s)\ln\delta
+\]
+
+\hypertarget{c.-proof-of-proposition-3}{%
+\subsection*{C. Proof of Proposition
+3}\label{c.-proof-of-proposition-3}}
+\addcontentsline{toc}{subsection}{C. Proof of Proposition 3}
+
+Suppose a positve reward \(x\) is delivered at period \(T\). By Equation
+(3), if \(w_T\) is convex in \(T\), we should have
+\(\frac{\partial^2 w_T}{\partial T^2}\geq 0\). This
+implies\[\tag{C1} 2G'(T)^2\geq(G(T)+e^{v(x)})G''(T) \]
+
+If \(\delta=1\), then \(G(T)=T\). We have \(G'(T)=1\), \(G''(T)=0\).
+Thus, Equation (C1) is always valid.
+
+If \(0<\delta<1\), then \(G(T)=(1-\delta)^{-1}(\delta^{-T}-1)\). We have
+\(G'(T)=(1-\delta)^{-1}(-\ln\delta)\delta^{-T}\),
+\(G''(t)=(-\ln\delta)G'(T)\). Thus, Equation (C1) is valid when
+\[\tag{C2} \delta^{-T}\geq(1-\delta)e^{v(x)}-1 \]Given \(T>0\), Equation
+(C2) holds true in two cases. The first case is
+\(1\geq (1-\delta)e^{v(x)}-1\), which implies that \(v(x)\) is no
+greater than a certain threshold \(v(\underline{x})\), where
+\(v(\underline{x})=\ln(\frac{2}{1-\delta})\). The second case is that
+\(v(x)\) is above \(v(\underline{x})\) and \(T\) is above a threshold
+\(\underline{t}\). In the second case, we can take the logarithm on both
+sides of Equation (C2). It yields
+\(\underline{t}=\frac{\ln[(1-\delta)\exp\{v(x)\}-1]}{\ln(1/\delta)}\).
+
+\hypertarget{d.-proof-of-proposition-4}{%
+\subsection*{D. Proof of Proposition
+4}\label{d.-proof-of-proposition-4}}
+\addcontentsline{toc}{subsection}{D. Proof of Proposition 4}
+
+For convenience, we use \(v\) to represent \(v(x)=u(x)/\lambda\), and
+use \(U\) represent \(U(x,T)\). Set \(g= G(T)\). The first-order
+derivative of \(U\) with respect to \(x\) can be written as\[\tag{D1}
+\frac{\partial U}{\partial x}=v'\frac{e^v+U}{e^v+g}
+\]If \(U\) is strictly concave in \(x\), we should have
+\(\frac{\partial^2 U}{\partial x^2}<0\). By Equation (D1), we calculate
+the second-order derivative of \(U\) with respect to \(x\), and
+rearrange this second-order condition to\[\tag{D2}
+2\zeta(v)+\frac{1}{1+v\zeta(v)}-1<\frac{-v''}{(v')^2}\equiv\frac{d}{dx}\left(\frac{1}{v'}\right)
+\]
+
+where \(\zeta(v)=g/(g+e^v)\). Since \(v''<0\), the RHS of Equation (D2)
+is clearly positive.
+
+To prove the first part of Proposition 4, we can show that when \(x\) is
+large enough, the LHS of Equation (D2) will be non-positive. To make the
+LHS non-positive, we require\[\tag{D3}
+\zeta(v)+\frac{1}{v}\leq\frac{1}{2}
+\]Note that \(\zeta(v)\) is decreasing in \(v\), and \(v\) is increasing
+in \(x\). Hence, \(\zeta(v)+\frac{1}{v}\) is decreasing in \(x\).
+Besides, when \(x\rightarrow0\), it approaches to \(+\infty\), and when
+\(x\rightarrow +\infty\), it approaches to 0. When
+\(\frac{d}{dx}\left(\frac{1}{v'(x)}\right)\) is continuous, there must
+be a unique realization of \(x\) in \((0,+\infty)\), say \(\bar{x}\),
+making the equality in Equation (D3) hold. When \(x\geq\bar{x}\),
+Equation (D3) is always valid, and therefore, \(U(x,T)\) is concave in
+\(x\).
+
+To prove the second part, first note that when \(x=0\), the LHS of
+Equation (D2) will become \(\frac{2g}{g+1}\). If
+\(\frac{d}{dx}\left(\frac{1}{v'(0)}\right)\) is smaller than this value,
+then the LHS of Equation (D2) should be greater than the RHS at the
+point of \(x=0\). From the first part of proposition 4, we know the LHS
+is smaller than the RHS at the point of \(x=\bar{x}\). Thus, given
+\(\frac{d}{dx}\left(\frac{1}{v'(x)}\right)\) is continuous in
+\([0,\bar{x}]\), there must also be a point within \([0,\bar{x}]\), such
+that the LHS equals the RHS. Let \(x^*\) denote the minimum of \(x\)
+that makes the equality valid. Then, for any \(x\in(0,x^*)\), we must
+have that the LHS of Equation (D2) is greater than the RHS, which
+implies \(U(x,T)\) is convex in \(x\). Given that \(T\geq1\), we have
+\(g\geq1\) and thus \(\frac{2g}{g+1}\geq 1\). Thus, when
+\(\frac{d}{dx}\left(\frac{1}{v'(0)}\right)<1\), \(U(x,t)\) can be convex
+in \(x\) for any \(x\in(0,x^{*})\), regardless of \(g\).
+
+The prove the third part, note that \(v(x)=u(x)/\lambda\). So, \[
+\frac{d}{dx}\left(\frac{1}{v'}\right)=\lambda\frac{d}{dx}\left(\frac{1}{u'}\right)
+\]We arbitrarily draw a point from \((0,\bar{x})\) and derive the range
+\(\lambda\) relative to this point. For simplicity, we choose
+\(x=\ln g\). In this case, the LHS of Equation (D2) becomes
+\(\frac{2}{2+\ln g}\). Define a function \(\xi(x)\), where \(\xi\) is
+the value of the LHS of Equation (D2) minus its RHS. Note \(\xi(x)\) is
+continuous at \(x=\ln g\). Therefore, for any positive real number
+\(b\), there must exist a positive real number \(c\) such that, when
+\(x\in(\ln g-c,\ln g+c)\), we have\[\tag{D4}
+\xi(\ln g)-b<\xi(x)<\xi(\ln g)+b
+\]If \(\xi(\ln g)-b\geq 0\), then \(\xi(x)\) will keep positive for all
+\(x\in(\ln g-c,\ln g+c)\), which implies the LHS of Equation (D2) is
+always greater than its RHS.
+
+Finally, we derive the condition for \(\xi(\ln g)-b\geq 0\). Suppose
+when \(x=\ln g\), \(\frac{d}{dx}\left(\frac{1}{u'}\right)=a\) (note at
+this point we have \(\frac{d}{dx}\left(\frac{1}{u'}\right)<+\infty\)).
+Combining with Equation (D3), we know that
+\(\xi(\ln g)-b =\frac{2}{2+\ln g}-\lambda a-b\). Letting this value be
+non-negative, we obtain\[\tag{D5}
+\lambda \leq \frac{2}{a(2+\ln g)}-\frac{b}{a}
+\]Given \(T\geq1\), we have \(g\geq 1\) and thus \(\frac{2}{2+\ln g}\)
+should be positive. Meanwhile, given that \(u'>0\) and \(u''<0\), \(a\)
+should also be positive. Since \(b\) can be any positive number,
+Equation (D5) holds if \(\lambda <\frac{2}{a(2+\ln g)}\). That is, when
+\(\lambda\) is positive but smaller than a certain threshold, there must
+be an interval \((\ln g-c,\ln g+c)\) such that the LHS of Equation (D2)
+is greater than the RHS. Set \(x_1 = \max\{0,\ln g-c\}\),
+\(x_2=\min\{\bar{x}, \ln g +c\}\). When \(x\in (x_1,x_2)\), function
+\(U(x,T)\) must be convex in \(x\).
+
+\hypertarget{e.-proof-of-proposition-5}{%
+\subsection*{E. Proof of Proposition
+5}\label{e.-proof-of-proposition-5}}
+\addcontentsline{toc}{subsection}{E. Proof of Proposition 5}
+
+The proof consists of four steps. First, we write the expressions for
+\(U(L1)\) and \(U(L2)\). Given a lottery result \((s_1,s_2)\), we denote
+the decision weight of each positive reward by \(w_{t_1}\) and
+\(w_{t_2}\). Suppose the time length of each lottery result is \(T\).
+For a period \(\tau\) at which no reward is delivered, the utility is
+zero. Let \(\Omega\) denote the set of all such period \(\tau\), then
+\(\Omega=\{\tau\,|\,0\leq\tau\leq T,\;\tau \neq t_1,t_2\}\). For all
+\(j,k\in\{s,l\}\), we define \(\phi_j=d_{t_1}e^{v(x_j)}\) and
+\(\eta_k=d_{t_2}e^{v(y_k)}\), where \(v(s)=u(s)/\lambda\), and \(d_t\)
+represents the reference weight for any reward delivered at period
+\(t\). By the definition of AAD, we have\[
+w_{t_1} = \frac{\phi_j}{\phi_j + \eta_k +D} \quad ,\quad
+w_{t_2} = \frac{\eta_k}{\phi_j + \eta_k +D}
+\]where \(j,k\in\{s,l\}\), \(D=\sum_{\tau\in\Omega} d_{\tau}\geq 0\).
+The value of a lottery \(L\) can be written as
+\(U(L)=w_{t_1}u(s_1)+w_{t_2}u(s_2)\). Hence, \[\tag{E1}
+\begin{aligned}
+U(L1)=0.5\frac{\phi_s u(x_s)+\eta_s u(y_s)}{\phi_s+\eta_s+D} + 0.5\frac{\phi_l u(x_l)+\eta_l u(y_l)}{\phi_l+\eta_l+D} \\
+U(L2)=0.5\frac{\phi_s u(x_s)+\eta_l u(y_l)}{\phi_s+\eta_l+D} + 0.5\frac{\phi_l u(x_l)+\eta_s u(y_s)}{\phi_l+\eta_s+D}
+\end{aligned}
+\]We observe that, when \(x_l=x_s\), we have \(U(L1)=U(L2)\).
+
+Second, suppose we increase \(x_l\) from \(x_s\) by an increment. This
+increases both \(U(L1)\) and \(U(L2)\) (either by a positive or a
+negative number). To make \(U(L1)<U(L2)\), this increment should
+increase \(U(L2)\) by a greater number than \(U(L1)\). Specifically, we
+assume \(U(L2)\) is increasing faster than \(U(L1)\) at any level of
+\(x_l\). That is, the partial derivative of \(U(L2)\) in terms of
+\(x_l\) is always greater than that of \(U(L1)\). Given \(\phi_l\) is
+increasing in \(x_l\), to see this, we can take partial derivatives in
+terms of \(\phi_l\).
+
+In each line of Equation (E1), note only the second term contains
+\(x_l\). Thus, we focus on the difference between the the second terms.
+The second term of the \(U(L1)\) is influenced by \(y_l\), while that of
+the \(U(L2)\) is influenced by \(y_s\), where \(y_l>y_s\). Thus, we can
+construct a function \(\xi\) such that\[
+\xi(\phi_l,\eta) = \frac{\phi_l \cdot v(x_l)+\eta\cdot v(y)}{\phi_l+\eta+D}
+\]where \(\eta=d_{t_2}e^{v(y)}\). In reverse, we can define
+\(v(x_l)=\ln(\phi_l/d_{t_1})\) and \(v(y)=\ln(\eta/d_{t_2})\). The
+function \(\xi\) is similar to the second term of each line, but note we
+replace \(u(.)\) by \(v(.)\). When \(y=y_l\), \(\xi\) is proportional to
+the second term of \(U(L1)\). When \(y=y_s\), \(\xi\) is proportional to
+the second term of \(U(L2)\) (by the same proportion). Thus, to show
+that the partial derivative of \(U(L2)\) in terms of \(x_l\) is greater
+than that of \(U(L1)\), we just need to show
+\(\partial \xi/\partial \phi_l\) is decreasing with \(y\) (or \(\eta\)).
+
+Third, we take the first- and second-order partial derivatives of
+\(\xi(\phi_l,\eta)\) in terms of \(\phi_l\). The partial derivative of
+\(\xi\) in terms of \(\phi_l\) is\[
+\frac{\partial \xi}{\partial \phi_l}=\frac{(v(x_l)+1)\eta-v(y)\eta+\phi_l+D(v(x_l)+1)}{(\phi_l+\eta+D)^2}
+\]We need to show that for \(y\in[y_s,y_l]\), we can obtain
+\(\partial^2 \xi/\partial \phi_l\partial \eta<0\). This implies
+that\[\tag{E2}
+(v(x_l)+v(y)+2)D-(\phi_l-\eta)(v(x_l)-v(y))+2(\phi_l+\eta)>0
+\]We want Equation (E2) to hold for any \(D>0\). Given the LHS is
+increasing with \(D\), we have\[\tag{E3}
+2(\phi_l+\eta)>(\phi_l-\eta)(v(x_l)-v(y))
+\]Define \(\kappa=d_{t_2}/d_{t_1}\), \(\alpha=v(x_l)-v(y)\). Note
+\(\kappa\in \mathbb{R}_{>0}\), \(\alpha\in\mathbb{R}\). Equation (E3)
+can be rewritten as\[\tag{E4}
+(\alpha-2)\kappa^{-1} e^{\alpha}-\alpha-2<0
+\]
+
+Fourth, based on Equation (E4), we construct a function
+\(h(\alpha)=(\alpha-2)\kappa^{-1} e^\alpha-\alpha-2\). We aim to examine
+whether there exists some \(\alpha\) that can make \(h(a)<0\).
+Obviously, \(\alpha=-2\) and \(\alpha=2\) satisfy this condition.
+Moreover, note \(h(\alpha)\) is decreasing in \(\alpha\) when
+\((\alpha-1)e^{\alpha}\leq \kappa\) and is increasing in \(\alpha\)
+otherwise. When either \(\alpha\rightarrow -\infty\) or
+\(\alpha \rightarrow +\infty\), \(h(\alpha)\rightarrow +\infty\). Thus,
+there must be a limited intertval \((\alpha_1,\alpha_2)\) such that
+\(h(a)<0\) so long as \(\alpha\in(\alpha_1,\alpha_2)\), and
+\([-2,2]\subset(\alpha_1,\alpha_2)\).
+
+For a given positive number \(\kappa\), the points \(\alpha_1,\alpha_2\)
+are determined by the solution to
+\(\frac{\alpha-2}{\alpha+2}e^{\alpha}=\kappa\). Since
+\(v(s)=u(s)/\lambda\), for any \(x_l\) and \(y\in[y_s,y_l]\), we have
+\(\frac{u(x_l)-u(y)}{\lambda}\in(\alpha_1,\alpha_2)\). In other words,
+for any \(x_l>x_s>0\), \(y_l>y_s>0\), any time length of lottery results
+and reference weights (which determining \(D\) and \(\kappa\)), there
+exists some \(\lambda\) that makes \(U(L1)<U(L2)\). Specifically, all
+\(\lambda>\lambda^{**} ={\max}\{\frac{u(x_l)-u(y_l)}{\alpha_1},\frac{u(x_l)-u(y_s)}{\alpha_2}\}\)
+satisfy the target condition.
+
+Notably, if \(\lambda\leq\lambda^{**}\), we have \(h(a)>0\), which by
+Equation (E2)(E3), indicates that under some conditions such as \(D=0\),
+there will be \(\partial^2 \xi/\partial \phi_l\partial \eta\geq0\) for
+all \(y\in[y_s,y_l]\). In that case, at each level of \(x_l\), the
+partial derivative of \(U(L1)\) in terms of \(x_l\) is greater than
+\(U(L2)\). Increasing \(x_l\) by an increment may induce a greater
+increase in \(U(L1)\) than in \(U(L2)\). So, the DM may perform
+intertemporal correlation seeking.

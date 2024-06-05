@@ -1,8 +1,5 @@
 ---
-# title: "An Attentional Model of Time Discounting"
-# author: "Zark Zijian Wang"
-# date: "`r format(Sys.time(), '%B %d, %Y')`"
-# bibliography: reference.bib
+bibliography: reference.bib
 # biblio-style: apalike
 # header-includes: 
 #   \usepackage{setspace}
@@ -32,123 +29,135 @@
 #     number_sections: true
 ---
 
-To illustrate how ADU with Shannon cost function can account for a broad set of anomalies about time preferences, imagine that a DM receives a positive detereminstic reward in period $j$ (and no reward in other periods). That is, she receives a sequence of rewards $X_T=[x_0,x_1,…,x_T]$, where $x_j>0$ and is certain, and $x_t = 0$ for all $t \neq j$ (both $j$ and $t$ are in $\{0,1,...,T\}$).
-
-For the convenience of illustration, I assume the DM holds stationary time preferences before acquiring any information, that is, $d_t=\delta^t$. Meanwhile, $\delta\in(0,1]$, where $\delta=1$ implies the initial attention is uniformly distributed across periods. For simplicity, I define $v(x_t)=u(x_t)/\lambda$, and set $v(0)=0$. Let $w_t(X_T)$ denote the discounting factor for period $t$. From the formula of ADUS we can infer that$$ 
-w_j(X_T) = \left\{ \begin{aligned}
-& \delta^j \cdot\frac{1}{1+\frac{\delta}{1-\delta}(1-\delta^T)e^{-v(x_j)}}\;, & 0<\delta<1 \\
-& \frac{1}{1+T\cdot e^{-v(x_j)}}\; , & \delta=1
-\end{aligned}
-\right.
-$$
-
-Clearly, $w_j$ is decreasing in $T$. This offers an account for a phenomenon called *hidden zero effect*.
-
 ## Hidden Zero Effect
 
-The most direct evidence that could support the ADUS model is likely the hidden zero effect [@magen_hidden-zero_2008]. The hidden zero effect means, supposing people face a small sooner reward (SS) and a large later reward (LL), they tend to exhibit more patience when SS and LL are framed as sequences rather than being framed as single-period rewards. For instance, suppose SS is "receive £100 today" and LL is "receive £120 in 6 months", and we have
+Empirical evidence suggests the subjective discount factor of a reward is dependent not just on delay but also on the framing of reward sequences. In this subsection, we discuss the evidence of (asymmetric) hidden zero effect [@magen2008hidden; @radu2011mechanism; @read2017value]. Similar with violation of dominance, this effect also provides a justification for our assumption that the sum of AADs is a fixed amount.
 
-SS~0~: "receive £100 today and £0 in 6 months"
+To illustrate, suppose the DM is indifferent between "receive £100 today" (SS) and "receive £120 in 25 weeks" (LL). The hidden zero effect suggests that people are more likely to choose LL when SS is framed as a sequence rather than as a single-period reward. In other words, if we frame SS as "receive £100 today and £0 in 25 weeks" (SS1), the DM would prefer LL to SS1. Moreover, @read2017value find that framing LL as "receive £0 today and £120 in 25 weeks" (LL1) has no effect on preference.
 
-LL~0~: "receive £0 today and £120 in 6 months"
+The hidden zero effect can be explain by the AAD model. When a DM valuates a reward sequence $s_{0\rightarrow T}$, the AAD model assumes that she splits a fixed amount of attention over $T$ periods. For the given example, the DM may perceive the time length of SS as "today" and perceives the time length of SS1 as "25 weeks". In the former case, she can focus her attention on the current period when she can get £100. While in the latter case, she have to spend some attention to future periods in which no reward is delivered, which also decreases the decision weight assigned to the current period. As a result, she values SS1 lower than SS. By contrast, the DM may perceive the time length of both LL and LL1 as "25 weeks". When she valuate LL, she has already paid some attention to periods earlier than "25 weeks". Therefore, changing LL to LL1 does not change the choice.
 
-people will be more likely to prefer LL~0~ over SS~0~ than preferring LL over SS. Subsequent research (e.g. @read_value_2017) suggests that the hidden zero effect is asymmetric. That is, shifting SS to SS~0~ and keeping LL unchanged leads to an increase in patience, whereas shifting LL to LL~0~ and keeping SS unchanged cannot increase patience. ADUS assumes that, within a sequence, attention is limited and the weight assigned to each period is anchored in an initial positive weight. These properties naturally explain the hidden zero effect. To illustrate, in SS, the DM perceives the length of sequence as "today" and allocate no attention to future. Whereas, in SS~0~, she perceives the length as "6 months". This makes some attention be paid to future periods with no reward, and decreases the attention paid to the only period with positive reward (given attention is limited); thus, the overall utility of sequence decreases. By contrast, shifting from LL to LL~0~ does not change the length of sequence, thus does not change overall utility.
+## Relation to Hyperbolic Discounting
 
-The existence of hidden zero effect also provides a hint in selection of time length $T$. When evaluating a reward delivered in period $j$, the range of $T$ is $[j,+\infty)$. Any increase in $T$ will reduce the overall utility. Thus, when comparing SS and LL, the DM may tend to set $T=j$ (the minimum length she can set), in order to maximize the overall utility. Any period out of this length can be perceived as irrelevant to the decision; so, she does not need to sample from the periods after $j$, when evaluating the given reward. Though, explicitly mentioning the periods after $j$ will direct her attention to those periods, and lead to the hidden zero effect. By setting $T=j$, we have$$ w_T(x_T) = \frac{1}{1+G(T)e^{-v(x_T)}} $$where$$ G(T) = \left\{ \begin{aligned} & \frac{1}{1-\delta}(\delta^{-T}-1) \; ,& 0<\delta<1\\ & T\; ,& \delta=1\ \end{aligned} \right. $$
+Most of the intertemporal choice studies only involve comparisons between single-period rewards (SS and LL). Here we derive the discount factor for SS/LL under the AAD model and use that to illustrate how attention allocation can account for the anomalies in such decision settings. For simplicity, we assume the reference weight $d_t = \delta^t$, $\delta\in(0,1]$, i.e. the DM initial discount factor (before learning information about $s_{0\rightarrow T}$) is exponential.[^1]
 
-Given period $T$ is now the only period with a non-zero reward within the sequence, I use $x_T$ to directly represent the whole sequence, and let $w_T(x_T)$ denote the discounting factor for period $T$. Interestingly, when $\delta=1$, $w_T(x_T)$ takes a form similar with hyperbolic discounting.
+[^1]: @strotz1955myopia shows that if, for any reward delivered at period $t$, the DM's discount factor is $\delta^t$, then her preference will be stationary and consistent over time.
+
+Consider a reward sequence $s_{0\rightarrow T}$ where for all $t\leq T$, $u(s_t)=0$ and only $u(s_T)>0$. This implies the DM receives nothing until period $T$. In this case, the DM's valuation of $s_{0\rightarrow T}$ is $U(s_{0\rightarrow T})=w_Tu(s_T)$. Let $v(x)=u(x)/\lambda$. By Definition 1, we can derive that $w_T$ is a function of $s_T$:$$\tag{3}
+ w_T = \frac{1}{1+G(T)e^{-v(s_T)}}
+$$where$$ G(T) = \left\{ \begin{aligned} & \frac{1}{1-\delta}(\delta^{-T}-1) \; ,& 0<\delta<1\\ & T\; ,& \delta=1\ \end{aligned} \right. $$This $w_T$ can represent the discount function for a single reward $s_T$, delivered at period $T$. Interestingly, when $\delta=1$, $w_T(s_T)$ takes a form similar with hyperbolic discounting. In recent years, some studies have attempted to provide a rational account for hyperbolic discounting. For instance, @gabaix2017myopia propose a model with similar assumptions to our information maximizing exploration approach to AAD: the DM's perception of utility is noisy and the DM updates her beliefs about utility with the Bayes' rule. Nevetherless, @gabaix2017myopia account for hyperbolic discounting with an assumption that the variance of utility signal is proportional to delay, whereas we propose the DM seeks to maximize her information gain when learning information about utilities. Meanwhile, when $v(s_t)=\ln(\beta s_t+1)$, where $\beta>0$, the discount function $w_T$ takes a similar form to @gershman2020rationally. Therefore, some remarks about such models can also be generated by the AAD in a special case.
+
+In the following three subsections, we use Equation (3) to explain three decision anomalies: the common difference effect (and its reverse), timing risk aversion, and S-shaped value function.
 
 ## Common Difference Effect
 
-A well-known anomaly about time preferences is *common difference effect*, firstly defined by @loewenstein_anomalies_1992. Suppose there are a large later reward $x_l$ arriving at period $t_l$ (denoted by LL) and a small sooner reward $x_s$ arriving at period $t_s$ (denoted by SS), where $x_l>x_s>0$, $t_l>t_s>0$. Define $V(x,t)=w_t(x_t)v(x_t)$. The common difference effect means, supposing$V(x_l,t_l)=V(x_s,t_l)$, we must have $V(x_l,t_l+\Delta t)>V(x_s,t_s+\Delta t)$ for any positive integer $\Delta t$.
+The common difference effect [@loewenstein1992anomalies] implies that, when the DM faces a choice between LL and SS, adding a common delay to both options can increase her preference for LL. For example, suppose the DM is indifferent between "receive £120 in 25 weeks" (LL) and "receive £100 today" (LL). Then, she would prefer "receive £120 in 40 weeks" to "receive £100 in 15 weeks".
 
-ADUS predicts that, if people are impatient, to observe the common difference effect, the difference between SS and LL in reward level must be set significantly larger than the difference in time delay. This is shown in Proposition 2.
+Let $(v_l,t_l)$ denote a reward of utility $v_l$, delivered at period $t_l$ and $(v_s,t_s)$ denote a reward of utility $v_s$, delivered at period $t_s$. We set $v_l>v_s>0$, $t_l>t_s>0$. So, $(v_l,t_l)$ can represent a LL and $(v_s,t_s)$ can represents a SS. We represent the discount factors for LL and SS by $w_{t_l}(v_l)$ and $w_{t_s}(v_s)$. Suppose $w_{t_l}(v_l)\cdot v_l = w_{t_s}(v_s)\cdot v_s$, then the common difference effect implies that $w_{t_l+\Delta t}(v_l)\cdot v_l > w_{t_s+\Delta t}(v_s)\cdot v_s$, where $\Delta t >0$. Given Equation (3), the conditions for the common difference effect are derived in Proposition 2.
 
-**Proposition 2**: *In ADUS, if the initial weights are uniformly distributed, then the common difference effect always holds; if the initial weights exponentially declines over time, the common difference effect holds when* $v(x_l)-v(x_s)+\ln\frac{v(x_l)}{v(x_s)}>-(t_l-t_s)\ln\delta$*.*
+\noindent \textbf{Proposition 2}: *The following statements are true:*
 
-Proposition 2 is interpreted as follows. When $\delta = 1$, ADUS predicts the DM always performs the common difference effect. This is obvious because discounting factor $w_T(x_T)$ takes a hyperbolic-like form. When $\delta<1$, there are four factors jointly deciding whether we could observe the common difference effect or not. First, without considering attentional mechanism, when we extend time delay, each of $w_{t_l}(x_l)$ and $w_{t_s}(x_s)$, i.e. the discounting factor for (and attention paid to) the only period with positive reward, declines in an exponential fashion. Second, without considering newly added time interval, due to the decline of $w_{t_l}(x_l)$ and $w_{t_s}(x_s)$, the DM frees up some attention and can reallocate it across periods. Given that in LL, the DM has to wait longer for reward, the periods where she wait can grab more attention from the released capacity of attention, compared with those in SS. In other words, an extension of delay makes she focus more on the waiting time in LL than in SS, which decreases the preference for LL. Third, the newly added time interval also grabs some attention from other periods. Note the time delay is extended by $[t_l,t_l+\Delta t]$ in LL and by $[t_s, t_s+\Delta t]$ in SS; given $t_l>t_s$, if people are impatient, the newly added time interval will receive less attention in LL than in SS, without considering other factors. This increases the preference for LL. Fourth, ADU generally assumes that the DM tends to pay more attention to periods with larger rewards. Given $x_l>x_s$, the newly added interval grabs less attention from the period where $x_l$ is positioned (in LL) than from the period where $x_s$ is positioned (in SS). That is, the DM focuses comparatively more on reward level in LL than in SS, which mitigates the impact of discounting factor declining. This also increases the preference for LL. When the impact of the later two factors succeeds that of the second factor, the DM will perform the common difference effect.
+(a) *If* $\delta=1$*, the common difference effect always holds.*
 
-Notably, if we explicit mention the zeros in LL and SS, extending time delay always lead to the common difference effect.
+(b) *If* $0<\delta<1$*, i.e. the DM is initially impatient, the common difference effect holds when and only when*$v_l-v_s+\ln(v_l/v_s)>(t_l-t_s)\ln(1/\delta)$*.*
 
-![](images/weight_LLvSS.pdf)
+The proof of Proposition 2 is in Appendix B. The part (b) of Proposition 2 yields a novel prediction about the common difference effect. That is, for an impaient DM, to make this effect hold, the relative and absolute differences in reward utility between LL and SS must be significantly larger than their aboslute difference in time delay. In the opposite, if the difference in delay is significantly larger than the difference in reward utility, we may observe a reversed common difference effect.[^2] Figure \ref{fig:common_diff} demonstrates an example for this reversed effect.
 
-![](images/value_LLvSS.pdf)
+[^2]: It is worth mentioning that if we make the "hidden zeros" explicit in LL and SS, adding a common delay under the AAD model would always yield a the common difference effect.
 
-## Magnitude Effect
+```{=tex}
+\begin{figure}[h]
+  \centering   
+  \includegraphics[width=0.65\textwidth]{figures/common_diff.png}   
+  \caption{The common difference effect and its reverse}
+  \vspace{8pt}
+  \begin{minipage}{1.0\textwidth}
+{\par\footnotesize Note: $x_l$ and $x_s$ are the positive reward levels for LL and SS. The values of LL and SS are calculated based on Equation (3). $d_t=0.75^t$, $u(x)=x^{0.6}$, $\lambda=2$. For each certain $t_s$, we identify the delay $t_l$ that makes the value of LL equivalent to SS. If the common different effect is valid, for one unit increase in $t_s$, the resultant $t_l$ should increase by a level smaller than one unit. }
+\end{minipage}
+  \label{fig:common_diff} 
+\end{figure}
+```
+When the DM is impatient, adding a common delay would naturally make $v_l$ and $v_s$ more discounted, i.e. less attention is paid to the corresponding rewards. Since the sum of decision weights is fixed, this implies the the DM frees up some attention and she needs to reallocate it across the periods in each reward sequence (LL and SS). There are three mechanisms jointly determining whether we could observe the common difference effect or not.
 
-The *magnitude effect* is another well-known anormaly about time preferences. Assuming we have $t_l$, $t_s$, $x_s$ fixed, and want to find a $x_l$ such that $V(x_l,t_l) \equiv V(x_s,t_s)$, the magnitude effect implies that, if we increase $x_s$, then the $x_l/x_s$ that makes the equality valid will decrease.
+First, the existing periods with no reward delivered would grab some attention. That is, the DM would attend more to the rewards of zero utility, delivered in duration $[0,t_l)$ for LL and in duration $[0,t_s]$ for SS. Given $t_l >t_s$, the relevant duration in LL may naturally capture more attention than that in SS. In other words, the common delay makes the DM focus more on the waiting time in LL than in SS, which decreases her preference for LL.
 
-In standard discounted utility model, the magnitude effect requires the elasticity of utility function to increase with the reward level [@loewenstein_anomalies_1992]. This requirement might be too restrictive, so that many commonly used utility functions (such as power or CARA utility function) does not satisfy it. By contrast, in ADU model, DM is generally assumed to attend more to periods with larger rewards. This implies that when comparing SS and LL, she exhibits more patience towards larger reward level, which is naturally compatible with the magnitude effect [@noor_intertemporal_2011; @noor_optimal_2022]. By Proposition 3, I focus on ADU with Shannon cost function, and show how this requirement for curvature of utility function can be relaxed in this setting.
+Second, the newly added time intervals also grab some attention. That is, the DM needs to pay some attention to rewards (of zero utility as well) delivered in duration $(t_l,t_l+\Delta t]$ in LL and in duration $(t_s, t_s+\Delta t]$ in SS. For LL, there are already plenty of periods over which DM has to split her attention. So, the duration $(t_l,t_l+\Delta t]$ in LL can capture less attention than its counterpart in SS. This increases the DM's preference for LL.
 
-**Proposition 3**: *Define* $v(x)\equiv u(x)/\lambda$ *as the utility function. In ADUS, the magnitude effect always holds true when function* $v(x)$ *satisfies*$$
-RRA_v(x)\leq 1-\frac{e_v(x)}{v(x)+1}
-$$*where* $RRA_v(x)$ *is the relative risk aversion coefficient of* $v(x)$*,* $e_v(x)$ *is the elasticity of* $v(x)$ *to* $x$*.*
+Third, the only positive reward, delivered in $t_l$ for LL and in $t_s$ for SS, may draw some attention back. Given that the DM in general tends to pay more attention to larger rewards, the positive reward in LL can capture more "free" attention than that that in SS. This also increases the preference for LL. If the latter two mechanisms override the first mechanism, we would observe a common difference effect in DM's choices.
 
-Note that Proposition 3 is a very broad condition. In Corollary 1 and Corollary 2, I show that power utility function and CARA utility function both satisfy this condition in most cases.
+## Concavity of Discount Function
 
-**Corollary 1**: Suppose $v(x)=x^\gamma/\lambda$, where $0<\gamma<1$ and $\lambda>0$. Then magnitude effect holds true for any $x\in \mathbb{R}_{>0}$.
+Many time discounting models, such as exponential and hyperbolic discounting, assume the discount function is convex in time delay. This style of discount function predicts DM is *risk seeking over time lotteries*. To illustrate, suppose a reward of level $x$ is delivered at period $t_l$ with probability $\pi$ and is delivered at period $t_s$ with probability $1-\pi$, where $0<\pi<1$. Meanwhile, another reward of the same level is delivered at period $t_m$, where $t_m=\pi t_l +(1-\pi) t_s$. Under such discount functions, the DM should prefer the former reward to the latter reward. For instance, she may prefer receiving an amount of money today or in 20 weeks with equal chance, rather than receiving it in 10 weeks with certainty. However, experimental studies suggest that people are often *risk averse over time lotteries*, i.e. they prefer the reward to be delivered at a certain time [@onay2007intertemporal; @dejarnette2020time].
 
-**Corollary 2**: Suppose $v(x)=(1-e^{-\gamma x})/\lambda$, where $\gamma>0$ and $\lambda>0$. The magnitude effect holds true for any $x\geq \frac{1+\eta}{\gamma}$, where $\eta>0$ and $\eta e^{1+\eta}-\eta=1$ (it can be calculated that $\eta \approx 0.35$).
+One way to accommodate the evidence about risk aversion over time lotteries is to make the discount function concave in terms of delay. Notably, @onay2007intertemporal find that people are more likely to be risk averse over time lotteries when $\pi$ is small, and to be risk seeking when $\pi$ is large. Given that when $\pi$ gets larger, $t_m$ is also larger, we can conclude that the discount function may be concave in delay for the near future but convex for the far future. That is, the discount function is of inverse-S shape. @takeuchi2011non also find evidence that supports this shape of discount function.
 
-## Concavity of Time Discounting
+In Proposition 3, we apply Equation (3) and show that the AAD is compatible with this shape of discount function as long as the DM is impatient and the reward level $x$ is large enough.
 
-Many time discounting models assumes discount function is convex in time delay, e.g. exponential and hyperbolic discounting. This style of discount function predicts DM is *risk seeking over time lotteries*. That is, suppose a deterministic reward of level $x$ is delivered in period $t_l$ with probability $\pi$ and delivered in period $t_s$ with probability $1-\pi$ ($0<\pi<1$, $c>0$); while another deterministic reward, of the same level, is delivered in a certain period $t_m$, where $t_m=\pi t_l +(1-\pi) t_s$. The DM should prefer the former reward to the latter reward. However, some experimental studies, such as @onay_intertemporal_2007 and @dejarnette_time_2020, suggest that people are often *risk averse over time lotteries*, i.e. preferring the reward delivered in a certain period.
+\noindent \textbf{Proposition 3}: *If* $\delta =1$*, then the discount function* $w_T$ i*s convex in* $T$*. If* $0<\delta<1$*, there exist a reward threshold* $\underline{x}>0$ *and a time threshold* $\underline{T}>0$ *such that:*
 
-One way to accommodate the evidence about risk aversion over time lotteries, as is suggested by @dejarnette_time_2020, is to modify the convexity (concavity) of discount function. Under a general EDU framework, DM is risk averse over time lotteries when $\pi w_{t_l}(x)+(1-\pi)w_{t_s}(x)<w_{t_m}(x)$. Fixing $t_s$ and $t_l$, the inequality suggests $w_{t_m}(c)$ is concave in $t_m$. In reverse, being risk seeking over time lotteries suggests $w_{t_m}(x)$ is convex in $t_m$. Notably, @onay_intertemporal_2007 find that people are more likely to be risk averse over time lotteries when $\pi$ is small, and to be risk seeking over time lotteries when $\pi$ is large. Given that when $\pi$ gets larger, $t_m$ is also larger, we can conclude that the discount function may be concave in delay for the near future but convex for the far future. Moreover, @takeuchi_non-parametric_2011 also find evidence that support this shape of discount function.
+(a) *when* $x\leq \underline{x}$*, the discount function is convex in* $T$;
+(b) *when* $x > \underline{x}$*, the discount function is convex in* $T$ *given* $T\geq \underline{T}$*, and it is concave in* $T$ *given* $0<T<\underline{T}$*.*
 
-In Proposition 4, I show that ADUS can produce such a shape of discount function as long as the reward level $x$ is large enough.
+The proof of Proposition 3 is in Appendix C. Figure \ref{fig:discount_value_function}(a) demonstrates the convex discount function (blue line) and the inverse-S shaped discount function (red line) that could be yielded by Equation (3).
 
-**Proposition 4**: In ADUS, *if* $\delta =1$*, then the discount function is convex in* $t$*. If* $0<\delta<1$*, then there are a reward threshold* $\underline{x}$ *and a time threshold* $\underline{t}$ *such that*
+```{=tex}
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/concave_discount.png} 
+        \caption{discount function}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/s_shape_value.png}
+        \caption{value function}
+    \end{subfigure}
+    \caption{Discount function and value function for a delayed reward}
 
-1)  *when* $x\leq \underline{x}$*, the discount function is convex in* $t$*;*
-2)  *when* $x > \underline{x}$*, the discount function is convex in* $t$ *given* $t\geq \underline{t}$*, and it is concave in* $t$ *given* $t<\underline{t}$*.*
-
-*It can be derived that* $v(\underline{x})=\ln(\frac{2}{1-\delta})$*, and* $\underline{t}=\frac{\ln[(1-\delta)e^{v(x)}-1]}{-\ln\delta}$*.*
-
-![](images/concavity_discount.pdf)
-
+  \vspace{8pt}
+  \begin{minipage}{1.0\textwidth}
+{\par\footnotesize Note: A reward of level $x_T$ is delivered at period $T$. The discount function and value function are calculated based on Equation (3). $d_t=0.75^t$, $u(x)=x^{0.6}$, $\lambda=2$.}
+\end{minipage}
+    
+    \label{fig:discount_value_function}
+\end{figure}
+```
 ## S-Shaped Value Function
 
-In prospect theory, @kahneman_prospect_1979 propose an S-shaped value function that is convex for losses and concave for gains. Since that, S-shaped value functions have been widely embraced by behavioral economists. More recent theories have provided further justifications for it, including reference-dependent utility in a broad sense [@koszegi_model_2006], and efficient coding of values [@frydman_efficient_2021]. Here, I provide an account based on selective attention to time periods.
+In decision theories, it is commonly assumed that the utility function $u(.)$ satisfies $u''<0$. This usually suggests the value function of a reward is concave. However, empirical evidence suggests that the value functions are often S-shaped. Such S-shaped value functions can be generated by various sources, such as reference dependence [@kahneman1979prospect] and efficient coding of numbers [@louie2012efficient]. Through the AAD model, we provide a novel account for S-shaped value function based on the insight that larger rewards capture more attention.
 
-Suppose a DM is faced with a choice between a risky lottery and a fixed amount of money. When making this choice, she does not obtain any money from either option. Thus, she perceives the outcome of each option as something that will happen in the future. She allocate her attention between the present period and the period when she may receive the money. Assume that she perceives the outcome will be realized in period $t$, and in a certain state, the option she chooses yields reward $x$, then we can use the attentional discounted utility $V(x,t)$ to represent the value function. I derive the conditions in which ADUS can produce a S-shaped value function in Proposition 5.
+Consider a reward of level $x$ delivered at period $T$. Its value function can be represented by $U(x,T)=w_T(x)u(x)$. We assume $u'>0$, $u''<0$, and $w_T$ is determined by Equation (3). $w_T$ is increasing with $x$ as the DM tends to pay more attention to larger rewards. Both functions $u(x)$ and $w_T(x)$ are concave in $x$; so when $x$ is small, they both grow fast. At some conditions, it is possible that the product of the two functions is convex in $x$ when $x$ is small enough. We derive the conditions for the S-shaped value function in Proposition 4.
 
-**Proposition 5**: *Suppose* $t\geq1$*,* $\frac{d}{dx}\left(\frac{1}{v'(x)}\right)$ *is continuous in* $(0,+\infty)$*, in ADUS,*
+\noindent \textbf{Proposition 4}: *Suppose* $T\geq1$*,* $\frac{d}{dx}\left(\frac{1}{v'(x)}\right)$ *is continuous in* $(0,+\infty)$*, then:*
 
-1)  *there exists a threshold* $\bar{x}$ *in* $(0,+\infty)$ *such that* $V(x,t)$ *is strictly concave in* $x$ *when* $x\in [\bar{x},+\infty)$*;*
+(a) *There exists a threshold* $\bar{x} \in\mathbb{R}_{\geq0}$ *such that* $U(x,T)$ *is strictly concave in* $x$ *when* $x\in [\bar{x},+\infty)$*;*
 
-2)  *if* $\frac{d}{dx}\left(\frac{1}{v'(x)}\right)$ *is right-continuous at* $x=0$*, and* $\frac{d}{dx}\left(\frac{1}{v'(0)}\right)<1$*, then there exists a threshold* $x^*$ *in* $(0, \bar{x})$ *such that, for any* $x\in (0,x^*)$*,* $V(x,t)$ *is strictly convex in* $x$*;*
+(b) *If* $\frac{d}{dx}\left(\frac{1}{v'(x)}\right)$ *is right-continuous at* $x=0$ *and* $\frac{d}{dx}\left(\frac{1}{v'(0)}\right)<1$*, there exists a threshold* $x^*$ *in* $(0, \bar{x})$ *such that, for any* $x\in (0,x^*)$*,* $U(x,T)$ *is strictly convex in* $x$.
 
-3)  *there exist a hyper-parameter* $\lambda^*$ *and an interval* $(x_1,x_2)$ *such that, if* $\lambda<\lambda^*$*, for any* $x\in(x_1,x_2)$*,* $V(x,t)$ *is strictly convex in* $x$*, where* $\lambda^*>0$ *and* $(x_1,x_2)\subset(0,\bar{x})$*.*
+(c) *There exists an unit cost of attention adjustment* $\lambda^*$ *and an interval* $(x_1,x_2)$ *such that, if* $\lambda<\lambda^*$*, for any* $x\in(x_1,x_2)$*,* $U(x,T)$ *is strictly convex in* $x$*, where* $\lambda^*>0$ *and* $(x_1,x_2)\subset(0,\bar{x})$*.*
 
-Proposition 5 implies, if the derivative of $\frac{1}{v'(x)}$ converges to a small number when $x\rightarrow 0^+$, or the unit cost of information $\lambda$ is small enough, value function $V(x,t)$ will perform an S shape in some interval of $x$. At the intuition level, note that $V(x,t)=w_t(x)v(x)$. When the level of reward $x$ grows, both the instantaneous utility of it, i.e. $v(x)$, and the discounting factor assigned to it, i.e. $w_t(x)$, can increase. These functions are both concave in $x$: when the level of reward is small, they both grow fast. So, it is possible that their product is convex in this case. By contrast, when the level of reward is large, they grow slowly, so their product keeps concave.
+The proof of Proposition 4 is in Appendix D. Proposition 4 implies, if the derivative of $\frac{1}{v'(x)}$ converges to a small number when $x\rightarrow 0^+$, or the unit cost of attention adjustment $\lambda$ is small enough, the value function $U(x,T)$ will be an S-shaped in some interval of $x$. Figure \ref{fig:discount_value_function}(b) demonstrates examples of this S-shaped value function.
 
-![](images/S_shaped_value.pdf)
+## Intertemporal Correlation Aversion
 
-## Inseparability of Sequences
+Consider a DM facing two lotteries. For one lottery, she can receive £100 today and £100 in 30 weeks with probability 1/2, and receive £3 today and £3 in 20 weeks with probability 1/2. For the other lottery, she can receive £3 today and £100 in 30 weeks with probability 1/2, and receive £100 today and £3 in 20 weeks with probability 1/2. In the former lottery, rewards delivered at different periods are positively correlated, whereas in the latter lottery, those rewards are negatively correlated. The expected discounted utility theory predicts the DM is indifferent between the two lotteries. However, reccent studies find the evidence of *intertemporal correlation aversion*[@andersen2018multiattribute; @rohde2023intertemporal]. That is, people often prefer the latter lottery than the former one.[^3]
 
-Let $x$ and $y$ denote two 2-period risky reward sequences. For $x$, the realized sequence is [£100,£100] with probability 1/2, and is [£3,£3] with probability 1/2. For $y$, the realized sequence is [£3,£100] with probability 1/2, and is [£100,£3] with probability 1/2. Classical models of intertemporal choice typically assume the separability of potentially realized sequences. This implies that the DM is indifferent between $x$ and $y$. However, @andersen_multiattribute_2018 find evidence of *intertemporal correlation aversion*, that is, people often prefer $y$ to $x$.
+[^3]: For theoretical analysis about intertemporal correlation aversion, please see @epstein1983stationary, @epstein1989substitution, @weil1990nonexpected, @bommier2005risk, and @bommier2017monotone. The AAD model takes a similar form to the class of models defined in @epstein1983stationary. A key feature of such models is that the discount factor for future utilities is dependent on the utility achieved in the current period.
 
-ADU can naturally yield intertemporal correlation aversion. For simplicity, suppose the initial attention is uniformly distributed across the two periods. For $x$, under each potentially realized sequence, the DM equally weights each period. For $y$, DM tends to assign more weight to the period with a reward of £100 (suppose that weight is $w$). Then the value of $x$ is $\frac{1}{2} u(100) + \frac{1}{2} u(3)$ and the value of $y$ is $w\cdot u(100) +(1-w) \cdot u(3)$. Given that $x>\frac{1}{2}$, the DMs should strictly prefer $y$ to $x$.
+For the above example, intertemporal correlation aversion can be generated by the AAD model as follows. The AAD model assumes the DM allocates decision weights within each specific reward sequence, which implies she would aggregate values over time in each state. For simplicity, suppose there are only two periods. In the state that the DM receives £3 in two periods, suppose the DM allocates decision weight $w$ to the first period and $1-w$ to the second period. Note in Definition 1, when $u(s_0)=u(s_1)=...=u(s_T)$, the decision weight $w_t$ for every period $t$ within the reward sequence $s_{0\rightarrow T}$ will remain the same as the reference weight $d_t$. So, in the state that the DM receives £100 in two periods, the allocation of decision weights is the same as $w$ and $1-w$. In the state that the DM can receive £100 in the first period and £3 in the second period, the reward of £100 can capture more attention so that its decision weight, say $w'$, is greater than $w$. Similarly, in the state that the DM receives £3 earlier and then £100, the decision weight for the reward of £100, say $1-w''$, is also greater than $1-w$. Therefore, the value of the lottery in which rewards are positively correlated, can be represented by $0.5\cdot u(3)+0.5\cdot u(100)$. By contrast, for the lottery in which rewards are negatively correlated, the value can be represented by $0.5(1-w'+w'')\cdot u(3)+0.5(1-w''+w')\cdot u(100)$. Given $(1-w'')+w'>1-w+w>1$, the decision weight assigned to $u(100)$, which is $0.5(1-w''+w')$, should be greater than 0.5. As a result, the DM prefer the latter lottery than the former lottery.
 
--   Other evidence related to inseparability: common sequence effect, (reverse) mere token effect, magnitude-increasing temporal sensitivity
+In a more general setting, whether the AAD model can continuously produce intertemporal correlation aversion is modulated by the unit cost of attention adjustment $\lambda$. To illustrate, we adopt the same theoretical setting as @bommier2005risk. Let $(s_1,s_2)$ denote the result of a lottery in which the DM can receive reward $s_1$ in period $t_1$ and then reward $s_2$ in period $t_2$, where $t_2>t_1\geq 0$. There are two lotteries, $L1$ and $L2$. The results of each lottery is of the same length of sequence. $L1$ generates $(x_s,y_s)$ and $(x_l,y_l)$ with equal chance, $L_2$ generates $(x_s,y_l)$ and $(x_l,y_s)$ with equal chance, $x_l>x_s>0$, $y_l>y_s>0$. By Proposition 5, we show that in this setting, we can always find a $\lambda$ that makes the DM intertemporal correlation averse.
 
-# The Role of Attention in Inconsistent Planning
+\noindent \textbf{Proposition 5}: *Suppose* $U(L1), U(L2)$ *are the values of* $L1$ *and* $L2$*. For any* $x_l>x_s>0$*,* $y_l>y_s>0$*, any reference weights, and any time length of lottery results, there exists* *a threshold* $\lambda^{**}$ such that for any unit co*st of attention adjustment* $\lambda>\lambda^{**}$, *the DM would perform intertemporal correlation aversion, i.e.* $U(L1)<U(L2)$.
 
-## Attention Grabbing and Updating
+The proof of Proposition 5 is in Appendix E. The threshold $\lambda^{**}$ is jointly determined by $x_l$, $y_l$, $y_s$, as well as the reference weights for rewards delivered at $t_1$ and $t_2$. Notably, when $\lambda < \lambda^{**}$, the DM may be intertemporal correlation seeking under some conditions.[^4] This suggests a potentially new mechanism for intertemporal correlation aversion, that is, DM performs intertemporal correlation aversion perhaps because she attends more to larger rewards while attention adjustment is very costly.
+
+[^4]: To validate, suppose $u(x_s)=5$, $u(x_l)=10$, $u(y_s)=1$, $u(y_l)=3$. The results of each lottery contain only two periods, $t_1$ and $t_2$. The reference weights are uniformly distributed, i.e. $d_{t_1}=d_{t_2}$. In this case, setting $\lambda=1$ would generate intertemporal correlation seeking, while setting $\lambda=100$ would generate intertemporal correlation aversion.
+
+## Learning and Inconsistent Planning
 
 Suppose a DM has budget $m$ ($m>0$) and is considering how to spend it over different time periods. We can use a reward sequence $x$ to represent this decision problem, where the DM's spending in period $t$ is $x_t$. In period 0, she wants to find a $x$ such that$$ \tag{3} \max_{x}\;\sum_{t=0}^T w_t u(x_t)\quad s.t. \;\sum_{t=0}^T x_t = m   $$
 
 where $w_t$ is the attention-adjusted discounting factor in period $t$. I assume $w_t=\delta^t e^{u(x_t)/\lambda}/\sum_{t=\tau}^T \delta^{\tau} e^{u(x_\tau)/\lambda}$ and there is no risk under this setting.
-
-In models like exponential and hyperbolic discounting, the discounting factor of a future period is consistently smaller than that of the current period. Thus, the DM should spend more at the present than in the future. By contrast, in ADU, when increasing the spending in a certain period, the discounting factor corresponding to that period should also increase. So it is possible that the DM spends more in the future and that a future period has a greater discounting factor than the current period. This is consistent with @loewenstein_preferences_1993 that find people sometimes prefer improving sequences to declining sequences.
-
-ADU suggests there are two mechanisms that can help explain why people may perform dynamically inconsistent behavior. The first is *attention-grabbing effect*, that is, keeping the others equal, when we increase $x_t$ (which lead to an increase in $w_t$), the discounting factor in any other period should decrease due to limited attention. After omitting a previous period from the decision problem in Equation (3), the DM can assign more weights to remaining periods; thus, the attention-grabbing effect is enhanced. The increased attention-grabbing effect will offset some benefit of increasing spending toward a certain period. Therefore, when the DM prefers improving sequences, the attention-grabbing effect will make her perform a present bias-like behavior (always feeling that she should spend more at the present than the original plan); when the DM prefers declining sequences, this effect will maker her perform a future bias-like behavior (always feeling she should spend more in the future).
-
-The second mechanism is *initial attention updating*. As is assumed above, in period 0, prior to evaluating each reward sequence, the DM's initial weight on period $t$ is proportional to $\delta^t$; after evaluation, the weight becomes being proportional to $\delta^t e^{u(x_t)/\lambda}$. In period 1, if she implements the evaluation based on the information attained in period 0, the initial weight should be updated to being proportional $\delta^t e^{u(x_t)/\lambda}$; thus, the weight after evaluation should become being proportional to $\delta e^{2u(x_t)/\lambda}$. As a result, the benefit of increasing spending toward a certain period gets strengthened. The updated initial attention can make those who prefer improving sequences perform present bias and those who prefer declining sequences perform future bias.
-
-Both the attention-grabbing effect and initial attention updating are affected by the curvature of utility function. They jointly decide which behavior pattern that people should perform in dynamics.
-
-**Proposition 6** (*spread-consistency correlation*) Suppose $\succsim$ has a ADU representation and satisfies Axiom 2-4. If there exist $b$ and $S_T$ such that, for any $b'$ and $S_T'$, $bS_T\succsim b'S_T'$, where $b+\sum_{t=0}^Ts_t=b'+\sum_{t=0}^Ts_t'$, then for any $S'_T$, we have $$S_T \succsim S_T' \Longleftrightarrow b\sim S_T$$where $\sum_{t=0}^Ts_t=\sum_{t=0}^Ts_t'$.
-
-Proposition 6 implies that, when allocating a consumption budget across time periods, the DM keeps her choice dynamically consistent if and only if she performs a strong preference for spread. Given that people are typically assumed to be impatient (preferring a declining sequence), one intuitive interpretation of Lemma 2 is that the less impatient a DM is in the present, the less inclined she is to deviate from the original choice in the future.

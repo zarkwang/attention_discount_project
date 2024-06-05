@@ -72,7 +72,7 @@
 
 \title{An Attentional Model of Time Discounting}
 \author{Zark Zijian Wang}
-\date{June 03, 2024}
+\date{June 05, 2024}
 
 \begin{document}
 \maketitle
@@ -115,7 +115,9 @@ value of \(s_{0\rightarrow T}\) is defined as
 \(U(s_{0\rightarrow T})\equiv \sum_{t=0}^T w_{t}u(s_t)\), where
 \(u(s_t)\) is the instantaneous utility of receiving \(s_t\), and
 \(w_t\) is the decision weight (sometimes called discount factors)
-assigned to \(s_t\).
+assigned to \(s_t\). We assume the function \(u(s_t)\) is strictly
+increasing with \(s_t\) and for any \(s_t>0\), we have \(u(s_t)>0\). For
+convenience, we set \(u(0)=0\).
 
 The determination of \(w_t\) is central to this paper. We believe that,
 due to the DM's limited attention and demand for information, the DM
@@ -160,16 +162,14 @@ earn a reward after detecting a target object from distractors. If a
 target object is associated with a large reward in previous trials, it
 can naturally capture more attention. Therefore, in the next trial,
 presenting the object as a distractor slows down the target
-detection.\footnote{Some scholars may classify attention into two
-  categories: ``bottom-up control'' and ``top-down control''. However,
-  the evidence about value-driven attentional capture does not fall into
-  either of these categories. Thus, in this paper, we do not describe
-  attention with this dichotomy. Instead, we view attention as a
-  mechanism that seeks to maximize the utility of information.} In
-addition, in financial decision making, investors usually perform an
-ostrich effect \citep{galai2006ostrich, karlsson2009ostrich}. One
-relevant evidence is that stock traders log in their brokerage accounts
-less frequently after market declines \citep{sicherman2016financial}.
+detection.\footnote{\citet{strotz1955myopia} shows that if, for any
+  reward delivered at period \(t\), the DM's discount factor is
+  \(\delta^t\), then her preference will be stationary and consistent
+  over time.} In addition, in financial decision making, investors
+usually perform an ostrich effect
+\citep{galai2006ostrich, karlsson2009ostrich}. One relevant evidence is
+that stock traders log in their brokerage accounts less frequently after
+market declines \citep{sicherman2016financial}.
 
 Third, \(w_t\) is ``anchored'' in a reference weight \(d_t\). For a
 certain sequence of rewards, \(d_t\) could denote the initial weight
@@ -181,9 +181,9 @@ context \citep{stewart2006decision}. The constraint on the deviation
 between \(w_t\) and \(d_t\) indicates that reallocating attention or
 acquiring new information is costly. The deviation of \(w_t\) from
 \(d_t\) depends on parameter \(\lambda\), which as we discuss in the
-next section, can reflect the unit cost of information acquisition. A
-large \(\lambda\) implies a low learning rate and a high cognitive cost
-in adapting the decision weights to the local context.
+next section, can reflect the unit cost of attention adjustment. A large
+\(\lambda\) implies a low learning rate and a high cognitive cost in
+adapting the decision weights to the local context.
 
 Fourth, we adopt the idea of \citet{gottlieb2012attention} and
 \citet{gottlieb2013information} that attention can be understood as an
@@ -214,10 +214,9 @@ utility} (help identifying the optimal action), \emph{cognitive utility}
 (satisfying curiosity), or \emph{hedonic utility} (inducing positive
 feelings). It is worth mentioning that the well-known rational
 inattention theories are grounded in the instrumental utility of
-information.\footnote{The rational inattention theory assumes the DM
-  learns information about different options in order to find the best
-  option. For details, see \citet{sims2003implications},
-  \citet{matvejka2015rational}, and \citet{mackowiak2023rational}.}
+information.\footnote{It is worth mentioning that if we make the
+  ``hidden zeros'' explicit in LL and SS, adding a common delay under
+  the AAD model would always yield a the common difference effect.}
 Instead, in this paper, we draw on the cognitive and hedonic utility of
 information to build our theory of time discounting. Our first approach
 to characterizing AAD is relevant to the cognitive utility: the DM's
@@ -243,9 +242,7 @@ nosiy. For any \(t\in\{0,1,…,T\}\), the signal sampled at information
 source \(s_t\) could be represented by \(x_t =u(s_t)+\epsilon_t\), where
 each \(\epsilon_t\) is i.i.d. and
 \(\epsilon_t \sim N(0,\sigma_\epsilon^2)\). The sampling weight for
-information source \(s_t\) is denoted by \(w_t\). We assume the function
-\(u(s_t)\) is strictly increasing with \(s_t\) and for any \(s_t>0\), we
-set \(u(s_t)>0\).
+information source \(s_t\) is denoted by \(w_t\).
 
 The DM's belief about the sequence value \(U(s_{0\rightarrow T})\) is
 updated as follows. At first, she holds a prior \(U_0\), and given she
@@ -300,20 +297,24 @@ problem. That is,\[
 w_t \propto d_t e^{\bar{x}_t/\lambda}
 \]where \(\bar{x}_t\) is the mean sample signal generated by information
 source \(s_t\) so far, \(1/\lambda\) is the learning rate, and \(d_t\)
-is the initial sampling weight for \(s_t\).\footnote{Classic softmax
-  strategy assumes the initial probability of taking an action follows
-  an uniform distribution. We relax this assumption by importing
-  \(d_t\), so that the DM can hold an initial preference of sampling
-  over the dated rewards.} Note \(\bar{x_t}\) cannot be calculated
-without doing simulations under a certain \(\sigma_\epsilon\). For
-researchers, modelling an intertemporal choice in this way requires
-conducting a series of simulations and then calibrating
-\(\sigma_\epsilon\) for every choiceable option, which could be
-computationally expensive. Fortunately, according to the weak law of
-large numbers, as the sample size \(k\) gets larger, \(\bar{x}_t\) is
-more likely to fall into a neighborhood of \(u(s_t)\). Thus, the AAD
-which assumes \(w_t \propto d_t e^{u(s_t)/\lambda}\) could be viewed as
-a proper approximation to the softmax exploration strategy.
+is the initial sampling weight for \(s_t\).\footnote{For theoretical
+  analysis about intertemporal correlation aversion, please see
+  \citet{epstein1983stationary}, \citet{epstein1989substitution},
+  \citet{weil1990nonexpected}, \citet{bommier2005risk}, and
+  \citet{bommier2017monotone}. The AAD model takes a similar form to the
+  class of models defined in \citet{epstein1983stationary}. A key
+  feature of such models is that the discount factor for future
+  utilities is dependent on the utility achieved in the current period.}
+Note \(\bar{x_t}\) cannot be calculated without doing simulations under
+a certain \(\sigma_\epsilon\). For researchers, modelling an
+intertemporal choice in this way requires conducting a series of
+simulations and then calibrating \(\sigma_\epsilon\) for every
+choiceable option, which could be computationally expensive.
+Fortunately, according to the weak law of large numbers, as the sample
+size \(k\) gets larger, \(\bar{x}_t\) is more likely to fall into a
+neighborhood of \(u(s_t)\). Thus, the AAD which assumes
+\(w_t \propto d_t e^{u(s_t)/\lambda}\) could be viewed as a proper
+approximation to the softmax exploration strategy.
 
 Those who familiar with reinforcement learning algorithms may notice
 that here \(u(s_t)\) is a special case of action-value function
@@ -342,18 +343,18 @@ mental valuation of a reward sequence.
 Two strands of literature can justify the information maximizing
 approach to characterizing AAD. First, our assumption that the DM
 updates decision weights toward a greater \(D_{KL}(U_k||U_0)\) is
-consistent with the finding that Bayesian surprises attract attention in
-vision research \citep{itti2009bayesian}. Second, the softmax
-exploration strategy is widely used by neuroscientists in fitting human
-actions in reinforcement learning tasks
-\citep{daw2006cortical, niv2012neural, fitzgerald2012action, niv2015reinforcement, leong2017dynamic}.
+compatible with the well-known finding that Bayesian surprises attract
+visual attention \citep{itti2009bayesian}. Second, the softmax
+exploration strategy is widely used by neuroscientists in reinforcement
+learning studies
+\citep{daw2006cortical, niv2012neural, fitzgerald2012action, collins2014opponent, niv2015reinforcement, leong2017dynamic}.
 For instance, \citet{daw2006cortical} find the softmax strategy can
 characterize humans' exploration behavior better than other classic
-strategies (e.g. \(\epsilon\)-greedy). Besides,
-\citet{collins2014opponent} show that models based on the soft strategy
-exhibit a good performance in explaining behaviors of the striatal
-dopaminergic system (which is central in brain's sensation of pleasure
-and learning of rewarding actions) in reinforcement learning.
+strategies (e.g. \(\epsilon\)-greedy). \citet{collins2014opponent} show
+that models based on the softmax strategy exhibit a good performance in
+explaining the striatal dopaminergic system's activities (which is
+central in brain's sensation of pleasure and learning of rewarding
+actions) in reinforcement learning tasks.
 
 \hypertarget{optimal-discounting}{%
 \subsection{\texorpdfstring{Optimal Discounting
@@ -374,23 +375,13 @@ multiple selves and reducing the incurred cognitive cost.
 \citet{noor2022optimal,noor2024constrained} specify an optimization
 problem to capture this decision. In this paper, we adopt a variant of
 their original model. The formal definition of the optimal discounting
-problem is given by Definition 2. \footnote{There are three differences
-  between Definition 2 and the original optimal discounting model
-  \citep{noor2022optimal,noor2024constrained}. First, in our setting,
-  shifting attention to future rewards may reduce the attention to the
-  current reward, while this would never happen in
-  \citet{noor2022optimal,noor2024constrained}. Second, the original
-  model assumes \(f'_t(w_t)\) must be continuous at 0 and \(w_t\) must
-  be no larger than 1. We relax these assumptions since neither
-  \(w_t=0\) nor \(w_t\geq1\) is included our solutions. Third, the
-  original model assumes that \(f'_t(w_t)\) is left-continuous in
-  \([0,1]\), and there exist \(\underline{w},\bar{w}\in[0,1]\) such that
-  \(f'_t(w_t)=0\) when \(w_t\leq\underline{w}\), \(f'_t(w_t)=\infty\)
-  when \(w_t\geq\bar{w}\), and \(f'_t(w_t)\) is strictly increasing when
-  \(w_t \in [\underline{w},\bar{w}]\). We simplify this assumption by
-  setting \(f'_t(w_t)\) is continuous strictly increasing in \((0,1)\).
-  For behavior of \(f'_t(w_t)\) near the border of \([0,1]\), we set
-  \(\lim_{w_t\rightarrow 0} f'_t(w_t)=-\infty\) instead.}
+problem is given by Definition 2. \footnote{To validate, suppose
+  \(u(x_s)=5\), \(u(x_l)=10\), \(u(y_s)=1\), \(u(y_l)=3\). The results
+  of each lottery contain only two periods, \(t_1\) and \(t_2\). The
+  reference weights are uniformly distributed, i.e.~\(d_{t_1}=d_{t_2}\).
+  In this case, setting \(\lambda=1\) would generate intertemporal
+  correlation seeking, while setting \(\lambda=100\) would generate
+  intertemporal correlation aversion.}
 
 \noindent \textbf{Definition 2}: \emph{Given reward sequence}
 \(s_{0\rightarrow T}=[s_0,...,s_T]\)\emph{, the following optimization
@@ -560,20 +551,18 @@ then we must have} \(\alpha_2 = \beta_2\)\emph{.}
 Axiom 3 implies that for a reward sequence \(s_{0\rightarrow T-1}\), if
 we add a new reward \(s_T\) at the end of the sequence, then the value
 of the new sequence should lie between the original sequence
-\(s_{0\rightarrow T-1}\) and the newly added reward \(s_T\). This
-characterizes condition (i), i.e.~the sum of decision weights is bounded
-tightly at 1. Notably, Axiom 3 is consistent with the empirical evidence
-about \emph{violation of dominance}
-\citep{scholten2014better, jiang2017better} in intertemporal choice.
-Suppose the DM is indifferent between a small-sooner reward (SS)
-``receive \$75 today'' and a large-later reward (LL) ``receive \$100 in
-52 weeks''. \citet{scholten2014better} find when we add a tiny reward
-after the payment in SS, e.g.~changing SS to ``receive \$75 today and
-\$5 in 52 weeks'', the DM would be more likely to prefer LL over SS.
-\citet{jiang2017better} find the same effect can apply to LL. That is,
-if we add a tiny reward after the payment in LL, e.g.~changing LL to
-``receive \$100 in 52 weeks and \$5 in 53 weeks'', the DM may be more
-likely to prefer SS over LL.
+\(s_{0\rightarrow T-1}\) and the newly added reward \(s_T\). Notably,
+Axiom 3 is consistent with the empirical evidence about \emph{violation
+of dominance} \citep{scholten2014better, jiang2017better} in
+intertemporal choice. Suppose the DM is indifferent between a
+small-sooner reward (SS) ``receive £75 today'' and a large-later reward
+(LL) ``receive £100 in 52 weeks''. \citet{scholten2014better} find when
+we add a tiny reward after the payment in SS, e.g.~changing SS to
+``receive £75 today and £3 in 52 weeks'', the DM would be more likely to
+prefer LL over SS. \citet{jiang2017better} find the same effect can
+apply to LL. That is, if we add a tiny reward after the payment in LL,
+e.g.~changing LL to ``receive £100 in 52 weeks and £3 in 53 weeks'', the
+DM may be more likely to prefer SS over LL.
 
 Axiom 4 implies that no matter how the DM brackets the rewards into
 sub-sequences (or how the sub-sequences get further decomposed), the
@@ -593,35 +582,463 @@ We show in Proposition 1 that the optimal discounting model plus Axiom
 1-4 can exactly produce AAD.
 
 \noindent \textbf{Proposition 1}: \emph{Suppose} \(\succsim\) \emph{has
-an optimal discounting representation, then it has an AAD representation
-if and only if it satisfies Axiom 1-4.}
+an optimal discounting representation, then it satisfies Axiom 1-4 if
+and only if has an AAD representation.}
 
-The proof of Proposition 1 is in Appendix A.
+The necessity (``only if'') is easy to see. We present the proof of
+sufficiency (``if'') in Appendix A. The sketch of the proof is as
+follows. First, by recursively applying Axiom 3 and Axiom 1 to each
+sub-sequence of \(s_{0\rightarrow T}\), we can obtain
+\(s_{0\rightarrow T}\sim w_0\cdot s_0+...+w_T\cdot s_T\), where
+\(\sum_{t=0}^T w_t = 1\) and \(w_t>0\). Second, by the FOC of the
+optimal discounting problem, we have \(f'_t(w_t)=u(s_t)+\theta\), where
+\(\theta\) is the Lagrangian multiplier. Given \(f'_t(.)\) is continuous
+and strictly increasing, we can set \(w_t=\phi_t(u(s_t)+\theta)\), where
+\(\phi_t(.)\) is also a continuous and strictly increasing function.
+Third, Axiom 4 indicates that the relative decision weights between
+rewards within a reward (sub-)sequence is irrelevant to the rewards
+outside it. Imagine that we add a new reward \(s_{T+1}\) to the end of
+\(s_{0\rightarrow T}\) and the decision weights for \(s_{T+1}\) are
+denoted by \(\{w'_t\}_{t=0}^{T+1}\). Then, by Axiom 4 (jointly with
+Axiom 1-3), we should have
+\(\frac{w_0}{w'_0}=\frac{w_1}{w'_1}=...=\frac{w_T}{w'_T}\). Thus,
+\(w_t \propto w'_t\). Suppose \(w'_t=\phi_t(u(s_t)-\eta)\), we can
+obtain \(w_t \propto e^{\ln\phi_t(u(s_t)-\eta)}\). Fourth, we can adjust
+\(s_{T+1}\) arbitrarily to get different realizations of \(\eta\).
+Suppose under some \(s_{T+1}\), \(w'_t = \phi_t(u(s_t))\). Then, we also
+have \(w_t \propto e^{\ln\phi_t(u(s_t))}\). By comparing the two
+proportional relations, we can find that there exists \(\kappa>0\) such
+that \(\ln\phi_t(u(s_t))=\ln\phi_t(u(s_t)-\eta)+\kappa\eta\) for all
+\(t\in\{0,1,…,T\}\), which indicates \(\ln \phi_t(.)\) is linear under
+some given \(\eta\). Finally, we show that the linear condition holds
+when \(\eta\in[0,u_{\max}-u_{\min}]\), where \(u_{\max},u_{\min}\) are
+the maximum and minimum instantaneous utilities in
+\(s_{0\rightarrow T}\). So, we can rewrite \(\ln\phi_t(u(s_t))\) as
+\(\ln\phi_t(u_{\min})+\kappa(u(s_t)-u_{\min})\). Setting
+\(d_t=\phi_t(u_{\min})\), \(\lambda =1/\kappa\), and reframing the
+utility function, we obtain \(w_t \propto d_t e^{u(s_t)/\lambda}\),
+which is AAD.
 
 \hypertarget{implications-for-decision-making}{%
 \section{Implications for Decision
 Making}\label{implications-for-decision-making}}
 
-hidden-zero effect
+\hypertarget{hidden-zero-effect}{%
+\subsection{Hidden Zero Effect}\label{hidden-zero-effect}}
 
-common-difference effect
+Empirical evidence suggests the subjective discount factor of a reward
+is dependent not just on delay but also on the framing of reward
+sequences. In this subsection, we discuss the evidence of (asymmetric)
+hidden zero effect
+\citep{magen2008hidden, radu2011mechanism, read2017value}. Similar with
+violation of dominance, this effect also provides a justification for
+our assumption that the sum of AADs is a fixed amount.
 
-concavity of discount function
+To illustrate, suppose the DM is indifferent between ``receive £100
+today'' (SS) and ``receive £120 in 25 weeks'' (LL). The hidden zero
+effect suggests that people are more likely to choose LL when SS is
+framed as a sequence rather than as a single-period reward. In other
+words, if we frame SS as ``receive £100 today and £0 in 25 weeks''
+(SS1), the DM would prefer LL to SS1. Moreover, \citet{read2017value}
+find that framing LL as ``receive £0 today and £120 in 25 weeks'' (LL1)
+has no effect on preference.
 
-S-shaped value function
+The hidden zero effect can be explain by the AAD model. When a DM
+valuates a reward sequence \(s_{0\rightarrow T}\), the AAD model assumes
+that she splits a fixed amount of attention over \(T\) periods. For the
+given example, the DM may perceive the time length of SS as ``today''
+and perceives the time length of SS1 as ``25 weeks''. In the former
+case, she can focus her attention on the current period when she can get
+£100. While in the latter case, she have to spend some attention to
+future periods in which no reward is delivered, which also decreases the
+decision weight assigned to the current period. As a result, she values
+SS1 lower than SS. By contrast, the DM may perceive the time length of
+both LL and LL1 as ``25 weeks''. When she valuate LL, she has already
+paid some attention to periods earlier than ``25 weeks''. Therefore,
+changing LL to LL1 does not change the choice.
 
-Intertemporal correlation aversion
+\hypertarget{relation-to-hyperbolic-discounting}{%
+\subsection{Relation to Hyperbolic
+Discounting}\label{relation-to-hyperbolic-discounting}}
 
-Learning and inconsistent planning
+Most of the intertemporal choice studies only involve comparisons
+between single-period rewards (SS and LL). Here we derive the discount
+factor for SS/LL under the AAD model and use that to illustrate how
+attention allocation can account for the anomalies in such decision
+settings. For simplicity, we assume the reference weight
+\(d_t = \delta^t\), \(\delta\in(0,1]\), i.e.~the DM initial discount
+factor (before learning information about \(s_{0\rightarrow T}\)) is
+exponential.\footnote{\citet{strotz1955myopia} shows that if, for any
+  reward delivered at period \(t\), the DM's discount factor is
+  \(\delta^t\), then her preference will be stationary and consistent
+  over time.}
 
-\texttt{\{\#\ \{r\ child=\textquotesingle{}Implications.Rmd\textquotesingle{}\}}
+Consider a reward sequence \(s_{0\rightarrow T}\) where for all
+\(t\leq T\), \(u(s_t)=0\) and only \(u(s_T)>0\). This implies the DM
+receives nothing until period \(T\). In this case, the DM's valuation of
+\(s_{0\rightarrow T}\) is \(U(s_{0\rightarrow T})=w_Tu(s_T)\). Let
+\(v(x)=u(x)/\lambda\). By Definition 1, we can derive that \(w_T\) is a
+function of \(s_T\):\[\tag{3}
+ w_T = \frac{1}{1+G(T)e^{-v(s_T)}}
+\]where\[ G(T) = \left\{ \begin{aligned} & \frac{1}{1-\delta}(\delta^{-T}-1) \; ,& 0<\delta<1\\ & T\; ,& \delta=1\ \end{aligned} \right. \]This
+\(w_T\) can represent the discount function for a single reward \(s_T\),
+delivered at period \(T\). Interestingly, when \(\delta=1\),
+\(w_T(s_T)\) takes a form similar with hyperbolic discounting. In recent
+years, some studies have attempted to provide a rational account for
+hyperbolic discounting. For instance, \citet{gabaix2017myopia} propose a
+model with similar assumptions to our information maximizing exploration
+approach to AAD: the DM's perception of utility is noisy and the DM
+updates her beliefs about utility with the Bayes' rule. Nevetherless,
+\citet{gabaix2017myopia} account for hyperbolic discounting with an
+assumption that the variance of utility signal is proportional to delay,
+whereas we propose the DM seeks to maximize her information gain when
+learning information about utilities. Meanwhile, when
+\(v(s_t)=\ln(\beta s_t+1)\), where \(\beta>0\), the discount function
+\(w_T\) takes a similar form to \citet{gershman2020rationally}.
+Therefore, some remarks about such models can also be generated by the
+AAD in a special case.
+
+In the following three subsections, we use Equation (3) to explain three
+decision anomalies: the common difference effect (and its reverse),
+timing risk aversion, and S-shaped value function.
+
+\hypertarget{common-difference-effect}{%
+\subsection{Common Difference Effect}\label{common-difference-effect}}
+
+The common difference effect \citep{loewenstein1992anomalies} implies
+that, when the DM faces a choice between LL and SS, adding a common
+delay to both options can increase her preference for LL. For example,
+suppose the DM is indifferent between ``receive £120 in 25 weeks'' (LL)
+and ``receive £100 today'' (LL). Then, she would prefer ``receive £120
+in 40 weeks'' to ``receive £100 in 15 weeks''.
+
+Let \((v_l,t_l)\) denote a reward of utility \(v_l\), delivered at
+period \(t_l\) and \((v_s,t_s)\) denote a reward of utility \(v_s\),
+delivered at period \(t_s\). We set \(v_l>v_s>0\), \(t_l>t_s>0\). So,
+\((v_l,t_l)\) can represent a LL and \((v_s,t_s)\) can represents a SS.
+We represent the discount factors for LL and SS by \(w_{t_l}(v_l)\) and
+\(w_{t_s}(v_s)\). Suppose
+\(w_{t_l}(v_l)\cdot v_l = w_{t_s}(v_s)\cdot v_s\), then the common
+difference effect implies that
+\(w_{t_l+\Delta t}(v_l)\cdot v_l > w_{t_s+\Delta t}(v_s)\cdot v_s\),
+where \(\Delta t >0\). Given Equation (3), the conditions for the common
+difference effect are derived in Proposition 2.
+
+\noindent \textbf{Proposition 2}: \emph{The following statements are
+true:}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\item
+  \emph{If} \(\delta=1\)\emph{, the common difference effect always
+  holds.}
+\item
+  \emph{If} \(0<\delta<1\)\emph{, i.e.~the DM is initially impatient,
+  the common difference effect holds when and only
+  when}\(v_l-v_s+\ln(v_l/v_s)>(t_l-t_s)\ln(1/\delta)\)\emph{.}
+\end{enumerate}
+
+The proof of Proposition 2 is in Appendix B. The part (b) of Proposition
+2 yields a novel prediction about the common difference effect. That is,
+for an impaient DM, to make this effect hold, the relative and absolute
+differences in reward utility between LL and SS must be significantly
+larger than their aboslute difference in time delay. In the opposite, if
+the difference in delay is significantly larger than the difference in
+reward utility, we may observe a reversed common difference
+effect.\footnote{It is worth mentioning that if we make the ``hidden
+  zeros'' explicit in LL and SS, adding a common delay under the AAD
+  model would always yield a the common difference effect.} Figure
+\ref{fig:common_diff} demonstrates an example for this reversed effect.
+
+\begin{figure}[h]
+  \centering   
+  \includegraphics[width=0.65\textwidth]{figures/common_diff.png}   
+  \caption{The common difference effect and its reverse}
+  \vspace{8pt}
+  \begin{minipage}{1.0\textwidth}
+{\par\footnotesize Note: $x_l$ and $x_s$ are the positive reward levels for LL and SS. The values of LL and SS are calculated based on Equation (3). $d_t=0.75^t$, $u(x)=x^{0.6}$, $\lambda=2$. For each certain $t_s$, we identify the delay $t_l$ that makes the value of LL equivalent to SS. If the common different effect is valid, for one unit increase in $t_s$, the resultant $t_l$ should increase by a level smaller than one unit. }
+\end{minipage}
+  \label{fig:common_diff} 
+\end{figure}
+
+When the DM is impatient, adding a common delay would naturally make
+\(v_l\) and \(v_s\) more discounted, i.e.~less attention is paid to the
+corresponding rewards. Since the sum of decision weights is fixed, this
+implies the the DM frees up some attention and she needs to reallocate
+it across the periods in each reward sequence (LL and SS). There are
+three mechanisms jointly determining whether we could observe the common
+difference effect or not.
+
+First, the existing periods with no reward delivered would grab some
+attention. That is, the DM would attend more to the rewards of zero
+utility, delivered in duration \([0,t_l)\) for LL and in duration
+\([0,t_s]\) for SS. Given \(t_l >t_s\), the relevant duration in LL may
+naturally capture more attention than that in SS. In other words, the
+common delay makes the DM focus more on the waiting time in LL than in
+SS, which decreases her preference for LL.
+
+Second, the newly added time intervals also grab some attention. That
+is, the DM needs to pay some attention to rewards (of zero utility as
+well) delivered in duration \((t_l,t_l+\Delta t]\) in LL and in duration
+\((t_s, t_s+\Delta t]\) in SS. For LL, there are already plenty of
+periods over which DM has to split her attention. So, the duration
+\((t_l,t_l+\Delta t]\) in LL can capture less attention than its
+counterpart in SS. This increases the DM's preference for LL.
+
+Third, the only positive reward, delivered in \(t_l\) for LL and in
+\(t_s\) for SS, may draw some attention back. Given that the DM in
+general tends to pay more attention to larger rewards, the positive
+reward in LL can capture more ``free'' attention than that that in SS.
+This also increases the preference for LL. If the latter two mechanisms
+override the first mechanism, we would observe a common difference
+effect in DM's choices.
+
+\hypertarget{concavity-of-discount-function}{%
+\subsection{Concavity of Discount
+Function}\label{concavity-of-discount-function}}
+
+Many time discounting models, such as exponential and hyperbolic
+discounting, assume the discount function is convex in time delay. This
+style of discount function predicts DM is \emph{risk seeking over time
+lotteries}. To illustrate, suppose a reward of level \(x\) is delivered
+at period \(t_l\) with probability \(\pi\) and is delivered at period
+\(t_s\) with probability \(1-\pi\), where \(0<\pi<1\). Meanwhile,
+another reward of the same level is delivered at period \(t_m\), where
+\(t_m=\pi t_l +(1-\pi) t_s\). Under such discount functions, the DM
+should prefer the former reward to the latter reward. For instance, she
+may prefer receiving an amount of money today or in 20 weeks with equal
+chance, rather than receiving it in 10 weeks with certainty. However,
+experimental studies suggest that people are often \emph{risk averse
+over time lotteries}, i.e.~they prefer the reward to be delivered at a
+certain time \citep{onay2007intertemporal, dejarnette2020time}.
+
+One way to accommodate the evidence about risk aversion over time
+lotteries is to make the discount function concave in terms of delay.
+Notably, \citet{onay2007intertemporal} find that people are more likely
+to be risk averse over time lotteries when \(\pi\) is small, and to be
+risk seeking when \(\pi\) is large. Given that when \(\pi\) gets larger,
+\(t_m\) is also larger, we can conclude that the discount function may
+be concave in delay for the near future but convex for the far future.
+That is, the discount function is of inverse-S shape.
+\citet{takeuchi2011non} also find evidence that supports this shape of
+discount function.
+
+In Proposition 3, we apply Equation (3) and show that the AAD is
+compatible with this shape of discount function as long as the DM is
+impatient and the reward level \(x\) is large enough.
+
+\noindent \textbf{Proposition 3}: \emph{If} \(\delta =1\)\emph{, then
+the discount function} \(w_T\) i\emph{s convex in} \(T\)\emph{. If}
+\(0<\delta<1\)\emph{, there exist a reward threshold}
+\(\underline{x}>0\) \emph{and a time threshold} \(\underline{T}>0\)
+\emph{such that:}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  \emph{when} \(x\leq \underline{x}\)\emph{, the discount function is
+  convex in} \(T\);
+\item
+  \emph{when} \(x > \underline{x}\)\emph{, the discount function is
+  convex in} \(T\) \emph{given} \(T\geq \underline{T}\)\emph{, and it is
+  concave in} \(T\) \emph{given} \(0<T<\underline{T}\)\emph{.}
+\end{enumerate}
+
+The proof of Proposition 3 is in Appendix C. Figure
+\ref{fig:discount_value_function}(a) demonstrates the convex discount
+function (blue line) and the inverse-S shaped discount function (red
+line) that could be yielded by Equation (3).
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/concave_discount.png} 
+        \caption{discount function}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/s_shape_value.png}
+        \caption{value function}
+    \end{subfigure}
+    \caption{Discount function and value function for a delayed reward}
+
+  \vspace{8pt}
+  \begin{minipage}{1.0\textwidth}
+{\par\footnotesize Note: A reward of level $x_T$ is delivered at period $T$. The discount function and value function are calculated based on Equation (3). $d_t=0.75^t$, $u(x)=x^{0.6}$, $\lambda=2$.}
+\end{minipage}
+    
+    \label{fig:discount_value_function}
+\end{figure}
+
+\hypertarget{s-shaped-value-function}{%
+\subsection{S-Shaped Value Function}\label{s-shaped-value-function}}
+
+In decision theories, it is commonly assumed that the utility function
+\(u(.)\) satisfies \(u''<0\). This usually suggests the value function
+of a reward is concave. However, empirical evidence suggests that the
+value functions are often S-shaped. Such S-shaped value functions can be
+generated by various sources, such as reference dependence
+\citep{kahneman1979prospect} and efficient coding of numbers
+\citep{louie2012efficient}. Through the AAD model, we provide a novel
+account for S-shaped value function based on the insight that larger
+rewards capture more attention.
+
+Consider a reward of level \(x\) delivered at period \(T\). Its value
+function can be represented by \(U(x,T)=w_T(x)u(x)\). We assume
+\(u'>0\), \(u''<0\), and \(w_T\) is determined by Equation (3). \(w_T\)
+is increasing with \(x\) as the DM tends to pay more attention to larger
+rewards. Both functions \(u(x)\) and \(w_T(x)\) are concave in \(x\); so
+when \(x\) is small, they both grow fast. At some conditions, it is
+possible that the product of the two functions is convex in \(x\) when
+\(x\) is small enough. We derive the conditions for the S-shaped value
+function in Proposition 4.
+
+\noindent \textbf{Proposition 4}: \emph{Suppose} \(T\geq1\)\emph{,}
+\(\frac{d}{dx}\left(\frac{1}{v'(x)}\right)\) \emph{is continuous in}
+\((0,+\infty)\)\emph{, then:}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\item
+  \emph{There exists a threshold} \(\bar{x} \in\mathbb{R}_{\geq0}\)
+  \emph{such that} \(U(x,T)\) \emph{is strictly concave in} \(x\)
+  \emph{when} \(x\in [\bar{x},+\infty)\)\emph{;}
+\item
+  \emph{If} \(\frac{d}{dx}\left(\frac{1}{v'(x)}\right)\) \emph{is
+  right-continuous at} \(x=0\) \emph{and}
+  \(\frac{d}{dx}\left(\frac{1}{v'(0)}\right)<1\)\emph{, there exists a
+  threshold} \(x^*\) \emph{in} \((0, \bar{x})\) \emph{such that, for
+  any} \(x\in (0,x^*)\)\emph{,} \(U(x,T)\) \emph{is strictly convex in}
+  \(x\).
+\item
+  \emph{There exists an unit cost of attention adjustment} \(\lambda^*\)
+  \emph{and an interval} \((x_1,x_2)\) \emph{such that, if}
+  \(\lambda<\lambda^*\)\emph{, for any} \(x\in(x_1,x_2)\)\emph{,}
+  \(U(x,T)\) \emph{is strictly convex in} \(x\)\emph{, where}
+  \(\lambda^*>0\) \emph{and} \((x_1,x_2)\subset(0,\bar{x})\)\emph{.}
+\end{enumerate}
+
+The proof of Proposition 4 is in Appendix D. Proposition 4 implies, if
+the derivative of \(\frac{1}{v'(x)}\) converges to a small number when
+\(x\rightarrow 0^+\), or the unit cost of attention adjustment
+\(\lambda\) is small enough, the value function \(U(x,T)\) will be an
+S-shaped in some interval of \(x\). Figure
+\ref{fig:discount_value_function}(b) demonstrates examples of this
+S-shaped value function.
+
+\hypertarget{intertemporal-correlation-aversion}{%
+\subsection{Intertemporal Correlation
+Aversion}\label{intertemporal-correlation-aversion}}
+
+Consider a DM facing two lotteries. For one lottery, she can receive
+£100 today and £100 in 30 weeks with probability 1/2, and receive £3
+today and £3 in 20 weeks with probability 1/2. For the other lottery,
+she can receive £3 today and £100 in 30 weeks with probability 1/2, and
+receive £100 today and £3 in 20 weeks with probability 1/2. In the
+former lottery, rewards delivered at different periods are positively
+correlated, whereas in the latter lottery, those rewards are negatively
+correlated. The expected discounted utility theory predicts the DM is
+indifferent between the two lotteries. However, reccent studies find the
+evidence of \emph{intertemporal correlation
+aversion}\citep{andersen2018multiattribute, rohde2023intertemporal}.
+That is, people often prefer the latter lottery than the former
+one.\footnote{For theoretical analysis about intertemporal correlation
+  aversion, please see \citet{epstein1983stationary},
+  \citet{epstein1989substitution}, \citet{weil1990nonexpected},
+  \citet{bommier2005risk}, and \citet{bommier2017monotone}. The AAD
+  model takes a similar form to the class of models defined in
+  \citet{epstein1983stationary}. A key feature of such models is that
+  the discount factor for future utilities is dependent on the utility
+  achieved in the current period.}
+
+For the above example, intertemporal correlation aversion can be
+generated by the AAD model as follows. The AAD model assumes the DM
+allocates decision weights within each specific reward sequence, which
+implies she would aggregate values over time in each state. For
+simplicity, suppose there are only two periods. In the state that the DM
+receives £3 in two periods, suppose the DM allocates decision weight
+\(w\) to the first period and \(1-w\) to the second period. Note in
+Definition 1, when \(u(s_0)=u(s_1)=...=u(s_T)\), the decision weight
+\(w_t\) for every period \(t\) within the reward sequence
+\(s_{0\rightarrow T}\) will remain the same as the reference weight
+\(d_t\). So, in the state that the DM receives £100 in two periods, the
+allocation of decision weights is the same as \(w\) and \(1-w\). In the
+state that the DM can receive £100 in the first period and £3 in the
+second period, the reward of £100 can capture more attention so that its
+decision weight, say \(w'\), is greater than \(w\). Similarly, in the
+state that the DM receives £3 earlier and then £100, the decision weight
+for the reward of £100, say \(1-w''\), is also greater than \(1-w\).
+Therefore, the value of the lottery in which rewards are positively
+correlated, can be represented by \(0.5\cdot u(3)+0.5\cdot u(100)\). By
+contrast, for the lottery in which rewards are negatively correlated,
+the value can be represented by
+\(0.5(1-w'+w'')\cdot u(3)+0.5(1-w''+w')\cdot u(100)\). Given
+\((1-w'')+w'>1-w+w>1\), the decision weight assigned to \(u(100)\),
+which is \(0.5(1-w''+w')\), should be greater than 0.5. As a result, the
+DM prefer the latter lottery than the former lottery.
+
+In a more general setting, whether the AAD model can continuously
+produce intertemporal correlation aversion is modulated by the unit cost
+of attention adjustment \(\lambda\). To illustrate, we adopt the same
+theoretical setting as \citet{bommier2005risk}. Let \((s_1,s_2)\) denote
+the result of a lottery in which the DM can receive reward \(s_1\) in
+period \(t_1\) and then reward \(s_2\) in period \(t_2\), where
+\(t_2>t_1\geq 0\). There are two lotteries, \(L1\) and \(L2\). The
+results of each lottery is of the same length of sequence. \(L1\)
+generates \((x_s,y_s)\) and \((x_l,y_l)\) with equal chance, \(L_2\)
+generates \((x_s,y_l)\) and \((x_l,y_s)\) with equal chance,
+\(x_l>x_s>0\), \(y_l>y_s>0\). By Proposition 5, we show that in this
+setting, we can always find a \(\lambda\) that makes the DM
+intertemporal correlation averse.
+
+\noindent \textbf{Proposition 5}: \emph{Suppose} \(U(L1), U(L2)\)
+\emph{are the values of} \(L1\) \emph{and} \(L2\)\emph{. For any}
+\(x_l>x_s>0\)\emph{,} \(y_l>y_s>0\)\emph{, any reference weights, and
+any time length of lottery results, there exists} \emph{a threshold}
+\(\lambda^{**}\) such that for any unit co\emph{st of attention
+adjustment} \(\lambda>\lambda^{**}\), \emph{the DM would perform
+intertemporal correlation aversion, i.e.} \(U(L1)<U(L2)\).
+
+The proof of Proposition 5 is in Appendix E. The threshold
+\(\lambda^{**}\) is jointly determined by \(x_l\), \(y_l\), \(y_s\), as
+well as the reference weights for rewards delivered at \(t_1\) and
+\(t_2\). Notably, when \(\lambda < \lambda^{**}\), the DM may be
+intertemporal correlation seeking under some conditions.\footnote{To
+  validate, suppose \(u(x_s)=5\), \(u(x_l)=10\), \(u(y_s)=1\),
+  \(u(y_l)=3\). The results of each lottery contain only two periods,
+  \(t_1\) and \(t_2\). The reference weights are uniformly distributed,
+  i.e.~\(d_{t_1}=d_{t_2}\). In this case, setting \(\lambda=1\) would
+  generate intertemporal correlation seeking, while setting
+  \(\lambda=100\) would generate intertemporal correlation aversion.}
+This suggests a potentially new mechanism for intertemporal correlation
+aversion, that is, DM performs intertemporal correlation aversion
+perhaps because she attends more to larger rewards while attention
+adjustment is very costly.
+
+\hypertarget{learning-and-inconsistent-planning}{%
+\subsection{Learning and Inconsistent
+Planning}\label{learning-and-inconsistent-planning}}
+
+Suppose a DM has budget \(m\) (\(m>0\)) and is considering how to spend
+it over different time periods. We can use a reward sequence \(x\) to
+represent this decision problem, where the DM's spending in period \(t\)
+is \(x_t\). In period 0, she wants to find a \(x\) such
+that\[ \tag{3} \max_{x}\;\sum_{t=0}^T w_t u(x_t)\quad s.t. \;\sum_{t=0}^T x_t = m   \]
+
+where \(w_t\) is the attention-adjusted discounting factor in period
+\(t\). I assume
+\(w_t=\delta^t e^{u(x_t)/\lambda}/\sum_{t=\tau}^T \delta^{\tau} e^{u(x_\tau)/\lambda}\)
+and there is no risk under this setting.
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
 
-\hypertarget{relation-to-other-models-of-intertemporal-choices}{%
+\hypertarget{relation-to-other-models-of-intertemporal-choice}{%
 \subsection{Relation to Other Models of Intertemporal
-Choices}\label{relation-to-other-models-of-intertemporal-choices}}
+Choice}\label{relation-to-other-models-of-intertemporal-choice}}
 
 The theory most similar to AAD is the salience theory
 \citep{bordalo2012salience, bordalo2013salience, bordalo2020memory}.
@@ -636,13 +1053,12 @@ optimal precision
 
 Relation with money/delay trade-off
 
-\hypertarget{other-relevant-phenomena}{%
-\subsection{Other relevant phenomena}\label{other-relevant-phenomena}}
-
 \hypertarget{limitation}{%
 \subsection{Limitation}\label{limitation}}
 
 attention biases learning: learning rate is high for attended reward
+
+sum of decision weights
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
@@ -653,14 +1069,17 @@ attention biases learning: learning rate is high for attended reward
 \newpage
 
 \hypertarget{appendix}{%
-\section{Appendix}\label{appendix}}
+\section*{Appendix}\label{appendix}}
+\addcontentsline{toc}{section}{Appendix}
 
 \hypertarget{a.-proof-of-proposition-1}{%
-\subsection{A. Proof of Proposition 1}\label{a.-proof-of-proposition-1}}
+\subsection*{A. Proof of Proposition
+1}\label{a.-proof-of-proposition-1}}
+\addcontentsline{toc}{subsection}{A. Proof of Proposition 1}
 
-The sufficiency is easy to validate. We present the proof of necessity
-here. That is, if \(\succsim\) has an optimal discounting representation
-and satisfies Axiom 1-4, then it has an AAD representation.
+We present the proof of sufficiency here. That is, if \(\succsim\) has
+an optimal discounting representation and satisfies Axiom 1-4, then it
+has an AAD representation.
 
 \noindent \textbf{Lemma 1}: \emph{If Axiom 1 and 3 hold, for any}
 \(s_{0\rightarrow T}\)\emph{, there exist} \(w_0, w_1, …, w_T > 0\)
@@ -872,7 +1291,7 @@ A corollary of this step is that we can manipulate \(\Delta \theta\) in
 Equation (A4) at any level in \([\underline{\theta},\bar{\theta}]\) by
 changing a hypothetical \(s_{T+1}\).
 
-Fifth, we show \(\ln \phi_t(.)\) is linear under some conditions. To do
+Fifth, we show \(\ln \phi_t(.)\) is linear under some condition. To do
 this, let us add a hypothetical \(s_{T+1}\) to the end of \(s_T\) and
 let \(w'_t=\phi_t(v(s_t))\) denote the decision weights for
 \(t=0,1,…,T+1\) in \(s_{0\rightarrow T+1}\). We change the hypothetical
@@ -931,6 +1350,245 @@ w_t \propto \phi_t(v_{\min})\cdot e^{\kappa(v(s_t)-v_{\min})}
 \(\phi_t(v_{\min})=d_t\), \(\lambda = 1/\kappa\), and apply the
 corollary of the third step, we can conclude that
 \(w_t\propto d_t e^{u(s_t)/\lambda}\), which is of the AAD form.
-\emph{QED}.
+
+\hypertarget{b.-proof-of-proposition-2}{%
+\subsection*{B. Proof of Proposition
+2}\label{b.-proof-of-proposition-2}}
+\addcontentsline{toc}{subsection}{B. Proof of Proposition 2}
+
+Note the instantaneous utilities of LL and SS are \(v_l\) and \(v_s\),
+and the delays for LL and SS are \(t_l\) and \(t_s\). According to
+Equation (3), the common difference effect implies that, if\[ \tag{B1}
+\frac{v_s}{1+G(t_s)e^{-v_s}} = \frac{v_l}{1+G(t_l)e^{-v_l}}
+\]then for any \(\Delta t \geq 0\), we have \[ \tag{B2}
+\frac{v_s}{1+G(t_s+\Delta t)e^{-v_s}} < \frac{v_l}{1+G(t_l+\Delta t)e^{-v_l}}
+\]If \(G(T)=T\), we have \(G(t+\Delta t) = G(t) + \Delta t\). In this
+case, combining Equation (B1) and (B2), we can obtain\[ \tag{B3}
+\frac{\Delta t e^{-v_s}}{v_s} > \frac{\Delta t e^{-v_l}}{v_l}
+\]Given that function \(\psi(v) = e^{-v}/v\) is decreasing with \(v\) so
+long as \(v>0\), Equation (B3) is valid.
+
+If \(G(T) = \frac{1}{1-\delta}(\delta^{-T}-1)\), we have\[
+1+G(t+\Delta t)e^{-v} = \delta^{-\Delta t}[1+G(t)e^{-v}]+(\delta^{-\Delta t}-1)(\frac{e^{-v}}{1-\delta}-1)
+\] Thus, combining Equation (B1) and (B2), we can obtain\[\tag{B4}
+(\delta^{-\Delta t}-1)\frac{\frac{e^{-v_s}}{1-\delta}-1}{v_s} >
+(\delta^{-\Delta t}-1)\frac{\frac{e^{-v_l}}{1-\delta}-1}{v_l}
+\] Given that \(0<\delta<1\), we have \(\delta^{-\Delta t}>1\). So,
+Equation (B4) is valid if and only if\[\tag{B5}
+\frac{1}{v_s}-\frac{1}{v_l}<\frac{1}{1-\delta}(\frac{e^{-v_s}}{v_s}-\frac{e^{-v_l}}{v_l})
+\] By Equation (B1), we know that\[\tag{B6}
+\frac{1}{v_s}-\frac{1}{v_l}=\frac{1}{1-\delta}\left[\frac{(\delta^{-t_l}-1)e^{-v_l}}{v_l} -\frac{(\delta^{-t_s}-1)e^{-v_s}}{v_s}\right]
+\] Combining Equation (B5) and (B6), we have\[
+\delta^{-t_l}\frac{e^{-v_l}}{v_l}<\delta^{-t_s}\frac{e^{-v_s}}{v_s} \Longleftrightarrow v_l - v_s + \ln \left(\frac{v_l}{v_s}\right)>-(t_l-t_s)\ln\delta
+\]
+
+\hypertarget{c.-proof-of-proposition-3}{%
+\subsection*{C. Proof of Proposition
+3}\label{c.-proof-of-proposition-3}}
+\addcontentsline{toc}{subsection}{C. Proof of Proposition 3}
+
+Suppose a positve reward \(x\) is delivered at period \(T\). By Equation
+(3), if \(w_T\) is convex in \(T\), we should have
+\(\frac{\partial^2 w_T}{\partial T^2}\geq 0\). This
+implies\[\tag{C1} 2G'(T)^2\geq(G(T)+e^{v(x)})G''(T) \]
+
+If \(\delta=1\), then \(G(T)=T\). We have \(G'(T)=1\), \(G''(T)=0\).
+Thus, Equation (C1) is always valid.
+
+If \(0<\delta<1\), then \(G(T)=(1-\delta)^{-1}(\delta^{-T}-1)\). We have
+\(G'(T)=(1-\delta)^{-1}(-\ln\delta)\delta^{-T}\),
+\(G''(t)=(-\ln\delta)G'(T)\). Thus, Equation (C1) is valid when
+\[\tag{C2} \delta^{-T}\geq(1-\delta)e^{v(x)}-1 \]Given \(T>0\), Equation
+(C2) holds true in two cases. The first case is
+\(1\geq (1-\delta)e^{v(x)}-1\), which implies that \(v(x)\) is no
+greater than a certain threshold \(v(\underline{x})\), where
+\(v(\underline{x})=\ln(\frac{2}{1-\delta})\). The second case is that
+\(v(x)\) is above \(v(\underline{x})\) and \(T\) is above a threshold
+\(\underline{t}\). In the second case, we can take the logarithm on both
+sides of Equation (C2). It yields
+\(\underline{t}=\frac{\ln[(1-\delta)\exp\{v(x)\}-1]}{\ln(1/\delta)}\).
+
+\hypertarget{d.-proof-of-proposition-4}{%
+\subsection*{D. Proof of Proposition
+4}\label{d.-proof-of-proposition-4}}
+\addcontentsline{toc}{subsection}{D. Proof of Proposition 4}
+
+For convenience, we use \(v\) to represent \(v(x)=u(x)/\lambda\), and
+use \(U\) represent \(U(x,T)\). Set \(g= G(T)\). The first-order
+derivative of \(U\) with respect to \(x\) can be written as\[\tag{D1}
+\frac{\partial U}{\partial x}=v'\frac{e^v+U}{e^v+g}
+\]If \(U\) is strictly concave in \(x\), we should have
+\(\frac{\partial^2 U}{\partial x^2}<0\). By Equation (D1), we calculate
+the second-order derivative of \(U\) with respect to \(x\), and
+rearrange this second-order condition to\[\tag{D2}
+2\zeta(v)+\frac{1}{1+v\zeta(v)}-1<\frac{-v''}{(v')^2}\equiv\frac{d}{dx}\left(\frac{1}{v'}\right)
+\]
+
+where \(\zeta(v)=g/(g+e^v)\). Since \(v''<0\), the RHS of Equation (D2)
+is clearly positive.
+
+To prove the first part of Proposition 4, we can show that when \(x\) is
+large enough, the LHS of Equation (D2) will be non-positive. To make the
+LHS non-positive, we require\[\tag{D3}
+\zeta(v)+\frac{1}{v}\leq\frac{1}{2}
+\]Note that \(\zeta(v)\) is decreasing in \(v\), and \(v\) is increasing
+in \(x\). Hence, \(\zeta(v)+\frac{1}{v}\) is decreasing in \(x\).
+Besides, when \(x\rightarrow0\), it approaches to \(+\infty\), and when
+\(x\rightarrow +\infty\), it approaches to 0. When
+\(\frac{d}{dx}\left(\frac{1}{v'(x)}\right)\) is continuous, there must
+be a unique realization of \(x\) in \((0,+\infty)\), say \(\bar{x}\),
+making the equality in Equation (D3) hold. When \(x\geq\bar{x}\),
+Equation (D3) is always valid, and therefore, \(U(x,T)\) is concave in
+\(x\).
+
+To prove the second part, first note that when \(x=0\), the LHS of
+Equation (D2) will become \(\frac{2g}{g+1}\). If
+\(\frac{d}{dx}\left(\frac{1}{v'(0)}\right)\) is smaller than this value,
+then the LHS of Equation (D2) should be greater than the RHS at the
+point of \(x=0\). From the first part of proposition 4, we know the LHS
+is smaller than the RHS at the point of \(x=\bar{x}\). Thus, given
+\(\frac{d}{dx}\left(\frac{1}{v'(x)}\right)\) is continuous in
+\([0,\bar{x}]\), there must also be a point within \([0,\bar{x}]\), such
+that the LHS equals the RHS. Let \(x^*\) denote the minimum of \(x\)
+that makes the equality valid. Then, for any \(x\in(0,x^*)\), we must
+have that the LHS of Equation (D2) is greater than the RHS, which
+implies \(U(x,T)\) is convex in \(x\). Given that \(T\geq1\), we have
+\(g\geq1\) and thus \(\frac{2g}{g+1}\geq 1\). Thus, when
+\(\frac{d}{dx}\left(\frac{1}{v'(0)}\right)<1\), \(U(x,t)\) can be convex
+in \(x\) for any \(x\in(0,x^{*})\), regardless of \(g\).
+
+The prove the third part, note that \(v(x)=u(x)/\lambda\). So, \[
+\frac{d}{dx}\left(\frac{1}{v'}\right)=\lambda\frac{d}{dx}\left(\frac{1}{u'}\right)
+\]We arbitrarily draw a point from \((0,\bar{x})\) and derive the range
+\(\lambda\) relative to this point. For simplicity, we choose
+\(x=\ln g\). In this case, the LHS of Equation (D2) becomes
+\(\frac{2}{2+\ln g}\). Define a function \(\xi(x)\), where \(\xi\) is
+the value of the LHS of Equation (D2) minus its RHS. Note \(\xi(x)\) is
+continuous at \(x=\ln g\). Therefore, for any positive real number
+\(b\), there must exist a positive real number \(c\) such that, when
+\(x\in(\ln g-c,\ln g+c)\), we have\[\tag{D4}
+\xi(\ln g)-b<\xi(x)<\xi(\ln g)+b
+\]If \(\xi(\ln g)-b\geq 0\), then \(\xi(x)\) will keep positive for all
+\(x\in(\ln g-c,\ln g+c)\), which implies the LHS of Equation (D2) is
+always greater than its RHS.
+
+Finally, we derive the condition for \(\xi(\ln g)-b\geq 0\). Suppose
+when \(x=\ln g\), \(\frac{d}{dx}\left(\frac{1}{u'}\right)=a\) (note at
+this point we have \(\frac{d}{dx}\left(\frac{1}{u'}\right)<+\infty\)).
+Combining with Equation (D3), we know that
+\(\xi(\ln g)-b =\frac{2}{2+\ln g}-\lambda a-b\). Letting this value be
+non-negative, we obtain\[\tag{D5}
+\lambda \leq \frac{2}{a(2+\ln g)}-\frac{b}{a}
+\]Given \(T\geq1\), we have \(g\geq 1\) and thus \(\frac{2}{2+\ln g}\)
+should be positive. Meanwhile, given that \(u'>0\) and \(u''<0\), \(a\)
+should also be positive. Since \(b\) can be any positive number,
+Equation (D5) holds if \(\lambda <\frac{2}{a(2+\ln g)}\). That is, when
+\(\lambda\) is positive but smaller than a certain threshold, there must
+be an interval \((\ln g-c,\ln g+c)\) such that the LHS of Equation (D2)
+is greater than the RHS. Set \(x_1 = \max\{0,\ln g-c\}\),
+\(x_2=\min\{\bar{x}, \ln g +c\}\). When \(x\in (x_1,x_2)\), function
+\(U(x,T)\) must be convex in \(x\).
+
+\hypertarget{e.-proof-of-proposition-5}{%
+\subsection*{E. Proof of Proposition
+5}\label{e.-proof-of-proposition-5}}
+\addcontentsline{toc}{subsection}{E. Proof of Proposition 5}
+
+The proof consists of four steps. First, we write the expressions for
+\(U(L1)\) and \(U(L2)\). Given a lottery result \((s_1,s_2)\), we denote
+the decision weight of each positive reward by \(w_{t_1}\) and
+\(w_{t_2}\). Suppose the time length of each lottery result is \(T\).
+For a period \(\tau\) at which no reward is delivered, the utility is
+zero. Let \(\Omega\) denote the set of all such period \(\tau\), then
+\(\Omega=\{\tau\,|\,0\leq\tau\leq T,\;\tau \neq t_1,t_2\}\). For all
+\(j,k\in\{s,l\}\), we define \(\phi_j=d_{t_1}e^{v(x_j)}\) and
+\(\eta_k=d_{t_2}e^{v(y_k)}\), where \(v(s)=u(s)/\lambda\), and \(d_t\)
+represents the reference weight for any reward delivered at period
+\(t\). By the definition of AAD, we have\[
+w_{t_1} = \frac{\phi_j}{\phi_j + \eta_k +D} \quad ,\quad
+w_{t_2} = \frac{\eta_k}{\phi_j + \eta_k +D}
+\]where \(j,k\in\{s,l\}\), \(D=\sum_{\tau\in\Omega} d_{\tau}\geq 0\).
+The value of a lottery \(L\) can be written as
+\(U(L)=w_{t_1}u(s_1)+w_{t_2}u(s_2)\). Hence, \[\tag{E1}
+\begin{aligned}
+U(L1)=0.5\frac{\phi_s u(x_s)+\eta_s u(y_s)}{\phi_s+\eta_s+D} + 0.5\frac{\phi_l u(x_l)+\eta_l u(y_l)}{\phi_l+\eta_l+D} \\
+U(L2)=0.5\frac{\phi_s u(x_s)+\eta_l u(y_l)}{\phi_s+\eta_l+D} + 0.5\frac{\phi_l u(x_l)+\eta_s u(y_s)}{\phi_l+\eta_s+D}
+\end{aligned}
+\]We observe that, when \(x_l=x_s\), we have \(U(L1)=U(L2)\).
+
+Second, suppose we increase \(x_l\) from \(x_s\) by an increment. This
+increases both \(U(L1)\) and \(U(L2)\) (either by a positive or a
+negative number). To make \(U(L1)<U(L2)\), this increment should
+increase \(U(L2)\) by a greater number than \(U(L1)\). Specifically, we
+assume \(U(L2)\) is increasing faster than \(U(L1)\) at any level of
+\(x_l\). That is, the partial derivative of \(U(L2)\) in terms of
+\(x_l\) is always greater than that of \(U(L1)\). Given \(\phi_l\) is
+increasing in \(x_l\), to see this, we can take partial derivatives in
+terms of \(\phi_l\).
+
+In each line of Equation (E1), note only the second term contains
+\(x_l\). Thus, we focus on the difference between the the second terms.
+The second term of the \(U(L1)\) is influenced by \(y_l\), while that of
+the \(U(L2)\) is influenced by \(y_s\), where \(y_l>y_s\). Thus, we can
+construct a function \(\xi\) such that\[
+\xi(\phi_l,\eta) = \frac{\phi_l \cdot v(x_l)+\eta\cdot v(y)}{\phi_l+\eta+D}
+\]where \(\eta=d_{t_2}e^{v(y)}\). In reverse, we can define
+\(v(x_l)=\ln(\phi_l/d_{t_1})\) and \(v(y)=\ln(\eta/d_{t_2})\). The
+function \(\xi\) is similar to the second term of each line, but note we
+replace \(u(.)\) by \(v(.)\). When \(y=y_l\), \(\xi\) is proportional to
+the second term of \(U(L1)\). When \(y=y_s\), \(\xi\) is proportional to
+the second term of \(U(L2)\) (by the same proportion). Thus, to show
+that the partial derivative of \(U(L2)\) in terms of \(x_l\) is greater
+than that of \(U(L1)\), we just need to show
+\(\partial \xi/\partial \phi_l\) is decreasing with \(y\) (or \(\eta\)).
+
+Third, we take the first- and second-order partial derivatives of
+\(\xi(\phi_l,\eta)\) in terms of \(\phi_l\). The partial derivative of
+\(\xi\) in terms of \(\phi_l\) is\[
+\frac{\partial \xi}{\partial \phi_l}=\frac{(v(x_l)+1)\eta-v(y)\eta+\phi_l+D(v(x_l)+1)}{(\phi_l+\eta+D)^2}
+\]We need to show that for \(y\in[y_s,y_l]\), we can obtain
+\(\partial^2 \xi/\partial \phi_l\partial \eta<0\). This implies
+that\[\tag{E2}
+(v(x_l)+v(y)+2)D-(\phi_l-\eta)(v(x_l)-v(y))+2(\phi_l+\eta)>0
+\]We want Equation (E2) to hold for any \(D>0\). Given the LHS is
+increasing with \(D\), we have\[\tag{E3}
+2(\phi_l+\eta)>(\phi_l-\eta)(v(x_l)-v(y))
+\]Define \(\kappa=d_{t_2}/d_{t_1}\), \(\alpha=v(x_l)-v(y)\). Note
+\(\kappa\in \mathbb{R}_{>0}\), \(\alpha\in\mathbb{R}\). Equation (E3)
+can be rewritten as\[\tag{E4}
+(\alpha-2)\kappa^{-1} e^{\alpha}-\alpha-2<0
+\]
+
+Fourth, based on Equation (E4), we construct a function
+\(h(\alpha)=(\alpha-2)\kappa^{-1} e^\alpha-\alpha-2\). We aim to examine
+whether there exists some \(\alpha\) that can make \(h(a)<0\).
+Obviously, \(\alpha=-2\) and \(\alpha=2\) satisfy this condition.
+Moreover, note \(h(\alpha)\) is decreasing in \(\alpha\) when
+\((\alpha-1)e^{\alpha}\leq \kappa\) and is increasing in \(\alpha\)
+otherwise. When either \(\alpha\rightarrow -\infty\) or
+\(\alpha \rightarrow +\infty\), \(h(\alpha)\rightarrow +\infty\). Thus,
+there must be a limited intertval \((\alpha_1,\alpha_2)\) such that
+\(h(a)<0\) so long as \(\alpha\in(\alpha_1,\alpha_2)\), and
+\([-2,2]\subset(\alpha_1,\alpha_2)\).
+
+For a given positive number \(\kappa\), the points \(\alpha_1,\alpha_2\)
+are determined by the solution to
+\(\frac{\alpha-2}{\alpha+2}e^{\alpha}=\kappa\). Since
+\(v(s)=u(s)/\lambda\), for any \(x_l\) and \(y\in[y_s,y_l]\), we have
+\(\frac{u(x_l)-u(y)}{\lambda}\in(\alpha_1,\alpha_2)\). In other words,
+for any \(x_l>x_s>0\), \(y_l>y_s>0\), any time length of lottery results
+and reference weights (which determining \(D\) and \(\kappa\)), there
+exists some \(\lambda\) that makes \(U(L1)<U(L2)\). Specifically, all
+\(\lambda>\lambda^{**} ={\max}\{\frac{u(x_l)-u(y_l)}{\alpha_1},\frac{u(x_l)-u(y_s)}{\alpha_2}\}\)
+satisfy the target condition.
+
+Notably, if \(\lambda\leq\lambda^{**}\), we have \(h(a)>0\), which by
+Equation (E2)(E3), indicates that under some conditions such as \(D=0\),
+there will be \(\partial^2 \xi/\partial \phi_l\partial \eta\geq0\) for
+all \(y\in[y_s,y_l]\). In that case, at each level of \(x_l\), the
+partial derivative of \(U(L1)\) in terms of \(x_l\) is greater than
+\(U(L2)\). Increasing \(x_l\) by an increment may induce a greater
+increase in \(U(L1)\) than in \(U(L2)\). So, the DM may perform
+intertemporal correlation seeking.
 
 \end{document}

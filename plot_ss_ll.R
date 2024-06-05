@@ -147,7 +147,7 @@ plot_com <- ggplot(data = d_com[d_com$t_s<11&d_com$t_s>0,],aes(x = t_s,y = t_l_e
        x = expression(italic(t)[italic(s)]),
        y = expression("equivalent long delay" ~~ italic(t)[italic(l)]))+
   theme(text = element_text(family = "Times New Roman"),
-        legend.position = c(0.24, 0.82))+
+        legend.position = c(0.22, 0.82))+
   scale_x_continuous(breaks = c(1,3,5,7,9))+
   scale_color_hue(breaks = c('low_reward','high_reward'), 
                   labels = new_labels_xx)+
