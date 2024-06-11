@@ -167,19 +167,19 @@ To illustrate, consider a DM has a consumption budget of $m$ ($m>0$; for procras
 & \max_{s_{0\rightarrow T}\in A}\;\sum_{t=0}^T w_t u(s_t)\\ 
 s.t. &\;\sum_{t=0}^T s_t = m,\; s_t \geq 0 \text{ for } t\in\{0,1,...,T\}
 \end{aligned}
-$$where $w_t$ is the AAD for consumption in period $t$ and $u'>0$, $u''<0$. The DM's reference factor for $w_t$ is $d_t=\delta^t$ ($0<\delta<1$) so that she can perform consistent behavior without taking attention mechanisms into consideration.
+$$where $w_t$ is the AAD for consumption in period $t$ and for $s\in[0,m]$, we have $0<u'(s)<\infty$, $-\infty<u''(s)<0$. The DM's reference factor for $w_t$ is $d_t=\delta^t$ ($0<\delta<1$) so that she can perform consistent behavior without taking attention adjustment into consideration.
 
 We denote the value of $s_{0\rightarrow T}$ by $U=\sum_{t=0}^T w_t u(s_t)$. In the AAD model, the analog to the Euler equation for this optimization problem is$$\tag{6}
-\frac{w_{t+1}}{w_t}\frac{v'(s_{t+1})}{v'(s_t)}\frac{v(s_{t+1})+1-U}{v(s_t)+1-U}=1
-$$where $v(s)=u(s)/\lambda$. Since the DM is impatient, it is natural that in her optimal consumption plan, $v(s_t)\geq v(s_{t+1})$. This indicates $s_0$ is the largest consumption in the plan. Suppose the DM has moved from period 0 to period 1 but has not yet changed her plan. Then, given $s_0$ is excluded from the sequence, the total value of consumption (which is the weighted mean of instantaneous utilities within the sequence) should decrease from $U$ to some lower level. As a result, in Equation (6) we have $\frac{v(s_{t+1})+1-U}{v(s_t)+1-U}$ decreases. To rebalance Equation (6), the DM has to adjust consumption in each period, which makes her behavior dynamically inconsistent.
+\frac{w_{t+1}}{w_t}\cdot\frac{u'(s_{t+1})}{u'(s_t)}\cdot\frac{u(s_{t+1})+\lambda-U}{u(s_t)+\lambda-U}=1
+$$Since the DM is impatient, it may be natural for her to choose $s_t\geq s_{t+1}$. This indicates that $s_0$ is the largest consumption in the plan. Suppose the DM moved from period 0 to period 1 but has not yet changed her plan. Then, given $s_0$ is excluded from the sequence, the total value of consumption (which is the weighted mean of instantaneous utilities within the sequence) should decrease from $U$ to some lower level. As a result, in Equation (6) we have $\frac{v(s_{t+1})+\lambda-U}{v(s_t)+\lambda-U}$ changes. To rebalance Equation (6), the DM has to adjust consumption in each period, which makes her behavior dynamically inconsistent.
 
-Specifically, consider that the DM transfers some future consumption to an earlier period $t$. On the one hand, as $v'(s_t)$ is decreasing, this could induce a reduction in total value of consumption. On the other hand, as she pays more attention to larger rewards, this increases $w_t$, which by contrast, could induce a increase in total value of consumption. If the latter effect exceeds the former effect, the DM would perform over-consumption over time. To make this condition hold, we require a high learning rate or low unit cost of attention adjustment so that an increase in $s_t$ would yield a great increase in $w_t$. A formal statement is presented in Proposition 6.
+Specifically, consider that the DM transfers some consumption at period $t+\tau$ ($\tau\geq 1$) to period $t$. There are three mechanisms jointly determining the changes in total value of consumption. First, as $u(s_t)$ increases, the DM tends to pay more attention to consumption in period $t$. Given $u(s_{t})\geq u(s_{t+\tau})$, this could increase the total value of consumption. Second, as $u'(.)$ is decreasing, the reduction in $u(s_{t+\tau})$ is greater than the increase in $u(s_t)$. This could induce a reduction in total value of consumption. Third, paying more attention to $s_t$ will result in less attention being paid to consumption in other periods, thereby reducing the values of consumption in those periods. This could also induce a reduction in total value of consumption. If the first mechanism overrides the other two mechanisms, the DM would perform over-consumption over time. To make this condition hold, we require a high learning rate or low unit cost of attention adjustment so that an increase in $s_t$ would yield a great increase in $w_t$. A formal statement is presented in Proposition 6.
 
 \noindent \textbf{Proposition 6}: *There exist* $\underline{\lambda},\bar{\lambda}>0$ *such that the solution to Equation (5) satisfies:*
 
-(a) *(concentration bias) If* $\lambda<\underline{\lambda}$*, the DM will concentrate all consumption at the current period.*
+(a) *(concentration bias) If* $\lambda\leq\underline{\lambda}$*, the DM will concentrate all consumption at the current period.*
 
-(b) *(under-consumption) If* $\lambda>\bar{\lambda}$*, with time moves forward, the DM will transfer consumption toward future periods.*
+(b) *(under-consumption) If* $\lambda\geq\bar{\lambda}$*, with time moves forward, the DM will transfer consumption toward future periods.*
 
 (c) *(over-consumption) For some* $\lambda\in(\underline{\lambda},\bar{\lambda})$*, with time moves forward, the DM will transfer consumption toward the current period.*
 

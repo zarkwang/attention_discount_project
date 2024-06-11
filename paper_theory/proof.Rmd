@@ -189,12 +189,48 @@ Notably, if $\lambda\leq\lambda^{**}$, we have $h(a)\geq0$, which by Equation (E
 
 ## F. Proof of Proposition 6 {.unnumbered}
 
-By calculate the first- and second-order derivatives of $U$ in terms of $s_t$, we can obtain$$\tag{F1}
-\frac{\partial U}{\partial s_t} = w_tv'(s_t)(v(s_t)+1-U)
-$$and$$\tag{F2}
-\frac{\partial^2 U}{\partial s_t^2} = w_t[(v(s_t)+1-U)((1-2w_t)v'(s_t)^2+v''(s_t))+v'(s_t)^2]
+By calculating the first-order derivatives of $U$ in terms of $s_t$ and $s_{t+1}$, we have$$\tag{F1}
+\frac{\partial U}{\partial s_{t+1}}/\frac{\partial U}{\partial s_t} = 
+\delta \exp\{\frac{u(s_{t+1})-u(s_t)}{\lambda}\}
+\cdot\frac{u'(s_{t+1})}{u'(s_t)}
+\cdot\frac{u(s_{t+1})+\lambda-U}{u(s_t)+\lambda-U}
+$$Drawing on Equation (F1), we construct a function $\rho_t(s_{0\rightarrow T})=e^{u(s_t)/\lambda}u'(s_t)(u(s_t)+\lambda-U)$. Henceforth, we use $\rho_t$ to represent $\rho_t(s_{0\rightarrow T})$ and use $u_t$ to represent $u(s_t)$, unless otherwise specified. Calculating the first-order derivative of $\rho_t$ in terms of $s_t$, we have$$\tag{F2}
+\frac{\partial \rho_t}{\partial s_t} = 
+e^{u_t/\lambda}[
+(u_t+\lambda-U)((1-w_t)\frac{(u'_t)^2}{\lambda}+u''_t)
++(u'_t)^2]
 $$
 
-We can show the solution to Equation (5) is a decreasing reward sequence, i.e. $s_0\geq s_1\geq ...\geq s_T$ and there exists at least one period $t$ such that $s_t>s_{t+1}$. To see this, consider for any $0\leq t+1\leq T$, we have $s_{t+1}=s_t$. By Equation (F1), in that case we can obtain $\frac{\partial U}{\partial s_{t+1}}/\frac{\partial U}{\partial s_{t}}=\delta<1$. This indicates transferring an incremental consumption from period $t+1$ to $t$ will increase the total value of consumption $U$, while doing from period $t$ to $t+1$ will decrease $U$. Hence, to maximize $U$, the DM's consumption plan must be a decreasing reward sequence.
+To prove the first part of Proposition 6, note that if$$\tag{F3}
+\lambda\leq \min_{0 \leq t \leq T} \inf_{s_{0\rightarrow T}\in A}\{-(u'_t)^2/u''_t \cdot(1-w_t)\}
+$$we will always have $(1-w_t)\frac{(u'_t)^2}{\lambda}+u''_t \geq 0$. According to Equation (F2), this yields $\frac{\partial \rho_t}{\partial s_t}>0$ when$u_t+\lambda-U>0$.
 
-Now we look at the first part of Proposition 6.
+Set $\underline{\lambda}$ as the RHS of Equation (F3). If $\lambda\leq \underline{\lambda}$, the DM will concentrate all consumption at period 0.
+
+To see this, we first consider that $s_{0\rightarrow T}$ is a constant sequence. In that case, for all $t=0,1,...,T$, we have $\frac{\partial U}{\partial s_t}>0$. Also, by Equation (F1), we have $\frac{\partial U}{\partial s_{t+1}}/\frac{\partial U}{\partial s_{t}}=\delta<1$. This suggests, in a constant reward sequence, transferring an incremental consumption from period $t+1$ to $t$ will increase the total value of consumption $U$, and doing the opposite will decrease $U$. So, the DM tends to change this constant sequence to an increasing sequence. For $t=0$, there must be $u(s_0)+\lambda - U >0$.
+
+Then, we consider two cases. First, suppose for all period $t$, we always have $u_t+\lambda-U>0$. This suggests, for any feasible $s_t$, we can obtain $\frac{\partial \rho_t}{\partial s_t}>0$. So long as the DM's consumption plan is a decreasing sequence ($s_t>s_{t+1}$), we have both $\frac{\partial U}{\partial s_t}>0$ and $\frac{\partial U}{\partial s_{t+1}}/\frac{\partial U}{\partial s_{t}}=\delta\frac{\rho_{t+1}}{\rho_{t}}<1$. In this case, the DM tends to keep making transfers from period $t+1$ to $t$, until all consumption is concentrated at period 0.
+
+Second, suppose for some $t>0$, keeping reducing consumption will induce that $u_t+1-U< 0$. For $s_t$ that satisfies this inequality, we have $\frac{\partial U}{\partial s_t}<0$. That is, an increase in each of such $s_t$ would induce a reduction in $U$. In this case, it is still rational to keep reducing future consumption until all consumption is concentrated at period 0.
+
+For the remaining part of Proposition 6, without loss of generality, we focus on what happens on the DM's consumption plan when she moves from period 0 to period 1. At period 1, we denote the rest of reward sequence by $s_{1 \rightarrow T}$, and the total value of consumption by $U_1\equiv U(s_{1\rightarrow T})$. Note the remaining part of Proposition 6 holds only when DM does not concentrate all consumption at period 0. So, at the solution, we have$$\tag{F4}
+\frac{\partial U}{\partial s_{t+1}}/\frac{\partial U}{\partial s_{t}}=1
+$$and$$\tag{F5}
+\frac{\partial^2 U}{\partial s_t^2}=
+\frac{w_t}{\lambda}
+[(u_t+\lambda-U)((1-2w_t)\frac{(u'_t)^2}{\lambda}+u''_t)
++(u'_t)^2]<0
+$$For period $\tau$ when the largest consumption occurs, we can obtain $u_\tau +\lambda - U>0$. Hence, to make Equation (F4) hold, we must have $u_t +\lambda - U>0$ for all $t=0,1,...,T$ (this can be satisfied by setting $\lambda \geq U$).
+
+Besides, Equation (F4) can only hold when the DM's consumption plan is a decreasing sequence. We show this by contradiction. Suppose $s_t\leq s_{t+1}$. Given that Equation (F4) requires $\rho_t > \rho_{t+1}$, we have
+
+according to the proof of the first part, we
+
+Meanwhile, we can rewrite Equation (F5) as $$\tag{F6}
+(1-2w_t)\frac{1}{\lambda} + \frac{1}{u_t+\lambda-U} < -\frac{u''_t}{(u'_t)^2} 
+$$
+
+To prove the second part, note that by Equation (F2), we have$$\tag{F7}
+\frac{\partial \rho_t}{\partial s_t}<0 \;\Longleftrightarrow\;
+(1-w_t)\frac{1}{\lambda}+\frac{1}{u_t+\lambda-U}<-\frac{u''_t}{(u'_t)^2}
+$$if $u_t+\lambda-U>0$. If Equation (F7) holds, then Equation (F5) must holds.
