@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.24)  5 JUN 2024 14:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.24)  12 JUN 2024 14:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -533,101 +533,99 @@ LaTeX Warning: Command \textellipsis invalid in math mode on input line 134.
 
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 173.
-[2{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}] [3]
+[2{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}] [3] [4]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 247.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 255.
 
-[4] [5] [6] [7]
+[5] [6] [7] [8]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 414.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 449.
 
-[8]
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 439.
-
-[9] [10] [11] [12] [13] [14]
-<figures/common_diff.png, id=331, 519.906pt x 415.662pt>
+[9] [10] [11] [12] [13] [14] [15]
+<figures/common_diff.png, id=345, 519.906pt x 415.662pt>
 File: figures/common_diff.png Graphic file (type png)
 <use figures/common_diff.png>
-Package pdftex.def Info: figures/common_diff.png  used on input line 780.
+Package pdftex.def Info: figures/common_diff.png  used on input line 791.
 (pdftex.def)             Requested size: 305.35359pt x 244.12851pt.
-[15] [16 <./figures/common_diff.png>] [17]
-<figures/concave_discount.png, id=368, 284.5029pt x 227.4096pt>
+[16 <./figures/common_diff.png>] [17]
+<figures/concave_discount.png, id=372, 284.5029pt x 227.4096pt>
 File: figures/concave_discount.png Graphic file (type png)
 <use figures/concave_discount.png>
-Package pdftex.def Info: figures/concave_discount.png  used on input line 882.
+Package pdftex.def Info: figures/concave_discount.png  used on input line 894.
 (pdftex.def)             Requested size: 230.18127pt x 183.98909pt.
-<figures/s_shape_value.png, id=369, 284.5029pt x 227.4096pt>
+<figures/s_shape_value.png, id=373, 284.5029pt x 227.4096pt>
 File: figures/s_shape_value.png Graphic file (type png)
 <use figures/s_shape_value.png>
-Package pdftex.def Info: figures/s_shape_value.png  used on input line 888.
+Package pdftex.def Info: figures/s_shape_value.png  used on input line 900.
 (pdftex.def)             Requested size: 230.18127pt x 183.98909pt.
-[18 <./figures/concave_discount.png> <./figures/s_shape_value.png>] [19] [20] [21]
-Underfull \hbox (badness 2478) in paragraph at lines 1055--1059
-[]\T1/lmr/m/n/12 where $\OML/lmm/m/it/12 w[]$ \T1/lmr/m/n/12 is the attention-adjusted dis-count-ing fac-tor in pe-riod $\OML/lmm/m/it/12 t$\T1/lmr/m/n/12 . I as-sume
- []
 
-(./AttentionalDiscount.bbl [22] [23] [24] [25] [26] [27]) [28]
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1109.
+[18] [19 <./figures/concave_discount.png> <./figures/s_shape_value.png>] [20] [21]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1096.
+
+[22] [23] (./AttentionalDiscount.bbl [24] [25] [26] [27] [28]) [29]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1190.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1129.
-
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1149.
-
-[29] [30]
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1212.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1210.
 
 
 LaTeX Warning: Command \textellipsis invalid in math mode on input line 1230.
 
+[30] [31]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1231.
-
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1239.
-
-[31]
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1282.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1293.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1290.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1311.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1296.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1312.
 
-[32] [33]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1354.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1320.
 
-[34] [35] [36] [37] [38] [39]
+[32]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1363.
+
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1371.
+
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1377.
+
+[33] [34]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1435.
+
+[35] [36] [37] [38] [39] [40] [41] [42] [43]
 
 Package caption Warning: Unused \captionsetup[table] on input line 58.
 See the caption package documentation for explanation.
 
-[40] (./AttentionalDiscount.aux)
+[44] (./AttentionalDiscount.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-05-08>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 15393 strings out of 475952
- 253565 string characters out of 5788423
+ 15425 strings out of 475952
+ 254100 string characters out of 5788423
  1941907 words of memory out of 5000000
- 37165 multiletter control sequences out of 15000+600000
+ 37176 multiletter control sequences out of 15000+600000
  627675 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 95i,9n,93p,718b,661s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 95i,9n,93p,718b,651s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on AttentionalDiscount.pdf (40 pages, 928251 bytes).
+Output written on AttentionalDiscount.pdf (44 pages, 948634 bytes).
 PDF statistics:
- 790 PDF objects out of 1000 (max. 8388607)
- 689 compressed objects within 7 object streams
- 204 named destinations out of 1000 (max. 500000)
+ 845 PDF objects out of 1000 (max. 8388607)
+ 739 compressed objects within 8 object streams
+ 225 named destinations out of 1000 (max. 500000)
  200 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -292,7 +292,7 @@ corollary of the third step, we can conclude that
 
 Note the instantaneous utilities of LL and SS are \(v_l\) and \(v_s\),
 and the delays for LL and SS are \(t_l\) and \(t_s\). According to
-Equation (3), the common difference effect implies that, if\[ \tag{B1}
+Equation (4), the common difference effect implies that, if\[ \tag{B1}
 \frac{v_s}{1+G(t_s)e^{-v_s}} = \frac{v_l}{1+G(t_l)e^{-v_l}}
 \]then for any \(\Delta t \geq 0\), we have \[ \tag{B2}
 \frac{v_s}{1+G(t_s+\Delta t)e^{-v_s}} < \frac{v_l}{1+G(t_l+\Delta t)e^{-v_l}}
@@ -322,7 +322,7 @@ Equation (B4) is valid if and only if\[\tag{B5}
 \addcontentsline{toc}{subsection}{C. Proof of Proposition 3}
 
 Suppose a positve reward \(x\) is delivered at period \(T\). By Equation
-(3), if \(w_T\) is convex in \(T\), we should have
+(4), if \(w_T\) is convex in \(T\), we should have
 \(\frac{\partial^2 w_T}{\partial T^2}\geq 0\). This
 implies\[\tag{C1} 2G'(T)^2\geq(G(T)+e^{v(x)})G''(T) \]
 
@@ -438,8 +438,7 @@ period \(\tau\), then
 \(\Omega=\{\tau\,|\,0\leq\tau\leq T,\;\tau \neq t_1,t_2\}\). For any
 \(j,k\in\{s,l\}\), we define \(\phi_j=d_{t_1}e^{v(x_j)}\) and
 \(\eta_k=d_{t_2}e^{v(y_k)}\), where \(v(s)=u(s)/\lambda\), and \(d_t\)
-represents the reference weight for any reward delivered at period
-\(t\).
+represents the reference factor for reward delivered at period \(t\).
 
 For a given lottery result \((s_1,s_2)\), we denote the decision weight
 of each positive reward by \(w_{t_1}\) and \(w_{t_2}\). By the
@@ -519,7 +518,7 @@ are determined by the solution to
 long as \(u(x_l)-u(y_l)\geq \lambda\alpha_1\) and
 \(u(x_l)-u(y_s)\leq\lambda\alpha_2\). So, we can conclude that for any
 \(x_l>x_s>0\), \(y_l>y_s>0\), any time length of lottery results and
-reference weights (which determines \(D\) and \(\kappa\)), there exists
+reference factor (which determines \(D\) and \(\kappa\)), there exists
 some \(\lambda\) that makes DM intertemporal correlation averse.
 Specifically, all
 \(\lambda>\lambda^{**} ={\max}\{\frac{u(x_l)-u(y_l)}{\alpha_1},\frac{u(x_l)-u(y_s)}{\alpha_2}\}\)
@@ -530,7 +529,147 @@ Equation (E2)(E3), indicates that under some conditions such as \(D=0\),
 there will be \(\partial^2 \xi/\partial \phi_l\partial \eta\geq0\) for
 all \(y\in[y_s,y_l]\). In that case, at each level of \(x_l\), the
 partial derivative of \(U(L1)\) in terms of \(x_l\) is greater than that
-of \(U(L2)\). Or in other words, increasing \(x_l\) by an increment can
-induce a greater increase in \(U(L1)\) than in \(U(L2)\), so it is
-possible that \(U(L1)>U(L2)\). Therefore, DM may perform intertemporal
+of \(U(L2)\). So, increasing \(x_l\) by an increment from \(x_s\) can
+induce a greater increase in \(U(L1)\) than in \(U(L2)\). This makes it
+possible that \(U(L1)>U(L2)\). In short, DM may perform intertemporal
 correlation seeking when \(\lambda\leq\lambda^{**}\).
+
+\hypertarget{f.-proof-of-proposition-6}{%
+\subsection*{F. Proof of Proposition
+6}\label{f.-proof-of-proposition-6}}
+\addcontentsline{toc}{subsection}{F. Proof of Proposition 6}
+
+Before proving the proposition, we first show that in the DM's optimal
+consumption plan \(s_{0\rightarrow T}\), the largest consumption must be
+\(s_0\). We show this by contradiction. Suppose the largest consumption
+is \(s_\tau\) (\(\tau>0\)). By Lemma 3, we obtain that if we exchange
+the consumption planned in \(\tau\) with the consumption planned in
+period 0, the total value of consumption will be non-decreasing. So, the
+largest consumption must be the current one.
+
+For convenience, henceforth we use \(u_t\) to represent \(u(s_t)\).
+
+\noindent \textbf{Lemma 3}: \emph{Suppose in}
+\(s_{0\rightarrow T}\)\emph{, we have}
+\(s_\tau= \max\{s_0,s_1,...,s_T\}\) \emph{and} \(\tau>0\). \emph{Set}
+\(u_0/\lambda=v_1\) \emph{and} \(u_{\tau}/\lambda=v_2\)\emph{. If we
+change} \(u_0/\lambda\) \emph{to} \(v_2\) \emph{and}
+\(u_{\tau}/\lambda\) \emph{to} \(v_1\)\emph{,} \(U(s_{0\rightarrow T})\)
+\emph{will be non-decreasing.}
+
+\noindent \emph{Proof}: Suppose that before we exchange consumption
+between period \(t\) and \(t+\tau\), the total value of consumption is
+\(V/\lambda\) and
+\(V=\sum_{t=0}^Td_t(u_t/\lambda)e^{u_t/\lambda}/\sum_{t=0}^Td_te^{u_t/\lambda}\).
+We define \(P\) as the numinator of \(V\) minus
+\(\delta_1v_1e^{v_1}+\delta_2v_2e^{v_2}\) and define \(Q\) as the
+denominator of \(V\) minus \(\delta_1e^{v_1}+\delta_2e^{v_2}\).
+
+Set \(d_0=\delta_1\), \(d_\tau=\delta_2\). Note \(v_2\geq V\). If
+changing changing \(u_t/\lambda\) to \(v_2\) and \(u_{t+\tau}/\lambda\)
+to \(v_1\) do not decrease \(V\), we should have
+\[\tag{F1} \frac{\delta_1v_1e^{v_1}+ \delta_2v_2e^{v_2}+P}{\delta_1e^{v_1}+\delta_2e^{v_2}+Q} \leq  \frac{\delta_1v_2e^{v_2}+ \delta_2v_1e^{v_1}+P}{\delta_1e^{v_2}+\delta_2e^{v_1}+Q} \]where
+\(\delta_1>\delta_2>0\), \(v_2\geq v_1>0\). Rearranging Equation (F1),
+we can
+obtain\[\tag{F2} -(\delta_1+\delta_2)e^{v_1+v_2}(v_2-v_1)\leq e^{v_2}(Qv_2-P)-e^{v_1}(Qv_1-P) \]Clearly,
+Equation (F2) holds if \(e^v(Qv-P)\) is increasing in \(v\) when
+\(v\in[v_1,v_2]\), and the latter implies \(v_1\geq \frac{P}{Q}-1\).
+
+Given that \(V\) is a weighted mean of \(v_1\), \(v_2\) and
+\(\frac{P}{Q}\), we can set
+\(V=\omega_1v_1+\omega_2v_2+(1-\omega_1-\omega_2)\frac{P}{Q}\), where
+\(\omega_1,\omega\in(0,1)\). If \(v_1\geq V\), we must have
+\(v_1\geq \frac{P}{Q}\). So, Equation (F6) must hold. If \(v_1<V\), note
+that \(\frac{\partial U}{\partial d_t}\propto u_t-U\). So, both
+decreasing \(d_0\) to \(\delta_2\) and increasing \(d_\tau\) to
+\(\delta_1\) would increase the total value of consumption. In summary,
+for either case, changing changing \(u_t/\lambda\) to \(v_2\) and
+\(u_{t+\tau}/\lambda\) to \(v_1\) do not decrease \(V\). \emph{QED}.
+
+By calculating the first-order derivatives of \(U\) in terms of \(s_t\)
+and \(s_{t+1}\), we have\[\tag{F3}
+\frac{\partial U}{\partial s_{t+1}}/\frac{\partial U}{\partial s_t} = 
+\delta \exp\{\frac{u_{t+1}-u_t}{\lambda}\}
+\cdot\frac{u'_{t+1}}{u'_t}
+\cdot\frac{u_{t+1}+\lambda-U}{u_t+\lambda-U}
+\]Drawing on Equation (F3), we construct a function
+\(\rho_t(s_{0\rightarrow T})=e^{u_t/\lambda}u'_t(u_t+\lambda-U)\).
+Henceforth, we use \(\rho_t\) to represent
+\(\rho_t(s_{0\rightarrow T})\), unless otherwise specified. Calculating
+the first-order derivative of \(\rho_t\) in terms of \(s_t\), we
+have\[\tag{F4}
+\frac{\partial \rho_t}{\partial s_t} = 
+e^{u_t/\lambda}[
+(u_t+\lambda-U)((1-w_t)\frac{(u'_t)^2}{\lambda}+u''_t)
++(u'_t)^2]
+\]
+
+To prove the first part of Proposition 6, note that if\[\tag{F5}
+\lambda\leq \min_{0 \leq t \leq T} \{-(u'_t)^2/u''_t \cdot(1-w_t)\}
+\]we will always have \((1-w_t)\frac{(u'_t)^2}{\lambda}+u''_t \geq 0\).
+According to Equation (F4), this yields
+\(\frac{\partial \rho_t}{\partial s_t}>0\) as long as
+\(u_t+\lambda-U>0\).
+
+Set \(\underline{\lambda}\) as the RHS of Equation (F5). If
+\(\lambda\leq \underline{\lambda}\), the DM will concentrate all
+consumption at period 0.
+
+To see this, we first consider that \(s_{0\rightarrow T}\) is a constant
+sequence. In this case, for all \(t=0,1,...,T\), we have
+\(\frac{\partial U}{\partial s_t}>0\). Also, by Equation (F1), we have
+\(\frac{\partial U}{\partial s_{t+1}}/\frac{\partial U}{\partial s_{t}}=\delta<1\).
+Hence, in a constant reward sequence, transferring an incremental
+consumption from period \(t+1\) to \(t\) will increase the total value
+of consumption \(U\), and doing the opposite will decrease \(U\). The DM
+would like to change this constant sequence to a decreasing sequence.
+
+We discuss the implication of this change in two cases. First, suppose
+for all period \(t\), we always have \(u_t+\lambda-U>0\). Then,
+\(\lambda \leq \underline{\lambda}\) can induce
+\(\frac{\partial \rho_t}{\partial s_t}>0\) for any feasible \(s_t\). So
+long as the DM's consumption plan is a decreasing sequence
+(\(s_t>s_{t+1}\)), we can obtain \(\frac{\partial U}{\partial s_t}>0\)
+and
+\(\frac{\partial U}{\partial s_{t+1}}/\frac{\partial U}{\partial s_{t}}=\delta\frac{\rho_{t+1}}{\rho_{t}}<1\).
+In this case, the DM would like to keep transferring consumption from
+period \(t+1\) to \(t\), until all consumption is concentrated at period
+0.
+
+Second, suppose for some period \(t>0\), reducing an amount of
+consumption will yield \(u_t+\lambda-U< 0\) (note we always have
+\(u_0+\lambda-U>0\), since \(s_0\) is the largest consumption in plan).
+For \(s_t\) that satisfies the given inequality, we have
+\(\frac{\partial U}{\partial s_t}<0\). An increase in each of such
+\(s_t\) would induce a reduction in \(U\) and keeping reducing it would
+induce an increase in \(U\). In this case, it is still rational for the
+DM to keep reducing future consumption until all consumption is
+concentrated at period 0.
+
+For the remaining part of Proposition 6, we note that the statements
+hold only when DM does not concentrate all consumption at period 0.
+Suppose the optimal consumption plan is an interior solution to Equation
+(5). At the solution, we have\[\tag{F6}
+\frac{\partial U}{\partial s_{t+1}}/\frac{\partial U}{\partial s_{t}}=1
+\]and \(\frac{\partial^2 U}{\partial s_t^2}<0\). For period \(\tau\)
+when the largest consumption occurs, we must have
+\(u_\tau +\lambda - U>0\). Thus, to make Equation (F6) hold, we require
+that \(u_t +\lambda - U>0\) for all \(t=0,1,...,T\) (this can be
+satisfied by setting \(\lambda \geq U\)).
+
+Without loss of generality, we focus on what happens on the DM's optimal
+consumption plan when she moves from period 0 to period 1. At period 1,
+we denote the rest of reward sequence by \(s_{1 \rightarrow T}\), and
+the total value of consumption by \(U_1\equiv U(s_{1\rightarrow T})\).
+
+To prove the second part, note that setting
+\(\frac{\partial^2 U}{\partial s_t^2}<0\) implies\[\tag{F7}
+(1-2w_t)\frac{1}{\lambda} + \frac{1}{u_t+\lambda-U} < -\frac{u''_t}{(u'_t)^2} 
+\]By Equation (F7), for any period \(t\) such that \(u_t+\lambda-U>0\),
+we have\[\tag{F8}
+\frac{\partial \rho_t}{\partial s_t}<0 \;\Longleftrightarrow\;
+(1-w_t)\frac{1}{\lambda}+\frac{1}{u_t+\lambda-U}<-\frac{u''_t}{(u'_t)^2}
+\]When the DM moves from period 0 to period 1, in Equation (F8) \(U\) is
+decreased to \(U_1\). So, if Equation (F8) holds at period 0, then for
+period 1, we still have \(\frac{\partial \rho_t}{\partial s_t}<0\).
+Meanwhile, if Equation (F8) holds, then Equation (F7) must hold.
