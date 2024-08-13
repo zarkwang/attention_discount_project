@@ -103,6 +103,8 @@ ggplot(data = d,aes(x = t,y = v, color = reward))+
 # Common difference effect
 # --------------------------
 
+t_seq = 0:20
+
 find_equiv <- function(u_l,u_s,t_s){
   t_seq_list = t_s+c(0:1000)*0.1
   obj <- abs(w(u_s,t_s)*u_s - w(u_l,t_seq_list)*u_l)
@@ -127,6 +129,10 @@ df_common_diff_1 <- tibble(u_l = u_l_low,
                          t_l_equiv = t_l_equiv_1,
                          cond = 'low_reward')
 
+3.85-1.99 + log(3.85/1.99)
+
+-4.3*log(1/2)
+
 df_common_diff_2 <- tibble(u_l = u_l_high,
                            u_s = u_s_high,
                            t_s = t_seq,
@@ -145,7 +151,7 @@ plot_com <- ggplot(data = d_com[d_com$t_s<11&d_com$t_s>0,],aes(x = t_s,y = t_l_e
   ylim(c(0,17))+
   labs(color = 'reward', 
        x = expression(italic(t)[italic(s)]),
-       y = expression("equivalent long delay" ~~ italic(t)[italic(l)]))+
+       y = expression(italic(t)[italic(l)]  ~~ "under equivalence"))+
   theme(text = element_text(family = "Times New Roman"),
         legend.position = c(0.22, 0.82))+
   scale_x_continuous(breaks = c(1,3,5,7,9))+

@@ -1,6 +1,6 @@
 ---
 title: "An Attentional Model of Time Discounting"
-author: "Zark Zijian Wang"
+author: "Zijian Zark Wang"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 bibliography: reference.bib
 biblio-style: apalike
@@ -13,12 +13,12 @@ header-includes:
   \usepackage{standalone}
   \renewcommand{\arraystretch}{1.5}
   \captionsetup[table]{skip=5pt}
-  \setstretch{1.5}
+  \setstretch{1.5} 
   \setlength{\parindent}{1em}
   \setlength{\footnotemargin}{3mm}
   \setlength{\footnotesep}{3mm}
-  # \renewcommand{\[}{\begin{equation}} 
-  # \renewcommand{\]}{\end{equation}}
+  \renewcommand{\[}{\begin{equation}} 
+  \renewcommand{\]}{\end{equation}}
 fontsize: 12pt
 geometry: margin=1in
 editor_options: 
@@ -40,313 +40,334 @@ output:
 
 # Introduction
 
-decision maker (DM)
 
-Kullback--Leibler (KL) divergence (also called relative entropy)
 
-hard attention
-
-information avoidance
-
-endogenous time preferences
-
-optimal expectation
-
-we present an axiomatic characterization of AAD with the optimal
-discounting framework
-
-# Model Setting
+# Model Setting \label{model_setting}
 
 Assume time is discrete. Let $s_{0\rightarrow T}\equiv[s_0,s_1,...,s_T]$
 denote a reward sequence that starts delivering rewards at period 0 and
 ends at period $T$. At each period $t$ of $s_{0\rightarrow T}$, a
 specific reward $s_t$ is delivered, where $t\in\{0,1,…,T\}$. Throughout
 this paper, we only consider non-negative rewards and finite length of
-sequence, i.e. we set $s_t \in \mathbb{R}_{\geq 0}$ and
-$1\leq T<\infty$. The DM's choice set is constituted by a range of
-alternative reward sequences which start from period 0 and end at some
-finite period. When making an intertemporal choice, the DM seeks to find
-a reward sequence $s_{0\rightarrow T}$ in her choice set, which has the
-highest value among all alternative reward sequences. To calculate the
-value of each reward sequence, we admit the additive discounted utility
-framework. The value of $s_{0\rightarrow T}$ is defined as
-$U(s_{0\rightarrow T})\equiv \sum_{t=0}^T w_{t}u(s_t)$, where $u(s_t)$
-is the instantaneous utility of receiving $s_t$, and $w_t$ is the
-decision weight (sometimes called discount factors) assigned to $s_t$.
-We assume the function $u:\mathbb{R}\rightarrow \mathbb{R}$ is strictly
-increasing and for any $s>0$, we have $u(s)>0$. For convenience, we set
-$u(0)=0$.
+sequence, i.e. $s_t \in \mathbb{R}_{\geq 0}$ and $1\leq T<\infty$. The
+DM's choice set is constituted by a range of alternative reward
+sequences which start from period 0 and end at some finite period. To
+calculate the value of each reward sequence, we adopt the additive
+discounted utility framework. The value of $s_{0\rightarrow T}$ is
+defined as $U(s_{0\rightarrow T})\equiv \sum_{t=0}^T w_{t}u(s_t)$, where
+$u(s_t)$ is the instantaneous utility of receiving $s_t$, and $w_t$ is
+the decision weight (sometimes called discount factors, $0<w_t<1$)
+assigned to $s_t$. The function $u:\mathbb{R}\rightarrow \mathbb{R}$ is
+strictly increasing, and for convenience, we set $u(0)=0$. When making
+an intertemporal choice, the DM seeks to find the reward sequence of the
+highest value in her choice set.
 
-The determination of $w_t$ is central to this paper. We believe that,
-due to the DM's limited attention and demand for information, the DM
-tends to overweight the large rewards and underweight the small rewards
-within the sequence. Specifically, we suggest $w_t$ follow a generalized
-logistic (softmax) function. We define any decision weight in this style
-as an *attention-adjusted discount* factors (AAD), as in Definition 1.
+The determination of $w_t$ is central to this paper. We assume that when
+evaluating a reward sequence, the DM needs to divide her attention to
+each reward in the sequence, in order to acquire its value information.
+The more attention she puts on a reward, the greater decision weight is
+assigned to that reward. For instance, to evaluate reward $s_t$ ($t>0$),
+she may need to imagine how much pleasure she would feel on the occasion
+when she receives $s_t$. As more attention is paid to that specific
+occasion, her imagination of the occasion will become more vivid and
+more salient. In this case, the utility of reward $s_t$ could be less
+discounted ($w_t$ will be greater). We assume that if the DM is totally
+focused on that specific occasion, the value of reward $s_t$ within the
+sequence will be equal to the value of it alone, i.e. $u(s_t)$. After
+each reward is evaluated, the DM aggregates the values of all rewards
+within the sequence to construct a value representation of the total
+sequence.
+
+The division of attention is subject to all rewards in the sequence. We
+propose that the DM's attention allocation process should follow at
+least two principles. First, she tends to overweight large rewards and
+underweight small rewards. For example, suppose a reward sequence
+$\mathbb{S}_{0\rightarrow1}$ delivers "£5 today and £200 in 1 week".
+When processing $\mathbb{S}_{0\rightarrow1}$, the DM might pay more
+attention to the period in which she can receive £200, and relatively
+ignore £5. Second, when the DM has to process more rewards in a
+sequence, the attention allocated to each reward would decline. To
+illustrate, consider a reward sequence $\mathbb{S}_{0\rightarrow 3}$
+that delivers "£5 today, and £200 in 1 week, and £85 in 2 weeks, and £10
+in 3 weeks". To evaluate $\mathbb{S}_{0\rightarrow 3}$, the DM needs to
+take into account more occasions when she can get a positive reward
+(compared with $\mathbb{S}_{0\rightarrow1}$). Suppose she faces the same
+attention constraint when evaluating each sequence. When the DM
+processes $S_{0\rightarrow 3}$, each occasion would be less vivid in her
+imagination than its counterpart in $\mathbb{S}_{0\rightarrow1}$. In
+Section 4, we show that these two principles can account for a wide
+range of anomalies relevant to intertemporal choice. Specifically, we
+suggest decision weight $w_t$ follow a softmax function. We define any
+weight in this style as an *attention-modulated discount* (AMD) factor,
+as in Definition 1.
 
 \noindent \textbf{Definition 1}: *Let* $\mathcal{W}\equiv[w_0,...,w_T]$
 *denote the decision weights for all specific rewards in*
-$s_{0\rightarrow T}$*.* $\mathcal{W}$ *is called attention-adjusted
-discount factors (AADs) if for any* $t\in\{0,1,…,T\}$,$$\tag{1}
+$s_{0\rightarrow T}$*.* $\mathcal{W}$ *is called attention-modulated
+discount (AMD) factors if for any* $t\in\{0,1,…,T\}$,$$\tag{1}
 w_t = \frac{d_te^{u(s_t)/\lambda}}{\sum_{\tau=0}^T d_\tau e^{u(s_\tau)/\lambda}} 
 $$*where* $d_t > 0$*,* $\lambda>0$*,* $u(.)$ *is the utility function.*
 
 In intuition, how Definition 1 reflects the role of attention in
-valuating reward sequences can be explained with four points. First,
-each reward in a sequence could be viewed as an information source and
-we assume the DM allocates limited information-processing resources
-across those information sources. The AADs capture this notion by
-normalizing the discount factors, i.e. fixing the sum of decision
-weights at 1. Similar assumptions are typically used in recursive
-preferences, such as @epstein1989substitution and @weil1990nonexpected.
-In this paper, the implication of normalization assumption is twofold.
-First, increasing the decision weight of one reward would reduce the
-decision weights of other rewards in the sequence, implying that
-focusing on one reward would make DM insensitive to the values of other
-rewards. Second, when there are more rewards in the sequence, DM needs
-to split attention across a wider range to process each of them, which
-may reduce the attention to, or decision weight of, each individual
-reward.
+valuation of reward sequences can be explained in four points. First, we
+view each reward in a sequence as a separate information source and the
+DM allocates limited attentional resources across those information
+sources. The AMD factors capture this notion by normalizing the discount
+factors (the sum of decision weights is 1). Similar assumptions are
+typically used in recursive utility models, such as @weil1990nonexpected
+and @epstein1991substitution . In this paper, the implication of
+normalization assumption is twofold. First, increasing the decision
+weight of one reward would reduce the decision weights of other rewards
+in the sequence, implying that focusing on one reward would make DM
+insensitive to other rewards. Second, when there are more rewards in the
+sequence, DM needs to split attention across a wider range to process
+each of them, which may reduce the attention to, or decision weight of,
+each individual reward.
 
-Second, $w_t$ is strictly increasing with $s_t$, indicating that DM
-would pay more attention to larger rewards. This is consistent with many
-empirical studies that suggest people tend to pay more attention to
-information associated with larger rewards. For instance, people perform
-a "value-driven attentional capture" effect in visual search
-[@della2009learning; @hickey2010reward; @anderson2011value;
-@chelazzi2013rewards; @jahfari2017sensitivity]. In one study
-[@anderson2011value], researchers recruit participants to do a series of
-visual search tasks, in each of which participants can earn a reward
-after detecting a target object from distractors. If an object is set as
-the target and is associated with a large reward, it can capture more
-attention even for the succeeding tasks. Therefore, in one following
-task, presenting this object as a distractor will slow down target
-detection.[^1] In addition, in financial decision making, investors
-usually perform an ostrich effect [@galai2006ostrich;
-@karlsson2009ostrich]. One relevant evidence is that stock traders log
-in their brokerage accounts less frequently after market declines
-[@sicherman2016financial].
+Second, $w_t$ is strictly increasing in $s_t$, indicating that the DM
+would pay more attention to larger rewards. This is consistent with
+empirical findings about attention in many decision domains. For
+instance, in visual search, people often perform a "value-driven
+attentional capture" effect [@della2009learning; @hickey2010reward;
+@anderson2011value; @chelazzi2013rewards; @jahfari2017sensitivity]:
+visual stimuli associated with large rewards naturally capture
+attention. In one study [@anderson2011value], researchers recruit
+participants to do a series of visual search tasks. In each task,
+participants earn a reward after detecting a target object from
+distractors. When an object is set as the target and associated with a
+large reward, it can capture attention even for the succeeding tasks.
+Therefore, in one following task, presenting this object as a distractor
+can slow down target detection.[^1] In addition, in financial decision
+making, people often perform an ostrich effect [@galai2006ostrich;
+@karlsson2009ostrich]: they have a desire for good news and tend to
+avoid bad news. One relative evidence is that people are more likely to
+check their financial accounts when they get paid and less likely when
+they overdraw [@olafsson2017ostrich].
 
 [^1]: Some scholars may classify attention into two categories:
-    "bottom-up control" and "top-down control". However, the evidence
-    about value-driven attentional capture does not fall into either of
-    these categories. Thus, in this paper, we do not describe attention
-    with this dichotomy. Instead, we view attention as a mechanism that
-    seeks to maximize the utility of information.
+    "bottom-up control" and "top-down control". However, value-driven
+    attentional capture does not fall into either of these categories
+    [@awh2012top]. In this paper, instead, we view attention as a
+    mechanism that selects information in order to maximize some type of
+    utility. Our view of attention is close to @gottlieb2012attention
+    and @gottlieb2013information.
 
-Third, $w_t$ is "anchored" in a reference factor $d_t$. If
-$d_t\in(0,1)$, then $d_t$ could represent the initial decision weight
-that the DM would assign to a reward delivered at period $t$ without
-knowing its realization. The constraint on the deviation between $w_t$
-and $d_t$ indicates that reallocating attention or acquiring new
-information is costly. The deviation of $w_t$ from $d_t$ depends on
-parameter $\lambda$, which as we discuss in the next section, can
-represent the inverse learning rate or the unit cost of attention
-adjustment. The size of $\lambda$ could be mediated by the DM's belief
-about how much the reference factors reflects her true time preference
-in the local context. If the DM is highly certain that those reference
-factors can characterize her time preference, she may prohibit the
-learning (or attention adjustment) process and therefore $\lambda$
-should be large.[^2]
+Third, $w_t$ is "anchored" in a factor $d_t$. If $0<d_t<1$, then $d_t$
+could represent the initial decision weight that the DM would assign to
+a reward delivered at period $t$ without knowing its realization. The DM
+reallocates attention across the rewards when learning the realization
+of each reward. We term $d_t$ as a *default* *discount factor*. The
+deviation of $w_t$ from $d_t$ is mediated by a parameter $\lambda$,
+which can represent the unit cost of reallocating attention. This
+restriction on the deviation between $w_t$ and $d_t$ implies that
+shifting attention across rewards is cognitively costly. The greater the
+parameter $\lambda$ is , the closer $w_t$ is to $d_t$. The size of
+$\lambda$ might be relevant to the DM's belief about how much those
+default discount factors can reflect her true time preference in the
+given context. If the DM is highly certain that the default discount
+factors truly characterize her preferences, she may inhibit the learning
+process and therefore $\lambda$ should be extremely large.[^2]
 
-[^2]: @enke2023complexity document that people exhibit a discounting
-    pattern that is closer to hyperbolic discounting when they
-    experience higher cognitive uncertainty (which induces a lower unit
-    cost of attention adjustment $\lambda$). This can be viewed as a
-    supportive evidence for our argument, because as we show in Section
-    \ref{hyperbolic}, exponential discount factors can be distorted into
-    a hyperbolic style through the attention adjustment process.
+[^2]: @enke2023complexity document that when people experience higher
+    cognitive uncertainty (which in our paper, means that they are
+    willing to learn more information before decision, and thus induce a
+    higher $\lambda$), their pattern of discounting will be closer to
+    hyperbolic discounting. This can be viewed as a supportive evidence
+    for our argument, because in Section \ref{hyperbolic}, we show that
+    exponential discount factors can be distorted to a hyperbolic style
+    through attention modulation.
 
 Fourth, we adopt the idea of @gottlieb2012attention and
 @gottlieb2013information that attention can be understood as an active
-information-sampling mechanism which selects information based on the
-perceived utility of information. For intertemporal choices, we assume
-the DM would selectively sample value information from each reward
-(information source) when processing a reward sequence, and the AAD can
-represent an approximately optimal sampling strategy. Note that the AADs
-follow a softmax function. @matvejka2015rational and
-@mackowiak2023rational claim that if a behavioral strategy conforms to
-this type of function, then it can be interpreted as a solution to some
-optimization problem under information constraints.
+information-sampling mechanism that selects information to maximize some
+type of utility. As illustrated in Section \ref{info_max_explor}, we
+assume the DM selectively samples value information from each
+information source (i.e. each reward) when processing a reward sequence,
+and we use the AMD model to represent an approximately optimal sampling
+strategy.
 
-# Interpretation
+# Interpretation \label{interpretation}
 
-## Information Maximizing Exploration \label{info_exploration}
+In this section, we provide two approaches to characterize AMD: the
+first is based on the information maximizing exploration framework; the
+second is based on the optimal discounting framework. These approaches
+are closely related to the idea proposed by @gottlieb2012attention,
+@gottlieb2013information and @sharot2020people, that people tend to pay
+attention to information with high *instrumental utility* (helping
+identify the optimal action), *cognitive utility* (satisfying
+curiosity), or *hedonic utility* (inducing positive feelings). It is
+worth mentioning that the well-known rational inattention theories,
+originating from @sims2003implications, and the classical Blackwell
+notion of information [@blackwell1951comparison], are grounded in the
+instrumental utility of information. In this paper, we draw on the
+cognitive and hedonic utility of information to build our theory of time
+discounting.
 
-In this section, we provide two approaches to characterize AAD: the
-first is based on information maximizing exploration, and the second is
-based on optimal discounting. These approaches are closely related to
-the idea proposed by @gottlieb2012attention, @gottlieb2013information
-and @sharot2020people, that people tend to pay attention to information
-with high *instrumental utility* (help identifying the optimal action),
-*cognitive utility* (satisfying curiosity), or *hedonic utility*
-(inducing positive feelings). It is worth mentioning that the well-known
-rational inattention theories are grounded in the instrumental utility
-of information.[^3] Instead, in this paper, we draw on the cognitive and
-hedonic utility of information to build our theory of time discounting.
-Our first approach to characterizing AAD is relevant to the cognitive
+Our first approach to characterizing AMD is relevant to cognitive
 utility: the DM's information acquisition process is curiosity-driven.
-The model setting of this approach, similar with @gottlieb2012attention
-and @gottlieb2013information, is based on a reinforcement learning
-framework. Specifically, we assume the DM seeks to maximize the
-information gain with a commonly-used exploration strategy. Our second
-approach is relevant to the hedonic utility: the DM consider the
-feelings of multiple selves and seeks to maximize their total utility
-under some cognitive cost. The theoretical background for the second
-approach is \citet{noor2022optimal,noor2024constrained}. We describe the
-first approach in this subsection and the second approach in Section
-\ref{optimal_discount}.
+Similar to @gottlieb2012attention and @gottlieb2013information, we
+interpret the model setting with a reinforcement learning framework.
+Specifically, we assume the DM adopts the commonly-used softmax
+exploration strategy in information acquisition. Our second approach is
+relevant to hedonic utility: the DM wants to process as much pleasant
+information (from large rewards) as possible. She adjust the decision
+weights toward that direction under some cognitive cost.
+\citet{noor2022optimal,noor2024constrained} provide a theoretical
+background for the second approach.
 
-[^3]: The rational inattention theory assumes the DM learns information
-    about different options in order to find the best option. For
-    details, see @sims2003implications, @matvejka2015rational, and
-    @mackowiak2023rational.
+## Information Maximizing Exploration \label{info_max_explor}
 
 For the information maximizing exploration approach, we assume that
 before having any information of a reward sequence, the DM perceives it
-has no value. Then, each reward in the sequence $s_{0\rightarrow T}$ is
-processed as an individual information source. The DM engages her
-attention to actively sample signals at each information source and
-update her belief about the sequence value accordingly. The signals are
-noisy. For any $t\in\{0,1,…,T\}$, the signal sampled at information
-source $s_t$ could be represented by $x_t =u(s_t)+\epsilon_t$, where
-each $\epsilon_t$ is i.i.d. and
+has no value. When evaluation begins, each reward in the sequence
+$s_{0\rightarrow T}$ is processed as a separate information source. The
+DM engages her attention to actively sample signals at each information
+source, and updates her belief about the sequence value accordingly. The
+signals are noisy.[^3] For any $t\in\{0,1,…,T\}$, the signal sampled at
+information source $s_t$ could be represented by
+$x_t =u(s_t)+\epsilon_t$, where each $\epsilon_t$ is i.i.d. and
 $\epsilon_t \sim N(0,\sigma_\epsilon^2)$. The sampling weight for
 information source $s_t$ is denoted by $w_t$.
 
+[^3]: Each value signal represents an estimate of the pleasure that the
+    DM would get from receiving the reward in a corresponding period.
+    The noise term implies the DM's estimate is imprecise. To
+    illustrate, when evaluating "£10 today and £20 in 1 week", the DM
+    should think about how much "receive £10 today" is worth ($s_0$),
+    and how much "receive £20 in 1 weeks" is worth ($s_1$). She might
+    think about $s_0$ first, or $s_1$ first, but it is little likely
+    that she can think both at the same time. So, to think about both
+    occasions, she has to consciously shift attention between the
+    rewards. Each time when she thinks about an occasion, she has to
+    imagine the pleasure that she would achieve on that occasion, and
+    the imagination is not a constant. This process can be described as
+    a sequential sampling methodology.
+
 The DM's belief about the sequence value $U(s_{0\rightarrow T})$ is
-updated as follows. At first, she holds a prior $U_0$, and given she
+updated as follows. At the beginning, she holds a prior $U_0$. Given she
 perceives no value from the reward sequence, the prior could be
 represented by $U_0 \sim N(0, \sigma^2)$. Second, she draws a series of
-signals at each information source $s_t$. Note we define
-$U(s_{0\rightarrow T})$ as a weighted mean of instantaneous utilities,
-i.e. $U(s_{0\rightarrow T})=\sum_{t=0}^Tw_tu(s_t)$. Let $\bar{x}$ denote
-the mean sample signal and $U$ denote a realization of
-$U(s_{0\rightarrow T})$. If there are $k$ signals being sampled in
-total, we should have
+signals at each information source $s_t$ and each signal indicates some
+information about the sequence value. Note we define
+$U(s_{0\rightarrow T})$ as a weighted mean of instantaneous utilities.
+Let $\bar{x}$ denote the mean sample signal and $U$ denote a realization
+of $U(s_{0\rightarrow T})$. If there are overall $k$ signals being
+sampled, we should have
 $\bar{x} | U, \sigma_\epsilon\sim N(U,\frac{\sigma_{\epsilon}^2}{k})$.
 Third, she uses the sampled signals to infer $U(s_{0\rightarrow T})$ in
-a Bayesian fashion. Let $U_k$ denote the valuer's posterior about the
-sequence value after receiving $k$ signals. According to the Bayes'
-rule, we have $U_k\sim N(\mu_k,\sigma_k^2)$ and$$
+a Bayesian fashion. Let $U_k$ denote the DM's posterior about the
+sequence value after receiving $k$ signals. According to Bayes' rule, we
+have $U_k\sim N(\mu_k,\sigma_k^2)$ and$$
 \mu_k = \frac{k^2\sigma_\epsilon^{-2}}{\sigma^{-2}+k^2\sigma_\epsilon^{-2}}\bar{x}\qquad,\qquad 
 \sigma_k^2 =  \frac{1}{\sigma^{-2}+k^2\sigma_\epsilon^{-2}}
-$$We assume the DM takes $\mu_k$ as the valuation of reward sequence. It
-is clear that as $k\rightarrow \infty$, the sequence value will converge
-to the mean sample signal, i.e. $\mu_k \rightarrow \bar{x}$.
+$$We assume the DM takes $\mu_k$ as the valuation of reward sequence. As
+$k\rightarrow \infty$, $\mu_k$ will converge to $\bar{x}$. Besides, note
+$\sigma_k$ depends only on $k$. This implies that drawing more samples
+can always increase the precision of the DM's estimate about
+$U(s_{0\rightarrow T})$.
 
-The DM's goal of sampling signals is to maximize her information gain.
-The information gain is defined as the KL divergence from the prior
-$U_0$ to the posterior $U_k$. In intuition, the KL divergence provides a
-measure for distance between distributions. As the DM acquires more
-information about $s_{0\rightarrow T}$, her posterior belief should move
-farther away from the prior. We let $p_0(U)$ and $p_k(U)$ denote the
-probability density functions of $U_0$ and $U_k$. Then, the information
-gain is$$\tag{2}
+The DM's goal of sampling is to maximize her information gain. The
+information gain is defined as the KL divergence from the prior $U_0$ to
+the posterior $U_k$. In intuition, acquiring more information should
+move the DM's posterior belief farther away from the prior. We let
+$p_0(U)$ and $p_k(U)$ denote the probability density functions of $U_0$
+and $U_k$. Then, the information gain is$$\tag{2}
 \begin{aligned}
 D_{KL}(U_k||U_0)&=\int_{-\infty}^{\infty} p_k(U) \log\left(p_k(U)/p_0(U)\right)dU \\
 &=\frac{\sigma_k^2+\mu_k^2}{2\sigma^2} - \log\left(\frac{\sigma_k}{\sigma}\right)-\frac{1}{2}
 \end{aligned}
-$$Notably, in Equation (2), $\sigma_k$ depends only on sample size $k$
-and $\mu_k$ is proportional to $\bar{x}$. Therefore, the problem of
+$$In Equation (2), the DM's information gain is increasing in $\mu_k^2$,
+and $\mu_k$ is proportional to $\bar{x}$. As a result, the objective of
 maximizing $D_{KL}(U_k||U_0)$ could be reduced to maximizing $\bar{x}$
-(as each $u(s_t)$ is non-negative). The reason is that, drawing more
-samples can always increase the precision of the DM's estimate about
-$U(s_{0\rightarrow T})$, and a larger $\bar{x}$ implies more "surprises"
-in comparison to the DM's initial perception that $s_{0\rightarrow T}$
-contains no value.
+(note each $u(s_t)$ is non-negative). The reason is, a larger $\bar{x}$
+implies more "surprises" in comparison to the DM's initial perception
+that $s_{0\rightarrow T}$ contains no value.
 
-Maximizing the mean sample signal $\bar{x}$ under a limited sample size
-$k$ is actually a multi-armed bandit problem
-\citep[][Ch.2]{sutton2018reinforcement}. On the one hand, the DM wants
-to draw more samples at information sources that are known to produce
-greater value signals (exploit). On the other hand, she wants to learn
-some value information from other information sources (explore). We
-assume the DM would take a softmax exploration strategy to solve this
-problem. That is,$$
+The problem of maximizing mean sample signal $\bar{x}$ under a given
+sample size $k$ is a multi-armed bandit problem
+\citep[][Ch.2]{sutton2018reinforcement}. The key to solve the
+multi-armed bandit problem is to choose a proper exploration strategy.
+On the one hand, the DM wants to draw more samples at the information
+source that is known to produce the greatest value signals. On the other
+hand, she wants to explore at other information sources. We assume the
+DM takes a softmax exploration strategy to solve this problem. That
+is,$$
 w_t \propto d_t e^{\bar{x}_t/\lambda}
-$$where $\bar{x}_t$ is the mean sample signal generated by information
-source $s_t$ so far, $1/\lambda$ is the learning rate, and $d_t$ is the
-initial sampling weight for $s_t$.[^4] Note $\bar{x_t}$ cannot be
-calculated without doing simulations under a certain $\sigma_\epsilon$.
-For researchers, modelling an intertemporal choice in this way requires
-conducting a series of simulations and then calibrating
-$\sigma_\epsilon$ for every choiceable option, which could be
-computationally expensive. Fortunately, according to the weak law of
-large numbers, as the sample size $k$ gets larger, $\bar{x}_t$ is more
-likely to fall into a neighborhood of $u(s_t)$. Thus, the AAD which
-assumes $w_t \propto d_t e^{u(s_t)/\lambda}$ could be viewed as a proper
+$$where $\lambda$ controls the rate of exploration, $\bar{x}_t$ is the
+mean sample signal generated by information source $s_t$ so far, and
+$d_t$ is the initial sampling weight for $s_t$.[^4] Note when we analyze
+the intertemporal choice data, $\bar{x}_t$ is a latent variable. In
+principle, researchers who want to calculate the sampling weight $w_t$
+should conduct a series of simulations to generate $\bar{x}_t$ under a
+fixed $\sigma_\epsilon$, and then fit $\sigma_\epsilon$ to the choice
+data. This process could be computationally expensive. To solve this
+computational issue, we apply the weak law of large numbers: when the
+sample size $k$ is large, $\bar{x}_t$ will be highly likely to fall into
+a neighborhood of $u(s_t)$. Thus, we can use
+$w_t \propto d_t e^{u(s_t)/\lambda}$, which is the AMD factor, as a fair
 approximation to the softmax exploration strategy.
 
-[^4]: Classic softmax strategy assumes the initial probability of taking
-    an action follows an uniform distribution. We relax this assumption
-    by importing $d_t$, so that the DM can hold an initial preference of
-    sampling over the dated rewards.
+[^4]: The classic softmax strategy assumes the initial probability of
+    taking any action is given by an uniform distribution. We relax this
+    assumption by importing $d_t$, so that the DM can hold an "initial"
+    preference for sampling over the information sources.
 
-Those who familiar with reinforcement learning algorithms may notice
-that here $u(s_t)$ is a special case of action-value function (assuming
-the learner only cares about the value of current reward in her each
-draw of the sample). The AAD thus can be viewed as a specific version of
-the soft Q-learning or policy gradient method for solving the given
-multi-armed bandit problem [@haarnoja2017reinforcement;
-@schulman2017equivalence]. Such methods are widely used (and
-sample-efficient) in reinforcement learning. Moreover, one may argue
-that the applicability of softmax exploration strategy is subject to our
-model assumptions, e.g. the form of information gain specified by
-Equation (2). Under alternative assumptions, the strategy may not be
-ideal. We acknowledge this limitation and suggest that researchers
-interested in modifying our model consider different objective functions
-or different families of noises. For example, if the DM seeks to
-minimize the regret rather than maximizing $\bar{x}$, the softmax
-exploration strategy can produce suboptimal actions and one remedy is to
-use the Gumbel--softmax strategy [@cesa2017boltzmann]. In addition, if
-noises $\epsilon_0,...,\epsilon_T$ do not follow an i.i.d. normal
-distribution, the information gain $D_{KL}(U_k||U_0)$ may be complex to
-compute, thus one can use its variational bound as the objective
-[@houthooft2016vime]. Compared to these complex specifications, our
-model specification in this subsection aims to provides a simple
+Researchers familiar with reinforcement learning algorithms may notice
+that in some sense $u(s_t)$ can be generalized to an action-value
+function (considering the future signals produced by the given
+exploration strategy). The AMD model thus can be somehow generalized to
+the soft Q-learning or policy gradient algorithms
+[@haarnoja2017reinforcement; @schulman2017equivalence]. Such algorithms
+are widely used (and sample-efficient) in reinforcement learning.
+Moreover, one may argue that the specification of the AMD factors is
+subject to the form of information gain specified by Equation (2). We
+acknowledge this limitation and suggest researchers interested in
+modifying the AMD model consider different assumptions about noises. For
+example, if noises $\epsilon_0,...,\epsilon_T$ do not follow an i.i.d.
+normal distribution, the information gain $D_{KL}(U_k||U_0)$ may be
+complex to compute; thus, one can use its variational bound as the
+objective of maximization[@houthooft2016vime]. Compared to these more
+complex settings, our model specification aims to provide a simple
 benchmark for understanding the role of attention in mental valuation of
 a reward sequence.
 
-Two strands of literature can help justify the assumptions we use in
-information maximizing exploration approach. First, models based on the
-assumption that DM seeks to maximize the information gain between the
-posterior and the prior has been studied extensively in both cognitive
-psychology [@oaksford1994rational; @itti2009bayesian;
-@friston2017active] and machine learning literature [@settles2009active;
-@ren2021survey]. In one study, @itti2009bayesian find this assumption
-has a strong predictive power for visual attention. Our assumption that
-the DM updates decision weights toward a greater $D_{KL}(U_k||U_0)$ is
-generally consistent with this finding. Second, the softmax exploration
-strategy is widely used by neuroscientists in studying human
-reinforcement learning [@daw2006cortical; @fitzgerald2012action;
-@collins2014opponent; @niv2015reinforcement; @leong2017dynamic]. For
-instance, @daw2006cortical find the softmax strategy can characterize
-humans' exploration behavior better than other classic strategies (e.g.
-$\epsilon$-greedy). @collins2014opponent show that models based on the
-softmax strategy exhibit a good performance in explaining the striatal
-dopaminergic system's activities (which is central in brain's sensation
-of pleasure and learning of rewarding actions) in reinforcement learning
-tasks.
+Two strands of literature can help justify our key assumptions in this
+subsection. First, for the assumption that DM seeks to maximize the
+information gain between the posterior and the prior, similar models
+have been studied extensively in both psychology [@oaksford1994rational;
+@itti2009bayesian; @friston2017active] and machine learning
+[@settles2009active; @ren2021survey]. In one study, @itti2009bayesian
+find this assumption has a strong predictive power for visual attention.
+Our assumption that the DM updates decision weights toward a greater
+$D_{KL}(U_k||U_0)$ is generally consistent with this finding. Second,
+the softmax exploration strategy is widely used by neuroscientists in
+studying human reinforcement learning [@daw2006cortical;
+@fitzgerald2012action; @collins2014opponent; @niv2015reinforcement;
+@leong2017dynamic]. For instance, @daw2006cortical find this strategy
+characterizes humans' exploration behavior better than other classic
+strategies (e.g. $\epsilon$-greedy). @collins2014opponent show that
+models based on this strategy exhibit a good performance in explaining
+activities of the brain's dopaminergic system (which is central in
+sensation of pleasure and learning of rewarding behaviors) in
+reinforcement learning.
 
 ## Optimal Discounting \label{optimal_discount}
 
-The second approach to characterize AAD is based on the optimal
+The second approach to characterize AMD is based on the optimal
 discounting model \citep{noor2022optimal,noor2024constrained}. In one
 version of that model, the authors assume that DM has a limited capacity
-of attention (or in their term, "empathy"), and before evaluating a
-reward sequence $s_{0\rightarrow T}$, she naturally focuses on the
-current period. The instantaneous utility $u(s_t)$ represents the
-well-being that the DM's self of period $t$ can obtain from the reward
-sequence. For valuating $s_{0\rightarrow T}$, the DM needs to split
-attention over $T$ time periods to consider the feeling of each self.
-This re-allocation of attention is cognitive costly. The DM seeks to
-find a balance between improving the overall well-being of multiple
-selves and reducing the incurred cognitive cost.
-\citet{noor2022optimal,noor2024constrained} specify an optimization
-problem to capture this decision. In this paper, we adopt a variant of
-their original model. The formal definition of the optimal discounting
-problem is given by Definition 2. [^5]
+of attention (or in their term, "empathy"). The instantaneous utility
+$u(s_t)$ represents the well-being that the DM's self of period $t$ can
+obtain from the reward sequence. Before evaluating a reward sequence
+$s_{0\rightarrow T}$, the DM naturally focuses on the current period.
+When evaluating that, she needs to split attention over $T$ periods to
+consider the well-being of each self. This attention reallocation
+process is cognitively costly. The DM seeks to balance between improving
+the overall well-being of multiple selves and reducing the incurred
+cognitive cost. \citet{noor2022optimal,noor2024constrained} specify an
+optimization problem to capture this balancing decision. In this paper,
+we adopt a variant of their original model. The formal definition of the
+optimal discounting problem is given by Definition 2. [^5]
 
 [^5]: There are three differences between Definition 2 and the original
     optimal discounting model
@@ -364,8 +385,9 @@ problem is given by Definition 2. [^5]
     $w_t \in [\underline{w},\bar{w}]$. We simplify this assumption by
     setting $f'_t(w_t)$ is continuous and strictly increasing in
     $(0,1)$, and similarly, we set $f'_t(w_t)$ can approach infinity
-    near at least one border of $[0,1]$. For convenience in later
-    discussion, we set $\lim_{w_t\rightarrow 0} f'_t(w_t)=-\infty$.
+    near at least one border of $[0,1]$. For convenience, we set
+    $\lim_{w_t\rightarrow 0} f'_t(w_t)=-\infty$, but it will be fine to
+    assume it can approach positive infinity near the other border.
 
 \noindent \textbf{Definition 2}: *Given reward sequence*
 $s_{0\rightarrow T}=[s_0,...,s_T]$*, the following optimization problem
@@ -378,62 +400,60 @@ $s_{0\rightarrow T}$*:*$$\tag{3}
 \end{aligned}
 $$*where* $M>0$, $u(s_t)<\infty$. $C(\mathcal{W})$ *is the cognitive
 cost function and is constituted by time-separable costs, i.e.*
-$C(\mathcal{W})=\sum_{t=0}^Tf_t(w_t)$*, where for all* $w_t\in(0,1)$*,*
+$C(\mathcal{W})=\sum_{t=0}^Tf_t(w_t)$*. For all* $w_t\in(0,1)$*,*
 $f_t(w_t)$ *is differentiable,* $f'_t(w_t)$ *is continuous and*
 stric*tly increasing, and* $\lim_{w_t\rightarrow 0} f'_t(w_t)=-\infty$.
 
-Here $w_t$ reflects the attention paid to consider the feeling of
+Here $w_t$ reflects the attention paid to consider the well-being of
 $t$-period self. The DM's objective function is the attention-weighted
-sum of utilities obtained by the multiple selves minus the cognitive
-cost of attention re-allocation. As is illustrated by
-\citet{noor2022optimal,noor2024constrained}, a key feature of Equation
-(3) is that decision weight $w_t$ is increasing with $s_t$, indicating
-the DM tends to pay more attention to larger rewards. It is easy to
-validate that if the following two conditions are satisfied, the
-solution to the optimal discounting problem will take an AAD form:
+sum of utilities, obtained by the multiple selves, minus the cost of
+attention reallocation. As \citet{noor2022optimal,noor2024constrained}
+illustrate, a key feature of Equation (3) is that decision weight $w_t$
+increases with $s_t$, which implies the DM tends to pay more attention
+to larger rewards. It is easy to validate that if the following two
+conditions are satisfied, solution to the optimal discounting problem
+will take the AMD form:
 
-(i) The constraint on sum of decision weights is always tight. That is,
+(i) The constraint on the sum of decision weights is always tight, i.e.
     $\sum_{t=0}^Tw_t=M$. Without loss of generality, we can set $M=1$.
 
 (ii) There exists a realization of decision weights
-     $\mathcal{D}=[d_0,...,d_T]$ such that $d_t>0$ for all
-     $t\in\{0,…,T\}$ and the cognitive cost is proportional to the KL
-     divergence from $\mathcal{D}$ to the DM's strategy $\mathcal{W}$
-     where applicable. That is,
+     $\mathcal{D}=[d_0,...,d_T]$, such that the cognitive cost is
+     proportional to the KL divergence from $\mathcal{D}$ to
+     $\mathcal{W}$. That is,
      $C(\mathcal{W})= \lambda\cdot D_{KL}(\mathcal{W}||\mathcal{D})$,
-     where $\lambda>0$.
+     where $\lambda>0$, $d_t>0$ for all $t\in\{0,…,T\}$.
 
 Here $d_t$ sets a reference for determining the decision weight $w_t$,
-the parameter $\lambda$ indicates how costly the attention re-allocation
-process is, and
+and the parameter $\lambda$ controls how costly the attention
+reallocation process is. By definition,
 $D_{KL}(\mathcal{W}||\mathcal{D})=\sum_{t=0}^Tw_t\log(\frac{w_t}{d_t})$.
-The solution to the optimal discounting problem under condition (i)-(ii)
-can be derived in the same way as Theorem 1 in @matvejka2015rational.
-Note this solution is equivalent to that of a bounded rationality model:
-assuming the DM wants to find a $\mathcal{W}$ that maximizes
-$\sum_{t=0}^Tw_tu(s_t)$ but can only search for solutions within a KL
-neighborhood of $\mathcal{D}$. Related models can also be found in
-@todorov2009efficient.
+Under condition (i)-(ii), the solution to the optimal discounting
+problem can be derived in exactly the same way as Theorem 1 in
+@matvejka2015rational. Also, note this specification of solution is
+equivalent to a kind of bounded rationality model
+[@todorov2009efficient]: the DM wants to find a $\mathcal{W}$ that
+maximizes $\sum_{t=0}^Tw_tu(s_t)$ but can only search for solutions
+within a KL neighborhood of $\mathcal{D}$.
 
-We interpret the implications of condition (i)-(ii) with behavioral
-axioms. Note if each $s_t$ is an independent option and $\mathcal{W}$
-simply represents the DM's choice strategy among options, such
-conditions can be directly characterized by a rational inattention
-theory \citep[e.g.][]{caplin2022rationally}. However, here $\mathcal{W}$
-is a component of sequence value $U(s_{0\rightarrow T})$, and the DM is
-assumed to choose the option with highest sequence value. Thus, we
-should derive the behavioral implications of condition (i)-(ii) in a
-different way*.* To illustrate, let $\succsim$ denote the preference
-relation between two reward sequences.[^6] For any reward sequence
-$s_{0\rightarrow T}=[s_0,...,s_T]$, we define
+We interpret the implications of condition (i)-(ii) with four behavioral
+axioms. Note if each $s_t$ is an independent option for choice and
+$\mathcal{W}$ is simply the DM's choice strategy, these conditions can
+be directly characterized by a rational inattention theory
+[@caplin2022rationally]. However, here $\mathcal{W}$ is a component in
+sequence value, and the DM is assumed to choose the option with the
+highest sequence value. Thus, we should derive the behavioral
+implications of condition (i)-(ii) in a different way from
+@caplin2022rationally. To see how we derive these, let $\succsim$ denote
+the preference relation between two reward sequences.[^6] For any reward
+sequence $s_{0\rightarrow T}=[s_0,...,s_T]$, we define
 $s_{0\rightarrow t}=[s_0,...,s_t]$ as a sub-sequence of it, where
 $1\leq t\leq T$.[^7] We first introduce two axioms for $\succsim$:
 
-[^6]: If $a \succsim b$ and $b\succsim a$, we say $a\sim b$ ("$a$ is the
-    same good as $b$"). If $a \succsim b$ does not hold, we say
-    $b\succ a$ ("$b$ is better than $a$"). $\succsim$ can also
-    characterize the preference relation between single rewards as the
-    single rewards can be viewed as one-period sequences.
+[^6]: If $a \succsim b$ and $b\succsim a$, we say $a\sim b$. If
+    $a \succsim b$ does not hold, we say $b\succ a$. $\succsim$ can also
+    characterize the preference relation between single rewards as any
+    single reward can be viewed as a one-period sequence.
 
 [^7]: Unless otherwise specified, every sub-sequence is set to starts
     from period 0.
@@ -471,14 +491,13 @@ of complete order implies preferences between reward sequences can be
 characterized by an utility function. Continuity and state-independence
 ensure that in a stochastic setting where the DM can receive one reward
 sequence under some states and receive a single reward under other
-states, her preference can be characterized by expected utility
-[@herstein1953axiomatic]. Reduction of compound alternatives ensures
-that the DM's valuation on a specific reward sequence is constant over
+states, her preference can be characterized by the expected utility
+theorem [@herstein1953axiomatic]. Reduction of compound alternatives
+ensures that the valuation of a certain reward sequence is constant over
 states. Axiom 2 is an extension of the Constant-Equivalence assumption
 in @bleichrodt2008koopmans. It implies there always exists a constant
-that can represent the value of a linear combination of sub-sequence
-$s_{0\rightarrow T}$ and the end-period reward $s_T$ so long as the
-weights lie in $(0,1)$.
+that can represent the value of a convex combination of sub-sequence
+$s_{0\rightarrow T}$ and the end-period reward $s_T$.
 
 For a given $s_{0\rightarrow T}$, the optimal discounting model can
 generate a sequence of decision weights $[w_0,...,w_T]$. Furthermore,
@@ -501,16 +520,16 @@ $$ *where* $\{w_t\}_{t=0}^T$ *and* $\{w'_t\}^{T'}_{t=0}$ *are solutions
 to the optimal discounting problems for* $s_{0\rightarrow T}$ *and*
 $s'_{0\rightarrow T'}$ *respectively.*
 
-Furthermore, if Definition 3 is satisfied and $\{w_t\}_{t=0}^T$ as well
-as $\{w'_t\}^{T'}_{t=0}$ takes the AAD form, we say $\succsim$ has an
-*AAD representation*. Now we specify two behavioral axioms that are key
-to characterize the AAD functions.
+Furthermore, if Definition 3 is satisfied and both $\{w_t\}_{t=0}^T$ and
+$\{w'_t\}^{T'}_{t=0}$ take the AMD form, we say $\succsim$ has an *AMD
+representation*. Now we specify two additional behavioral axioms that
+are key to characterize AMD.
 
-\noindent \textbf{Axiom 3} (sequential outcome-betweenness): *For any*
+\noindent \textbf{Axiom 3} (Sequential Outcome-Betweenness): *For any*
 $s_{0\rightarrow T}$*, there exists* $\alpha\in(0,1)$ *such that*
 $s_{0\rightarrow T} \sim \alpha\cdot s_{0\rightarrow T-1}+(1-\alpha) \cdot s_T$*.*
 
-\noindent \textbf{Axiom 4} (sequential bracket-independence): *Suppose*
+\noindent \textbf{Axiom 4} (Sequential Bracket-Independence): *Suppose*
 $T\geq 2$. *For any* $s_{0\rightarrow T}$*, if there exist*
 $\alpha_1,\alpha_2,\beta_0,\beta_1,\beta_2\in(0,1)$ *such that*
 $s_{0\rightarrow T}\sim \alpha_1 \cdot s_{0\rightarrow T-1} + \alpha_2 \cdot s_{T}$
@@ -524,36 +543,37 @@ new sequence should lie between the original sequence
 $s_{0\rightarrow T-1}$ and the newly added reward $s_T$. Notably, Axiom
 3 is consistent with the empirical evidence about *violation of
 dominance* [@scholten2014better; @jiang2017better] in intertemporal
-choice. Suppose the DM is indifferent between a small-sooner reward (SS)
-"receive £75 today" and a large-later reward (LL) "receive £100 in 52
-weeks". @scholten2014better find when we add a tiny reward after the
-payment in SS, e.g. changing SS to "receive £75 today and £3 in 52
-weeks", the DM would be more likely to prefer LL over SS.
-@jiang2017better find the same effect can apply to LL. That is, if we
-add a tiny reward after the payment in LL, e.g. changing LL to "receive
-£100 in 52 weeks and £3 in 53 weeks", the DM may be more likely to
-prefer SS over LL.
+choice. To illustrate, suppose the DM is indifferent between a
+small-sooner reward (SS) "receive £75 today" and a large-later reward
+(LL) "receive £100 in 52 weeks". @scholten2014better find when we add a
+tiny reward after the payment in SS, e.g. changing SS to "receive £75
+today and £5 in 52 weeks", the DM would be more likely to prefer LL over
+SS. @jiang2017better find the same effect can apply to LL. That is, if
+we add a tiny reward after the payment in LL, e.g. changing LL to
+"receive £100 in 52 weeks and £5 in 53 weeks", the DM may be more likely
+to prefer SS over LL.
 
-Axiom 4 implies that no matter how the DM brackets the rewards into
-sub-sequences (or how the sub-sequences get further decomposed), the
+Axiom 4 implies that no matter how the DM brackets a stream of rewards
+into sub-sequences, or how the sub-sequences get decomposed, the
 decision weights for rewards outside them should not be affected.
 Specifically, suppose we decompose reward sequence $s_{0\rightarrow T}$
 and find its value is equivalent to a linear combination of
-$s_{0\rightarrow T-1}$ and $s_T$. We also can further decompose
-$s_{0\rightarrow T-1}$ to a linear combination of $s_{0\rightarrow T-2}$
-and $s_{T-1}$. But no matter how we operate, as long as the
-decomposition is carried out inside $s_{0\rightarrow T-1}$, the weight
-of $s_T$ in the valuation of $s_{0\rightarrow T}$ will always remain the
-same. This axiom is an analog to independence of irrelevant alternatives
-in discrete choice problems, while the latter is a key feature of
-softmax choice function.
+$s_{0\rightarrow T-1}$ and $s_T$. Also, we further decompose the value
+of $s_{0\rightarrow T-1}$ to a linear combination of
+$s_{0\rightarrow T-2}$ and $s_{T-1}$ (and we can recursively do this to
+$s_{0\rightarrow T-2}$). In any cases, as long as the decomposition is
+carried out inside $s_{0\rightarrow T-1}$, the weight of $s_T$ in the
+valuation of $s_{0\rightarrow T}$ will remain the same. This axiom is
+analogous to the Independence of Irrelevant Alternatives principle in
+discrete choice analysis, while the latter is a key feature of softmax
+choice function.
 
 We show in Proposition 1 that the optimal discounting model plus Axiom
-1-4 can exactly produce AAD.
+1-4 can produce the AMD model.
 
 \noindent \textbf{Proposition 1}: *Suppose* $\succsim$ *has an optimal
 discounting representation, then it satisfies Axiom 1-4 if and only if
-has an AAD representation.*
+has an AMD representation.*
 
 The necessity ("only if") is easy to see. We present the proof of
 sufficiency ("if") in Appendix A. The sketch of the proof is as follows.
@@ -566,31 +586,32 @@ discounting problem, we have $f'_t(w_t)=u(s_t)+\theta$, where $\theta$
 is the Lagrangian multiplier. Given $f'_t(.)$ is continuous and strictly
 increasing, we define its inverse function as $\phi_t(.)$ and set
 $w_t=\phi_t(u(s_t)+\theta)$. Third, Axiom 4 indicates that the decision
-weights for rewards outside a reward sub-sequence is irrelevant to the
-decision weights in it. Imagine that we add a new reward $s_{T+1}$ to
-the end of $s_{0\rightarrow T}$ and denote the decision weights for
+weight for a reward outside a sub-sequence is irrelevant to the decision
+weights inside it. Imagine that we add a new reward $s_{T+1}$ to the end
+of $s_{0\rightarrow T}$ and denote the decision weights for
 $s_{0\rightarrow T+1}$ by $\{w'_t\}_{t=0}^{T+1}$. Doing this should not
 change the relative difference between the decision weights inside
-$s_{0\rightarrow T}$. That is, the relative difference between $w'_t$
-and $w'_{t-1}$ should be the same as that between $w_t$ and $w_{t-1}$
-for all $1\leq t\leq T$. So, by applying Axiom 4 jointly with Axiom 1-3,
-we should obtain $w_0/w'_0=w_1/w'_1=...=w_T/w'_T$ . Suppose
+$s_{0\rightarrow T}$. That is, for all $1\leq t\leq T$, the relative
+difference between $w'_t$ and $w'_{t-1}$ should be the same as that
+between $w_t$ and $w_{t-1}$. So, by applying Axiom 4 jointly with Axiom
+1-3, we should obtain $w_0/w'_0=w_1/w'_1=...=w_T/w'_T$ . Suppose
 $w'_t=\phi_t(u(s_t)-\eta)$, we have
 $w_t \propto e^{\ln\phi_t(u(s_t)-\eta)}$. Fourth, we can adjust
 $s_{T+1}$ arbitrarily to get different realizations of $\eta$. Suppose
 under some $s_{T+1}$, we have $w'_t = \phi_t(u(s_t))$, which indicates
-$w_t \propto e^{\ln\phi_t(u(s_t))}$. By combining this with the
-proportional relation obtained in the last step, we can conclude that
+$w_t \propto e^{\ln\phi_t(u(s_t))}$. Combining this with the
+proportional relation obtained in the third step, we can conclude that
 for some $\kappa>0$, there must be
 $\ln\phi_t(u(s_t))=\ln\phi_t(u(s_t)-\eta)+\kappa\eta$. This indicates
 $\ln \phi_t(.)$ is linear in a given range of $\eta$. Finally, we show
-that the linear condition can hold when $\eta\in[0,u_{\max}-u_{\min}]$,
-where $u_{\max},u_{\min}$ are the maximum and minimum instantaneous
-utilities in $s_{0\rightarrow T}$. Therefore, we can rewrite
-$\ln\phi_t(u(s_t))$ as $\ln\phi_t(u_{\min})+\kappa[u(s_t)-u_{\min}]$.
-Setting $d_t=\phi_t(u_{\min})$, $\lambda =1/\kappa$, and reframing the
-utility function, we obtain $w_t \propto d_t e^{u(s_t)/\lambda}$, which
-is AAD.
+that the linearity condition can hold when
+$\eta\in[0,u_{\max}-u_{\min}]$, where $u_{\max},u_{\min}$ are the
+maximum and minimum instantaneous utilities in $s_{0\rightarrow T}$.
+Therefore, we can rewrite $\ln\phi_t(u(s_t))$ as
+$\ln\phi_t(u_{\min})+\kappa[u(s_t)-u_{\min}]$. Setting
+$d_t=\phi_t(u_{\min})$, $\lambda =1/\kappa$, and re-framing the utility
+function, we obtain $w_t \propto d_t e^{u(s_t)/\lambda}$, which is the
+AMD factor.
 
 ```{r child='Implications.Rmd'}
 ```
