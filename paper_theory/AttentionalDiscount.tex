@@ -55,7 +55,7 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
-\usepackage{setspace,lscape} \usepackage{amsmath} \usepackage{caption,subcaption,multirow} \usepackage[hang]{footmisc} \usepackage{enumitem} \usepackage{standalone} \renewcommand{\arraystretch}{1.5} \captionsetup[table]{skip=5pt} \setstretch{1.5} \setlength{\parindent}{1em} \setlength{\footnotemargin}{3mm} \setlength{\footnotesep}{3mm} \renewcommand{\[}{\begin{equation}} \renewcommand{\]}{\end{equation}}
+\usepackage{setspace,lscape} \usepackage{amsmath} \usepackage{caption,subcaption,multirow} \usepackage[hang]{footmisc} \usepackage{enumitem} \usepackage{standalone} \renewcommand{\arraystretch}{1.5} \captionsetup[table]{skip=5pt} \setstretch{1.5} \setlength{\parindent}{1em} \setlength{\footnotemargin}{3mm} \setlength{\footnotesep}{3mm}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -72,13 +72,329 @@
 
 \title{An Attentional Model of Time Discounting}
 \author{Zijian Zark Wang}
-\date{August 13, 2024}
+\date{August 16, 2024}
 
 \begin{document}
 \maketitle
+\begin{abstract}
+When decision makers evaluate a sequence of rewards, they may pay more
+attention to larger rewards and, given attention is limited, less
+attention to smaller rewards. They may also become less attentive to
+each reward when they need to split attention over a longer period of
+time. Such reductions in attention could lead to greater discounting of
+the rewards' value. This paper introduces a novel theory of time
+discounting based on these assumptions. The resulting discount factors
+in the theory follow a distribution similar to the multinomial logit
+function. We characterize such discount factors using two approaches:
+one based on information maximazing exploration and the other based on
+an optimal discounting framework. The theory can explain a wide range of
+anomalies, including the hidden-zero effect, S-shaped value function,
+and intertemporal correlation aversion. Also, it specifies new mediators
+for some well-known psychological effects, such as the common difference
+effect, risk aversion over time lotteries, and the present bias.
+\end{abstract}
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
+
+In real-world intertemporal choices, people often face situations where
+rewards are delivered in a sequence over different time periods. For
+example, when people make consumption plans, each consumption stream can
+represent a sequence of rewards. Similarly, when choosing pension
+schemes, each option involves a sequence of monthly payments spanning
+several decades. Determining how to value a reward sequence is a
+critical issue in such decisions. Most researchers use additive
+discounted utility models to deal with this issue
+\citep[see][]{cohen2020measuring}. Classical models of this class, such
+as exponential and hyperbolic discounting, typically assume that a
+decision-maker (DM) discounts the value of a future reward purely based
+on the period in which it is delivered. However, the size of the reward
+itself, as long as its contrast with other elements in the sequence, may
+also influence how people discount it. We propose that such influences
+are modulated by attention.
+
+To develop intuitions on how attention may affect discounting within a
+sequence of rewards, imagine that you can receive £30 today and £10 in a
+month. In an additive discounted utility model, the value of this reward
+sequence could be represented by \(d_0 \cdot u(30) + d_1 \cdot u(10)\),
+where \(u(.)\) is called an instantaneous utility function and
+\(d_0,d_1\) are the discount factors for the two rewards.
+
+We consider two basic changes on this reward sequence. First, if we
+change the £10 to £1,000, how would this influence your discounting of
+each reward? Both exponential and hyperbolic discounting predict that
+the discount factors would not be changed. But when you evaluate
+``receive £30 today and £1,000 in a month'', you may pay more attention
+to the later reward and relatively ignore the other. The reason is
+whether you can get £30 today is less important when you can get £1000
+rather than only £10 in another day. Thus, it is possible that you
+overweight the £1,000 and underweight the £30 in your valuation of the
+sequence. If it is the case, increasing £10 to £1,000 should lead to a
+reduction in \(d_0/d_1\).
+
+Second, if we add some rewards delivered at other times into the
+sequence -- such as changing it to ``receive £30 today and £10 in a
+month, and £15 in two months, and £20 in three months'' -- this may also
+affect how you discount the rewards. To evaluate this reward sequence,
+you have to take into account the information of all the rewards it
+includes. As the number of rewards increases, it may be more challenging
+to determine the overall value of the sequence. Also, a series of
+psychological studies suggests, when people have to process more pieces
+of information at the same time, each piece may be processed at a
+shallower level due to limited attention.\footnote{Evidence with this
+  respect can be divided into three bodies. First, research in visual
+  attention has identified the crowding effect
+  \citep{whitney2011visual}. This means that when too many items are
+  close together in someone's view, it would be difficult to recognize
+  or distinguish each item, even if they are all visible. Second, in
+  memory and learning, multitasking often lead to poorer performance
+  \citep[e.g. the split-attention effect, see][]{sweller1998cognitive,sweller2011cognitive}.
+  This is often attributed to heavy cognitive load and limited
+  processing resources. Third, decision-making studies also show that
+  when people face more attributes, or have to switch between stimuli
+  more frequently, they generally take longer to make decisions and are
+  more prone to errors
+  \citep{malhotra1982information, kool2010decision}.} For the given
+change in reward sequence, it means each reward may receive less
+attention (or less processing resources). So, even though you can easily
+comprehend what will happen in each period when you view the sequence,
+you perception of each reward's value should become shallower or vaguer.
+In the additive discounted utility models, such an effect could be
+captured by a greater discounting of each reward's value.
+
+In this paper, we develop a new model of time discounting to capture
+these intuitions about attention. For simplicity, we adopt the additive
+discounted utility framework, but for each period \(t\), adjust the
+discount factor \(d_t\) to a decision weight \(w_t\). Let
+\(s_{0\rightarrow T}=[s_0,s_1,…,s_T]\) denote a sequence of rewards
+delivered from period 0 to period \(T\), where \(s_t\) represents the
+reward delivered in period \(t\). The value of this sequence can be
+represented by \(U(s_{0\rightarrow T})=\sum_{t=0}^T w_t u(s_t)\). The
+decision weight \(w_t\) is increasing in the attention allocated to
+\(s_t\). We assume that when evaluating a reward sequence, each reward
+is an independent information source. The DM cannot process all this
+information in the same depth at once. Therefore, she selectively
+attends more to those rewards that will have the largest impact on
+sequence value. A larger reward should be given a greater decision
+weight and a smaller one should be given a smaller decision
+weight.\footnote{Attention allocation may also be affected by reference
+  points \citep{bordalo2012salience, kHoszegi2013model}. In this paper,
+  we simply set zero as the reference point and assume all rewards are
+  non-negative. However, in the following specification of \(w_t\),
+  reference-dependency can be easily incorporated by setting the
+  instantaneous utility to \(u(s_t-\bar{s}_t)\), where \(\bar{s}_t\) is
+  the reference point.}
+
+Notably, we recommend using a simple form to specify \(w_t\):\[
+w_t = \frac{d_te^{u(s_t)/\lambda}}{\sum_{\tau=0}^T d_te^{u(s_\tau)/\lambda}}
+\]where the parameter \(\lambda>0\), and the instantaneous utility
+\(u(s_t)\geq 0\). This specification of \(w_t\) takes the multinomial
+logit (also called softmax) function. Note the given decision weight
+\(w_t\) is increasing in reward \(s_t\) but decreasing in other rewards,
+indicating a tendency to focus on the larger rewards (this captures the
+first intuition). The total of decision weights is a fixed
+amount,\footnote{Some recursive preference models also assume a constant
+  sum for the time aggregator, algining with the CES utility framework
+  \citep{epstein1991substitution, weil1990nonexpected}. Someone may
+  argue that this assumption can incur some issues in fitting the
+  empirical phenomena. We discuss these issues in Section
+  \ref{seq_length}.} which indicates the DM's attention capacity is
+limited and when she divides attention over more periods, each period
+would receive less attention (this captures the second intuition). The
+determination of \(w_t\) is subject to the ``original'' discount factor
+\(d_t\), but also reflects some attentional mechanisms. Thus, we term
+our model by the \emph{attention-modulated discounting} (AMD) model.
+
+Our recommended form of \(w_t\) has three desired features. First, we
+introduce only one additional parameter \(\lambda\) to the standard
+discounting models. This makes our model not only capable of explaining
+a range of phenomena, but also highly parsimonious. Also, the parameter
+\(\lambda\), as we illustrate later, is decreasing in the DM's cognitive
+uncertainty as well as the learning rate. This allows researchers to
+test our model through process-tracing methods.
+
+Second, \(w_t\) follows a softmax form, which has been widely used in
+various decision domains. In discrete choice analysis, the softmax
+function can be used to represent the DM's choice strategy under
+attention constraint \citep{matvejka2015rational}; in memory research,
+\citet{bordalo2020memory} use this function as the attention weight for
+recalled experiences. Our model thus has the potential to be integrated
+with these models to form a unified framework for analyzing the role of
+attention in decision-making.
+
+Third, \(w_t\) satisfies a property that we term Sequential
+Bracket-Independence\emph{.} To illustrate this property, consider a
+reward sequence \(s_{0\rightarrow T}\). We can bracket its first \(T\)
+periods into another sequence
+\(s_{0\rightarrow T-1}=[s_0,...,s_{T-1}]\). The value of
+\(s_{0\rightarrow T}\) then can also be represented by a weighted sum of
+the values of \(s_{0\rightarrow T-1}\) and \(s_T\). That is,
+\(U(s_{0\rightarrow T})=\alpha U(s_{0\rightarrow T-1})+\beta u(s_T)\)
+where \(\alpha,\beta\) are the decision weights. Sequential
+Bracket-Independence implies that, the decision weight for \(u(s_t)\) in
+the value representation of \(s_{0\rightarrow T}\) is independent of
+whether we conduct this bracketing operation. In other words, we must
+have \(\beta = w_T\). Under this property, how the DM values a reward
+sequence is independent of how she might bracket it: for each particular
+sequence, there is only one unique distribution of decision weights.
+
+\hypertarget{two-characterization-approaches}{%
+\subsection{Two Characterization
+Approaches}\label{two-characterization-approaches}}
+
+We characterize the AMD model by two approaches. It is mentionable that
+across various fields (economics, psychology, and machine learning),
+there are typically two ways to model attention
+\citep{xu2015show, gabaix2019behavioral, lindsay2020attention}. The
+first is to assume the decision maker is in an information-rich
+environment and adjusts the probability of sampling from different
+information sources to achieve specific goals (``hard attention''), and
+the second is through the weighting of different items or attributes
+when integrating them to a total representation (``soft attention'').
+Our first approach fits the ``hard attention'' while the second approach
+fits the ``soft attention''.
+
+The first approach is inspired by reinforcement learning and
+neuroscientific literature. Our mathematic setting is similar to
+\citet{itti2009bayesian} and \citet{gottlieb2013information}. The DM is
+assumed to randomly switch attention across a sequence of rewards. Each
+time, she samples a reward and uses the perceived (noisy) value of that
+reward as a signal of the overall value of the sequence. She then
+updates her belief about the sequence value with the Bayes' rule. The
+objective of sampling is to maximize the information gain, measured by
+the Kullback--Leibler (KL) divergence of the posterior belief from the
+prior belief. In other words, the DM's attention is curiosity-driven:
+she tends to focus on the reward that brings the greatest surprise
+compared to her prior belief. In intuition, before the DM starts
+acquiring any information about the sequence, she should believe it
+contains no value. So, larger rewards, which deviates more from the zero
+value, can produce more surprises and thus receive higher decision
+weights. Specifically, we assume the DM uses the softmax exploration
+strategy to achieve her objective, as studies have suggested it has
+strong predictive power for human behavior and neural activities during
+reinforcement learning \citep{daw2006cortical, collins2014opponent} .
+
+The second approach is an axiomatic analysis. We draw on the optimal
+discounting framework \citep{noor2022optimal,noor2024constrained} to
+assume that adjusting \(d_t\) to \(w_t\) triggers a cognitive cost, and
+that the DM does this to maximize the net value of the reward sequence.
+The implication of this assumption is that the DM tends to focus on the
+information source that provides the greatest pleasure. We show that
+within the optimal discounting framework, the softmax weighting function
+is the only function that simultaneously satisfies the standard
+preference axioms, Sequential Bracket-Independence, and Sequential
+Outcome-Betweenness. We have demonstrated the implication of Sequential
+Bracket-Independence. Sequential Outcome-Betweenness implies that adding
+a tiny reward to the end of a reward sequence could result in the
+sequence being valued lower than the original sequence but higher than
+that tiny reward alone. This property is critical for explaining some
+attention-related intertemporal choice anomalies, such as the violation
+of dominance \citep{scholten2014better, jiang2017better} and the hidden
+zero effect
+\citep{magen2008hidden, radu2011mechanism, read2017value, dang2021beauty}.
+
+\hypertarget{applications-and-related-literature}{%
+\subsection{Applications and Related
+Literature}\label{applications-and-related-literature}}
+
+We apply the AMD model to a wide range of decision anomalies. First, the
+model is consistent with a series of recent empirical findings,
+including the hidden zero effect. Suppose a DM is indifferent between
+``receive £100 today'' and ``receive £120 in 25 weeks''. The hidden zero
+effect suggests that, if we explicitly state the zero rewards in the
+former option, changing it to ``receive £100 today and £0 in 25 weeks'',
+the DM would be less likely to choose this option. This effect provides
+a robust technique for alter people's patience but cannot be explained
+by standard discounting models. According to our model, the given change
+extends the sequence length and directs some of the DM's attention to a
+future period with no reward delivered, which in turn, reduces the
+attention for the £100 payment, thereby producting the hidden zero
+effect.
+
+Second, the model makes novel predictions about some existing findings,
+such as the common difference effect \citep{loewenstein1992anomalies},
+and risk aversion over time lotteries
+\citep{onay2007intertemporal, dejarnette2020time}. For example, it
+predicts that in comparison between a small sooner reward (SS) and a
+large later reward (LL), if the difference between reward delays is
+substantially larger than the difference between reward utilities, the
+common difference effect may be reversed. That is, adding a common delay
+to both SS and LL can lead people to exhibit less patience. Besides, it
+predicts that people are risk averse over time lotteries only when the
+lottery reward is large enough.
+
+Third, the model provides new accounts for several anomalies, such as
+S-shaped value function, intertemporal correlation aversion
+\citep{andersen2018multiattribute, rohde2023intertemporal}, and
+concentration bias \citep{dertwinkel2022concentration}. For example, the
+concentration bias implies that when allocating rewards over multiple
+periods, the DM has a tendency to concentrate all rewards into a single
+period. The AMD model suggests this happens when the DM does not know or
+knows little about how to allocate the rewards. In this case, the DM
+requires more information for decision making. According to our first
+characterization approach, she may accelerate the rate of information
+sampling, causing the decision weights (i.e.~the probability of each
+reward being sampled) to become more concentrated toward the period with
+the largest reward delivered. Consequently, she may weight that specific
+period much more than the other periods.
+
+Fourth, the model links inconsistent planning to memory and learning. It
+suggests that in a dynamic consumption-saving problem, people perform
+present-biased behavior (such as over-consumption) only when they can
+recall their previous attention allocation. In the AMD model, the
+pleasure that a DM experiences in each period increases with the
+attention allocated to that period. In intuition, if the DM recalls
+experiencing great pleasure from consuming a lot in the last period, she
+might be attached to that mental state. Due to this attachment, she
+might focus more on the current pleasure and become less attentive to
+the future, thereby performing the present-biased behavior.
+
+Our model is grounded in the literature of endogenous time preference.
+The theoretical idea that time discounting is subject to all rewards
+within the same sequence comes from \citet{uzawa1968time}, a seminal
+paper in endogenous time preference. Early theories of this class
+\citep{uzawa1968time, epstein1983rate, epstein1983stationary, becker1997endogenous}
+typically assume an increase in the present reward can lead to all
+subsequent rewards in the same sequence being discounted more.
+Nevertheless, they do not clearly address how changes in future rewards
+might affect the weighting of the rewards delivered earlier (this also
+means they cannot account for the hidden zero effect). Our model extends
+this framework. Some theories also assume time preferences are mediated
+by the cognitive cost of paying attention to the future
+\citep{fudenberg2006dual, noor2022optimal}. We borrow from this idea to
+develop the second characterization approach for AMD.
+
+Our model contributes to the literature of attention-based choice
+models. In this field, some other theories also examine the role of
+attention in intertemporal choice. For example, the focus-weighted
+utility theory \citep{kHoszegi2013model} suggests that people assign
+greater decision weights to larger rewards under some contexts, which is
+consistent with our assumption. However, in that theory, the decision
+weights within the same sequence are uncorrelated with each other. While
+in the AMD model, an increase in one decision weight would reduce some
+of the other decision weights in the sequence. In Section
+\ref{relation_to_other}, we provide more details for such comparisons.
+Moreover, our model emphasizes the non-instrumental value of
+information. This differentiates it from a series of attention models
+that focus on the instrumental value of information, including the
+rational inattention theories
+\citep{sims2003implications, matvejka2015rational, steiner2017rational}.
+In the two characterization approaches, we assume the DM acquires
+information for pleasure and satisfying their curiosity. In the field of
+risky choice, several theories are also built upon this assumption, such
+as preference for suspense and surprise \citep{ely2015suspense},
+information gaps \citep{golman2018information}, and information aversion
+\citep{andries2020information}. But similar theories are still lacking
+in (riskless) intertemporal choice. Our research can help fill this gap.
+
+The rest of this paper is organized as follows. Section
+\ref{model_setting} introduces the model setting. Section
+\ref{interpretation} describes the two approaches used to characterize
+the AMD model, i.e.~information maximizing exploration and optimal
+discounting. Section \ref{implication} explains the model's implications
+for decision-making from eight perspectives. Finally, Section
+\ref{discuss} discuss issues related to the use of the model and propose
+possible improvements.
 
 \hypertarget{model-setting}{%
 \section{\texorpdfstring{Model Setting
@@ -110,28 +426,29 @@ to each reward in the sequence, in order to acquire its value
 information. The more attention she puts on a reward, the greater
 decision weight is assigned to that reward. For instance, to evaluate
 reward \(s_t\) (\(t>0\)), she may need to imagine how much pleasure she
-would feel on the occasion when she receives \(s_t\). As more attention
-is paid to that specific occasion, her imagination of the occasion will
-become more vivid and more salient. In this case, the utility of reward
-\(s_t\) could be less discounted (\(w_t\) will be greater). We assume
-that if the DM is totally focused on that specific occasion, the value
-of reward \(s_t\) within the sequence will be equal to the value of it
-alone, i.e.~\(u(s_t)\). After each reward is evaluated, the DM
-aggregates the values of all rewards within the sequence to construct a
-value representation of the total sequence.
+would feel on the occasion when she receives \(s_t\)
+\citep{macinnis1987role}. As more attention is paid to that specific
+occasion, her imagination of the occasion will become more vivid and
+more salient. In this case, the utility of reward \(s_t\) could be less
+discounted (\(w_t\) will be greater). We assume that if the DM is
+totally focused on that specific occasion, the value of reward \(s_t\)
+within the sequence will be equal to the value of it alone, i.e.
+\(u(s_t)\). After each reward is evaluated, the DM aggregates the values
+of all rewards within the sequence to construct a value representation
+of the total sequence.
 
 The division of attention is subject to all rewards in the sequence. We
 propose that the DM's attention allocation process should follow at
 least two principles. First, she tends to overweight large rewards and
 underweight small rewards. For example, suppose a reward sequence
-\(\mathbb{S}_{0\rightarrow1}\) delivers ``£5 today and £200 in 1 week''.
-When processing \(\mathbb{S}_{0\rightarrow1}\), the DM might pay more
-attention to the period in which she can receive £200, and relatively
-ignore £5. Second, when the DM has to process more rewards in a
-sequence, the attention allocated to each reward would decline. To
+\(\mathbb{S}_{0\rightarrow1}\) delivers ``£5 today and £200 in 1
+month''. When processing \(\mathbb{S}_{0\rightarrow1}\), the DM might
+pay more attention to the period in which she can receive £200, and
+relatively ignore £5. Second, when the DM has to process more rewards in
+a sequence, the attention allocated to each reward would decline. To
 illustrate, consider a reward sequence \(\mathbb{S}_{0\rightarrow 3}\)
-that delivers ``£5 today, and £200 in 1 week, and £85 in 2 weeks, and
-£10 in 3 weeks''. To evaluate \(\mathbb{S}_{0\rightarrow 3}\), the DM
+that delivers ``£5 today, and £200 in 1 month, and £85 in 2 months, and
+£10 in 3 months''. To evaluate \(\mathbb{S}_{0\rightarrow 3}\), the DM
 needs to take into account more occasions when she can get a positive
 reward (compared with \(\mathbb{S}_{0\rightarrow1}\)). Suppose she faces
 the same attention constraint when evaluating each sequence. When the DM
@@ -140,15 +457,15 @@ her imagination than its counterpart in \(\mathbb{S}_{0\rightarrow1}\).
 In Section 4, we show that these two principles can account for a wide
 range of anomalies relevant to intertemporal choice. Specifically, we
 suggest decision weight \(w_t\) follow a softmax function. We define any
-weight in this style as an \emph{attention-modulated discount} (AMD)
-factor, as in Definition 1.
+weight in this style as an \emph{attention-modulated discount} factor,
+as in Definition 1.
 
 \noindent \textbf{Definition 1}: \emph{Let}
 \(\mathcal{W}\equiv[w_0,...,w_T]\) \emph{denote the decision weights for
 all specific rewards in} \(s_{0\rightarrow T}\)\emph{.} \(\mathcal{W}\)
 \emph{is called attention-modulated discount (AMD) factors if for any}
 \(t\in\{0,1,…,T\}\),\[\tag{1}
-w_t = \frac{d_te^{u(s_t)/\lambda}}{\sum_{\tau=0}^T d_\tau e^{u(s_\tau)/\lambda}} 
+w_t = \frac{d_te^{u(s_t)/\lambda}}{\sum_{\tau=0}^T d_te^{u(s_\tau)/\lambda}}
 \]\emph{where} \(d_t > 0\)\emph{,} \(\lambda>0\)\emph{,} \(u(.)\)
 \emph{is the utility function.}
 
@@ -157,19 +474,19 @@ valuation of reward sequences can be explained in four points. First, we
 view each reward in a sequence as a separate information source and the
 DM allocates limited attentional resources across those information
 sources. The AMD factors capture this notion by normalizing the discount
-factors (the sum of decision weights is 1). Similar assumptions are
-typically used in recursive utility models, such as
+factors (the sum of decision weights is 1). Note similar assumptions are
+commonly used in recursive preference models, such as
 \citet{weil1990nonexpected} and \citet{epstein1991substitution} . In
-this paper, the implication of normalization assumption is twofold.
-First, increasing the decision weight of one reward would reduce the
+this paper, the implication of normalization assumption is twofold. On
+the one hand, increasing the decision weight of one reward reduces the
 decision weights of other rewards in the sequence, implying that
-focusing on one reward would make DM insensitive to other rewards.
-Second, when there are more rewards in the sequence, DM needs to split
-attention across a wider range to process each of them, which may reduce
-the attention to, or decision weight of, each individual reward.
+focusing on one item could make DM less sensitive to the others. One the
+other hand, when there are more rewards in the sequence, the DM needs to
+split attention across a wider range to process each of them, which may
+reduce the attention to, or decision weight of, each individual reward.
 
-Second, \(w_t\) is strictly increasing in \(s_t\), indicating that the
-DM would pay more attention to larger rewards. This is consistent with
+Second, \(w_t\) is strictly increasing in \(s_t\), indicating a tendency
+to pay more attention to larger rewards. This is consistent with
 empirical findings about attention in many decision domains. For
 instance, in visual search, people often perform a ``value-driven
 attentional capture'' effect
@@ -228,25 +545,25 @@ information from each information source (i.e.~each reward) when
 processing a reward sequence, and we use the AMD model to represent an
 approximately optimal sampling strategy.
 
-\hypertarget{interpretation}{%
-\section{\texorpdfstring{Interpretation
-\label{interpretation}}{Interpretation }}\label{interpretation}}
+\hypertarget{characterization}{%
+\section{\texorpdfstring{Characterization
+\label{interpretation}}{Characterization }}\label{characterization}}
 
 In this section, we provide two approaches to characterize AMD: the
 first is based on the information maximizing exploration framework; the
 second is based on the optimal discounting framework. These approaches
 are closely related to the idea proposed by
-\citet{gottlieb2012attention}, \citet{gottlieb2013information} and
-\citet{sharot2020people}, that people tend to pay attention to
-information with high \emph{instrumental utility} (helping identify the
-optimal action), \emph{cognitive utility} (satisfying curiosity), or
-\emph{hedonic utility} (inducing positive feelings). It is worth
-mentioning that the well-known rational inattention theories,
-originating from \citet{sims2003implications}, and the classical
-Blackwell notion of information \citep{blackwell1951comparison}, are
-grounded in the instrumental utility of information. In this paper, we
-draw on the cognitive and hedonic utility of information to build our
-theory of time discounting.
+\citet{gottlieb2012attention}, \citet{gottlieb2013information},
+\citet{sharot2020people}, and \citet{golman2022demand}, that people tend
+to pay attention to information with high \emph{instrumental utility}
+(helping identify the optimal action), \emph{cognitive utility}
+(satisfying curiosity), or \emph{hedonic utility} (inducing positive
+feelings). It is worth mentioning that the well-known rational
+inattention theories, originating from \citet{sims2003implications}, and
+the classical Blackwell notion of information
+\citep{blackwell1951comparison}, are grounded in the instrumental
+utility of information. In this paper, we draw on the cognitive and
+hedonic utility of information to build our theory of time discounting.
 
 Our first approach to characterizing AMD is relevant to cognitive
 utility: the DM's information acquisition process is curiosity-driven.
@@ -606,13 +923,12 @@ of the new sequence should lie between the original sequence
 Axiom 3 is consistent with the empirical evidence about \emph{violation
 of dominance} \citep{scholten2014better, jiang2017better} in
 intertemporal choice. To illustrate, suppose the DM is indifferent
-between a small-sooner reward (SS) ``receive £75 today'' and a
-large-later reward (LL) ``receive £100 in 52 weeks''.
-\citet{scholten2014better} find when we add a tiny reward after the
-payment in SS, e.g.~changing SS to ``receive £75 today and £5 in 52
+between ``receive £75 today'' (SS) and ``receive £100 in 52 weeks''
+(LL). \citet{scholten2014better} find when we add a tiny reward after
+the payment in SS, e.g.~changing SS to ``receive £75 today and £5 in 52
 weeks'', the DM would be more likely to prefer LL over SS.
 \citet{jiang2017better} find the same effect can apply to LL. That is,
-if we add a tiny reward after the payment in LL, e.g.~changing LL to
+if we add a tiny reward after the payment in LL, e.g. changing LL to
 ``receive £100 in 52 weeks and £5 in 53 weeks'', the DM may be more
 likely to prefer SS over LL.
 
@@ -677,16 +993,17 @@ utility function, we obtain \(w_t \propto d_t e^{u(s_t)/\lambda}\),
 which is the AMD factor.
 
 \hypertarget{implications-for-decision-making}{%
-\section{Implications for Decision
-Making}\label{implications-for-decision-making}}
+\section{\texorpdfstring{Implications for Decision Making
+\label{implication}}{Implications for Decision Making }}\label{implications-for-decision-making}}
 
 \hypertarget{hidden-zero-effect}{%
 \subsection{\texorpdfstring{Hidden Zero Effect
-\label{hidden_zero_effect}}{Hidden Zero Effect }}\label{hidden-zero-effect}}
+\label{hidden_zero}}{Hidden Zero Effect }}\label{hidden-zero-effect}}
 
 Empirical research suggests time discounting is influenced by the
 framing of sequences. One prominent evidence in this field is the hidden
-zero effect \citep{magen2008hidden, radu2011mechanism, read2017value}.
+zero effect
+\citep{magen2008hidden, radu2011mechanism, read2017value, dang2021beauty}.
 Studies about the hidden zero effect typically relate this effect to
 ``temporal attention''.
 
@@ -1109,24 +1426,20 @@ reallocation is very costly.
 \subsection{Concentration Bias}\label{concentration-bias}}
 
 In the existing literature, one approach to applying attention in
-explaining intertemporal chocies is the focus-weighted utility model,
+intertemporal choice research is the focus-weighted utility model,
 proposed by \citet{kHoszegi2013model}. In their model,
 \citeauthor{kHoszegi2013model} assume that within a reward sequence, the
 decision weight for a reward is increasing with the difference of that
-reward from its reference point. If we take zero reward as the reference
-point for every period, then this assumption is also true for the AMD
-model. The key difference between the AMD model and the focus-weighted
-utility model is that, in the latter, the decision weights are
-uncorrelated with each other and depend only on the choice set, whereas
-we assume increasing one decision weight can reduce some other decision
-weights within the sequence. The focus-weighted utility model predicts
-that people may perform a \emph{concentration bias} and
-\citet{dertwinkel2022concentration} find supportive evidence for this
+reward from a reference point.\footnote{In this paper, we take zero
+  reward as the reference point for every period. So, this assumption is
+  also true for the AMD model.} The model predicts that people may
+perform a \emph{concentration bias} and
+\citet{dertwinkel2022concentration} find supportive evidence for such a
 prediction. In this subsection, we show that the AMD model provides an
 alternative way to generate the concentration bias. Furthermore, we
 identify the conditions in terms of impatience and attention
-reallocation cost (which are beyond the predictions of
-\citet{kHoszegi2013model}) for concentration bias under the AMD model.
+reallocation cost, which are beyond the predictions of
+\citet{kHoszegi2013model}, for the concentration bias.
 
 To illustrate the concentration bias, consider a DM with a consumption
 budget £100 to spend over four days (from period 0 to period 3). Suppose
@@ -1328,21 +1641,22 @@ over-consumption behavior. The former reflects the behavior of a DM
 ``with learning''.
 
 \hypertarget{discussion}{%
-\section{Discussion}\label{discussion}}
+\section{\texorpdfstring{Discussion
+\label{discuss}}{Discussion }}\label{discussion}}
 
 \hypertarget{selection-of-sequence-length}{%
-\subsection{Selection of Sequence
-Length}\label{selection-of-sequence-length}}
+\subsection{\texorpdfstring{Selection of Sequence Length
+\label{seq_length}}{Selection of Sequence Length }}\label{selection-of-sequence-length}}
 
 In our model, the attention a DM can allocate to each time period is
 affected by sequence length. When a sequence contains more periods, the
 average attention she can allocate to each period naturally decreases.
-In Section \ref{hidden_zero_effect}, we discuss how this can generate
-the hidden zero effect. Nevertheless, in reality, we usually cannot
-observe the actual sequence length perceived by the people. Researchers
-using our model need to make their own assumptions about sequence
-length. In this subsection, we discuss two issues related to setting
-these assumptions and provide recommendations.
+In Section \ref{hidden_zero}, we discuss how this can generate the
+hidden zero effect. Nevertheless, in reality, we usually cannot observe
+the actual sequence length perceived by the people. Researchers using
+our model need to make their own assumptions about sequence length. In
+this subsection, we discuss two issues related to setting these
+assumptions and provide recommendations.
 
 The first issue is about the unit of time. A given duration can be
 represented as sequences of different lengths depending on the time unit
@@ -1448,8 +1762,9 @@ allocate some attention to processing such an information, and adding
 some periods of no reward is a simple way to capture this.
 
 \hypertarget{relation-to-other-intertemporal-choice-models}{%
-\subsection{Relation to Other Intertemporal Choice
-Models}\label{relation-to-other-intertemporal-choice-models}}
+\subsection{\texorpdfstring{Relation to Other Intertemporal Choice
+Models
+\label{relation_to_other}}{Relation to Other Intertemporal Choice Models }}\label{relation-to-other-intertemporal-choice-models}}
 
 In the existing literature, the theory most similar to AMD is the
 salience theory, originally proposed by \citet{bordalo2012salience}. A
@@ -1466,7 +1781,7 @@ incorporates a memory-based reference point in the salience theory.
 
 Nevertheless, unlike the AMD model, the salience theory does not impose
 any restrictions on the sum of decision weights; it merely re-normalizes
-the decision weights. Through appying that theory to intertemporal
+the decision weights. Through applying that theory to intertemporal
 choice, the value of a sequence could be represented by
 \(U=\sum_{t=0}^T \pi_tw_tu(s_t)\), where \(\pi_t\) is some ``standard''
 discount factor (e.g.~the exponential discount factor
@@ -1501,37 +1816,20 @@ aDDM have yet to examine how attention shifts within a sequence, but
 they may relate to the cost of attention reallocation, which controls
 the rate of information acquisition in the AMD model.
 
-Our model extends the theories of endogenous time preference, which can
-be traced back to \citet{uzawa1968time}. Early theories, such as
-\citet{uzawa1968time} and \citet{becker1997endogenous}, assume that
-increasing a reward can lead to all sebsequent rewards in the same
-sequence being discounted more. However, they do not clearly address how
-changes in future rewards might affect the weighting of the rewards
-delivered earlier -- an issue crucial for explaining empirical findings
-like the violation of dominance and hidden-zero effect. Some theories
-\citep[e.g.][]{fudenberg2006dual,noor2022optimal} assume that time
-preferences are mediated by the cognitive cost of paying attention to
-the future. We borrowed this idea in the axiomatic characterization of
-the AMD model by using a modified version of the optimal discounting
-framework \citep{noor2022optimal,noor2024constrained}. We demonstrated
-that AMD is the only the model that satisfies both Sequential
-Outcome-Betweenness and Sequential Bracket-Independence within this
-general framework.
-
 Moreover, the trade-off models for intertemporal choice provides an
 alternative approach to model choices between sequences
 \citep[\citet{scholten2016cumulative},
 \citet{scholten2024unified}]{read2012tradeoffs}. Such models assume that
 the DM trades off the average utility of receiving rewards against the
 average disutility of waiting. Yet, they can still be expressed in a
-form similar to endogenous time preference. For example, in
+form similar to additive discounted utilities. For example, in
 \citet{scholten2016cumulative}, the value of a sequence can be
 represented by \(U=\sum_{t=0}^T w_tu(s_t)\), where
 \(w_t=1-\kappa\frac{T(T+1)(T-t+1)}{\sum_{\tau=0}^T (T-\tau+1)u(s_\tau)}\)
 and \(\kappa\) is a positive parameter. Under this specification of
 \(w_t\), increasing \(s_t\) can increase the decision weights for all
 rewards in the sequence, while in the AMD model, this increases the
-deicison weight for \(s_t\) but reduces the decision weights for all the
+decision weight for \(s_t\) but reduces the decision weights for all the
 other rewards.
 
 \hypertarget{possible-improvements}{%

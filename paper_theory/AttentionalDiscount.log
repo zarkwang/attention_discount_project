@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.24)  13 AUG 2024 07:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.24)  16 AUG 2024 02:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -421,11 +421,7 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count301
 \l__pdf_internal_box=\box56
-) (./AttentionalDiscount.aux
-
-LaTeX Warning: Label `interpretation' multiply defined.
-
-)
+) (./AttentionalDiscount.aux)
 \openout1 = `AttentionalDiscount.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
@@ -519,743 +515,148 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 79.
 (c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
+) [1
+
+{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 88.
+(Font)              <12> on input line 119.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 88.
+(Font)              <8> on input line 119.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 88.
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 91.
-
-[1
-
-{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 150.
-
-[2]
+(Font)              <6> on input line 119.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 190.
-[3] [4]
+(Font)              <5> on input line 157.
+[2{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 286.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 169.
 
-[5] [6
-pdfTeX warning (ext4): destination with the same identifier (name{equation.3.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.361 
-      ] [7] [8]
+[3{c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}] [4] [5] [6] [7]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 476.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 407.
 
-[9] [10]
-pdfTeX warning (ext4): destination with the same identifier (name{equation.3.3}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.574 if} \[
-            
-pdfTeX warning (ext4): destination with the same identifier (name{equation.3.3}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.574 if} \[
-            
-pdfTeX warning (ext4): destination with the same identifier (name{equation.3.3}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.574 if} \[
-            
-pdfTeX warning (ext4): destination with the same identifier (name{equation.3.3}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.574 if} \[
-             [11] [12] [13] [14] [15
-pdfTeX warning (ext4): destination with the same identifier (name{equation.4.4}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.784 
-      ] [16]
-<figures/common_diff.png, id=358, 519.906pt x 415.662pt>
+[8] [9]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 467.
+
+[10] [11]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 603.
+
+[12] [13] [14] [15] [16]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 793.
+
+[17] [18] [19] [20] [21] [22] [23]
+<figures/common_diff.png, id=533, 519.906pt x 415.662pt>
 File: figures/common_diff.png Graphic file (type png)
 <use figures/common_diff.png>
-Package pdftex.def Info: figures/common_diff.png  used on input line 860.
+Package pdftex.def Info: figures/common_diff.png  used on input line 1177.
 (pdftex.def)             Requested size: 305.35359pt x 244.12851pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[17] [18 <./figures/common_diff.png>]
-<figures/concave_discount.png, id=386, 284.5029pt x 227.4096pt>
+[24] [25 <./figures/common_diff.png>]
+<figures/concave_discount.png, id=561, 284.5029pt x 227.4096pt>
 File: figures/concave_discount.png Graphic file (type png)
 <use figures/concave_discount.png>
-Package pdftex.def Info: figures/concave_discount.png  used on input line 943.
+Package pdftex.def Info: figures/concave_discount.png  used on input line 1260.
 (pdftex.def)             Requested size: 230.18127pt x 183.98909pt.
-<figures/s_shape_value.png, id=387, 284.5029pt x 227.4096pt>
+<figures/s_shape_value.png, id=562, 284.5029pt x 227.4096pt>
 File: figures/s_shape_value.png Graphic file (type png)
 <use figures/s_shape_value.png>
-Package pdftex.def Info: figures/s_shape_value.png  used on input line 949.
+Package pdftex.def Info: figures/s_shape_value.png  used on input line 1266.
 (pdftex.def)             Requested size: 230.18127pt x 183.98909pt.
-[19 <./figures/concave_discount.png> <./figures/s_shape_value.png>] [20] [21] [22] [23] [24
-pdfTeX warning (ext4): destination with the same identifier (name{equation.4.6}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1224 
-       ]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1231.
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[26] [27 <./figures/concave_discount.png> <./figures/s_shape_value.png>] [28] [29] [30] [31]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1544.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1234.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1547.
 
-<figures/learning_c.png, id=492, 462.528pt x 346.896pt>
+[32]
+<figures/learning_c.png, id=673, 462.528pt x 346.896pt>
 File: figures/learning_c.png Graphic file (type png)
 <use figures/learning_c.png>
-Package pdftex.def Info: figures/learning_c.png  used on input line 1246.
+Package pdftex.def Info: figures/learning_c.png  used on input line 1559.
 (pdftex.def)             Requested size: 230.18361pt x 172.63771pt.
-<figures/no_learning_c.png, id=493, 462.528pt x 346.896pt>
+<figures/no_learning_c.png, id=674, 462.528pt x 346.896pt>
 File: figures/no_learning_c.png Graphic file (type png)
 <use figures/no_learning_c.png>
-Package pdftex.def Info: figures/no_learning_c.png  used on input line 1252.
+Package pdftex.def Info: figures/no_learning_c.png  used on input line 1565.
 (pdftex.def)             Requested size: 230.18361pt x 172.63771pt.
-[25] [26 <./figures/learning_c.png> <./figures/no_learning_c.png>] [27] [28] [29] [30] [31] [32] (./AttentionalDiscount.bbl [33] [34] [35] [36] [37] [38] [39]) [40]
+[33 <./figures/learning_c.png> <./figures/no_learning_c.png>] [34] [35] [36] [37] [38] (./AttentionalDiscount.bbl [39] [40] [41] [42] [43] [44] [45] [46] [47]) [48]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1579.
-
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1599.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1877.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1619.
-
-[41] [42
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.8}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1670 T
-        hus, we have \(\alpha = \frac{\beta_0}{\zeta}\) for any
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.8}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1670 T
-        hus, we have \(\alpha = \frac{\beta_0}{\zeta}\) for any]
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1682.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1897.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1700.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1917.
+
+[49] [50]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1980.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1701.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1998.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1709.
-
-[43
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.9}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1723 
-       ]
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.9}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1734 rewritten as\[
-                     \tag{A5}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.9}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1734 rewritten as\[
-                     \tag{A5}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.9}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1734 rewritten as\[
-                     \tag{A5}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.9}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1734 rewritten as\[
-                     \tag{A5}
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1752.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 1999.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1760.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 2007.
+
+[51]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 2050.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1766.
-
-[44]
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.9}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1799 have\[
-             \tag{A6}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.9}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1799 have\[
-             \tag{A6}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.9}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1799 have\[
-             \tag{A6}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.9}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1799 have\[
-             \tag{A6}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.9}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1804 ...re, Equation (A6) can be rewritten as \[
-                                                  
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.9}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1804 ...re, Equation (A6) can be rewritten as \[
-                                                  
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.9}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1804 ...re, Equation (A6) can be rewritten as \[
-                                                  
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.9}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1804 ...re, Equation (A6) can be rewritten as \[
-                                                   [45]
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 1824.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 2058.
 
 
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1843 have\[
-             \tag{A8}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1843 have\[
-             \tag{A8}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1843 have\[
-             \tag{A8}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1843 have\[
-             \tag{A8}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1857 ...mon difference effect implies that, if\[
-                                                   \tag{B1}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1857 ...mon difference effect implies that, if\[
-                                                   \tag{B1}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1857 ...mon difference effect implies that, if\[
-                                                   \tag{B1}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1857 ...mon difference effect implies that, if\[
-                                                   \tag{B1}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1859 ... for any \(\Delta t \geq 0\), we have \[
-                                                   \tag{B2}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1859 ... for any \(\Delta t \geq 0\), we have \[
-                                                   \tag{B2}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1859 ... for any \(\Delta t \geq 0\), we have \[
-                                                   \tag{B2}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1859 ... for any \(\Delta t \geq 0\), we have \[
-                                                   \tag{B2} [46]
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1862 ... Equation (B1) and (B2), we can obtain\[
-                                                   \tag{B3}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1862 ... Equation (B1) and (B2), we can obtain\[
-                                                   \tag{B3}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1862 ... Equation (B1) and (B2), we can obtain\[
-                                                   \tag{B3}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1862 ... Equation (B1) and (B2), we can obtain\[
-                                                   \tag{B3}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1867 ...1}{1-\delta}(\delta^{-T}-1)\), we have\[
-                                                  \tag{B4}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1867 ...1}{1-\delta}(\delta^{-T}-1)\), we have\[
-                                                  \tag{B4}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1867 ...1}{1-\delta}(\delta^{-T}-1)\), we have\[
-                                                  \tag{B4}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1867 ...1}{1-\delta}(\delta^{-T}-1)\), we have\[
-                                                  \tag{B4}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1869 ... Equation (B1) and (B2), we can obtain\[
-                                                  \tag{B5}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1869 ... Equation (B1) and (B2), we can obtain\[
-                                                  \tag{B5}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1869 ... Equation (B1) and (B2), we can obtain\[
-                                                  \tag{B5}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1869 ... Equation (B1) and (B2), we can obtain\[
-                                                  \tag{B5}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1873 Equation (B5) is valid if and only if\[
-                                              \tag{B6}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1873 Equation (B5) is valid if and only if\[
-                                              \tag{B6}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1873 Equation (B5) is valid if and only if\[
-                                              \tag{B6}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1873 Equation (B5) is valid if and only if\[
-                                              \tag{B6}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1875 \] By Equation (B1), we know that\[
-                                          \tag{B7}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1875 \] By Equation (B1), we know that\[
-                                          \tag{B7}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1875 \] By Equation (B1), we know that\[
-                                          \tag{B7}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1875 \] By Equation (B1), we know that\[
-                                          \tag{B7}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1877 ...bining Equation (B6) and (B7), we have\[
-                                                  
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1877 ...bining Equation (B6) and (B7), we have\[
-                                                  
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1877 ...bining Equation (B6) and (B7), we have\[
-                                                  
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1877 ...bining Equation (B6) and (B7), we have\[
-                                                   [47] [48
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.11}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1926 T
-        o prove the first part of Proposition 4, we can show that when \(x\) is
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.11}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1926 T
-        o prove the first part of Proposition 4, we can show that when \(x\) is
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.11}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1926 T
-        o prove the first part of Proposition 4, we can show that when \(x\) is]
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.11}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1928 LHS non-positive, we require\[
-                                     \tag{D3}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.11}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1928 LHS non-positive, we require\[
-                                     \tag{D3}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.11}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1928 LHS non-positive, we require\[
-                                     \tag{D3}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.11}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1928 LHS non-positive, we require\[
-                                     \tag{D3}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.11}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1957 ...part, note \(v(x)=u(x)/\lambda\). So, \[
-                                                  
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.11}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1957 ...part, note \(v(x)=u(x)/\lambda\). So, \[
-                                                  
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.11}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1957 ...part, note \(v(x)=u(x)/\lambda\). So, \[
-                                                  
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.11}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1957 ...part, note \(v(x)=u(x)/\lambda\). So, \[
-                                                   [49] [50
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.12}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2011 \]
-         where \(j,k\in\{s,l\}\), \(D=\sum_{\tau\in\Omega} d_{\tau}\geq 0\).] [51
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.12}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2050 \]
-         We need to show that for \(y\in[y_s,y_l]\), we can obtain
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.13}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2050 \]
-         We need to show that for \(y\in[y_s,y_l]\), we can obtain] [52
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.15}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2099 
-       
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.15}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2099 
-       ]
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.15}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2125 \(\tau\), where\[
-                        
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.15}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2125 \(\tau\), where\[
-                        
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.15}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2125 \(\tau\), where\[
-                        
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.15}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2125 \(\tau\), where\[
-                         [53
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2140 
-       ]
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2173 we have \[
-                 \tag{F3}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2173 we have \[
-                 \tag{F3}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2173 we have \[
-                 \tag{F3}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2173 we have \[
-                 \tag{F3}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2180 ...tial derivative in terms of \(s_t\) is\[
-                                                  \tag{F4}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2180 ...tial derivative in terms of \(s_t\) is\[
-                                                  \tag{F4}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2180 ...tial derivative in terms of \(s_t\) is\[
-                                                  \tag{F4}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2180 ...tial derivative in terms of \(s_t\) is\[
-                                                  \tag{F4}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2185 \]To prove Proposition 6, note that if\[
-                                               \tag{F5}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2185 \]To prove Proposition 6, note that if\[
-                                               \tag{F5}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2185 \]To prove Proposition 6, note that if\[
-                                               \tag{F5}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2185 \]To prove Proposition 6, note that if\[
-                                               \tag{F5} [54]
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2238 implies\[
-                \tag{G1} (1-2w_t)\frac{1}{\lambda} + \frac{1}{u_t+\lambda-U}...
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2238 implies\[
-                \tag{G1} (1-2w_t)\frac{1}{\lambda} + \frac{1}{u_t+\lambda-U}...
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2238 implies\[
-                \tag{G1} (1-2w_t)\frac{1}{\lambda} + \frac{1}{u_t+\lambda-U}...
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2238 implies\[
-                \tag{G1} (1-2w_t)\frac{1}{\lambda} + \frac{1}{u_t+\lambda-U}...
-Underfull \hbox (badness 1755) in paragraph at lines 2238--2244
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 2064.
+
+[52] [53]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 2122.
+
+[54] [55] [56] [57] [58] [59] [60] [61] [62]
+Underfull \hbox (badness 1755) in paragraph at lines 2536--2542
 \T1/lmr/m/n/12 Second, to an-a-lyze how a change in $\OML/lmm/m/it/12 s[]$ \T1/lmr/m/n/12 will af-fect $[]$, we con-struct a func-tion
  []
 
-[55]
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2244 obtain\[
-               \tag{G2} \frac{\partial \tilde{\rho}_t}{\partial s_t} <0 \;\L...
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2244 obtain\[
-               \tag{G2} \frac{\partial \tilde{\rho}_t}{\partial s_t} <0 \;\L...
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2244 obtain\[
-               \tag{G2} \frac{\partial \tilde{\rho}_t}{\partial s_t} <0 \;\L...
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2244 obtain\[
-               \tag{G2} \frac{\partial \tilde{\rho}_t}{\partial s_t} <0 \;\L...
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2247 if\[
-           \tag{G3} \frac{1}{\lambda}+\frac{1}{u_t+\lambda-U}<-\frac{u''_t}{...
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2247 if\[
-           \tag{G3} \frac{1}{\lambda}+\frac{1}{u_t+\lambda-U}<-\frac{u''_t}{...
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2247 if\[
-           \tag{G3} \frac{1}{\lambda}+\frac{1}{u_t+\lambda-U}<-\frac{u''_t}{...
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2247 if\[
-           \tag{G3} \frac{1}{\lambda}+\frac{1}{u_t+\lambda-U}<-\frac{u''_t}{...
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2260 when \(u_t+\lambda-U>0\), we can obtain\[
-                                                
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2260 when \(u_t+\lambda-U>0\), we can obtain\[
-                                                
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2260 when \(u_t+\lambda-U>0\), we can obtain\[
-                                                
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2260 when \(u_t+\lambda-U>0\), we can obtain\[
-                                                
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2284 we can define \(d_t^0\) as\[
-                                   
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2284 we can define \(d_t^0\) as\[
-                                   
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2284 we can define \(d_t^0\) as\[
-                                   
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.16}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2284 we can define \(d_t^0\) as\[
-                                    [56]
+[63] [64]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 2296.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 2594.
 
-[57] [58
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.17}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2389 have\[
-             \tag{H2}]
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.17}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2389 have\[
-             \tag{H2}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.17}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2389 have\[
-             \tag{H2}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.17}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2389 have\[
-             \tag{H2}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.17}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2389 have\[
-             \tag{H2}
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.17}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2394 only when\[
-                  
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.17}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2394 only when\[
-                  
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.17}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2394 only when\[
-                  
-pdfTeX warning (ext4): destination with the same identifier (name{equation.5.17}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.2394 only when\[
-                  
+[65] [66]
 
 Package caption Warning: Unused \captionsetup[table] on input line 58.
 See the caption package documentation for explanation.
 
-[59] (./AttentionalDiscount.aux)
+[67] (./AttentionalDiscount.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-05-08>
  ***********
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 15575 strings out of 475952
- 257143 string characters out of 5788423
+ 15649 strings out of 475952
+ 258936 string characters out of 5788423
  1941907 words of memory out of 5000000
- 37256 multiletter control sequences out of 15000+600000
- 627675 words of font info for 87 fonts, out of 8000000 for 9000
+ 37316 multiletter control sequences out of 15000+600000
+ 630670 words of font info for 88 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 95i,9n,93p,710b,709s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on AttentionalDiscount.pdf (59 pages, 1040204 bytes).
+ 95i,9n,93p,710b,733s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Users/zarkwang/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on AttentionalDiscount.pdf (67 pages, 1088706 bytes).
 PDF statistics:
- 1067 PDF objects out of 1200 (max. 8388607)
- 940 compressed objects within 10 object streams
- 295 named destinations out of 1000 (max. 500000)
- 242 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1219 PDF objects out of 1440 (max. 8388607)
+ 1081 compressed objects within 11 object streams
+ 308 named destinations out of 1000 (max. 500000)
+ 258 words of extra memory for PDF output out of 10000 (max. 10000000)
 
