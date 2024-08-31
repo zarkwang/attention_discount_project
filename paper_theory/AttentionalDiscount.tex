@@ -164,7 +164,7 @@ captured by a greater discounting of each reward's value.
 
 In this paper, we develop a new model of time discounting to capture
 these intuitions about attention. For simplicity, we adopt the additive
-discounted utility framework, but for each period \(t\), adjust the
+discounted utility framework. But for each period \(t\), we adjust the
 discount factor \(d_t\) to a decision weight \(w_t\). Let
 \(s_{0\rightarrow T}=[s_0,s_1,…,s_T]\) denote a sequence of rewards
 delivered from period 0 to period \(T\), where \(s_t\) represents the
@@ -208,14 +208,14 @@ our model by the \emph{attention-modulated discounting} (AMD) model.
 Our recommended form of \(w_t\) has three desired features. First, we
 introduce only one additional parameter \(\lambda\) to the standard
 discounting models. This makes our model not only capable of explaining
-a range of phenomena, but also highly parsimonious. Also, the parameter
-\(\lambda\), as we illustrate later, is decreasing in the DM's cognitive
-uncertainty as well as the learning rate. This allows researchers to
-test our model through process-tracing methods.
+a range of phenomena, but also highly parsimonious. Meanwhile, the
+parameter \(\lambda\), as we illustrate later, is decreasing in the DM's
+cognitive uncertainty as well as the learning rate. This allows
+researchers to test our model through process-tracing methods.
 
-Second, \(w_t\) follows a softmax form, which has been widely used in
-various decision domains. In discrete choice analysis, the softmax
-function can be used to represent the DM's choice strategy under
+Second, \(w_t\) follows a softmax form, which is widely used to model
+attention in various decision domains. In discrete choice analysis, the
+softmax function can be used to represent the DM's choice strategy under
 attention constraint \citep{matvejka2015rational}; in memory research,
 \citet{bordalo2020memory} use this function as the attention weight for
 recalled experiences. Our model thus has the potential to be integrated
@@ -235,7 +235,7 @@ Bracket-Independence implies that, the decision weight for \(u(s_t)\) in
 the value representation of \(s_{0\rightarrow T}\) is independent of
 whether we conduct this bracketing operation. In other words, we must
 have \(\beta = w_T\). Under this property, how the DM values a reward
-sequence is independent of how she might bracket it: for each particular
+sequence is independent of how she might bracket it. For each particular
 sequence, there is only one unique distribution of decision weights.
 
 \hypertarget{two-characterization-approaches}{%
@@ -243,21 +243,21 @@ sequence, there is only one unique distribution of decision weights.
 Approaches}\label{two-characterization-approaches}}
 
 We characterize the AMD model by two approaches. It is mentionable that
-across various fields (economics, psychology, and machine learning),
+across various fields, e.g.~economics, psychology, and machine learning,
 there are typically two ways to model attention
 \citep{xu2015show, gabaix2019behavioral, lindsay2020attention}. The
-first is to assume the decision maker is in an information-rich
-environment and adjusts the probability of sampling from different
-information sources to achieve specific goals (``hard attention''), and
-the second is through the weighting of different items or attributes
-when integrating them to a total representation (``soft attention'').
-Our first approach fits the ``hard attention'' while the second approach
-fits the ``soft attention''.
+first is to assume the DM is in an information-rich environment and
+adjusts the probabilities of sampling from different information sources
+to achieve some goals (``hard attention''), and the second is through
+the weighting of different items or attributes when they are integrated
+into a total representation (``soft attention''). Our first approach
+fits the ``hard attention'' and the second approach fits the ``soft
+attention''.
 
 The first approach is inspired by reinforcement learning and
 neuroscientific literature. Our mathematic setting is similar to
-\citet{itti2009bayesian} and \citet{gottlieb2013information}. The DM is
-assumed to randomly switch attention across a sequence of rewards. Each
+\citet{itti2009bayesian} and \citet{gottlieb2013information}. We assume
+the DM randomly switches attention across a sequence of rewards. Each
 time, she samples a reward and uses the perceived (noisy) value of that
 reward as a signal of the overall value of the sequence. She then
 updates her belief about the sequence value with the Bayes' rule. The
@@ -279,10 +279,10 @@ discounting framework \citep{noor2022optimal,noor2024constrained} to
 assume that adjusting \(d_t\) to \(w_t\) triggers a cognitive cost, and
 that the DM does this to maximize the net value of the reward sequence.
 The implication of this assumption is that the DM tends to focus on the
-information source that provides the greatest pleasure. We show that
-within the optimal discounting framework, the softmax weighting function
-is the only function that simultaneously satisfies the standard
-preference axioms, Sequential Bracket-Independence, and Sequential
+information source providing the greatest pleasure. We show that within
+the optimal discounting framework, the softmax weighting function is the
+only function that simultaneously satisfies the standard preference
+axioms, Sequential Bracket-Independence, and Sequential
 Outcome-Betweenness. We have demonstrated the implication of Sequential
 Bracket-Independence. Sequential Outcome-Betweenness implies that adding
 a tiny reward to the end of a reward sequence could result in the
@@ -304,12 +304,12 @@ including the hidden zero effect. Suppose a DM is indifferent between
 effect suggests that, if we explicitly state the zero rewards in the
 former option, changing it to ``receive £100 today and £0 in 25 weeks'',
 the DM would be less likely to choose this option. This effect provides
-a robust technique for alter people's patience but cannot be explained
-by standard discounting models. According to our model, the given change
-extends the sequence length and directs some of the DM's attention to a
-future period with no reward delivered, which in turn, reduces the
-attention for the £100 payment, thereby producting the hidden zero
-effect.
+a robust technique for altering people's patience but cannot be
+explained by standard discounting models. According to our model, the
+given change extends the sequence length and directs some of the DM's
+attention to a future period with no reward delivered, which in turn,
+reduces the attention for the £100 payment, thereby producing the hidden
+zero effect.
 
 Second, the model makes novel predictions about some existing findings,
 such as the common difference effect \citep{loewenstein1992anomalies},
